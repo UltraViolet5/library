@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using library.Pages;
+
 
 namespace library
 {
@@ -12,7 +14,15 @@ namespace library
     {
         public MainPage()
         {
+
             InitializeComponent();
+
+            
+
+          
+            
         }
+
+   
     }
 }
