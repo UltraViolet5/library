@@ -6,12 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using library.Pages;
+using library.ViewModel;
 
 
 namespace library
 {
     public partial class MainPage : ContentPage
     {
+        // TODO FIXME Propertisy z dużej litery
         Books books { get; set; }
         Login login { get; set; }
         Mates mates { get; set; }
@@ -22,11 +24,10 @@ namespace library
         UserView userView { get; set; }
 
 
-
+        private readonly MainViewModel _mainViewModel;
 
         public MainPage()
         {
-
             InitializeComponent();
             books = new Books();
             login = new Login();
@@ -37,10 +38,9 @@ namespace library
             settings = new Settings();
             userView = new UserView();
 
-            
 
             btnBooks.Clicked += (s, e) => Navigation.PushAsync(books);
-            btnLoginPage.Clicked+=(s,e)=> Navigation.PushAsync(login);
+            btnLoginPage.Clicked += (s, e) => Navigation.PushAsync(login);
             btnMates.Clicked += (s, e) => Navigation.PushAsync(mates);
             btnMyRentals.Clicked += (s, e) => Navigation.PushAsync(myRentals);
             btnRegister.Clicked += (s, e) => Navigation.PushAsync(register);
@@ -48,9 +48,28 @@ namespace library
             btnSettings.Clicked += (s, e) => Navigation.PushAsync(settings);
             btnUserView.Clicked += (s, e) => Navigation.PushAsync(userView);
 
+            _mainViewModel = new MainViewModel();
 
+            BindingContext = _mainViewModel;
+            DisplayBooks();
         }
 
-   
+        /// <summary>
+        /// Add last books to main page.
+        /// </summary>
+        private void DisplayBooks()
+        {
+            foreach (var book in _mainViewModel.Books)
+            {
+                var bookCard = new Frame
+                {
+                    BackgroundColor = Color.Gray,
+                    Margin = new Thickness(20, 10),
+                    Content = new StackLayout()
+                        { Children = { new Label() { Text = "" } } }
+                };
+                LastBooks.Children.Add(bookCard);
+            }
+        }
     }
 }
