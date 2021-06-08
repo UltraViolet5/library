@@ -15,6 +15,11 @@ namespace library.Pages
         public Books()
         {
             InitializeComponent();
+
+
+            btnAddBook.Clicked += (s,e) => Navigation.PushAsync(new AddBook());
+
+
         }
     }
 }

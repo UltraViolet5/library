@@ -4,9 +4,9 @@
              x:Class="library.Pages.Mates">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Label Text="Welcome to Xamarin.Forms! MATES"
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+                HorizontalOptions="CenterAndExpand"  />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

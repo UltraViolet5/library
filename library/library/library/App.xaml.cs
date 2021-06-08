@@ -2,21 +2,20 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using library.Pages;
-using System.Timers;
 
 namespace library
 {
     public partial class App : Application
     {
 
-        LogoPage logoPage { get; set; }
+        LogoPage LogoPage { get; set; }
 
         public App()
         {
             InitializeComponent();
 
             MainPage = new NavigationPage(new library.MainPage());
-            logoPage = new LogoPage();
+            LogoPage = new LogoPage();
             
         }
 
@@ -31,9 +30,8 @@ namespace library
         private void MainPage_Appearing(object sender, EventArgs e)
         {
             
-            MainPage.Navigation.PushModalAsync(logoPage);
+            MainPage.Navigation.PushModalAsync(LogoPage);
             System.Threading.Thread.Sleep(2000);
-            /*System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(10));*/
             MainPage.Navigation.PopModalAsync();
         }
 
