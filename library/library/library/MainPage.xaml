@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodel="clr-namespace:library.ViewModel" x:DataType="viewmodel:MainViewModel"
              x:Class="library.MainPage">
 
     <ScrollView>
@@ -27,30 +27,36 @@
 
             <!-- Here will be added book cards -->
             <StackLayout x:Name="LastBooks">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition Width="5*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="0" Text="Books" FontSize="Title" Padding="30,10,30,10" />
+                    <Label x:Name="BooksLabel"   Grid.Row="0" Grid.Column="0" Text="Books" FontSize="Title" Padding="30,10,30,10" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BooksLbTapped}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
                     <Image Grid.Row="0" Grid.Column="1" Source="plus.png" WidthRequest="25" HeightRequest="25" 
-                           HorizontalOptions="End" Margin="25"></Image>
-                </Grid>
+                               HorizontalOptions="End" Margin="25"></Image>
+                    </Grid>
+                 
             </StackLayout>
 
             <Label Text="Books" FontSize="Title" Padding="30,10,30,10" />
-            <Button x:Name="btnLoginPage" Text="Login" />
-            <Button x:Name="btnRegister" Text="Register" />
-            <Button x:Name="btnUserView" Text="User View" />
-            <Button x:Name="btnBooks" Text="Books" />
-            <Button x:Name="btnMates" Text="Mates" />
-            <Button x:Name="btnMyRentals" Text="My Rentals" />
-            <Button x:Name="btnRented" Text="Rented" />
-            <Button x:Name="btnSettings" Text="Settings" />
+            <Button x:Name="btnLoginPage" Text="Login" Command="{Binding BtnLogin}"/>
+            <Button x:Name="btnRegister" Text="Register" Command="{Binding BtnRegister}" />
+            <Button x:Name="btnUserView" Text="User View" Command="{Binding BtnUserView}" />
+            <Button x:Name="btnBooks" Text="Books" Command="{Binding BtnBooks}"/>
+            <Button x:Name="btnMates" Text="Mates" Command="{Binding BtnMates}"/>
+            <Button x:Name="btnMyRentals" Text="My Rentals" Command="{Binding BtnMyRentals}"/>
+            <Button x:Name="btnRented" Text="Rented" Command="{Binding BtnRented}"/>
+            <Button x:Name="btnSettings" Text="Settings" Command="{Binding BtnSettings}"/>
 
         </StackLayout>
     </ScrollView>
