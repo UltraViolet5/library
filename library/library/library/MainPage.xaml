@@ -6,14 +6,40 @@
 
     <ScrollView>
         <StackLayout>
-            <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-                <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White"
-                       FontSize="36" />
+            <Frame BackgroundColor="#fff" Padding="24" CornerRadius="0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="5*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                   
+                    <Image Grid.Column="0" Grid.Row="1" Source="user.png" 
+                           HeightRequest="40" WidthRequest="40" HorizontalOptions="StartAndExpand"></Image>
+                    <Image Grid.Column="1" Grid.Row="1" Source="menu_btn.png" 
+                           WidthRequest="25" HeightRequest="25" HorizontalOptions="End"></Image>
+                </Grid>
             </Frame>
 
             <!-- Here will be added book cards -->
             <StackLayout x:Name="LastBooks">
-                <Label Text="Books" FontSize="Title" Padding="30,10,30,10" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Text="Books" FontSize="Title" Padding="30,10,30,10" />
+                    <Image Grid.Row="0" Grid.Column="1" Source="plus.png" WidthRequest="25" HeightRequest="25" 
+                           HorizontalOptions="End" Margin="25"></Image>
+                </Grid>
             </StackLayout>
 
             <Label Text="Books" FontSize="Title" Padding="30,10,30,10" />

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using library.Pages;
 using library.ViewModel;
+using library.FactoryMethod;
 
 
 namespace library
@@ -25,6 +26,7 @@ namespace library
 
 
         private readonly MainViewModel _mainViewModel;
+        private readonly ComponentFactoryBase _componentFactory;
 
         public MainPage()
         {
@@ -49,6 +51,7 @@ namespace library
             btnUserView.Clicked += (s, e) => Navigation.PushAsync(userView);
 
             _mainViewModel = new MainViewModel();
+            _componentFactory = new ComponentFactory();
 
             BindingContext = _mainViewModel;
             DisplayBooks();
@@ -61,13 +64,7 @@ namespace library
         {
             foreach (var book in _mainViewModel.Books)
             {
-                var bookCard = new Frame
-                {
-                    BackgroundColor = Color.Gray,
-                    Margin = new Thickness(20, 10),
-                    Content = new StackLayout()
-                        { Children = { new Label() { Text = "" } } }
-                };
+                var bookCard = _componentFactory.CreateBookCard(book);
                 LastBooks.Children.Add(bookCard);
             }
         }

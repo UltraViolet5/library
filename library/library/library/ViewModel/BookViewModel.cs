@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using library.Infrastructure;
 using library.Model;
+using System.Linq;
 
 namespace library.ViewModel
 {
@@ -25,13 +26,16 @@ namespace library.ViewModel
         }
 
 
-        public List<Author> Authors
+        public string Authors
         {
-            get => _book.Authors;
-            set
+            get
             {
-                _book.Authors = value;
-                RaisePropertyChanged();
+                List<string> authors =
+                    _book.
+                    Authors.
+                    Select(author => author.FirstName + author.LastName).ToList();
+
+                return string.Join(", ", authors);
             }
         }
 

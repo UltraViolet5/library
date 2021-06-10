@@ -4,9 +4,11 @@
              x:Class="library.Pages.LogoPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms! LOGOPage"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Image Source="logo.png" 
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand"
+                   WidthRequest="120"
+                   HeightRequest="120"></Image>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
