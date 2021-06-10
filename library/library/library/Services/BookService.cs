@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using library.Daos;
 using library.Model;
+using System.Linq;
+
 
 namespace library.Services
 {
@@ -22,7 +24,7 @@ namespace library.Services
                 return _bookDao.GetAll();
             }
 
-            return _bookDao.GetAll();
+            return _bookDao.GetAll().Take((int)limit);
         }
 
         public void AddBooks(IEnumerable<Book> books)
