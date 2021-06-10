@@ -44,7 +44,7 @@ namespace library.ViewModel
         {
             _dbService = new DBService();
 
-            var seeder = new LibrarySeeder(_bookService);
+            var seeder = new LibrarySeeder(_dbService);
             seeder.Seed();
 
             Books = _dbService.GetBooks().Select(b => new BookViewModel(b));
