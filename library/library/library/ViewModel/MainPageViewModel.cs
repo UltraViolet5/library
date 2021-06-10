@@ -24,8 +24,9 @@ namespace library.ViewModel
         UserView UserView { get; set; }*/
 
         public IEnumerable<BookViewModel> Books { get; private set; }
+        public IEnumerable<CategoryViewModel> Categories { get; private set; }
 
-        private BookService _bookService;
+        private DBService _dbService;
 
         Login Login = new Login();
 
@@ -41,12 +42,13 @@ namespace library.ViewModel
 
         public MainViewModel()
         {
-            _bookService = new BookService(BookDaoMemory.S);
+            _dbService = new DBService();
 
             var seeder = new LibrarySeeder(_bookService);
             seeder.Seed();
 
-            Books = _bookService.GetBooks().Select(b => new BookViewModel(b));
+            Books = _dbService.GetBooks().Select(b => new BookViewModel(b));
+            Categories = _dbService.GetCategories().Select(c => new CategoryViewModel(c));
 
             BooksPage = new Books();
             LoginPage = new Login();

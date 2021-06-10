@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using library.Pages;
 using library.ViewModel;
 using library.FactoryMethod;
@@ -59,8 +53,19 @@ namespace library
 
             BindingContext = _mainViewModel;
             DisplayBooks();
+            DisplayCategories();
+        }
 
-            
+        /// <summary>
+        /// Add book categories to main page.
+        /// </summary>
+        private void DisplayCategories()
+        {
+            foreach (CategoryViewModel category in _mainViewModel.Categories)
+            {
+                var categoriesUI = _componentFactory.CreateCategoryBtn(category);
+                Categories.Children.Add(categoriesUI);
+            }
         }
 
         /// <summary>
