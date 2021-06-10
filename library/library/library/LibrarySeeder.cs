@@ -8,16 +8,29 @@ namespace library
 {
     public class LibrarySeeder
     {
-        private readonly BookService _bookService;
+        private readonly DBService _dbService;
 
-        public LibrarySeeder(BookService bookService)
+        public LibrarySeeder(DBService dbService)
         {
-            _bookService = bookService;
+            _dbService = dbService;
         }
 
         public void Seed()
         {
-            _bookService.AddBooks(GetBooks());
+            _dbService.AddBooks(GetBooks());
+            _dbService.AddCategories(GetCategories());
+        }
+
+        private IEnumerable<Category> GetCategories()
+        {
+            return new List<Category>()
+            {
+                new Category() {Name = "fantasy"},
+                new Category() {Name = "action"},
+                new Category() {Name = "it"},
+                new Category() {Name = "crime"},
+                new Category() {Name = "documentary"}
+            };
         }
 
         private IEnumerable<Book> GetBooks()
@@ -38,17 +51,17 @@ namespace library
             books.Add(new Book()
             {
                 Title = "First book Title",
-                Authors = new List<Author>() { author, author2 }
+                Authors = new List<Author>() {author, author2}
             });
             books.Add(new Book()
             {
                 Title = "Second super book",
-                Authors = new List<Author>() { author, author2 }
+                Authors = new List<Author>() {author, author2}
             });
             books.Add(new Book()
             {
                 Title = "Third book",
-                Authors = new List<Author>() { author, author2 }
+                Authors = new List<Author>() {author, author2}
             });
 
             return books;

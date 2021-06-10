@@ -9,5 +9,6 @@ namespace library.FactoryMethod
     public abstract class ComponentFactoryBase
     {
         public abstract Frame CreateBookCard(BookViewModel book);
+        public abstract Frame CreateCategoryBtn(CategoryViewModel category);
     }
 }
