@@ -4,6 +4,7 @@
              xmlns:gv="clr-namespace:GoogleVisionBarCodeScanner;assembly=BarcodeScanner.XF"
              
              x:Class="library.Pages.ScanPage">
+    <ContentPage.Title>Scann</ContentPage.Title>
     <ContentPage.Content>
         <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <!--VirbationOnDetected: Indicate the device will vibrate or not when detected barcode, default is True
@@ -13,7 +14,7 @@
 		 ScanInterval: Scan interval for iOS, default is 500ms and the minimum is 100ms, please be reminded that double scanning may be occurred if it is too small
 		 -->
             <gv:CameraView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" OnDetected="CameraView_OnDetected" Grid.Row="1"
-                            DefaultTorchOn="True" VibrationOnDetected="False" AutoStartScanning="True" RequestedFPS="30" ScanInterval="500"/>
+                            DefaultTorchOn="False" VibrationOnDetected="False" AutoStartScanning="True" RequestedFPS="30" ScanInterval="500"/>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>
