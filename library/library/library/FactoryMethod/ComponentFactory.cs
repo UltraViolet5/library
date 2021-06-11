@@ -33,12 +33,16 @@ namespace library.FactoryMethod
         {
             return new Frame()
             {
+                
                 Padding = new Thickness(15,0,15,0),
                 CornerRadius = 8,
                 Content = new Label
                 {
                     Text = category.Name
+                    
+                   
                 }
+             
             };
         }
     }

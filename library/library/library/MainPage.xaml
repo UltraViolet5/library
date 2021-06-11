@@ -17,10 +17,18 @@
                     </Grid.RowDefinitions>
                     <Frame Grid.Column="0" Grid.Row="0" CornerRadius="15" WidthRequest="50" HeightRequest="50" Padding="0" HasShadow="False">
                         <Image Source="user.png" Margin="0"
-                           HeightRequest="50" WidthRequest="50" HorizontalOptions="StartAndExpand"></Image>
+                           HeightRequest="50" WidthRequest="50" HorizontalOptions="StartAndExpand">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BtnUserView}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
                     </Frame>                    
                     <Image Grid.Column="1" Grid.Row="0" Source="menu_btn.png" 
-                           WidthRequest="25" HeightRequest="25" HorizontalOptions="End"></Image>
+                           WidthRequest="25" HeightRequest="25" HorizontalOptions="End">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding }"/>
+                        </Image.GestureRecognizers>
+                    </Image>
                 </Grid>
             </Frame>
 
@@ -42,7 +50,11 @@
                         </Label.GestureRecognizers>
                     </Label>
                     <Image Grid.Row="0" Grid.Column="1" Source="plus.png" WidthRequest="20" HeightRequest="20" 
-                           HorizontalOptions="End" Margin="0,0,20,0"></Image>
+                           HorizontalOptions="End" Margin="0,0,20,0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AddBook}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
                 </Grid>
             </StackLayout>
 
@@ -59,7 +71,8 @@
 
                     <Label Grid.Row="0" Grid.Column="0" Text="Categories" FontSize="Title" Padding="30,10,30,10" />
                     <Image Grid.Row="0" Grid.Column="1" Source="plus.png" WidthRequest="20" HeightRequest="20" 
-                           HorizontalOptions="End" Margin="0,0,20,0"></Image>
+                           HorizontalOptions="End" Margin="0,0,20,0">
+                    </Image>
                 </Grid>
                 <StackLayout x:Name="Categories" Orientation="Horizontal" Padding="30,0,0,0">
 

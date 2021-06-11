@@ -16,12 +16,13 @@ namespace library.ViewModel
 
         Books BooksPage { get; set; }
         Login LoginPage { get; set; }
-     /* Mates Mates { get; set; }
+        Mates Mates { get; set; }
         MyRentals MyRentals { get; set; }
         Registration Register { get; set; }
         Rented Rented { get; set; }
         Settings Settings { get; set; }
-        UserView UserView { get; set; }*/
+        UserView UserView { get; set; }
+        BooksByCategory BooksByCategory { get; set; }
 
         public IEnumerable<BookViewModel> Books { get; private set; }
         public IEnumerable<CategoryViewModel> Categories { get; private set; }
@@ -39,6 +40,8 @@ namespace library.ViewModel
         public ICommand BtnRented { get; private set; }
         public ICommand BtnSettings { get; private set; }
         public ICommand BooksLbTapped { get; private set; }
+        public ICommand AddBook { get; private set; }
+        public ICommand ShowBooksByCategory { get; private set; }
 
         public MainViewModel()
         {
@@ -52,20 +55,47 @@ namespace library.ViewModel
 
             BooksPage = new Books();
             LoginPage = new Login();
-            /*Mates = new Mates();
+            Mates = new Mates();
             MyRentals = new MyRentals();
             Register = new Registration();
             Rented = new Rented();
             Settings = new Settings();
-            UserView = new UserView();*/
+            UserView = new UserView();
+            BooksByCategory = new BooksByCategory();
 
             BtnLogin = new Command(LoginBtnExecute, LoginBtnCanExecute);
-            BooksLbTapped = new Command(BooksLbTappedExecute, BooksLbTappedCanExecute);
+            BooksLbTapped = new Command(TappedExecute, BooksLbTappedCanExecute);
+            BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
+            ShowBooksByCategory = new Command(ShowBooksByCategoryExecute, ShowBooksByCategoryCanExecute);
+            ///BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
+            //BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
+            //BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
+            //BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
+            //BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
+
         }
 
+        private bool ShowBooksByCategoryCanExecute(object arg)
+        {
+            return true;
+        }
 
+        private void ShowBooksByCategoryExecute(object obj)
+        {
+            App.FirstPage.Navigation.PushAsync(BooksByCategory);
+        }
 
-        private void BooksLbTappedExecute(object obj)
+        private bool UserViewImageCanExecute(object arg)
+        {
+            return true;
+        }
+
+        private void UserViewImageTappedExecute(object obj)
+        {
+            App.FirstPage.Navigation.PushAsync(UserView);
+        }
+
+        private void TappedExecute(object arg)
         {
             App.FirstPage.Navigation.PushAsync(BooksPage);
         }

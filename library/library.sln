@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "library.Android", "library\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "library.iOS", "library\library.iOS\library.iOS.csproj", "{75F666BD-81A3-41B3-B80E-E4B149FF9DE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "library", "library\library\library.csproj", "{433BC428-37CD-450E-AC80-9DFF8C4126BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "library", "library\library\library.csproj", "{433BC428-37CD-450E-AC80-9DFF8C4126BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -100,7 +100,6 @@ Global
 		{792320C2-0DC3-4BBB-AD8C-07D14EB1C398}.Release|x86.Build.0 = Release|Any CPU
 		{792320C2-0DC3-4BBB-AD8C-07D14EB1C398}.Release|x86.Deploy.0 = Release|Any CPU
 		{75F666BD-81A3-41B3-B80E-E4B149FF9DE7}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
-		{75F666BD-81A3-41B3-B80E-E4B149FF9DE7}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
 		{75F666BD-81A3-41B3-B80E-E4B149FF9DE7}.Debug|Any CPU.Deploy.0 = Debug|iPhoneSimulator
 		{75F666BD-81A3-41B3-B80E-E4B149FF9DE7}.Debug|ARM.ActiveCfg = Debug|iPhone
 		{75F666BD-81A3-41B3-B80E-E4B149FF9DE7}.Debug|ARM.Build.0 = Debug|iPhone

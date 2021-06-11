@@ -26,14 +26,14 @@ namespace library
         public MainPage()
         {
             InitializeComponent();
-        /*    Books = new Books();
-            Login = new Login();
-            Mates = new Mates();
-            MyRentals = new MyRentals();
-            Register = new Registration();
-            Rented = new Rented();
-            Settings = new Settings();
-            UserView = new UserView();*/
+            /*    Books = new Books();
+                Login = new Login();
+                Mates = new Mates();
+                MyRentals = new MyRentals();
+                Register = new Registration();
+                Rented = new Rented();
+                Settings = new Settings();
+                UserView = new UserView();*/
 
 
 
@@ -64,9 +64,18 @@ namespace library
             foreach (CategoryViewModel category in _mainViewModel.Categories)
             {
                 var categoriesUI = _componentFactory.CreateCategoryBtn(category);
+                var TappGest = new TapGestureRecognizer();
+                TappGest.SetBinding(TapGestureRecognizer.CommandProperty, "ShowBooksByCategory");
+                categoriesUI.GestureRecognizers.Add(TappGest);
                 Categories.Children.Add(categoriesUI);
+
             }
+
+
         }
+
+    
+
 
         /// <summary>
         /// Add last books to main page.
@@ -79,21 +88,8 @@ namespace library
                 LastBooks.Children.Add(bookCard);
             }
         }
-    /*    /// <summary>
-        /// Add Taped event to the label
-        /// </summary>
-        /// <param name="page"></param>
-        /// <param name="label"></param>
-        public void AddTappedLbEvent(Page page,Label label)
-        {
-            TapGestureRecognizer TappedEvt = new TapGestureRecognizer();
-            TappedEvt.Tapped += (s, e) =>
-            {
-                Navigation.PushAsync(page);
-            };
+        
 
-            label.GestureRecognizers.Add(TappedEvt);
-        }*/
 
         
     }
