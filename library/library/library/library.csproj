@@ -11,9 +11,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BarcodeScanner.XF" Version="5.0.6" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     <PackageReference Include="Xamarin.HotReload" Version="2.0.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Pages\AddBook.xaml.cs">
+      <DependentUpon>AddBook.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

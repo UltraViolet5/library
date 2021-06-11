@@ -15,8 +15,11 @@ namespace library.Droid
             base.OnCreate(savedInstanceState);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            GoogleVisionBarCodeScanner.Droid.RendererInitializer.Init();
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            
             LoadApplication(new App());
+
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
@@ -24,5 +27,6 @@ namespace library.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
     }
 }

@@ -23,6 +23,7 @@ namespace library.ViewModel
         Settings Settings { get; set; }
         UserView UserView { get; set; }
         BooksByCategory BooksByCategory { get; set; }
+        Book Book { get; set; }
 
         public IEnumerable<BookViewModel> Books { get; private set; }
         public IEnumerable<CategoryViewModel> Categories { get; private set; }
@@ -42,6 +43,7 @@ namespace library.ViewModel
         public ICommand BooksLbTapped { get; private set; }
         public ICommand AddBook { get; private set; }
         public ICommand ShowBooksByCategory { get; private set; }
+        public ICommand ShowBook { get; private set; }
 
         public MainViewModel()
         {
@@ -62,17 +64,28 @@ namespace library.ViewModel
             Settings = new Settings();
             UserView = new UserView();
             BooksByCategory = new BooksByCategory();
+            Book = new Book();
 
             BtnLogin = new Command(LoginBtnExecute, LoginBtnCanExecute);
             BooksLbTapped = new Command(TappedExecute, BooksLbTappedCanExecute);
             BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
             ShowBooksByCategory = new Command(ShowBooksByCategoryExecute, ShowBooksByCategoryCanExecute);
-            ///BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
+            ShowBook = new Command(ShowBookExecute, ShowBookCanExecute);
             //BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
             //BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
             //BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
             //BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
 
+        }
+
+        private bool ShowBookCanExecute(object arg)
+        {
+            return true;
+        }
+
+        private void ShowBookExecute(object obj)
+        {
+            App.FirstPage.Navigation.PushAsync(Book);
         }
 
         private bool ShowBooksByCategoryCanExecute(object arg)
