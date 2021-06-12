@@ -1,4 +1,4 @@
-﻿using GoogleVisionBarCodeScanner;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,31 +14,41 @@ namespace library.Pages
     {
         public ScanPage()
         {
-            GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode);
+            /*GoogleVisionBarCodeScanner.Methods.SetSupportBarcodeFormat(GoogleVisionBarCodeScanner.BarcodeFormats.QRCode);*/
+
             InitializeComponent();
             
 
         }
 
-        private async void CameraView_OnDetected(object sender, GoogleVisionBarCodeScanner.OnDetectedEventArg e)
+        private void ZXingScannerView_OnScanResult(ZXing.Result result)
         {
-            List<GoogleVisionBarCodeScanner.BarcodeResult> obj = e.BarcodeResults;
-
-            string result = string.Empty;
-            for (int i = 0; i < obj.Count; i++)
+            Device.BeginInvokeOnMainThread(() =>
             {
-                result += $"{i + 1}. Type : {obj[i].BarcodeType}, Value : {obj[i].DisplayValue}{Environment.NewLine}";
-            }
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-                await DisplayAlert("Result", result, "OK");
-                //If you want to stop scanning, you can close the scanning page
-                await Navigation.PopModalAsync();
-                //if you want to keep scanning the next barcode, do not close the scanning page and call below function
-                //GoogleVisionBarCodeScanner.Methods.SetIsScanning(true);
+                scanResultText.Text = result.Text + "(type: " + result.BarcodeFormat.ToString() + ")";
             });
-
+                
         }
+
+        /*  private async void CameraView_OnDetected(object sender, GoogleVisionBarCodeScanner.OnDetectedEventArg e)
+          {
+              List<GoogleVisionBarCodeScanner.BarcodeResult> obj = e.BarcodeResults;
+
+              string result = string.Empty;
+              for (int i = 0; i < obj.Count; i++)
+              {
+                  result += $"{i + 1}. Type : {obj[i].BarcodeType}, Value : {obj[i].DisplayValue}{Environment.NewLine}";
+              }
+              Device.BeginInvokeOnMainThread(async () =>
+              {
+                  await DisplayAlert("Result", result, "OK");
+                  //If you want to stop scanning, you can close the scanning page
+                  await Navigation.PopModalAsync();
+                  //if you want to keep scanning the next barcode, do not close the scanning page and call below function
+                  //GoogleVisionBarCodeScanner.Methods.SetIsScanning(true);
+              });
+
+          }*/
 
     }
 }
