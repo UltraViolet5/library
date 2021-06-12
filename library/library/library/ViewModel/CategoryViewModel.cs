@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using library.Infrastructure;
 using library.Model;
 
 namespace library.ViewModel

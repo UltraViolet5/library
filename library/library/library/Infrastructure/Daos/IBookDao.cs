@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using library.Model;
 
-namespace library.Daos
+namespace library.Infrastructure.Daos
 {
     public interface IBookDao : IDao<Book>
     {

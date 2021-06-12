@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
-using library.Daos.Implementations;
-using library.Infrastructure;
 using library.Pages;
 using library.Services;
 using Xamarin.Forms;

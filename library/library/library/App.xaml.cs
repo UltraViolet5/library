@@ -17,12 +17,12 @@ namespace library
 
             MainPage = new NavigationPage(new library.MainPage());
             FirstPage = MainPage;
-            LogoPage = new LogoPage();
+            // LogoPage = new LogoPage();
         }
 
         protected override void OnStart()
         {
-            MainPage.Appearing += MainPage_Appearing;
+            // MainPage.Appearing += MainPage_Appearing;
         }
 
         private void MainPage_Appearing(object sender, EventArgs e)

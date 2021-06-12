@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using library.Infrastructure;
 using library.Model;
 using System.Linq;
 
@@ -10,7 +9,6 @@ namespace library.ViewModel
     public class BookViewModel : BaseViewModel
     {
         private readonly Book _book;
-
 
         public string Title
         {

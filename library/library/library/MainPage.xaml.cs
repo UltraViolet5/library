@@ -10,7 +10,6 @@ namespace library
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
-
         /*Books Books { get; set; }
         Login Login { get; set; }
         Mates Mates { get; set; }
@@ -19,7 +18,6 @@ namespace library
         Rented Rented { get; set; }
         Settings Settings { get; set; }
         UserView UserView { get; set; }*/
-
 
 
         private readonly MainViewModel _mainViewModel;
@@ -36,8 +34,6 @@ namespace library
                 Rented = new Rented();
                 Settings = new Settings();
                 UserView = new UserView();*/
-
-
 
 
             /*AddTappedLbEvent(Books, BooksLabel);*/
@@ -66,17 +62,12 @@ namespace library
             foreach (CategoryViewModel category in _mainViewModel.Categories)
             {
                 var categoriesUI = _componentFactory.CreateCategoryBtn(category);
-                var TappGest = new TapGestureRecognizer();
-                TappGest.SetBinding(TapGestureRecognizer.CommandProperty, "ShowBooksByCategory");
-                categoriesUI.GestureRecognizers.Add(TappGest);
+                var tapGest = new TapGestureRecognizer();
+                tapGest.SetBinding(TapGestureRecognizer.CommandProperty, "ShowBooksByCategory");
+                categoriesUI.GestureRecognizers.Add(tapGest);
                 Categories.Children.Add(categoriesUI);
-
             }
-
-
         }
-
-    
 
 
         /// <summary>
@@ -93,9 +84,5 @@ namespace library
                 LastBooks.Children.Add(bookCard);
             }
         }
-        
-
-
-        
     }
 }

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using library.Model;
 
-namespace library.Daos.Implementations
+namespace library.Infrastructure.Daos.Implementations
 {
     class CategoryDaoMemory : ICategoryDao
     {

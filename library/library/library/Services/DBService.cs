@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using library.Daos;
-using library.Daos.Implementations;
+using library.Infrastructure.Daos;
+using library.Infrastructure.Daos.Implementations;
 using library.Model;
 
 namespace library.Services
