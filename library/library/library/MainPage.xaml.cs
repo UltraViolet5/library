@@ -18,34 +18,16 @@ namespace library
         Rented Rented { get; set; }
         Settings Settings { get; set; }
         UserView UserView { get; set; }*/
-
+        
 
         private readonly MainViewModel _mainViewModel;
         private readonly ComponentFactoryBase _componentFactory;
 
         public MainPage()
         {
+            
             InitializeComponent();
-            /*    Books = new Books();
-                Login = new Login();
-                Mates = new Mates();
-                MyRentals = new MyRentals();
-                Register = new Registration();
-                Rented = new Rented();
-                Settings = new Settings();
-                UserView = new UserView();*/
-
-
-            /*AddTappedLbEvent(Books, BooksLabel);*/
-            /*btnBooks.Clicked += (s, e) => Navigation.PushAsync(Books);*/
-            /* btnLoginPage.Clicked += (s, e) => Navigation.PushAsync(Login);*/
-            /*  btnMates.Clicked += (s, e) => Navigation.PushAsync(Mates);
-              btnMyRentals.Clicked += (s, e) => Navigation.PushAsync(MyRentals);
-              btnRegister.Clicked += (s, e) => Navigation.PushAsync(Register);
-              btnRented.Clicked += (s, e) => Navigation.PushAsync(Rented);
-              btnSettings.Clicked += (s, e) => Navigation.PushAsync(Settings);
-              btnUserView.Clicked += (s, e) => Navigation.PushAsync(UserView);*/
-
+  
             _mainViewModel = new MainViewModel();
             _componentFactory = new ComponentFactory();
 
@@ -84,5 +66,8 @@ namespace library
                 LastBooks.Children.Add(bookCard);
             }
         }
+
+        
     }
+
 }
