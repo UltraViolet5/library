@@ -4,7 +4,9 @@
              xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
              x:Class="library.Pages.ScanPage">
   <ContentPage.Title>Scann</ContentPage.Title>
-
-    <Label x:Name="scanResultText"></Label>
-    <zxing:ZXingScannerView IsScanning="True" OnScanResult="ZXingScannerView_OnScanResult"/>
+    <StackLayout>
+        <Label x:Name="scanResultText"/>
+        <zxing:ZXingScannerView IsScanning="False" OnScanResult="ZXingScannerView_OnScanResult"/>
+        <Button x:Name="scanbutton" Text="scan"/>
+    </StackLayout>
 </ContentPage>
