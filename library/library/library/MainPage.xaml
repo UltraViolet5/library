@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodel="clr-namespace:library.ViewModel" x:DataType="viewmodel:MainViewModel"
              x:Class="library.MainPage">
 
     <ScrollView>
@@ -18,27 +18,44 @@
                     <Frame Grid.Column="0" Grid.Row="0" CornerRadius="15" WidthRequest="50" HeightRequest="50"
                            Padding="0" HasShadow="False">
                         <Image Source="user.png" Margin="0"
-                               HeightRequest="50" WidthRequest="50" HorizontalOptions="StartAndExpand" />
-                    </Frame>
-                    <Image Grid.Column="1" Grid.Row="0" Source="menu_btn.png"
-                           WidthRequest="25" HeightRequest="25" HorizontalOptions="End" />
+                           HeightRequest="50" WidthRequest="50" HorizontalOptions="StartAndExpand">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BtnUserView}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Frame>                    
+                    <Image Grid.Column="1" Grid.Row="0" Source="menu_btn.png" 
+                           WidthRequest="25" HeightRequest="25" HorizontalOptions="End">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding }"/>
+                        </Image.GestureRecognizers>
+                    </Image>
                 </Grid>
             </Frame>
 
             <!-- Here will be added book cards -->
             <StackLayout x:Name="LastBooks">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*" />
-                        <ColumnDefinition Width="5*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
+                
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="0" Text="Books" FontSize="Title" Padding="30,10,30,10" />
-                    <Image Grid.Row="0" Grid.Column="1" Source="plus.png" WidthRequest="20" HeightRequest="20"
-                           HorizontalOptions="End" Margin="0,0,20,0" />
+                      <Label x:Name="BooksLabel"   Grid.Row="0" Grid.Column="0" Text="Books" FontSize="Title" Padding="30,10,30,10" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BooksLbTapped}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Image Grid.Row="0" Grid.Column="1" Source="plus.png" WidthRequest="20" HeightRequest="20" 
+                           HorizontalOptions="End" Margin="0,0,20,0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AddBook}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
                 </Grid>
             </StackLayout>
 
@@ -55,8 +72,9 @@
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Grid.Column="0" Text="Categories" FontSize="Title" Padding="30,10,30,10" />
-                    <Image Grid.Row="0" Grid.Column="1" Source="plus.png" WidthRequest="20" HeightRequest="20"
-                           HorizontalOptions="End" Margin="0,0,20,0" />
+                    <Image Grid.Row="0" Grid.Column="1" Source="plus.png" WidthRequest="20" HeightRequest="20" 
+                           HorizontalOptions="End" Margin="0,0,20,0">
+                    </Image>
                 </Grid>
                 <ScrollView Orientation="Horizontal" HorizontalOptions="Fill">
                     <StackLayout x:Name="Categories" Orientation="Horizontal" Padding="30,0,0,0" />
@@ -134,11 +152,11 @@
             <StackLayout x:Name="Rentals">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*" />
-                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Grid.Column="0" Text="My rentals" FontSize="Title"

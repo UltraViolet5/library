@@ -10,15 +10,16 @@ namespace library
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
-        // TODO FIXME Propertisy z dużej litery
-        Books books { get; set; }
-        Login login { get; set; }
-        Mates mates { get; set; }
-        MyRentals myRentals { get; set; }
-        Registration register { get; set; }
-        Rented rented { get; set; }
-        Settings settings { get; set; }
-        UserView userView { get; set; }
+
+        /*Books Books { get; set; }
+        Login Login { get; set; }
+        Mates Mates { get; set; }
+        MyRentals MyRentals { get; set; }
+        Registration Register { get; set; }
+        Rented Rented { get; set; }
+        Settings Settings { get; set; }
+        UserView UserView { get; set; }*/
+
 
 
         private readonly MainViewModel _mainViewModel;
@@ -27,24 +28,27 @@ namespace library
         public MainPage()
         {
             InitializeComponent();
-            books = new Books();
-            login = new Login();
-            mates = new Mates();
-            myRentals = new MyRentals();
-            register = new Registration();
-            rented = new Rented();
-            settings = new Settings();
-            userView = new UserView();
+            /*    Books = new Books();
+                Login = new Login();
+                Mates = new Mates();
+                MyRentals = new MyRentals();
+                Register = new Registration();
+                Rented = new Rented();
+                Settings = new Settings();
+                UserView = new UserView();*/
 
 
-            btnBooks.Clicked += (s, e) => Navigation.PushAsync(books);
-            btnLoginPage.Clicked += (s, e) => Navigation.PushAsync(login);
-            btnMates.Clicked += (s, e) => Navigation.PushAsync(mates);
-            btnMyRentals.Clicked += (s, e) => Navigation.PushAsync(myRentals);
-            btnRegister.Clicked += (s, e) => Navigation.PushAsync(register);
-            btnRented.Clicked += (s, e) => Navigation.PushAsync(rented);
-            btnSettings.Clicked += (s, e) => Navigation.PushAsync(settings);
-            btnUserView.Clicked += (s, e) => Navigation.PushAsync(userView);
+
+
+            /*AddTappedLbEvent(Books, BooksLabel);*/
+            /*btnBooks.Clicked += (s, e) => Navigation.PushAsync(Books);*/
+            /* btnLoginPage.Clicked += (s, e) => Navigation.PushAsync(Login);*/
+            /*  btnMates.Clicked += (s, e) => Navigation.PushAsync(Mates);
+              btnMyRentals.Clicked += (s, e) => Navigation.PushAsync(MyRentals);
+              btnRegister.Clicked += (s, e) => Navigation.PushAsync(Register);
+              btnRented.Clicked += (s, e) => Navigation.PushAsync(Rented);
+              btnSettings.Clicked += (s, e) => Navigation.PushAsync(Settings);
+              btnUserView.Clicked += (s, e) => Navigation.PushAsync(UserView);*/
 
             _mainViewModel = new MainViewModel();
             _componentFactory = new ComponentFactory();
@@ -62,9 +66,18 @@ namespace library
             foreach (CategoryViewModel category in _mainViewModel.Categories)
             {
                 var categoriesUI = _componentFactory.CreateCategoryBtn(category);
+                var TappGest = new TapGestureRecognizer();
+                TappGest.SetBinding(TapGestureRecognizer.CommandProperty, "ShowBooksByCategory");
+                categoriesUI.GestureRecognizers.Add(TappGest);
                 Categories.Children.Add(categoriesUI);
+
             }
+
+
         }
+
+    
+
 
         /// <summary>
         /// Add last books to main page.
@@ -74,8 +87,15 @@ namespace library
             foreach (var book in _mainViewModel.Books)
             {
                 var bookCard = _componentFactory.CreateBookCard(book);
+                var TappGest = new TapGestureRecognizer();
+                TappGest.SetBinding(TapGestureRecognizer.CommandProperty, "ShowBook");
+                bookCard.GestureRecognizers.Add(TappGest);
                 LastBooks.Children.Add(bookCard);
             }
         }
+        
+
+
+        
     }
 }

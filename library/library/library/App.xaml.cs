@@ -7,13 +7,16 @@ namespace library
 {
     public partial class App : Application
     {
-        LogoPage LogoPage { get; set; }
+        public static LogoPage LogoPage { get; set; }
+        public static Page FirstPage { get; set; }
+       
 
         public App()
         {
             InitializeComponent();
 
             MainPage = new NavigationPage(new library.MainPage());
+            FirstPage = MainPage;
             LogoPage = new LogoPage();
         }
 
