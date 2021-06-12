@@ -28,8 +28,6 @@ namespace library.ViewModel
 
         private DBService _dbService;
 
-        Login Login = new Login();
-
         public ICommand BtnLogin { get; private set; }
         public ICommand BtnRegister { get; private set; }
         public ICommand BtnUserView { get; private set; }

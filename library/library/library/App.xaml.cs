@@ -18,8 +18,6 @@ namespace library
             MainPage = new NavigationPage(new library.MainPage());
             FirstPage = MainPage;
             LogoPage = new LogoPage();
-            
-           
         }
 
         /// <summary>

@@ -21,6 +21,11 @@ namespace library.Pages
 
         }
 
+
+        /// <summary>
+        /// if scan have result, display Result in Label.
+        /// </summary>
+        /// <param name="result"></param>
         private void ZXingScannerView_OnScanResult(ZXing.Result result)
         {
             Device.BeginInvokeOnMainThread(() =>
@@ -30,6 +35,12 @@ namespace library.Pages
                 
         }
 
+
+        /// <summary>
+        /// Turn on or off scaning.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void scanbutton_Clicked(object sender, EventArgs e)
         {
             if (scaner.IsScanning)
