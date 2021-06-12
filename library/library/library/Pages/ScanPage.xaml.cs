@@ -30,8 +30,16 @@ namespace library.Pages
                 
         }
 
-
-
-       
+        private void scanbutton_Clicked(object sender, EventArgs e)
+        {
+            if (scaner.IsScanning)
+            {
+                scaner.IsScanning = false;
+            }
+            else
+            {
+                scaner.IsScanning = true;
+            }
+        }
     }
 }
