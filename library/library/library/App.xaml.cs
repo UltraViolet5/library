@@ -22,7 +22,9 @@ namespace library
            
         }
 
-     
+        /// <summary>
+        /// Display LogoPage
+        /// </summary>
         protected override void OnStart()
         {
             FirstPage.Navigation.PushModalAsync(LogoPage);

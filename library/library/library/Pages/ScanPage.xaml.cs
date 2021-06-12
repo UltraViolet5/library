@@ -35,10 +35,12 @@ namespace library.Pages
             if (scaner.IsScanning)
             {
                 scaner.IsScanning = false;
+                scanbutton.Text = "Scan";
             }
             else
             {
                 scaner.IsScanning = true;
+                scanbutton.Text = "Off Scan";
             }
         }
     }
