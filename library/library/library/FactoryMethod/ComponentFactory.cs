@@ -33,11 +33,14 @@ namespace library.FactoryMethod
         {
             return new Frame()
             {
-                Padding = new Thickness(15,0,15,0),
-                CornerRadius = 8,
+                Padding = new Thickness(15,5,15,5),
+                BackgroundColor = Color.LightGray,
+                CornerRadius = 7,
+                HorizontalOptions = LayoutOptions.StartAndExpand,
                 Content = new Label
                 {
-                    Text = category.Name
+                    Text = category.Name,
+                    FontSize = 18
                 }
             };
         }

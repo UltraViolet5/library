@@ -2,10 +2,12 @@
 using library.Pages;
 using library.ViewModel;
 using library.FactoryMethod;
+using Xamarin.Forms.Xaml;
 
 
 namespace library
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
         // TODO FIXME Propertisy z dużej litery
