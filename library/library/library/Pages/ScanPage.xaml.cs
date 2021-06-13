@@ -6,53 +6,45 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using library.ViewModel;
 
 namespace library.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ScanPage : ContentPage
     {
+
+        public static Button ScanButton { get; set; }
+        public static ZXing.Net.Mobile.Forms.ZXingScannerView ScannerView { get; private set; }
+
         public ScanPage()
         {
            
 
             InitializeComponent();
-            
+            ScanButton = scanbutton;
+            ScannerView = scaner;
 
         }
 
 
         /// <summary>
-        /// if scan have result, display Result in Label.
+        /// if scan have result, display result in label.
         /// </summary>
         /// <param name="result"></param>
         private void ZXingScannerView_OnScanResult(ZXing.Result result)
         {
+           
+
+
             Device.BeginInvokeOnMainThread(() =>
             {
                 scanResultText.Text = result.Text + "(type: " + result.BarcodeFormat.ToString() + ")";
             });
-                
-        }
+
+            AddBookViewModel.Result = result;
 
 
-        /// <summary>
-        /// Turn on or off scaning.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void scanbutton_Clicked(object sender, EventArgs e)
-        {
-            if (scaner.IsScanning)
-            {
-                scaner.IsScanning = false;
-                scanbutton.Text = "Scan";
-            }
-            else
-            {
-                scaner.IsScanning = true;
-                scanbutton.Text = "Off Scan";
-            }
         }
     }
 }
