@@ -80,7 +80,7 @@ namespace library.FactoryMethod
                         {
                             new CheckBox()
                             {
-                                IsChecked = book.Read,
+                                IsChecked = book.Available,
                                 Color = Color.Black,
                                 IsEnabled = false
                             },
