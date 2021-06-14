@@ -51,17 +51,26 @@ namespace library
             books.Add(new Book()
             {
                 Title = "First book Title",
-                Authors = new List<Author>() {author, author2}
+                Authors = new List<Author>() {author, author2},
+                PublishingYear = new DateTime(2020,1,1),
+                Read = true,
+                Available = false
             });
             books.Add(new Book()
             {
                 Title = "Second super book",
-                Authors = new List<Author>() {author, author2}
+                Authors = new List<Author>() {author, author2},
+                PublishingYear = new DateTime(2020, 1, 1),
+                Available = true,
+                Read = true
             });
             books.Add(new Book()
             {
                 Title = "Third book",
-                Authors = new List<Author>() {author, author2}
+                Authors = new List<Author>() {author, author2},
+                PublishingYear = new DateTime(2020, 1, 1),
+                Available = true,
+                Read = false
             });
 
             return books;

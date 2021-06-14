@@ -16,6 +16,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
+
                 <Frame Grid.Column="0" Grid.Row="0" CornerRadius="15" WidthRequest="50" HeightRequest="50"
                        Padding="0" HasShadow="False">
                     <Image Source="user.png" Margin="0"
@@ -45,7 +46,7 @@
                     </Grid.RowDefinitions>
 
                     <Label x:Name="BooksLabel" Grid.Row="0" Grid.Column="0" Text="Books" FontSize="Title"
-                           Padding="30,10,30,10">
+                           Padding="30,10,30,10" FontFamily="News701">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding BooksLbTapped}" />
                         </Label.GestureRecognizers>
@@ -57,6 +58,7 @@
                         </Image.GestureRecognizers>
                     </Image>
                 </Grid>
+
             </StackLayout>
 
             <!-- Here will be added categories btns -->
@@ -70,7 +72,8 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="0" Text="Categories" FontSize="Title" Padding="30,10,30,10" />
+                    <Label Grid.Row="0" Grid.Column="0" Text="Categories" FontSize="Title" Padding="30,10,30,10"
+                           FontFamily="News701"/>
                     <Image Grid.Row="0" Grid.Column="1" Source="plus.png" WidthRequest="20" HeightRequest="20"
                            HorizontalOptions="End" Margin="0,0,20,0" />
                 </Grid>
@@ -90,7 +93,8 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="0" Text="Mates" FontSize="Title" Padding="30,10,30,10" />
+                    <Label Grid.Row="0" Grid.Column="0" Text="Mates" FontSize="Title" 
+                           Padding="30,10,30,10" FontFamily="News701"/>
                     <Image Grid.Row="0" Grid.Column="1" Source="plus.png" WidthRequest="20" HeightRequest="20"
                            HorizontalOptions="End" Margin="0,0,20,0" />
                 </Grid>
@@ -158,11 +162,12 @@
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Grid.Column="0" Text="My rentals" FontSize="Title"
-                           Padding="30,10,30,10" />
+                           Padding="30,10,30,10" FontFamily="News701"/>
                 </Grid>
 
                 <!-- Data mock up TODO generating element from factory -->
-                <Frame Padding="15,5,15,5" Margin="25,0,25,0" CornerRadius="7">
+                <Frame Padding="15,5,15,5"
+                       Margin="25,0,25,0" CornerRadius="7">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*" />
@@ -173,9 +178,9 @@
                         <Image Source="calender.png" WidthRequest="15" HeightRequest="15"
                                HorizontalOptions="Start" />
                         <Label Grid.Column="1" Text="Return at 05/07/2021" HorizontalOptions="StartAndExpand"
-                               HorizontalTextAlignment="Start" />
+                               HorizontalTextAlignment="Start" FontFamily="News701"/>
                         <Image Grid.Column="2" Source="arrow.png" HorizontalOptions="End"
-                               WidthRequest="10" />
+                               WidthRequest="10"/>
                     </Grid>
                 </Frame>
                 <Frame Padding="15,5,15,5" Margin="25,10,25,10" CornerRadius="7">
@@ -189,7 +194,7 @@
                         <Image Source="calender.png" WidthRequest="15" HeightRequest="15"
                                HorizontalOptions="Start" />
                         <Label Grid.Column="1" Text="Return at 05/07/2021" HorizontalOptions="StartAndExpand"
-                               HorizontalTextAlignment="Start" />
+                               HorizontalTextAlignment="Start" FontFamily="News701"/>
                         <Image Grid.Column="2" Source="arrow.png" HorizontalOptions="End"
                                WidthRequest="10" />
                     </Grid>

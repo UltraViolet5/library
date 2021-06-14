@@ -132,6 +132,7 @@
     <AndroidResource Include="Resources\drawable\plusfilled.png" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\picture.png" />
     <Content Include="SplashScreen.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
