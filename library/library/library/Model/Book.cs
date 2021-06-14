@@ -9,6 +9,8 @@ namespace library.Model
         public int Id { get; set; }
         public string Title { get; set; }
         public List<Author> Authors { get; set; }
+
+        public DateTime PublishingYear { get; set; }
         // TODO implement pictures
         public string Picture { get; set; }
         public User Owner { get; set; }

@@ -31,11 +31,14 @@ namespace library.ViewModel
                 List<string> authors =
                     _book.
                     Authors.
-                    Select(author => author.FirstName + author.LastName).ToList();
+                    Select(author => author.FirstName + " " + author.LastName).ToList();
 
                 return string.Join(", ", authors);
             }
         }
+
+
+        public string PublishingYear => _book.PublishingYear.Date.Year.ToString();
 
 
         public string Picture
