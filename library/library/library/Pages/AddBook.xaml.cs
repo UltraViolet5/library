@@ -1,4 +1,5 @@
-﻿using System;
+﻿using library.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,9 +12,15 @@ namespace library.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddBook : TabbedPage
     {
+
+        public static AddBookViewModel AddBookViewModel;
+
         public AddBook()
         {
             InitializeComponent();
+
+            AddBookViewModel = new AddBookViewModel();
+
         }
     }
 }

@@ -27,7 +27,7 @@ namespace library
         {
             FirstPage.Navigation.PushModalAsync(LogoPage);
             System.Threading.Thread.Sleep(2000);
-            FirstPage.Navigation.PopModalAsync();
+            FirstPage.Navigation.PopModalAsync(true);
         }
 
       

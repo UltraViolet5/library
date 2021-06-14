@@ -22,8 +22,8 @@ namespace library.Pages
            
 
             InitializeComponent();
-            ScanButton = scanbutton;
-            ScannerView = scaner;
+            ScanButton = scanbuttonXAML;
+            ScannerView = scanerXAML;
 
         }
 
@@ -40,11 +40,40 @@ namespace library.Pages
             Device.BeginInvokeOnMainThread(() =>
             {
                 scanResultText.Text = result.Text + "(type: " + result.BarcodeFormat.ToString() + ")";
+                DataPage.Label.Text = scanResultText.Text;
+
             });
 
             AddBookViewModel.Result = result;
+            PropertyChanged += ScanPage_PropertyChanged;
+
+        }
+
+        private void ScanPage_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            scanbuttonXAML.Text += "done";
+            
+        }
 
 
+        /// <summary>
+        /// Turn on or off scaning.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void scanbuttonXAML_Clicked(object sender, EventArgs e)
+        {
+            if (ScannerView.IsScanning)
+            {
+                ScannerView.IsScanning = false;
+                ScanButton.Text = "Scan";
+            }
+            else
+            {
+                ScannerView.IsScanning = true;
+                ScanButton.Text = "Off Scan";
+                scanResultText.Text += "Skanowanie";
+            }
         }
     }
 }

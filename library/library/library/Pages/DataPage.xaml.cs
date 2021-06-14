@@ -1,4 +1,5 @@
-﻿using System;
+﻿using library.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,15 @@ namespace library.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DataPage : ContentPage
     {
+        public static Label Label;
+
         public DataPage()
         {
             InitializeComponent();
             Task.Run(AnimateBG);
+            Label = BarcodeLabel;
+
+
         }
 
 
@@ -33,5 +39,7 @@ namespace library.Pages
                 await Task.Delay(10000);
             }
         }
+
+        
     }
 }

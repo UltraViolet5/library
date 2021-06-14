@@ -1,4 +1,5 @@
-﻿using System;
+﻿using library.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,14 +13,21 @@ namespace library.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Books : ContentPage
     {
+        public static BooksViewModel BooksViewModelInst { get; set; }
+        public static AddBook AddBookPage;
+        
+
         public Books()
         {
             InitializeComponent();
+            AddBookPage = new AddBook();
+            BooksViewModelInst = new BooksViewModel();
 
+        }
 
-            btnAddBook.Clicked += (s,e) => Navigation.PushAsync(new AddBook());
-
-
+        private void btnAddBook_Clicked(object sender, EventArgs e)
+        {
+             App.FirstPage.Navigation.PushAsync(AddBookPage);
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodel="clr-namespace:library.ViewModel"
+             x:DataType="viewmodel:AddBookViewModel"
              x:Class="library.Pages.DataPage">
+
     <ContentPage.Title>Add Data</ContentPage.Title>
 
     <Grid>
@@ -23,7 +25,8 @@
                 </BoxView.Background>
             </BoxView>
         <Frame HeightRequest="60" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent"  BorderColor="White">
-            <Label FontSize="30" HorizontalTextAlignment="Center" TextColor="White" >hello </Label>
+            <Label x:Name="BarcodeLabel"  FontSize="15" HorizontalTextAlignment="Center" TextColor="White"  Text="Barcode"/>
+
         </Frame>
     </Grid>
 

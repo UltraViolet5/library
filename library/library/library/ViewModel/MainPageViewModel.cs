@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace library.ViewModel
 {
-    class MainViewModel : BaseViewModel
+    public class MainViewModel : BaseViewModel
     {
 
         Books BooksPage { get; set; }

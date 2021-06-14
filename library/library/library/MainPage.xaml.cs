@@ -10,17 +10,8 @@ namespace library
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
-        /*Books Books { get; set; }
-        Login Login { get; set; }
-        Mates Mates { get; set; }
-        MyRentals MyRentals { get; set; }
-        Registration Register { get; set; }
-        Rented Rented { get; set; }
-        Settings Settings { get; set; }
-        UserView UserView { get; set; }*/
-        
-
-        private readonly MainViewModel _mainViewModel;
+    
+        public readonly MainViewModel _mainViewModel;
         private readonly ComponentFactoryBase _componentFactory;
 
         public MainPage()
@@ -46,6 +37,7 @@ namespace library
                 var categoriesUI = _componentFactory.CreateCategoryBtn(category);
                 var tapGest = new TapGestureRecognizer();
                 tapGest.SetBinding(TapGestureRecognizer.CommandProperty, "ShowBooksByCategory");
+               
                 categoriesUI.GestureRecognizers.Add(tapGest);
                 Categories.Children.Add(categoriesUI);
             }

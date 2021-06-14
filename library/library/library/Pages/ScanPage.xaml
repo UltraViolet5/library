@@ -7,7 +7,7 @@
   <ContentPage.Title>Scann</ContentPage.Title>
     <StackLayout>
         <Label x:Name="scanResultText"/>
-        <zxing:ZXingScannerView x:Name="scaner" IsScanning="False" OnScanResult="ZXingScannerView_OnScanResult"/>
-        <Button x:Name="scanbutton" Text="Scan" Command="{Binding Scan}"/>
+        <zxing:ZXingScannerView x:Name="scanerXAML" IsScanning="False" OnScanResult="ZXingScannerView_OnScanResult"/>
+        <Button x:Name="scanbuttonXAML" Text="Scan" Clicked="scanbuttonXAML_Clicked"    />
     </StackLayout>
 </ContentPage>
