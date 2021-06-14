@@ -6,7 +6,6 @@ using library.Pages;
 using library.Services;
 using Xamarin.Forms;
 
-
 namespace library.ViewModel
 {
     public class AddBookViewModel : BaseViewModel
