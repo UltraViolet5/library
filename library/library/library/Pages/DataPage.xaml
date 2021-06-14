@@ -3,25 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="library.Pages.DataPage">
     <ContentPage.Title>Add Data</ContentPage.Title>
-    <ContentPage.Content>
-        <StackLayout x:Name="slGradient" Scale="20" AnchorX="1" AnchorY="0" >
-            <StackLayout.Background>
-                <LinearGradientBrush>
-                   
-                    <GradientStop Color="DarkBlue"  Offset="0.2"/>
-                    <GradientStop Color="LightBlue"  Offset="0.3"/>
-                    <GradientStop Color="Indigo"  Offset="0.4"/>
-                    <GradientStop Color="Aqua" Offset="0.5"/>
-                    <GradientStop Color="CornflowerBlue" Offset="0.6"/>
-                    <GradientStop Color="DarkBlue"  Offset="0.7"/>
-                    <GradientStop Color="LightBlue"  Offset="0.8"/>
-                    <GradientStop Color="Indigo"  Offset="0.9"/>
-  
+
+    <Grid>
+            <BoxView x:Name="slGradient" Scale="20" AnchorX="1" AnchorY="0" >
+                <BoxView.Background>
+                    <LinearGradientBrush>
+
+                        <GradientStop Color="DarkBlue"  Offset="0.2"/>
+                        <GradientStop Color="LightBlue"  Offset="0.3"/>
+                        <GradientStop Color="Indigo"  Offset="0.4"/>
+                        <GradientStop Color="Aqua" Offset="0.5"/>
+                        <GradientStop Color="CornflowerBlue" Offset="0.6"/>
+                        <GradientStop Color="DarkBlue"  Offset="0.7"/>
+                        <GradientStop Color="LightBlue"  Offset="0.8"/>
+                        <GradientStop Color="Indigo"  Offset="0.9"/>
+                        <GradientStop Color="Aqua" Offset="1.0"/>
+
                 </LinearGradientBrush>
-            </StackLayout.Background>
-            <Label Text="Welcome to Xamarin.Forms!"
-                        VerticalOptions="CenterAndExpand" 
-                        HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+                </BoxView.Background>
+            </BoxView>
+        <Frame HeightRequest="60" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent"  BorderColor="White">
+            <Label FontSize="30" HorizontalTextAlignment="Center" TextColor="White" >hello </Label>
+        </Frame>
+    </Grid>
+
+
 </ContentPage>

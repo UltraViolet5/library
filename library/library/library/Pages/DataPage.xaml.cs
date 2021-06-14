@@ -23,11 +23,15 @@ namespace library.Pages
         private async void AnimateBG()
         {
             Action<double> forward = input => slGradient.AnchorY = input;
-     
-            slGradient.Animate("forward", callback: forward, start: 0, end: 1, length: 10000, easing: Easing.Linear);
-            await Task.Delay(10000);
+            Action<double> backward = input => slGradient.AnchorY = input;
 
-            AnimateBG();
+            while (true)
+            {
+                slGradient.Animate("forward", callback: forward, start: 0, end: 1, length: 10000, easing: Easing.SinInOut);
+                await Task.Delay(10000);
+                slGradient.Animate("backward", callback: backward, start: 1, end: 0, length: 10000, easing: Easing.SinInOut);
+                await Task.Delay(10000);
+            }
         }
     }
 }
