@@ -15,6 +15,19 @@ namespace library.Pages
         public DataPage()
         {
             InitializeComponent();
+            Task.Run(AnimateBG);
+        }
+
+
+
+        private async void AnimateBG()
+        {
+            Action<double> forward = input => slGradient.AnchorY = input;
+     
+            slGradient.Animate("forward", callback: forward, start: 0, end: 1, length: 10000, easing: Easing.Linear);
+            await Task.Delay(10000);
+
+            AnimateBG();
         }
     }
 }

@@ -15,6 +15,9 @@ namespace library.Pages
         public LogoPage()
         {
             InitializeComponent();
+           
         }
+
+  
     }
 }
