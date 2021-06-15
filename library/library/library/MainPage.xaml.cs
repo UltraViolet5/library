@@ -25,6 +25,31 @@ namespace library
             BindingContext = _mainViewModel;
             DisplayBooks();
             DisplayCategories();
+            DisplayMates();
+            DisplayBorrowings();
+        }
+
+        private void DisplayBorrowings()
+        {
+            foreach (BorrowingViewModel borrowing in _mainViewModel.Borrowings)
+            {
+                var borrowingUi = _componentFactory.CreateRentalBtn(borrowing);
+                
+                Rentals.Children.Add(borrowingUi);
+            }
+        }
+
+        /// <summary>
+        /// Add mates icons to main page
+        /// </summary>
+        private void DisplayMates()
+        {
+            foreach (UserViewModel mate in _mainViewModel.Mates)
+            {
+                var mateUI = _componentFactory.CreateMateIcon(mate);
+
+                Mates.Children.Add(mateUI);
+            }
         }
 
         /// <summary>

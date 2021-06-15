@@ -14,7 +14,7 @@ namespace library.ViewModel
 
         Books BooksPage { get; set; }
         Login LoginPage { get; set; }
-        Mates Mates { get; set; }
+        MatesPage MatesPage { get; set; }
         MyRentals MyRentals { get; set; }
         Registration Register { get; set; }
         Rented Rented { get; set; }
@@ -25,6 +25,9 @@ namespace library.ViewModel
 
         public IEnumerable<BookViewModel> Books { get; private set; }
         public IEnumerable<CategoryViewModel> Categories { get; private set; }
+        public IEnumerable<UserViewModel> Mates { get; private set; }
+        public IEnumerable<BorrowingViewModel> Borrowings { get; private set; }
+
 
         private DBService _dbService;
 
@@ -47,10 +50,12 @@ namespace library.ViewModel
             
             Books = _dbService.GetBooks().Select(b => new BookViewModel(b));
             Categories = _dbService.GetCategories().Select(c => new CategoryViewModel(c));
+            Mates = _dbService.GetMates().Select(m => new UserViewModel(m));
+            Borrowings = _dbService.GetBorrowings().Select(b => new BorrowingViewModel(b));
 
             BooksPage = new Books();
             LoginPage = new Login();
-            Mates = new Mates();
+            MatesPage = new MatesPage();
             MyRentals = new MyRentals();
             Register = new Registration();
             Rented = new Rented();

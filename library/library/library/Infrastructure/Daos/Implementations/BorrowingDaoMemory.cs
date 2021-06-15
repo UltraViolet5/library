@@ -1,34 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using library.Model;
 
 namespace library.Infrastructure.Daos.Implementations
 {
-    class BookDaoMemory : IBookDao
+    class BorrowingDaoMemory : IBorrowingDao
     {
-        private List<Book> _data = new List<Book>();
+        private List<Borrowing> _data = new List<Borrowing>();
 
-        private static BookDaoMemory _s;
+        private static BorrowingDaoMemory _s;
 
-        public static BookDaoMemory S
+        public static BorrowingDaoMemory S
         {
             get
             {
                 if (_s == null)
-                    _s = new BookDaoMemory();
+                    _s = new BorrowingDaoMemory();
 
                 return _s;
             }
 
-            private set => _s = value;
+            private set { _s = value; }
         }
 
-        private BookDaoMemory()
+        private BorrowingDaoMemory()
         {
         }
 
-        public void Add(Book item)
+        public void Add(Borrowing item)
         {
             _data.Add(item);
         }
@@ -42,7 +43,7 @@ namespace library.Infrastructure.Daos.Implementations
             _data.Remove(toRemove);
         }
 
-        public Book Get(int id)
+        public Borrowing Get(int id)
         {
             var result = _data.First(x => x.Id == id);
             if (result == null)
@@ -51,19 +52,9 @@ namespace library.Infrastructure.Daos.Implementations
             return result;
         }
 
-        public IEnumerable<Book> GetAll()
+        public IEnumerable<Borrowing> GetAll()
         {
             return _data;
-        }
-
-        public IEnumerable<Book> GetBy(User owner)
-        {
-            return _data.Where(x => x.Owner.Id == owner.Id);
-        }
-
-        public IEnumerable<Book> GetBy(User owner, Category category)
-        {
-            return _data.Where(x => x.Owner.Id == owner.Id && x.Categories.Contains(category));
         }
     }
 }

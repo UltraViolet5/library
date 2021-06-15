@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using library.Model;
 using Xamarin.Forms;
 using library.ViewModel;
 
@@ -10,5 +11,7 @@ namespace library.FactoryMethod
     {
         public abstract Frame CreateBookCard(BookViewModel book);
         public abstract Frame CreateCategoryBtn(CategoryViewModel category);
+        public abstract Frame CreateMateIcon(UserViewModel user);
+        public abstract Frame CreateRentalBtn(BorrowingViewModel borrowing);
     }
 }

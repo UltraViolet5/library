@@ -19,6 +19,29 @@ namespace library
         {
             _dbService.AddBooks(GetBooks());
             _dbService.AddCategories(GetCategories());
+            _dbService.AddBorrowings(GetBorrowindg());
+            _dbService.AddUsers(GetUsers());
+        }
+
+        private IEnumerable<User> GetUsers()
+        {
+            return new List<User>()
+            {
+                new User(),
+                new User(),
+                new User(),
+                new User()
+            };
+        }
+
+        private IEnumerable<Borrowing> GetBorrowindg()
+        {
+            return new List<Borrowing>()
+            {
+                new Borrowing() {ReturnDate = new DateTime(2021, 9, 3),},
+                new Borrowing() {ReturnDate = new DateTime(2021, 10, 21),},
+                new Borrowing() {ReturnDate = new DateTime(2021, 8, 12),},
+            };
         }
 
         private IEnumerable<Category> GetCategories()

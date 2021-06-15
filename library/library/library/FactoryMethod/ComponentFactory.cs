@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using library.Model;
 using Xamarin.Forms;
 using library.ViewModel;
 
@@ -126,9 +127,79 @@ namespace library.FactoryMethod
                 Content = new Label
                 {
                     Text = category.Name,
-                    FontSize = 18
+                    FontSize = 18,
+                    FontFamily = Style.MainFont
                 }
             };
+        }
+
+        public override Frame CreateMateIcon(UserViewModel user)
+        {
+            return new Frame()
+            {
+                CornerRadius = 25,
+                WidthRequest = 50,
+                HeightRequest = 50,
+                Padding = 0,
+                HasShadow = false,
+                Content = new Image()
+                {
+                    Source = "user.png",
+                    Margin = 0,
+                    HeightRequest = 50,
+                    WidthRequest = 50,
+                    HorizontalOptions = LayoutOptions.StartAndExpand
+                }
+            };
+        }
+
+        public override Frame CreateRentalBtn(BorrowingViewModel borrowing)
+        {
+            var grid = new Grid()
+            {
+                ColumnDefinitions = 
+                {
+                    new ColumnDefinition() {Width = new GridLength(1, GridUnitType.Star)},
+                    new ColumnDefinition() {Width = new GridLength(5, GridUnitType.Star)},
+                    new ColumnDefinition() {Width = new GridLength(2, GridUnitType.Star)}
+                }
+            };
+            grid.Children.Add(new Image()
+            {
+                Source = "calender.png",
+                WidthRequest = 15,
+                HeightRequest = 15,
+                HorizontalOptions = LayoutOptions.Start
+            });
+
+            var label = new Label()
+            {
+                Text = $"Return at {borrowing.ReturnDate}",
+                HorizontalOptions = LayoutOptions.StartAndExpand,
+                HorizontalTextAlignment = TextAlignment.Start,
+                FontFamily = Style.MainFont
+            };
+            label.SetValue(Grid.ColumnProperty, 1);
+            grid.Children.Add(label);
+
+            var arrow = new Image()
+            {
+                Source = "arrow.png",
+                HorizontalOptions = LayoutOptions.End,
+                WidthRequest = 10
+            };
+            arrow.SetValue(Grid.ColumnProperty, 2);
+            grid.Children.Add(arrow);
+
+            var frame = new Frame()
+            {
+                Padding = new Thickness(15,5),
+                Margin = new Thickness(25, 0),
+                CornerRadius = 7,
+                Content = grid
+            };
+
+            return frame;
         }
     }
 }

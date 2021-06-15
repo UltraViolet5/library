@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using library.Model;
 
 namespace library.Infrastructure.Daos.Implementations
@@ -29,12 +30,20 @@ namespace library.Infrastructure.Daos.Implementations
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            var toRemove = _data.First(x => x.Id == id);
+            if (toRemove == null)
+                throw new ArgumentException($"No found Category with id {id}");
+
+            _data.Remove(toRemove);
         }
 
         public Category Get(int id)
         {
-            throw new NotImplementedException();
+            var result = _data.First(x => x.Id == id);
+            if (result == null)
+                throw new ArgumentException($"No found Category with id {id}");
+            
+            return result;
         }
 
         public IEnumerable<Category> GetAll()

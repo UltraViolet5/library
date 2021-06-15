@@ -34,7 +34,7 @@
                 </Image>
             </Grid>
 
-            <!-- Here will be added book cards -->
+            <!-- BOOKS -->
             <StackLayout x:Name="LastBooks">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -58,10 +58,11 @@
                         </Image.GestureRecognizers>
                     </Image>
                 </Grid>
+                <!-- Here will be added book cards -->
 
             </StackLayout>
 
-            <!-- Here will be added categories btns -->
+            <!-- CATEGORIES -->
             <StackLayout Margin="0,20,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -79,10 +80,12 @@
                 </Grid>
                 <ScrollView Orientation="Horizontal" HorizontalOptions="Fill">
                     <StackLayout x:Name="Categories" Orientation="Horizontal" Padding="30,0,0,0" />
+                    <!-- Here will be added categories btns -->
+
                 </ScrollView>
             </StackLayout>
 
-            <!-- Here will be added mates btns -->
+            <!-- MATES -->
             <StackLayout Margin="0,20,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -100,57 +103,12 @@
                 </Grid>
                 <ScrollView Orientation="Horizontal" HorizontalOptions="Fill">
                     <StackLayout x:Name="Mates" Orientation="Horizontal" Padding="30,0,0,0">
-                        <!-- Data mock up TODO generating element from factory -->
-                        <Frame CornerRadius="15" WidthRequest="50" HeightRequest="50"
-                               Padding="0" HasShadow="False">
-                            <Image Source="user.png" Margin="0"
-                                   HeightRequest="50" WidthRequest="50" HorizontalOptions="StartAndExpand" />
-                        </Frame>
-                        <Frame CornerRadius="15" WidthRequest="50" HeightRequest="50"
-                               Padding="0" HasShadow="False">
-                            <Image Source="user.png" Margin="0"
-                                   HeightRequest="50" WidthRequest="50" HorizontalOptions="StartAndExpand" />
-                        </Frame>
-                        <Frame CornerRadius="15" WidthRequest="50" HeightRequest="50"
-                               Padding="0" HasShadow="False">
-                            <Image Source="user.png" Margin="0"
-                                   HeightRequest="50" WidthRequest="50" HorizontalOptions="StartAndExpand" />
-                        </Frame>
-                        <Frame CornerRadius="15" WidthRequest="50" HeightRequest="50"
-                               Padding="0" HasShadow="False">
-                            <Image Source="user.png" Margin="0"
-                                   HeightRequest="50" WidthRequest="50" HorizontalOptions="StartAndExpand" />
-                        </Frame>
-                        <Frame CornerRadius="15" WidthRequest="50" HeightRequest="50"
-                               Padding="0" HasShadow="False">
-                            <Image Source="user.png" Margin="0"
-                                   HeightRequest="50" WidthRequest="50" HorizontalOptions="StartAndExpand" />
-                        </Frame>
-                        <Frame CornerRadius="15" WidthRequest="50" HeightRequest="50"
-                               Padding="0" HasShadow="False">
-                            <Image Source="user.png" Margin="0"
-                                   HeightRequest="50" WidthRequest="50" HorizontalOptions="StartAndExpand" />
-                        </Frame>
-                        <Frame CornerRadius="15" WidthRequest="50" HeightRequest="50"
-                               Padding="0" HasShadow="False">
-                            <Image Source="user.png" Margin="0"
-                                   HeightRequest="50" WidthRequest="50" HorizontalOptions="StartAndExpand" />
-                        </Frame>
-                        <Frame CornerRadius="15" WidthRequest="50" HeightRequest="50"
-                               Padding="0" HasShadow="False">
-                            <Image Source="user.png" Margin="0"
-                                   HeightRequest="50" WidthRequest="50" HorizontalOptions="StartAndExpand" />
-                        </Frame>
-                        <Frame CornerRadius="15" WidthRequest="50" HeightRequest="50"
-                               Padding="0" HasShadow="False">
-                            <Image Source="user.png" Margin="0"
-                                   HeightRequest="50" WidthRequest="50" HorizontalOptions="StartAndExpand" />
-                        </Frame>
+                        <!-- Here will be added mates btns -->
                     </StackLayout>
                 </ScrollView>
             </StackLayout>
 
-            <!-- Here will be added rentals cards -->
+            <!-- BORROWINGS -->
             <StackLayout x:Name="Rentals" Margin="0,20,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -164,47 +122,14 @@
                     <Label Grid.Row="0" Grid.Column="0" Text="My rentals" FontSize="Title"
                            Padding="30,10,30,10" FontFamily="News701"/>
                 </Grid>
+                <!-- Here will be added rentals cards -->
 
-                <!-- Data mock up TODO generating element from factory -->
-                <Frame Padding="15,5,15,5"
-                       Margin="25,0,25,0" CornerRadius="7">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="5*" />
-                            <ColumnDefinition Width="2*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Image Source="calender.png" WidthRequest="15" HeightRequest="15"
-                               HorizontalOptions="Start" />
-                        <Label Grid.Column="1" Text="Return at 05/07/2021" HorizontalOptions="StartAndExpand"
-                               HorizontalTextAlignment="Start" FontFamily="News701"/>
-                        <Image Grid.Column="2" Source="arrow.png" HorizontalOptions="End"
-                               WidthRequest="10"/>
-                    </Grid>
-                </Frame>
-                <Frame Padding="15,5,15,5" Margin="25,10,25,10" CornerRadius="7">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="5*" />
-                            <ColumnDefinition Width="2*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Image Source="calender.png" WidthRequest="15" HeightRequest="15"
-                               HorizontalOptions="Start" />
-                        <Label Grid.Column="1" Text="Return at 05/07/2021" HorizontalOptions="StartAndExpand"
-                               HorizontalTextAlignment="Start" FontFamily="News701"/>
-                        <Image Grid.Column="2" Source="arrow.png" HorizontalOptions="End"
-                               WidthRequest="10" />
-                    </Grid>
-                </Frame>
             </StackLayout>
 
             <Button x:Name="btnLoginPage" Text="Login" />
             <Button x:Name="btnRegister" Text="Register" />
             <Button x:Name="btnUserView" Text="User View" />
-            <Button x:Name="btnMates" Text="Mates" />
+            <Button x:Name="btnMates" Text="MatesPage" />
             <Button x:Name="btnMyRentals" Text="My Rentals" />
             <Button x:Name="btnRented" Text="Rented" />
             <Button x:Name="btnSettings" Text="Settings" />
