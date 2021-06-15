@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 using library.Pages;
 using library.ViewModel;
 using library.FactoryMethod;
@@ -23,12 +24,16 @@ namespace library
             _componentFactory = new ComponentFactory();
 
             BindingContext = _mainViewModel;
+
             DisplayBooks();
             DisplayCategories();
             DisplayMates();
             DisplayBorrowings();
         }
 
+        /// <summary>
+        /// Display list of lasts borrowings
+        /// </summary>
         private void DisplayBorrowings()
         {
             foreach (BorrowingViewModel borrowing in _mainViewModel.Borrowings)
@@ -84,7 +89,11 @@ namespace library
             }
         }
 
-        
+
+        private void BtnLoginPage_OnClicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

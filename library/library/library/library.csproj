@@ -29,6 +29,9 @@
     <Compile Update="Pages\AddBook.xaml.cs">
       <DependentUpon>AddBook.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\MatesPage.xaml.cs">
       <DependentUpon>MatesPage.xaml</DependentUpon>
     </Compile>
@@ -47,7 +50,7 @@
     <EmbeddedResource Update="Pages\BooksByCategory.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Login.xaml">
+    <EmbeddedResource Update="Pages\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\LogoPage.xaml">

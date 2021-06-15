@@ -126,7 +126,8 @@
 
             </StackLayout>
 
-            <Button x:Name="btnLoginPage" Text="Login" />
+            <Button x:Name="btnLoginPage" Text="LoginPage" Command="{Binding BtnLogin}">
+            </Button>
             <Button x:Name="btnRegister" Text="Register" />
             <Button x:Name="btnUserView" Text="User View" />
             <Button x:Name="btnMates" Text="MatesPage" />

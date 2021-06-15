@@ -13,7 +13,8 @@ namespace library.ViewModel
     {
 
         Books BooksPage { get; set; }
-        Login LoginPage { get; set; }
+        private AddBook AddBookPage { get; set; }
+        LoginPage LoginPage { get; set; }
         MatesPage MatesPage { get; set; }
         MyRentals MyRentals { get; set; }
         Registration Register { get; set; }
@@ -46,6 +47,7 @@ namespace library.ViewModel
 
         public MainViewModel()
         {
+            // Data init
             _dbService = new DBService();
             
             Books = _dbService.GetBooks().Select(b => new BookViewModel(b));
@@ -53,8 +55,9 @@ namespace library.ViewModel
             Mates = _dbService.GetMates().Select(m => new UserViewModel(m));
             Borrowings = _dbService.GetBorrowings().Select(b => new BorrowingViewModel(b));
 
+            // Page init
             BooksPage = new Books();
-            LoginPage = new Login();
+            LoginPage = new LoginPage();
             MatesPage = new MatesPage();
             MyRentals = new MyRentals();
             Register = new Registration();
@@ -63,12 +66,15 @@ namespace library.ViewModel
             UserView = new UserView();
             BooksByCategory = new BooksByCategory();
             Book = new Book();
+            AddBookPage = new AddBook();
 
+            // Actions init
             BtnLogin = new Command(LoginBtnExecute, LoginBtnCanExecute);
             BooksLbTapped = new Command(TappedExecute, BooksLbTappedCanExecute);
             BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
             ShowBooksByCategory = new Command(ShowBooksByCategoryExecute, ShowBooksByCategoryCanExecute);
             ShowBook = new Command(ShowBookExecute, ShowBookCanExecute);
+            AddBook = new Command(AddBookExecute);
             //BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
             //BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
             //BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
@@ -124,6 +130,11 @@ namespace library.ViewModel
         private bool LoginBtnCanExecute(object arg)
         {
             return true;
+        }
+
+        private void AddBookExecute(object arg)
+        {
+            App.FirstPage.Navigation.PushAsync(AddBookPage);
         }
     }
 }
