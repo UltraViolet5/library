@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace library.ViewModel
 {
-    public class MainViewModel : BaseViewModel
+    public class MainPageViewModel : BaseViewModel
     {
 
         Books BooksPage { get; set; }
@@ -17,7 +17,7 @@ namespace library.ViewModel
         LoginPage LoginPage { get; set; }
         MatesPage MatesPage { get; set; }
         MyRentals MyRentals { get; set; }
-        Registration Register { get; set; }
+        RegistrationPage RegistrationPage { get; set; }
         Rented Rented { get; set; }
         Settings Settings { get; set; }
         UserView UserView { get; set; }
@@ -33,7 +33,7 @@ namespace library.ViewModel
         private DBService _dbService;
 
         public ICommand BtnLogin { get; private set; }
-        public ICommand BtnRegister { get; private set; }
+        public ICommand RegisterCommand { get; private set; }
         public ICommand BtnUserView { get; private set; }
         public ICommand BtnBooks { get; private set; }
         public ICommand BtnMates { get; private set; }
@@ -45,7 +45,7 @@ namespace library.ViewModel
         public ICommand ShowBooksByCategory { get; private set; }
         public ICommand ShowBook { get; private set; }
 
-        public MainViewModel()
+        public MainPageViewModel()
         {
             // Data init
             _dbService = new DBService();
@@ -60,7 +60,7 @@ namespace library.ViewModel
             LoginPage = new LoginPage();
             MatesPage = new MatesPage();
             MyRentals = new MyRentals();
-            Register = new Registration();
+            RegistrationPage = new RegistrationPage();
             Rented = new Rented();
             Settings = new Settings();
             UserView = new UserView();
@@ -75,10 +75,7 @@ namespace library.ViewModel
             ShowBooksByCategory = new Command(ShowBooksByCategoryExecute, ShowBooksByCategoryCanExecute);
             ShowBook = new Command(ShowBookExecute, ShowBookCanExecute);
             AddBook = new Command(AddBookExecute);
-            //BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
-            //BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
-            //BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
-            //BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
+            RegisterCommand = new Command(RegisterExecute);
 
         }
 
@@ -135,6 +132,11 @@ namespace library.ViewModel
         private void AddBookExecute(object arg)
         {
             App.FirstPage.Navigation.PushAsync(AddBookPage);
+        }
+
+        private void RegisterExecute()
+        {
+            App.FirstPage.Navigation.PushAsync(RegistrationPage);
         }
     }
 }

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="library.Pages.RegistrationPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Margin="70,0" Padding="0,20">
+                <Label Text="Registration" HorizontalTextAlignment="Start" FontSize="18"
+                       FontFamily="News701" Margin="0,10" />
+                <Frame WidthRequest="150" HeightRequest="150" CornerRadius="25" Padding="0"
+                       Margin="40,10" HasShadow="False" BorderColor="LightGray"
+                       HorizontalOptions="Center">
+                    <AbsoluteLayout>
+                        <Label Text="picture" HorizontalTextAlignment="Center" VerticalOptions="Center"
+                               FontFamily="News701" FontSize="24" TextColor="LightGray"
+                               AbsoluteLayout.LayoutBounds="0.5,0.5" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                        <Image Source="plusfilled.png" WidthRequest="40" HeightRequest="40"
+                               AbsoluteLayout.LayoutBounds="0.9,0.9" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                    </AbsoluteLayout>
+                </Frame>
+                <Label Text="Email" HorizontalTextAlignment="Center" FontSize="18"
+                       FontFamily="News701" Margin="0" />
+                <Frame Padding="0" CornerRadius="12" Margin="0,10">
+                    <Entry Placeholder="e-mail" HorizontalTextAlignment="Center"
+                           BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701" />
+                </Frame>
+                <Label Text="Password" HorizontalTextAlignment="Center" FontSize="18"
+                       FontFamily="News701" Margin="0" />
+                <Frame Padding="0" CornerRadius="12" Margin="0,10">
+                    <Entry Placeholder="password" HorizontalTextAlignment="Center" IsPassword="True"
+                           BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701" />
+                </Frame>
+                <Label Text="Confirm password" HorizontalTextAlignment="Center" FontSize="18"
+                       FontFamily="News701" Margin="0" />
+                <Frame Padding="0" CornerRadius="12" Margin="0,10">
+                    <Entry Placeholder="confirm password" HorizontalTextAlignment="Center" IsPassword="True"
+                           BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701" />
+                </Frame>
+                <Label Text="User name" HorizontalTextAlignment="Center" FontSize="18"
+                       FontFamily="News701" Margin="0" />
+                <Frame Padding="0" CornerRadius="12" Margin="0,10">
+                    <Entry Placeholder="name" HorizontalTextAlignment="Center"
+                           BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701" />
+                </Frame>
+                <Label Text="Birth date" HorizontalTextAlignment="Center" FontSize="18"
+                       FontFamily="News701" Margin="0" />
+                <Frame Padding="0" CornerRadius="12" Margin="0,10">
+                    <Entry Placeholder="birth date" HorizontalTextAlignment="Center"
+                           BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701" />
+                </Frame>
+                <Label Text="Localization" HorizontalTextAlignment="Center" FontSize="18"
+                       FontFamily="News701" Margin="0" />
+                <Frame Padding="0" CornerRadius="12" Margin="0,10">
+                    <Entry Placeholder="localization" HorizontalTextAlignment="Center"
+                           BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701" />
+                </Frame>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <CheckBox Color="Black" IsEnabled="True" />
+                    <Label Text="Accept terms..." VerticalTextAlignment="Center"
+                           FontFamily="News701" />
+                </StackLayout>
+                <Image Source="arrowfilled.png" HorizontalOptions="End" Margin="0,0"
+                       WidthRequest="40">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RegisterCommand}"></TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

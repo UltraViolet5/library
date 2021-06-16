@@ -12,7 +12,7 @@ namespace library
     public partial class MainPage : ContentPage
     {
     
-        public readonly MainViewModel _mainViewModel;
+        public readonly MainPageViewModel MainPageViewModel;
         private readonly ComponentFactoryBase _componentFactory;
 
         public MainPage()
@@ -20,10 +20,10 @@ namespace library
             
             InitializeComponent();
   
-            _mainViewModel = new MainViewModel();
+            MainPageViewModel = new MainPageViewModel();
             _componentFactory = new ComponentFactory();
 
-            BindingContext = _mainViewModel;
+            BindingContext = MainPageViewModel;
 
             DisplayBooks();
             DisplayCategories();
@@ -36,7 +36,7 @@ namespace library
         /// </summary>
         private void DisplayBorrowings()
         {
-            foreach (BorrowingViewModel borrowing in _mainViewModel.Borrowings)
+            foreach (BorrowingViewModel borrowing in MainPageViewModel.Borrowings)
             {
                 var borrowingUi = _componentFactory.CreateRentalBtn(borrowing);
                 
@@ -49,7 +49,7 @@ namespace library
         /// </summary>
         private void DisplayMates()
         {
-            foreach (UserViewModel mate in _mainViewModel.Mates)
+            foreach (UserViewModel mate in MainPageViewModel.Mates)
             {
                 var mateUI = _componentFactory.CreateMateIcon(mate);
 
@@ -62,7 +62,7 @@ namespace library
         /// </summary>
         private void DisplayCategories()
         {
-            foreach (CategoryViewModel category in _mainViewModel.Categories)
+            foreach (CategoryViewModel category in MainPageViewModel.Categories)
             {
                 var categoriesUI = _componentFactory.CreateCategoryBtn(category);
                 var tapGest = new TapGestureRecognizer();
@@ -79,7 +79,7 @@ namespace library
         /// </summary>
         private void DisplayBooks()
         {
-            foreach (var book in _mainViewModel.Books)
+            foreach (var book in MainPageViewModel.Books)
             {
                 var bookCard = _componentFactory.CreateBookCard(book);
                 var TappGest = new TapGestureRecognizer();
