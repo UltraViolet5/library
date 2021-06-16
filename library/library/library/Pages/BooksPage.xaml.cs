@@ -11,16 +11,16 @@ using Xamarin.Forms.Xaml;
 namespace library.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Books : ContentPage
+    public partial class BooksPage : ContentPage
     {
         public static BooksViewModel BooksViewModelInst { get; set; }
-        public static AddBook AddBookPage;
+        public static AddBookPage AddBookPage;
         
 
-        public Books()
+        public BooksPage()
         {
             InitializeComponent();
-            AddBookPage = new AddBook();
+            AddBookPage = new AddBookPage();
             BooksViewModelInst = new BooksViewModel();
 
         }

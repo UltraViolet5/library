@@ -26,8 +26,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Pages\AddBook.xaml.cs">
-      <DependentUpon>AddBook.xaml</DependentUpon>
+    <Compile Update="Pages\AddBookPage.xaml.cs">
+      <DependentUpon>AddBookPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\BookPage.xaml.cs">
+      <DependentUpon>BookPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\BooksByCategoryPage.xaml.cs">
+      <DependentUpon>BooksByCategoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\BooksPage.xaml.cs">
+      <DependentUpon>BooksPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -35,22 +44,34 @@
     <Compile Update="Pages\MatesPage.xaml.cs">
       <DependentUpon>MatesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\MyRentalsPage.xaml.cs">
+      <DependentUpon>MyRentalsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\RentedPage.xaml.cs">
+      <DependentUpon>RentedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\UserPage.xaml.cs">
+      <DependentUpon>UserPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Pages\AddBook.xaml">
+    <EmbeddedResource Update="Pages\AddBookPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Book.xaml">
+    <EmbeddedResource Update="Pages\BookPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Books.xaml">
+    <EmbeddedResource Update="Pages\BooksPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\BooksByCategory.xaml">
+    <EmbeddedResource Update="Pages\BooksByCategoryPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\LoginPage.xaml">
@@ -62,19 +83,19 @@
     <EmbeddedResource Update="Pages\MatesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\MyRentals.xaml">
+    <EmbeddedResource Update="Pages\MyRentalsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\RegistrationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Rented.xaml">
+    <EmbeddedResource Update="Pages\RentedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Settings.xaml">
+    <EmbeddedResource Update="Pages\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\UserView.xaml">
+    <EmbeddedResource Update="Pages\UserPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

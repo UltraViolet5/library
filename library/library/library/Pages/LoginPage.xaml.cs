@@ -22,5 +22,11 @@ namespace library.Pages
 
             BindingContext = _loginViewModel;
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            App.FirstPage.Navigation.RemovePage(this);
+            return base.OnBackButtonPressed();
+        }
     }
 }

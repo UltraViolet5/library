@@ -45,7 +45,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Label x:Name="BooksLabel" Grid.Row="0" Grid.Column="0" Text="Books" FontSize="Title"
+                    <Label x:Name="BooksLabel" Grid.Row="0" Grid.Column="0" Text="BooksPage" FontSize="Title"
                            Padding="30,10,30,10" FontFamily="News701">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding BooksLbTapped}" />
@@ -132,8 +132,8 @@
             <Button x:Name="btnUserView" Text="User View" />
             <Button x:Name="btnMates" Text="MatesPage" />
             <Button x:Name="btnMyRentals" Text="My Rentals" />
-            <Button x:Name="btnRented" Text="Rented" />
-            <Button x:Name="btnSettings" Text="Settings" />
+            <Button x:Name="btnRented" Text="RentedPage" />
+            <Button x:Name="btnSettings" Text="SettingsPage" />
 
         </StackLayout>
     </ScrollView>

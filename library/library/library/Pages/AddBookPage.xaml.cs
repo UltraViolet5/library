@@ -1,20 +1,26 @@
-﻿using System;
+﻿using library.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace library.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class UserView : ContentPage
+    public partial class AddBookPage : TabbedPage
     {
-        public UserView()
+
+        public static AddBookViewModel AddBookViewModel;
+
+        public AddBookPage()
         {
             InitializeComponent();
+
+            AddBookViewModel = new AddBookViewModel();
+
         }
     }
 }

@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace library.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Settings : ContentPage
+    public partial class UserPage : ContentPage
     {
-        public Settings()
+        public UserPage()
         {
             InitializeComponent();
         }

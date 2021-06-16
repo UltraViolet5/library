@@ -11,18 +11,17 @@ namespace library.ViewModel
 {
     public class MainPageViewModel : BaseViewModel
     {
-
-        Books BooksPage { get; set; }
-        private AddBook AddBookPage { get; set; }
-        LoginPage LoginPage { get; set; }
-        MatesPage MatesPage { get; set; }
-        MyRentals MyRentals { get; set; }
-        RegistrationPage RegistrationPage { get; set; }
-        Rented Rented { get; set; }
-        Settings Settings { get; set; }
-        UserView UserView { get; set; }
-        BooksByCategory BooksByCategory { get; set; }
-        Book Book { get; set; }
+        private BooksPage BooksPage { get; set; }
+        private AddBookPage AddBookPage { get; set; }
+        private LoginPage LoginPage { get; set; }
+        private MatesPage MatesPage { get; set; }
+        private MyRentalsPage MyRentalsPage { get; set; }
+        private RegistrationPage RegistrationPage { get; set; }
+        private RentedPage RentedPage { get; set; }
+        private SettingsPage SettingsPage { get; set; }
+        private UserPage UserPage { get; set; }
+        private BooksByCategoryPage BooksByCategoryPage { get; set; }
+        private BookPage BookPage { get; set; }
 
         public IEnumerable<BookViewModel> Books { get; private set; }
         public IEnumerable<CategoryViewModel> Categories { get; private set; }
@@ -56,24 +55,24 @@ namespace library.ViewModel
             Borrowings = _dbService.GetBorrowings().Select(b => new BorrowingViewModel(b));
 
             // Page init
-            BooksPage = new Books();
+            BooksPage = new BooksPage();
             LoginPage = new LoginPage();
             MatesPage = new MatesPage();
-            MyRentals = new MyRentals();
+            MyRentalsPage = new MyRentalsPage();
             RegistrationPage = new RegistrationPage();
-            Rented = new Rented();
-            Settings = new Settings();
-            UserView = new UserView();
-            BooksByCategory = new BooksByCategory();
-            Book = new Book();
-            AddBookPage = new AddBook();
+            RentedPage = new RentedPage();
+            SettingsPage = new SettingsPage();
+            UserPage = new UserPage();
+            BooksByCategoryPage = new BooksByCategoryPage();
+            BookPage = new BookPage();
+            AddBookPage = new AddBookPage();
 
             // Actions init
-            BtnLogin = new Command(LoginBtnExecute, LoginBtnCanExecute);
-            BooksLbTapped = new Command(TappedExecute, BooksLbTappedCanExecute);
-            BtnUserView = new Command(UserViewImageTappedExecute, UserViewImageCanExecute);
-            ShowBooksByCategory = new Command(ShowBooksByCategoryExecute, ShowBooksByCategoryCanExecute);
-            ShowBook = new Command(ShowBookExecute, ShowBookCanExecute);
+            BtnLogin = new Command(LoginBtnExecute);
+            BooksLbTapped = new Command(TappedExecute);
+            BtnUserView = new Command(UserViewImageTappedExecute);
+            ShowBooksByCategory = new Command(ShowBooksByCategoryExecute);
+            ShowBook = new Command(ShowBookExecute);
             AddBook = new Command(AddBookExecute);
             RegisterCommand = new Command(RegisterExecute);
 
@@ -86,7 +85,7 @@ namespace library.ViewModel
 
         private void ShowBookExecute(object obj)
         {
-            App.FirstPage.Navigation.PushAsync(Book);
+            App.FirstPage.Navigation.PushAsync(BookPage);
         }
 
         private bool ShowBooksByCategoryCanExecute(object arg)
@@ -96,7 +95,7 @@ namespace library.ViewModel
 
         private void ShowBooksByCategoryExecute(object obj)
         {
-            App.FirstPage.Navigation.PushAsync(BooksByCategory);
+            App.FirstPage.Navigation.PushAsync(BooksByCategoryPage);
         }
 
         private bool UserViewImageCanExecute(object arg)
@@ -106,7 +105,7 @@ namespace library.ViewModel
 
         private void UserViewImageTappedExecute(object obj)
         {
-            App.FirstPage.Navigation.PushAsync(UserView);
+            App.FirstPage.Navigation.PushAsync(UserPage);
         }
 
         private void TappedExecute(object arg)

@@ -8,8 +8,12 @@ namespace library
     public partial class App : Application
     {
         public static LogoPage LogoPage { get; set; }
+
+        /// <summary>
+        /// Static reference to main page
+        /// </summary>
         public static Page FirstPage { get; set; }
-       
+
 
         public App()
         {
@@ -26,11 +30,10 @@ namespace library
         protected override void OnStart()
         {
             FirstPage.Navigation.PushModalAsync(LogoPage);
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(3000);
             FirstPage.Navigation.PopModalAsync(true);
         }
 
-      
 
         protected override void OnSleep()
         {

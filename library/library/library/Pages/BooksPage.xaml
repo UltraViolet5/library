@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodel="clr-namespace:library.ViewModel" x:DataType="viewmodel:BooksViewModel"
-             x:Class="library.Pages.Books">
+             x:Class="library.Pages.BooksPage">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Welcome to Xamarin.Forms! BOOKS"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <Button x:Name="btnAddBook" Text="Add Book" Clicked="btnAddBook_Clicked" />
+            <Button x:Name="btnAddBook" Text="Add BookPage" Clicked="btnAddBook_Clicked" />
 
 
         </StackLayout>

@@ -22,5 +22,11 @@ namespace library.Pages
 
             // BindingContext = _registrationViewModel;
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            App.FirstPage.Navigation.RemovePage(this);
+            return base.OnBackButtonPressed();
+        }
     }
 }

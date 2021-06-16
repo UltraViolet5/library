@@ -15,17 +15,7 @@ namespace library.ViewModel
 
         public AddBookViewModel()
         {
-            
             RaisePropertyChanged("Result");
         }
-
-        
-
-        /// <summary>
-        /// Turn on or off scaning.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-       
     }
 }

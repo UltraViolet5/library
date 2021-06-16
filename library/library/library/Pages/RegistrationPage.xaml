@@ -59,7 +59,7 @@
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                     <CheckBox Color="Black" IsEnabled="True" />
                     <Label Text="Accept terms..." VerticalTextAlignment="Center"
-                           FontFamily="News701" />
+                           FontFamily="News701"/>
                 </StackLayout>
                 <Image Source="arrowfilled.png" HorizontalOptions="End" Margin="0,0"
                        WidthRequest="40">
