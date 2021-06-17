@@ -40,6 +40,14 @@ namespace library.Pages
             }
         }
 
-        
+        private void AddAutor_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddCategory_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }
