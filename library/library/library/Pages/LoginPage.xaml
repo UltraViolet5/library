@@ -19,9 +19,13 @@
                        IsPassword="True" IsEnabled="True" FontFamily="News701" />
             </Frame>
             <Image Source="arrowfilled.png" HorizontalOptions="End" Margin="0,0"
-                   WidthRequest="40" />
+                   WidthRequest="40">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToMainPageCommand}"></TapGestureRecognizer>
+                </Image.GestureRecognizers>
+            </Image>
             <Label Text="or" HorizontalTextAlignment="Center" FontSize="18"
-                   FontFamily="News701" Margin="0" />
+                   FontFamily="News701" Margin="0"/>
             <Button Text="register" Margin="0,0" FontFamily="News701"
                     Command="{Binding RegisterCommand}" />
         </StackLayout>

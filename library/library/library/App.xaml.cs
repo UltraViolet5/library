@@ -7,33 +7,24 @@ namespace library
 {
     public partial class App : Application
     {
-        public static LogoPage LogoPage { get; set; }
-
         /// <summary>
         /// Static reference to main page
         /// </summary>
-        public static Page FirstPage { get; set; }
+        private static Page MainPageInstance { get; set; }
 
+        public static INavigation Navigation => MainPageInstance.Navigation;
 
         public App()
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new library.MainPage());
-            FirstPage = MainPage;
-            LogoPage = new LogoPage();
+            MainPage = new NavigationPage(new LogoPage());
+            MainPageInstance = MainPage;
         }
 
-        /// <summary>
-        /// Display LogoPage
-        /// </summary>
         protected override void OnStart()
         {
-            FirstPage.Navigation.PushModalAsync(LogoPage);
-            System.Threading.Thread.Sleep(3000);
-            FirstPage.Navigation.PopModalAsync(true);
         }
-
 
         protected override void OnSleep()
         {

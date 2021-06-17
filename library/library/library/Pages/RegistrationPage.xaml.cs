@@ -12,21 +12,22 @@ namespace library.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegistrationPage : ContentPage
     {
-        // TODO using register view model break running application
-        // private readonly RegistrationViewModel _registrationViewModel;
+        private readonly RegistrationViewModel _registrationViewModel;
         public RegistrationPage()
         {
             InitializeComponent();
 
-            // _registrationViewModel = new RegistrationViewModel();
+            NavigationPage.SetHasNavigationBar(this, false);
 
-            // BindingContext = _registrationViewModel;
+            _registrationViewModel = new RegistrationViewModel();
+
+            BindingContext = _registrationViewModel;
         }
 
-        protected override bool OnBackButtonPressed()
+        protected override void OnDisappearing()
         {
-            App.FirstPage.Navigation.RemovePage(this);
-            return base.OnBackButtonPressed();
+            base.OnDisappearing();
+            Navigation.RemovePage(this);
         }
     }
 }

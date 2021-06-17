@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Xamarin.Forms;
 using library.Pages;
 using library.ViewModel;
@@ -25,11 +26,14 @@ namespace library
 
             BindingContext = MainPageViewModel;
 
+            NavigationPage.SetHasNavigationBar(this, false);
+
             DisplayBooks();
             DisplayCategories();
             DisplayMates();
             DisplayBorrowings();
         }
+
 
         /// <summary>
         /// Display list of lasts borrowings

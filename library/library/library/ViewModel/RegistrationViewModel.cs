@@ -17,20 +17,23 @@ namespace library.ViewModel
         public string Localization { get; set; }
         public bool TermsAccepted { get; set; }
 
-        public LoginPage LoginPage { get; set; }
-
         public ICommand RegisterCommand { get; private set; }
+        public ICommand BackToLoginCommand{ get; private set; }
 
         public RegistrationViewModel()
         {
-            LoginPage = new LoginPage();
-
             RegisterCommand = new Command(RegisterExecute);
+            BackToLoginCommand = new Command(BackToLoginExecute);
+        }
+
+        private void BackToLoginExecute()
+        {
+            App.Navigation.PushAsync(new LoginPage());
         }
 
         private void RegisterExecute()
         {
-            App.FirstPage.Navigation.PushAsync(LoginPage);
+            App.Navigation.PushAsync(new LoginPage());
         }
     }
 }

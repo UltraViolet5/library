@@ -11,23 +11,10 @@ namespace library.ViewModel
 {
     public class MainPageViewModel : BaseViewModel
     {
-        private BooksPage BooksPage { get; set; }
-        private AddBookPage AddBookPage { get; set; }
-        private LoginPage LoginPage { get; set; }
-        private MatesPage MatesPage { get; set; }
-        private MyRentalsPage MyRentalsPage { get; set; }
-        private RegistrationPage RegistrationPage { get; set; }
-        private RentedPage RentedPage { get; set; }
-        private SettingsPage SettingsPage { get; set; }
-        private UserPage UserPage { get; set; }
-        private BooksByCategoryPage BooksByCategoryPage { get; set; }
-        private BookPage BookPage { get; set; }
-
         public IEnumerable<BookViewModel> Books { get; private set; }
         public IEnumerable<CategoryViewModel> Categories { get; private set; }
         public IEnumerable<UserViewModel> Mates { get; private set; }
         public IEnumerable<BorrowingViewModel> Borrowings { get; private set; }
-
 
         private DBService _dbService;
 
@@ -54,75 +41,35 @@ namespace library.ViewModel
             Mates = _dbService.GetMates().Select(m => new UserViewModel(m));
             Borrowings = _dbService.GetBorrowings().Select(b => new BorrowingViewModel(b));
 
-            // Page init
-            BooksPage = new BooksPage();
-            LoginPage = new LoginPage();
-            MatesPage = new MatesPage();
-            MyRentalsPage = new MyRentalsPage();
-            RegistrationPage = new RegistrationPage();
-            RentedPage = new RentedPage();
-            SettingsPage = new SettingsPage();
-            UserPage = new UserPage();
-            BooksByCategoryPage = new BooksByCategoryPage();
-            BookPage = new BookPage();
-            AddBookPage = new AddBookPage();
-
             // Actions init
-            BtnLogin = new Command(LoginBtnExecute);
             BooksLbTapped = new Command(TappedExecute);
             BtnUserView = new Command(UserViewImageTappedExecute);
             ShowBooksByCategory = new Command(ShowBooksByCategoryExecute);
             ShowBook = new Command(ShowBookExecute);
             AddBook = new Command(AddBookExecute);
-            RegisterCommand = new Command(RegisterExecute);
 
         }
-
-        private bool ShowBookCanExecute(object arg)
-        {
-            return true;
-        }
-
+        
         private void ShowBookExecute(object obj)
         {
-            App.FirstPage.Navigation.PushAsync(BookPage);
+            App.Navigation.PushAsync(new BookPage());
         }
-
-        private bool ShowBooksByCategoryCanExecute(object arg)
-        {
-            return true;
-        }
-
+        
         private void ShowBooksByCategoryExecute(object obj)
         {
-            App.FirstPage.Navigation.PushAsync(BooksByCategoryPage);
-        }
-
-        private bool UserViewImageCanExecute(object arg)
-        {
-            return true;
+            App.Navigation.PushAsync(new BooksByCategoryPage());
         }
 
         private void UserViewImageTappedExecute(object obj)
         {
-            App.FirstPage.Navigation.PushAsync(UserPage);
+            App.Navigation.PushAsync(new UserPage());
         }
 
         private void TappedExecute(object arg)
         {
-            App.FirstPage.Navigation.PushAsync(BooksPage);
+            App.Navigation.PushAsync(new BookPage());
         }
-
-        private bool BooksLbTappedCanExecute(object arg)
-        {
-            return true;
-        }
-
-        private void LoginBtnExecute(object obj)
-        {
-            App.FirstPage.Navigation.PushAsync(LoginPage);
-        }
-
+        
         private bool LoginBtnCanExecute(object arg)
         {
             return true;
@@ -130,12 +77,7 @@ namespace library.ViewModel
 
         private void AddBookExecute(object arg)
         {
-            App.FirstPage.Navigation.PushAsync(AddBookPage);
-        }
-
-        private void RegisterExecute()
-        {
-            App.FirstPage.Navigation.PushAsync(RegistrationPage);
+            App.Navigation.PushAsync(new AddBookPage());
         }
     }
 }

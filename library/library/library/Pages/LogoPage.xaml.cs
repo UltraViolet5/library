@@ -15,9 +15,21 @@ namespace library.Pages
         public LogoPage()
         {
             InitializeComponent();
-           
+
+            NavigationPage.SetHasNavigationBar(this, false);
+
+            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
+            {
+                Navigation.PushAsync(new LoginPage());
+
+                return false;
+            });
         }
 
-  
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            Navigation.RemovePage(this);
+        }
     }
 }
