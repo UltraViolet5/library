@@ -45,9 +45,9 @@
                 </Frame>
                 <Label Text="Birth date" HorizontalTextAlignment="Center" FontSize="18"
                        FontFamily="News701" Margin="0" />
-                <Frame Padding="0" CornerRadius="12" Margin="0,10">
-                    <Entry Placeholder="birth date" HorizontalTextAlignment="Center"
-                           BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701" />
+                <Frame Padding="0" CornerRadius="12" Margin="0,10"
+                       BackgroundColor="#e6e6e6">
+                    <DatePicker FontFamily="News701" HorizontalOptions="CenterAndExpand"/>
                 </Frame>
                 <Label Text="Localization" HorizontalTextAlignment="Center" FontSize="18"
                        FontFamily="News701" Margin="0" />

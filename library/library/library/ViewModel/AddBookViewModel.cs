@@ -23,7 +23,6 @@ namespace library.ViewModel
         public DatePicker PublishingYear { get; set; }
         public List<Category> Categories;
 
-       
 
         public AddBookViewModel()
         {
@@ -31,29 +30,16 @@ namespace library.ViewModel
 
             SaveButton = new Command(SaveButtonExecute);
             AddAutor = new Command(AddAutorExecute);
-            
-
         }
 
         private void AddAutorExecute(object obj)
         {
-            
         }
-        
+
 
         private void SaveButtonExecute(object obj)
         {
             var NewBook = new Book();
-            
-            
-           
-
         }
-
-        
-
-        
-
-       
     }
 }

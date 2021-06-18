@@ -33,6 +33,7 @@ namespace library.ViewModel
 
         private void RegisterExecute()
         {
+            // TODO Register user
             App.Navigation.PushAsync(new LoginPage());
         }
     }

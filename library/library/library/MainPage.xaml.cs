@@ -14,7 +14,6 @@ namespace library
     {
     
         public readonly MainPageViewModel MainPageViewModel;
-        private readonly ComponentFactoryBase _componentFactory;
 
         public MainPage()
         {
@@ -22,7 +21,6 @@ namespace library
             InitializeComponent();
   
             MainPageViewModel = new MainPageViewModel();
-            _componentFactory = new ComponentFactory();
 
             BindingContext = MainPageViewModel;
 
@@ -42,7 +40,7 @@ namespace library
         {
             foreach (BorrowingViewModel borrowing in MainPageViewModel.Borrowings)
             {
-                var borrowingUi = _componentFactory.CreateRentalBtn(borrowing);
+                var borrowingUi = App.ComponentFactory.CreateRentalBtn(borrowing);
                 
                 Rentals.Children.Add(borrowingUi);
             }
@@ -55,7 +53,7 @@ namespace library
         {
             foreach (UserViewModel mate in MainPageViewModel.Mates)
             {
-                var mateUI = _componentFactory.CreateMateIcon(mate);
+                var mateUI = App.ComponentFactory.CreateMateIcon(mate);
 
                 Mates.Children.Add(mateUI);
             }
@@ -68,7 +66,7 @@ namespace library
         {
             foreach (CategoryViewModel category in MainPageViewModel.Categories)
             {
-                var categoriesUI = _componentFactory.CreateCategoryBtn(category);
+                var categoriesUI = App.ComponentFactory.CreateCategoryBtn(category);
                 var tapGest = new TapGestureRecognizer();
                 tapGest.SetBinding(TapGestureRecognizer.CommandProperty, "ShowBooksByCategory");
                
@@ -85,9 +83,9 @@ namespace library
         {
             foreach (var book in MainPageViewModel.Books)
             {
-                var bookCard = _componentFactory.CreateBookCard(book);
+                var bookCard = App.ComponentFactory.CreateBookCard(book);
                 var TappGest = new TapGestureRecognizer();
-                TappGest.SetBinding(TapGestureRecognizer.CommandProperty, "ShowBook");
+                TappGest.SetBinding(TapGestureRecognizer.CommandProperty, "ShowBookCommand");
                 bookCard.GestureRecognizers.Add(TappGest);
                 LastBooks.Children.Add(bookCard);
             }

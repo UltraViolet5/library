@@ -10,9 +10,17 @@ namespace library.ViewModel
     public class BooksViewModel : BaseViewModel
     {
 
+        public ICommand AddBookCommand { get; private set; }
+
+
         public BooksViewModel()
         {
-           
+            AddBookCommand = new Command(AddBookExecute);
+        }
+
+        private void AddBookExecute()
+        {
+            App.Navigation.PushAsync(new AddBookPage());
         }
     }
 }

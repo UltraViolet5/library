@@ -16,7 +16,6 @@ namespace library.Pages
         public static BooksViewModel BooksViewModelInst { get; set; }
         public static AddBookDataPage AddBookDataPage;
         
-
         public BooksPage()
         {
             InitializeComponent();

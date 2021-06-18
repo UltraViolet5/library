@@ -3,12 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodel="clr-namespace:library.ViewModel" x:DataType="viewmodel:BooksViewModel"
              x:Class="library.Pages.BooksPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms! BOOKS"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Button x:Name="btnAddBook" Text="Add BookPage" Clicked="btnAddBook_Clicked" />
+        <StackLayout x:Name="LastBooks" Padding="20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="5*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
+                <Label x:Name="BooksLabel" Grid.Row="0" Grid.Column="0" Text="Books" FontSize="Title"
+                       Padding="10,10,30,10" FontFamily="News701"></Label>
+                <Image Grid.Row="0" Grid.Column="1" Source="plus.png" WidthRequest="20" HeightRequest="20"
+                       HorizontalOptions="End" Margin="0,0,20,0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AddBookCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+            <!-- Here will be added book cards -->
 
         </StackLayout>
     </ContentPage.Content>
