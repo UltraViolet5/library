@@ -46,7 +46,7 @@ namespace library.Pages
 
             AddBookViewModel.Result = result;
             ScannerView.IsScanning = false;
-            Navigation.PushAsync(new AddBookDataPage());
+            Navigation.PopAsync();
 
         }
 
