@@ -13,5 +13,6 @@ namespace library.FactoryMethod
         public abstract Frame CreateCategoryBtn(CategoryViewModel category);
         public abstract Frame CreateMateIcon(UserViewModel user);
         public abstract Frame CreateRentalBtn(BorrowingViewModel borrowing);
+        public abstract Frame CreateFrameWithEntry();
     }
 }

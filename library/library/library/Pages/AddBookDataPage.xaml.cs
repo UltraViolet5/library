@@ -7,20 +7,24 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using library.FactoryMethod;
 
 namespace library.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DataPage : ContentPage
+    public partial class AddBookDataPage : ContentPage
     {
-        public static Label Label;
+        public static Label BarLabel;
+        public static StackLayout Autorlayout;
+        private readonly ComponentFactoryBase _componentFactory;
 
-        public DataPage()
+        public AddBookDataPage()
         {
             InitializeComponent();
             Task.Run(AnimateBG);
-            Label = BarcodeLabel;
-
+            BarLabel = BarcodeLabel;
+            Autorlayout = AutorFrameXAML;
+            _componentFactory = new ComponentFactory();
 
         }
 
@@ -42,10 +46,20 @@ namespace library.Pages
 
         private void AddAutor_Clicked(object sender, EventArgs e)
         {
-
+            Autorlayout.Children.Add(_componentFactory.CreateFrameWithEntry());
         }
 
         private void AddCategory_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SaveBtn_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CancelBtn_Clicked(object sender, EventArgs e)
         {
 
         }

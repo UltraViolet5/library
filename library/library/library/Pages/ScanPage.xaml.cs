@@ -40,7 +40,7 @@ namespace library.Pages
             Device.BeginInvokeOnMainThread(() =>
             {
                 scanResultText.Text = result.Text + "(type: " + result.BarcodeFormat.ToString() + ")";
-                DataPage.Label.Text = scanResultText.Text;
+                AddBookDataPage.BarLabel.Text = scanResultText.Text;
 
             });
 
