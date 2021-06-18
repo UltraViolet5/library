@@ -25,6 +25,7 @@ namespace library.Pages
             BarLabel = BarcodeLabel;
             Autorlayout = AutorFrameXAML;
             _componentFactory = new ComponentFactory();
+             
 
         }
 
@@ -62,6 +63,11 @@ namespace library.Pages
         private void CancelBtn_Clicked(object sender, EventArgs e)
         {
 
+        }
+
+        private void ScanBtn_Clicked(object sender, EventArgs e)
+        {
+            App.Navigation.PushAsync(new ScanPage());
         }
     }
 }

@@ -31,6 +31,7 @@
                     <Label x:Name="BarcodeLabel"  FontSize="15" HorizontalTextAlignment="Center"  TextColor="White"  Text="Barcode"/>
                 </Frame>
 
+                <Button x:Name="ScanBtn" Text="+" HorizontalOptions="FillAndExpand" Clicked="ScanBtn_Clicked" HeightRequest="40" WidthRequest="30" BackgroundColor="White" />
                 <Label Text="Title" HorizontalTextAlignment="Center" FontSize="18"
                            FontFamily="News701" Margin="0" TextColor="White" />
                 <Frame Padding="0" CornerRadius="12" Margin="0,10">
