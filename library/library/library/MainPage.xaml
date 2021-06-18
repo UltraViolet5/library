@@ -6,9 +6,9 @@
              x:Class="library.MainPage">
 
     <ScrollView>
-        <StackLayout>
+        <StackLayout Padding="30">
             <!-- Header -->
-            <Grid Margin="20">
+            <Grid Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50" />
                     <ColumnDefinition Width="*" />
@@ -45,8 +45,8 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Label x:Name="BooksLabel" Grid.Row="0" Grid.Column="0" Text="BooksPage" FontSize="Title"
-                           Padding="30,10,30,10" FontFamily="News701">
+                    <Label x:Name="BooksLabel" Grid.Row="0" Grid.Column="0" Text="Books" FontSize="Title"
+                           Padding="10,10,30,10" FontFamily="News701">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding BooksLbTapped}" />
                         </Label.GestureRecognizers>
@@ -73,13 +73,13 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="0" Text="Categories" FontSize="Title" Padding="30,10,30,10"
+                    <Label Grid.Row="0" Grid.Column="0" Text="Categories" FontSize="Title" Padding="10,10"
                            FontFamily="News701"/>
                     <Image Grid.Row="0" Grid.Column="1" Source="plus.png" WidthRequest="20" HeightRequest="20"
                            HorizontalOptions="End" Margin="0,0,20,0" />
                 </Grid>
                 <ScrollView Orientation="Horizontal" HorizontalOptions="Fill">
-                    <StackLayout x:Name="Categories" Orientation="Horizontal" Padding="30,0,0,0" />
+                    <StackLayout x:Name="Categories" Orientation="Horizontal"/>
                     <!-- Here will be added categories btns -->
 
                 </ScrollView>
@@ -97,12 +97,12 @@
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Grid.Column="0" Text="Mates" FontSize="Title" 
-                           Padding="30,10,30,10" FontFamily="News701"/>
+                           Padding="10" FontFamily="News701"/>
                     <Image Grid.Row="0" Grid.Column="1" Source="plus.png" WidthRequest="20" HeightRequest="20"
                            HorizontalOptions="End" Margin="0,0,20,0" />
                 </Grid>
                 <ScrollView Orientation="Horizontal" HorizontalOptions="Fill">
-                    <StackLayout x:Name="Mates" Orientation="Horizontal" Padding="30,0,0,0">
+                    <StackLayout x:Name="Mates" Orientation="Horizontal">
                         <!-- Here will be added mates btns -->
                     </StackLayout>
                 </ScrollView>
@@ -120,21 +120,11 @@
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Grid.Column="0" Text="My rentals" FontSize="Title"
-                           Padding="30,10,30,10" FontFamily="News701"/>
+                           Padding="10" FontFamily="News701"/>
                 </Grid>
                 <!-- Here will be added rentals cards -->
 
             </StackLayout>
-
-            <Button x:Name="btnLoginPage" Text="LoginPage" Command="{Binding BtnLogin}">
-            </Button>
-            <Button x:Name="btnRegister" Text="Register" Command="{Binding RegisterCommand}"/>
-            <Button x:Name="btnUserView" Text="User View" />
-            <Button x:Name="btnMates" Text="MatesPage" />
-            <Button x:Name="btnMyRentals" Text="My Rentals" />
-            <Button x:Name="btnRented" Text="RentedPage" />
-            <Button x:Name="btnSettings" Text="SettingsPage" />
-
         </StackLayout>
     </ScrollView>
 

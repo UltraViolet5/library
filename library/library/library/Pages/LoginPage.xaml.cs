@@ -21,11 +21,18 @@ namespace library.Pages
             _loginViewModel = new LoginViewModel();
 
             BindingContext = _loginViewModel;
+
+            NavigationPage.SetHasNavigationBar(this, false);
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            Navigation.RemovePage(this);
         }
 
         protected override bool OnBackButtonPressed()
         {
-            App.FirstPage.Navigation.RemovePage(this);
             return base.OnBackButtonPressed();
         }
     }

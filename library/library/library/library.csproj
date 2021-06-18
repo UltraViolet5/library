@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="TT0320M_.TTF" />
+    <EmbeddedResource Include="Resources\TT0320M_.TTF" />
   </ItemGroup>
 
   <ItemGroup>

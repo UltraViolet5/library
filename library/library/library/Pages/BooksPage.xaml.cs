@@ -27,7 +27,7 @@ namespace library.Pages
 
         private void btnAddBook_Clicked(object sender, EventArgs e)
         {
-             App.FirstPage.Navigation.PushAsync(AddBookDataPage);
+             App.Navigation.PushAsync(AddBookPage);
         }
     }
 }

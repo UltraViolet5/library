@@ -12,22 +12,25 @@ namespace library.ViewModel
         public string Email { get; set; }
         public string Password { get; set; }
 
-        // Pages
-        private RegistrationPage RegistrationPage { get; set; }
 
         // Commands
         public ICommand RegisterCommand { get; private set; }
+        public ICommand ToMainPageCommand { get; private set; }
 
         public LoginViewModel()
         {
-            RegistrationPage = new RegistrationPage();
-
             RegisterCommand = new Command(RegisterExecute);
+            ToMainPageCommand = new Command(ToMainPageExecute);
+        }
+
+        private void ToMainPageExecute(object obj)
+        {
+            App.Navigation.PushAsync(new MainPage());
         }
 
         private void RegisterExecute(object obj)
         {
-            App.FirstPage.Navigation.PushAsync(RegistrationPage);
+            App.Navigation.PushAsync(new RegistrationPage());
         }
     }
 }
