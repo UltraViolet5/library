@@ -14,19 +14,19 @@ namespace library.Pages
     public partial class BooksPage : ContentPage
     {
         public static BooksViewModel BooksViewModelInst { get; set; }
-        public static AddBookPage AddBookPage;
+        public static AddBookDataPage AddBookDataPage;
         
         public BooksPage()
         {
             InitializeComponent();
-            AddBookPage = new AddBookPage();
+            AddBookDataPage = new AddBookDataPage();
             BooksViewModelInst = new BooksViewModel();
 
         }
 
         private void btnAddBook_Clicked(object sender, EventArgs e)
         {
-             App.Navigation.PushAsync(AddBookPage);
+             App.Navigation.PushAsync(AddBookDataPage);
         }
     }
 }

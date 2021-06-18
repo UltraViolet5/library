@@ -200,5 +200,19 @@ namespace library.FactoryMethod
 
             return frame;
         }
+
+        public override Frame CreateFrameWithEntry()
+        {
+            var NewFrame = new Frame
+            {
+                
+                Content = new Entry
+                {
+                    
+                }
+            };
+
+            return NewFrame;
+        }
     }
 }

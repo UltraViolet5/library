@@ -40,20 +40,17 @@ namespace library.Pages
             Device.BeginInvokeOnMainThread(() =>
             {
                 scanResultText.Text = result.Text + "(type: " + result.BarcodeFormat.ToString() + ")";
-                DataPage.Label.Text = scanResultText.Text;
+                AddBookDataPage.BarLabel.Text = scanResultText.Text;
 
             });
 
             AddBookViewModel.Result = result;
-            PropertyChanged += ScanPage_PropertyChanged;
+            ScannerView.IsScanning = false;
+            Navigation.PushAsync(new AddBookDataPage());
 
         }
 
-        private void ScanPage_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            scanbuttonXAML.Text += "done";
-            
-        }
+   
 
 
         /// <summary>

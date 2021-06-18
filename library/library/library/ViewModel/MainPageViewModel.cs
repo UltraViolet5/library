@@ -102,7 +102,7 @@ namespace library.ViewModel
 
         private void AddBookExecute(object arg)
         {
-            App.Navigation.PushAsync(new AddBookPage());
+            App.Navigation.PushAsync(new AddBookDataPage());
         }
     }
 }
