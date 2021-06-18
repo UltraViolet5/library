@@ -7,7 +7,7 @@ using library.ViewModel;
 
 namespace library.FactoryMethod
 {
-    class ComponentFactory : ComponentFactoryBase
+    public class ComponentFactory : ComponentFactoryBase
     {
         public override Frame CreateBookCard(BookViewModel book)
         {

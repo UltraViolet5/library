@@ -1,18 +1,23 @@
 ﻿using System;
+using library.FactoryMethod;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using library.Pages;
+using library.Services;
 
 namespace library
 {
     public partial class App : Application
     {
+        
+        public static INavigation Navigation => MainPageInstance.Navigation;
+        public static DBService DbService { get; private set; }
+        public static ComponentFactory ComponentFactory { get; private set; }
+
         /// <summary>
         /// Static reference to main page
         /// </summary>
         private static Page MainPageInstance { get; set; }
-
-        public static INavigation Navigation => MainPageInstance.Navigation;
 
         public App()
         {
@@ -20,6 +25,9 @@ namespace library
 
             MainPage = new NavigationPage(new LogoPage());
             MainPageInstance = MainPage;
+
+            DbService = new DBService();
+            ComponentFactory = new ComponentFactory();
         }
 
         protected override void OnStart()

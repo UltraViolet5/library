@@ -16,40 +16,65 @@ namespace library.ViewModel
         public IEnumerable<UserViewModel> Mates { get; private set; }
         public IEnumerable<BorrowingViewModel> Borrowings { get; private set; }
 
-        private DBService _dbService;
-
-        public ICommand BtnLogin { get; private set; }
         public ICommand RegisterCommand { get; private set; }
-        public ICommand BtnUserView { get; private set; }
-        public ICommand BtnBooks { get; private set; }
-        public ICommand BtnMates { get; private set; }
-        public ICommand BtnMyRentals { get; private set; }
-        public ICommand BtnRented { get; private set; }
-        public ICommand BtnSettings { get; private set; }
-        public ICommand BooksLbTapped { get; private set; }
-        public ICommand AddBook { get; private set; }
+        public ICommand UserCommand { get; private set; }
+        public ICommand MatesCommand { get; private set; }
+        public ICommand RentalsCommand { get; private set; }
+        public ICommand RentedCommand { get; private set; }
+        public ICommand SettingsCommand { get; private set; }
+        public ICommand BooksCommand { get; private set; }
+        public ICommand AddBookCommand { get; private set; }
         public ICommand ShowBooksByCategory { get; private set; }
-        public ICommand ShowBook { get; private set; }
+        public ICommand ShowBookCommand { get; private set; }
+        public ICommand CategoriesCommand { get; private set; }
+        public ICommand AddCategoryCommand { get; private set; }
 
         public MainPageViewModel()
         {
             // Data init
-            _dbService = new DBService();
-            
-            Books = _dbService.GetBooks().Select(b => new BookViewModel(b));
-            Categories = _dbService.GetCategories().Select(c => new CategoryViewModel(c));
-            Mates = _dbService.GetMates().Select(m => new UserViewModel(m));
-            Borrowings = _dbService.GetBorrowings().Select(b => new BorrowingViewModel(b));
+            Books = App.DbService.GetBooks().Select(b => new BookViewModel(b));
+            Categories = App.DbService.GetCategories().Select(c => new CategoryViewModel(c));
+            Mates = App.DbService.GetMates().Select(m => new UserViewModel(m));
+            Borrowings = App.DbService.GetBorrowings().Select(b => new BorrowingViewModel(b));
 
             // Actions init
-            BooksLbTapped = new Command(TappedExecute);
-            BtnUserView = new Command(UserViewImageTappedExecute);
+            BooksCommand = new Command(BooksExecute);
+            UserCommand = new Command(UserViewImageTappedExecute);
             ShowBooksByCategory = new Command(ShowBooksByCategoryExecute);
-            ShowBook = new Command(ShowBookExecute);
-            AddBook = new Command(AddBookExecute);
-
+            ShowBookCommand = new Command(ShowBookExecute);
+            AddBookCommand = new Command(AddBookExecute);
+            SettingsCommand = new Command(SettingsExecute);
+            CategoriesCommand = new Command(CategoryExecute);
+            AddCategoryCommand = new Command(AddCategoryExecute);
+            MatesCommand = new Command(MatesExecute);
+            RentalsCommand = new Command(RentalsExecute);
         }
-        
+
+        private void RentalsExecute()
+        {
+            App.Navigation.PushAsync(new MyRentalsPage());
+        }
+
+        private void MatesExecute()
+        {
+            App.Navigation.PushAsync(new MatesPage());
+        }
+
+        private void AddCategoryExecute()
+        {
+            App.Navigation.PushAsync(new CategoriesPage());
+        }
+
+        private void CategoryExecute()
+        {
+            App.Navigation.PushAsync(new CategoriesPage());
+        }
+
+        private void SettingsExecute()
+        {
+            App.Navigation.PushAsync(new SettingsPage());
+        }
+
         private void ShowBookExecute(object obj)
         {
             App.Navigation.PushAsync(new BookPage());
@@ -65,9 +90,9 @@ namespace library.ViewModel
             App.Navigation.PushAsync(new UserPage());
         }
 
-        private void TappedExecute(object arg)
+        private void BooksExecute(object arg)
         {
-            App.Navigation.PushAsync(new BookPage());
+            App.Navigation.PushAsync(new BooksPage());
         }
         
         private bool LoginBtnCanExecute(object arg)

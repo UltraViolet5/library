@@ -20,8 +20,6 @@ namespace library.Pages
             InitializeComponent();
             Task.Run(AnimateBG);
             Label = BarcodeLabel;
-
-
         }
 
 
@@ -48,6 +46,14 @@ namespace library.Pages
         private void AddCategory_Clicked(object sender, EventArgs e)
         {
 
+        }
+
+        private void SaveBtn_Clicked(object sender, EventArgs e)
+        {
+        }
+
+        private void CancelBtn_Clicked(object sender, EventArgs e)
+        {
         }
     }
 }
