@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using library.FactoryMethod;
@@ -25,10 +24,7 @@ namespace library.Pages
             BarLabel = BarcodeLabel;
             Autorlayout = AutorFrameXAML;
             _componentFactory = new ComponentFactory();
-             
-
         }
-
 
 
         private async void AnimateBG()
@@ -38,9 +34,11 @@ namespace library.Pages
 
             while (true)
             {
-                slGradient.Animate("forward", callback: forward, start: 0, end: 1, length: 10000, easing: Easing.SinInOut);
+                slGradient.Animate("forward", callback: forward, start: 0, end: 1, length: 10000,
+                    easing: Easing.SinInOut);
                 await Task.Delay(10000);
-                slGradient.Animate("backward", callback: backward, start: 1, end: 0, length: 10000, easing: Easing.SinInOut);
+                slGradient.Animate("backward", callback: backward, start: 1, end: 0, length: 10000,
+                    easing: Easing.SinInOut);
                 await Task.Delay(10000);
             }
         }
@@ -52,17 +50,6 @@ namespace library.Pages
 
         private void AddCategory_Clicked(object sender, EventArgs e)
         {
-
-        }
-
-        private void SaveBtn_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CancelBtn_Clicked(object sender, EventArgs e)
-        {
-
         }
 
         private void SaveBtn_Clicked(object sender, EventArgs e)
