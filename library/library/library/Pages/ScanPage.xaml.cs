@@ -24,6 +24,7 @@ namespace library.Pages
             InitializeComponent();
             ScanButton = scanbuttonXAML;
             ScannerView = scanerXAML;
+            
 
         }
 
@@ -44,7 +45,7 @@ namespace library.Pages
 
             });
 
-            AddBookViewModel.Result = result;
+            AddBookViewModel.Instance.Result = result;
             ScannerView.IsScanning = false;
             Navigation.PopAsync();
 
