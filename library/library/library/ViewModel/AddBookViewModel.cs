@@ -14,38 +14,50 @@ namespace library.ViewModel
     public class AddBookViewModel : BaseViewModel
     {
 
-        public static AddBookViewModel Instance
-        {
-            get
-            {
-                if (Instance == null)
-                {
-                    return Instance = new AddBookViewModel();
-                }
-                return Instance;
-            }
-            private set { }
-        }
+        //public static AddBookViewModel Instance
+        //{
+        //    get
+          //  {
+          //      if (Instance == null)
+           //     {
+                   // return Instance = new AddBookViewModel();
+             //   }
+              //  return Instance;
+            //}
+            //private set { }
+       // }
 
-        public ZXing.Result Result
+        /* public ZXing.Result Result
+         {
+             get { return Result; }
+             set
+             {
+                 if (Result != value)
+                 {
+                     Result = value;
+                     // Can pass the property name as a string,
+                     // -or- let the compiler do it because of the
+                     // CallerMemberNameAttribute on the RaisePropertyChanged method.
+                     RaisePropertyChanged("Result");
+                 }
+             }
+         }*/
+
+        private string _barcodeText = "Scan your barcode!";
+
+        public string BarcodeText
         {
-            get { return Result; }
+            get { return _barcodeText; }
             set
             {
-                if (Result != value)
-                {
-                    Result = value;
-                    // Can pass the property name as a string,
-                    // -or- let the compiler do it because of the
-                    // CallerMemberNameAttribute on the RaisePropertyChanged method.
-                    RaisePropertyChanged("Result");
-                }
+              
+                    _barcodeText = value;
+                    RaisePropertyChanged(nameof(BarcodeText));
+              
             }
         }
-
-        public string BarcodeText 
-        {
-            get
+       
+       /*     get
             {
                 if (Result == null)
                 {
@@ -60,8 +72,8 @@ namespace library.ViewModel
             {
                 BarcodeText = value;
                 RaisePropertyChanged("BarcodeText");
-            } 
-        }
+            } */
+        
 
         public ICommand SaveButton { get; set; }
         public ICommand AddAutor { get; set; }
@@ -81,14 +93,7 @@ namespace library.ViewModel
         
         }
 
-        public AddBookViewModel GetInstace()
-        {
-            if (Instance == null)
-            {
-               return  Instance = new AddBookViewModel();
-            }
-            return Instance;
-        }
+        
 
         private void AddAutorExecute(object obj)
         {

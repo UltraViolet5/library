@@ -205,10 +205,13 @@ namespace library.FactoryMethod
         {
             var NewFrame = new Frame
             {
-                
+                CornerRadius = 12,
+                Margin = 0.10,
                 Content = new Entry
                 {
-                    
+                    BackgroundColor = Color.White,
+                    WidthRequest = 150,
+                    FontFamily = "News701"
                 }
             };
 
