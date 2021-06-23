@@ -19,7 +19,6 @@ namespace library.Pages
             InitializeComponent();
 
             _loginViewModel = new LoginViewModel();
-
             BindingContext = _loginViewModel;
 
             NavigationPage.SetHasNavigationBar(this, false);

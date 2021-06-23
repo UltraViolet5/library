@@ -36,6 +36,16 @@ namespace library.Infrastructure.Daos.Implementations
 
         public void Remove(int id)
         {
+            throw new InvalidOperationException("User have string id. Use proper method for it.");
+        }
+
+        public User Get(int id)
+        {
+            throw new InvalidOperationException("User have string id. Use proper method for it.");
+        }
+
+        public void Remove(string id)
+        {
             var toRemove = _data.First(x => x.Id == id);
             if (toRemove == null)
                 throw new ArgumentException($"No found Category with id {id}");
@@ -43,7 +53,7 @@ namespace library.Infrastructure.Daos.Implementations
             _data.Remove(toRemove);
         }
 
-        public User Get(int id)
+        public User Get(string id)
         {
             var result = _data.First(x => x.Id == id);
             if (result == null)

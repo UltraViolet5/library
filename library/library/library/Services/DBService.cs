@@ -80,5 +80,15 @@ namespace library.Services
         {
             return _borrowingDao.GetAll();
         }
+
+        public void AddUser(User user)
+        {
+            _userDao.Add(user);
+        }
+
+        public User GetUser(string email)
+        {
+            return _userDao.GetAll().FirstOrDefault(x => x.Email == email);
+        }
     }
 }

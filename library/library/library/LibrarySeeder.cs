@@ -27,7 +27,12 @@ namespace library
         {
             return new List<User>()
             {
-                new User(),
+                new User()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Email = "lib@lib.com",
+                    PasswordHash = ""
+                },
                 new User(),
                 new User(),
                 new User()

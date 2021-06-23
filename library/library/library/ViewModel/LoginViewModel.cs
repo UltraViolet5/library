@@ -2,15 +2,42 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
+using library.Model;
 using library.Pages;
 using Xamarin.Forms;
+using BCrypt = BCrypt.Net.BCrypt;
 
 namespace library.ViewModel
 {
-    class LoginViewModel
+    class LoginViewModel : BaseViewModel
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
+        private string _email;
+
+        public string Email
+        {
+            get => _email;
+            set
+            {
+                if (_email == value) return;
+
+                _email = value;
+                RaisePropertyChanged(nameof(Email));
+            }
+        }
+
+        private string _password;
+
+        public string Password
+        {
+            get => _password;
+            set
+            {
+                if (_password == value) return;
+
+                _password = value;
+                RaisePropertyChanged(nameof(Password));
+            }
+        }
 
 
         // Commands
@@ -19,16 +46,30 @@ namespace library.ViewModel
 
         public LoginViewModel()
         {
-            RegisterCommand = new Command(RegisterExecute);
-            ToMainPageCommand = new Command(ToMainPageExecute);
+            RegisterCommand = new Command(ToRegistrationExecute);
+            ToMainPageCommand = new Command(LoginExecute, LoginCanExecute);
         }
 
-        private void ToMainPageExecute(object obj)
+        private bool LoginCanExecute(object arg)
         {
-            App.Navigation.PushAsync(new MainPage());
+            return !string.IsNullOrWhiteSpace(Email)
+                && !string.IsNullOrEmpty(Password);
         }
 
-        private void RegisterExecute(object obj)
+        private void LoginExecute(object obj)
+        {
+            User user = App.DbService.GetUser(Email);
+            if (user == null)
+                return;
+            
+            if (global::BCrypt.Net.BCrypt.Verify(Password, user.PasswordHash))
+            {
+                Console.WriteLine("Logged! Correct password");
+                App.Navigation.PushAsync(new MainPage());
+            }
+        }
+
+        private void ToRegistrationExecute(object obj)
         {
             App.Navigation.PushAsync(new RegistrationPage());
         }

@@ -13,6 +13,17 @@ namespace library.ViewModel
         {
             _user = user;
         }
-        // TODO implement user view model
+
+        public string Email
+        {
+            get => _user.Email;
+            set
+            {
+                if (value == _user.Email) return;
+
+                _user.Email = value;
+                RaisePropertyChanged(nameof(Email));
+            }
+        }
     }
 }
