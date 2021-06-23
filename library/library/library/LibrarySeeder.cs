@@ -29,9 +29,9 @@ namespace library
             {
                 new User()
                 {
-                    Id = Guid.NewGuid().ToString(),
-                    Email = "lib@lib.com",
-                    PasswordHash = ""
+                    Email = "admin",
+                    // Password = admin
+                    PasswordHash = "$2a$11$3C0BAwSbIIGYT8wiYt2xauRoyhCJMPC9SknVBW5JcAjOTN47oDfgS"
                 },
                 new User(),
                 new User(),
