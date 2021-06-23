@@ -16,6 +16,8 @@ namespace library.Pages
         public static Label BarLabel;
         public static StackLayout Autorlayout;
         private readonly ComponentFactoryBase _componentFactory;
+        public readonly AddBookViewModel AddBookViewModel;
+        public ScanPage ScanPage;
 
         public AddBookDataPage()
         {
@@ -24,6 +26,16 @@ namespace library.Pages
             BarLabel = BarcodeLabel;
             Autorlayout = AutorFrameXAML;
             _componentFactory = new ComponentFactory();
+            AddBookViewModel = new AddBookViewModel();
+            BindingContext = AddBookViewModel;
+            ScanPage = new ScanPage();
+            ScanPage.IsScaned += HandleScanSucced;
+        }
+
+        private void HandleScanSucced(object sender, EventArgs e)
+        {
+            string Scantext = (string)sender;
+            AddBookViewModel.BarcodeText = Scantext;
         }
 
 
@@ -62,7 +74,7 @@ namespace library.Pages
 
         private void ScanBtn_Clicked(object sender, EventArgs e)
         {
-            App.Navigation.PushAsync(new ScanPage());
+            App.Navigation.PushModalAsync(ScanPage);
         }
     }
 }

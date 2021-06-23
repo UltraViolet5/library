@@ -17,6 +17,10 @@ namespace library.Pages
         public static Button ScanButton { get; set; }
         public static ZXing.Net.Mobile.Forms.ZXingScannerView ScannerView { get; private set; }
 
+        public event EventHandler IsScaned;
+        
+
+
         public ScanPage()
         {
            
@@ -40,13 +44,22 @@ namespace library.Pages
             Device.BeginInvokeOnMainThread(() =>
             {
                 scanResultText.Text = result.Text + "(type: " + result.BarcodeFormat.ToString() + ")";
-                AddBookDataPage.BarLabel.Text = scanResultText.Text;
+                ///AddBookDataPage.BarLabel.Text = scanResultText.Text;
 
             });
 
-            AddBookViewModel.Result = result;
+            ///AddBookViewModel.Instance.BarcodeText = result.Text + "(type: " + result.BarcodeFormat.ToString() + ")";
+            ///Navigation.NavigationStack[Navigation.NavigationStack.Count-2]
             ScannerView.IsScanning = false;
-            Navigation.PopAsync();
+            ScanButton.Text = "Scan";
+            App.Navigation.PopModalAsync();
+
+            if(IsScaned != null)
+            {
+                IsScaned(result.Text, EventArgs.Empty);
+
+            }
+            
 
         }
 
