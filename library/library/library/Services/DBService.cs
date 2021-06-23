@@ -31,7 +31,7 @@ namespace library.Services
                 return _bookDao.GetAll();
             }
 
-            return _bookDao.GetAll().Take((int)limit);
+            return _bookDao.GetAll().Take((int) limit);
         }
 
         public void AddBooks(IEnumerable<Book> books)
@@ -40,6 +40,11 @@ namespace library.Services
             {
                 _bookDao.Add(book);
             }
+        }
+
+        public void AddBook(Book book)
+        {
+            _bookDao.Add(book);
         }
 
         public IEnumerable<Category> GetCategories()
