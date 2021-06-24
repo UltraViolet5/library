@@ -34,6 +34,8 @@
                     <Entry Text="{Binding Email}" Placeholder="e-mail" HorizontalTextAlignment="Center"
                            BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701" />
                 </Frame>
+                <Label Text="Incorrect email." HorizontalTextAlignment="Center"
+                       TextColor="Red" IsVisible="{Binding EmailValidation_ShowMsg}"></Label>
 
                 <!-- Password -->
                 <Label Text="Password" HorizontalTextAlignment="Center" FontSize="18"
@@ -43,6 +45,8 @@
                            BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701"
                            Text="{Binding Password}"/>
                 </Frame>
+                <Label Text="Password can't be empty." HorizontalTextAlignment="Center" TextColor="Red" 
+                       IsVisible="{Binding PasswordValidation_ShowMsg}"></Label>
 
                 <!-- Confirm Password -->
                 <Label Text="Confirm password" HorizontalTextAlignment="Center" FontSize="18"
@@ -52,6 +56,8 @@
                            BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701"
                            Text="{Binding ConfirmPassword}"/>
                 </Frame>
+                <Label Text="Password no match." HorizontalTextAlignment="Center" TextColor="Red" 
+                       IsVisible="{Binding PasswordConfirmValidation_ShowMsg}"></Label>
 
                 <!-- User name -->
                 <Label Text="User name" HorizontalTextAlignment="Center" FontSize="18"
@@ -61,6 +67,8 @@
                            BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701"
                            Text="{Binding UserName}"/>
                 </Frame>
+                <Label Text="User name can't be empty." HorizontalTextAlignment="Center" TextColor="Red" 
+                       IsVisible="{Binding UserNameValidation_ShowMsg}"></Label>
 
                 <!-- Birth date -->
                 <Label Text="Birth date" HorizontalTextAlignment="Center" FontSize="18"
@@ -79,6 +87,8 @@
                            BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701"
                            Text="{Binding Localization}"/>
                 </Frame>
+                <Label Text="Localization can't be empty." HorizontalTextAlignment="Center" TextColor="Red" 
+                       IsVisible="{Binding LocalizationValidation_ShowMsg}"></Label>
 
                 <!-- Terms -->
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
@@ -87,6 +97,8 @@
                     <Label Text="Accept terms..." VerticalTextAlignment="Center"
                            FontFamily="News701" />
                 </StackLayout>
+                <Label Text="You have to accept terms." HorizontalTextAlignment="Center" TextColor="Red" 
+                       IsVisible="{Binding TermsValidation_ShowMsg}"></Label>
 
                 <!-- Navigation -->
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">

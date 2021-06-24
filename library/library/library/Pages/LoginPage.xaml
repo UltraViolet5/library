@@ -27,6 +27,8 @@
                        IsPassword="True" IsEnabled="True" FontFamily="News701"
                        Text="{Binding Password}"/>
             </Frame>
+            <Label x:Name="ValidationMsg" Text="Incorrect login or password." HorizontalTextAlignment="Center"
+                   TextColor="Red" IsVisible="{Binding LoginValidation_ShowMsg}"></Label>
             <Image Source="arrowfilled.png" HorizontalOptions="End" Margin="0,0"
                    WidthRequest="40">
                 <Image.GestureRecognizers>

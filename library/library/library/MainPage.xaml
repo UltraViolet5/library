@@ -64,18 +64,10 @@
 
             <!-- CATEGORIES -->
             <StackLayout Margin="0,20,0,0">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*" />
-                        <ColumnDefinition Width="5*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="0" Text="Categories" FontSize="Title" Padding="10,10"
-                           FontFamily="News701"></Label>
-                </Grid>
+
+                <Label Grid.Row="0" Grid.Column="0" Text="Categories" FontSize="Title" Padding="10,10"
+                       FontFamily="News701" />
                 <ScrollView Orientation="Horizontal" HorizontalOptions="Fill">
                     <StackLayout x:Name="Categories" Orientation="Horizontal" />
                     <!-- Here will be added categories btns -->
@@ -112,22 +104,12 @@
 
             <!-- RENTALS -->
             <StackLayout x:Name="Rentals" Margin="0,20,0,0">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*" />
-                        <ColumnDefinition Width="5*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
-                    <Label Grid.Row="0" Grid.Column="0" Text="My rentals" FontSize="Title"
-                           Padding="10" FontFamily="News701">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding RentalsCommand}"></TapGestureRecognizer>
-                        </Label.GestureRecognizers>
-                    </Label>
-                </Grid>
+                <Label Grid.Row="0" Grid.Column="0" Text="My rentals" FontSize="Title"
+                       Padding="10" FontFamily="News701">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RentalsCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
                 <!-- Here will be added rentals cards -->
 
             </StackLayout>

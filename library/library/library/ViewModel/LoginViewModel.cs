@@ -39,6 +39,17 @@ namespace library.ViewModel
             }
         }
 
+        private bool _loginValidationShowMsg = false;
+
+        public bool LoginValidation_ShowMsg
+        {
+            get { return _loginValidationShowMsg; }
+            set
+            {
+                _loginValidationShowMsg = value;
+                RaisePropertyChanged(nameof(LoginValidation_ShowMsg));
+            }
+        }
 
         // Commands
         public ICommand RegisterCommand { get; private set; }
@@ -52,20 +63,34 @@ namespace library.ViewModel
 
         private bool LoginCanExecute(object arg)
         {
-            return !string.IsNullOrWhiteSpace(Email)
-                && !string.IsNullOrEmpty(Password);
+            bool canExecute = !string.IsNullOrWhiteSpace(Email)
+                              && !string.IsNullOrEmpty(Password);
+
+            if (!canExecute)
+                LoginValidation_ShowMsg = true;
+
+            return canExecute;
         }
 
         private void LoginExecute(object obj)
         {
             User user = App.DbService.GetUser(Email);
             if (user == null)
+            {
+                Console.WriteLine("Incorrect login or password.");
+                LoginValidation_ShowMsg = true;
                 return;
-            
-            if (global::BCrypt.Net.BCrypt.Verify(Password, user.PasswordHash))
+            }
+
+            bool verification = global::BCrypt.Net.BCrypt.Verify(Password, user.PasswordHash);
+            if (verification)
             {
                 Console.WriteLine("Logged! Correct password");
                 App.Navigation.PushAsync(new MainPage());
+            }
+            else
+            {
+                LoginValidation_ShowMsg = true;
             }
         }
 
