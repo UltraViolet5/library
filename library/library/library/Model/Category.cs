@@ -4,8 +4,9 @@ using System.Text;
 
 namespace library.Model
 {
-    public class Category
+    public enum Category
     {
+<<<<<<< Updated upstream
         public int Id { get; private set; }
         public string Name { get; set; }
 
@@ -24,5 +25,14 @@ namespace library.Model
                 return toReturn;
             }
         }
+=======
+        It,
+        Cirme,
+        Cookbook,
+        Documentary,
+        Si_Fi,
+        Novell
+
+>>>>>>> Stashed changes
     }
 }

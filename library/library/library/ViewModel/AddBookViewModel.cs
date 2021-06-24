@@ -14,35 +14,6 @@ namespace library.ViewModel
     public class AddBookViewModel : BaseViewModel
     {
 
-        //public static AddBookViewModel Instance
-        //{
-        //    get
-          //  {
-          //      if (Instance == null)
-           //     {
-                   // return Instance = new AddBookViewModel();
-             //   }
-              //  return Instance;
-            //}
-            //private set { }
-       // }
-
-        /* public ZXing.Result Result
-         {
-             get { return Result; }
-             set
-             {
-                 if (Result != value)
-                 {
-                     Result = value;
-                     // Can pass the property name as a string,
-                     // -or- let the compiler do it because of the
-                     // CallerMemberNameAttribute on the RaisePropertyChanged method.
-                     RaisePropertyChanged("Result");
-                 }
-             }
-         }*/
-
         private string _barcodeText = "Scan your barcode!";
 
         public string BarcodeText
@@ -50,47 +21,32 @@ namespace library.ViewModel
             get { return _barcodeText; }
             set
             {
-              
-                    _barcodeText = value;
-                    RaisePropertyChanged(nameof(BarcodeText));
-              
+                _barcodeText = value;
+                RaisePropertyChanged(nameof(BarcodeText));
             }
         }
-       
-       /*     get
-            {
-                if (Result == null)
-                {
-                    return "Scan your Barcode";
-                }
-                else
-                {
-                    return Result.Text + "(type: " + Result.BarcodeFormat.ToString() + ")";
-                }
-            }
-            set 
-            {
-                BarcodeText = value;
-                RaisePropertyChanged("BarcodeText");
-            } */
         
+        public List<string> CategoriesList 
+        { 
+            
+            get { return new List<string>(Enum.GetNames(typeof(Category))); }
+            private set { }
+        }
 
         public ICommand SaveButton { get; set; }
         public ICommand AddAutor { get; set; }
 
         public string Title { get; set; }
-        public List<Author> Autors;
-        public DatePicker PublishingYear { get; set; }
-        public List<Category> Categories;
+        public string  Autors;
+        public DateTime PublishingYear { get; set; }
+        public Category Category;
+
 
 
         public AddBookViewModel()
         {
-            
-
             SaveButton = new Command(SaveButtonExecute);
             AddAutor = new Command(AddAutorExecute);
-        
         }
 
         
@@ -102,7 +58,17 @@ namespace library.ViewModel
 
         private void SaveButtonExecute(object obj)
         {
-            var NewBook = new Book();
+            Book NewBook = new Book();
+
+            NewBook.Title = this.Title;
+            NewBook.Authors = this.Autors;
+            NewBook.BarcodeNumber = this._barcodeText;
+            NewBook.Categories = Category.Si_Fi;
+            NewBook.PublishingYear = this.PublishingYear;
+            
+
+            App.Navigation.PopAsync();
+            
         }
     }
 }

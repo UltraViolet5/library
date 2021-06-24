@@ -44,11 +44,9 @@ namespace library.Pages
             Device.BeginInvokeOnMainThread(() =>
             {
                 scanResultText.Text = result.Text + "(type: " + result.BarcodeFormat.ToString() + ")";
-                ///AddBookDataPage.BarLabel.Text = scanResultText.Text;
 
             });
 
-            ///AddBookViewModel.Instance.BarcodeText = result.Text + "(type: " + result.BarcodeFormat.ToString() + ")";
             ///Navigation.NavigationStack[Navigation.NavigationStack.Count-2]
             ScannerView.IsScanning = false;
             ScanButton.Text = "Scan";
