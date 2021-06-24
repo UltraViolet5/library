@@ -18,7 +18,6 @@ namespace library
         public void Seed()
         {
             _dbService.AddBooks(GetBooks());
-            _dbService.AddCategories(GetCategories());
             _dbService.AddBorrowings(GetBorrowindg());
             _dbService.AddUsers(GetUsers());
         }
@@ -48,19 +47,7 @@ namespace library
                 new Borrowing() {ReturnDate = new DateTime(2021, 8, 12),},
             };
         }
-
-        private IEnumerable<Category> GetCategories()
-        {
-            return new List<Category>()
-            {
-                new Category() {Name = "fantasy"},
-                new Category() {Name = "action"},
-                new Category() {Name = "it"},
-                new Category() {Name = "crime"},
-                new Category() {Name = "documentary"}
-            };
-        }
-
+        
         private IEnumerable<Book> GetBooks()
         {
             var author = new Author()
@@ -79,7 +66,7 @@ namespace library
             books.Add(new Book()
             {
                 Title = "First book Title",
-                Authors = new List<Author>() {author, author2},
+                Authors = "Jarek, Krzysiek",
                 PublishingYear = new DateTime(2020,1,1),
                 Read = true,
                 Available = false
@@ -87,7 +74,7 @@ namespace library
             books.Add(new Book()
             {
                 Title = "Second super book",
-                Authors = new List<Author>() {author, author2},
+                Authors = "Jarek",
                 PublishingYear = new DateTime(2020, 1, 1),
                 Available = true,
                 Read = true
@@ -95,7 +82,7 @@ namespace library
             books.Add(new Book()
             {
                 Title = "Third book",
-                Authors = new List<Author>() {author, author2},
+                Authors = "Krzysiek",
                 PublishingYear = new DateTime(2020, 1, 1),
                 Available = true,
                 Read = false

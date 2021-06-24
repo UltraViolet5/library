@@ -116,7 +116,7 @@ namespace library.FactoryMethod
             return result;
         }
 
-        public override Frame CreateCategoryBtn(CategoryViewModel category)
+        public override Frame CreateCategoryBtn(string category)
         {
             return new Frame()
             {
@@ -126,7 +126,7 @@ namespace library.FactoryMethod
                 HorizontalOptions = LayoutOptions.StartAndExpand,
                 Content = new Label
                 {
-                    Text = category.Name,
+                    Text = category,
                     FontSize = 18,
                     FontFamily = Style.MainFont
                 }

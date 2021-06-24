@@ -31,6 +31,8 @@ namespace library.Pages
             BindingContext = AddBookViewModel;
             ScanPage = new ScanPage();
             ScanPage.IsScaned += HandleScanSucced;
+
+            DisplayRadioButton();
         }
 
         private void HandleScanSucced(object sender, EventArgs e)
@@ -77,6 +79,14 @@ namespace library.Pages
         private void ScanBtn_Clicked(object sender, EventArgs e)
         {
             App.Navigation.PushModalAsync(ScanPage);
+        }
+
+        private void DisplayRadioButton()
+        {
+            foreach (var categries in AddBookViewModel.CategoriesList)
+            {
+                RadioButtonLayout.Children.Add(new RadioButton { Content = categries, Value = categries });
+            }
         }
     }
 }

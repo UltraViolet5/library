@@ -34,19 +34,19 @@ namespace library.ViewModel
         }
 
         public ICommand SaveButton { get; set; }
-        public ICommand AddAutor { get; set; }
+        public ICommand AddAuthor { get; set; }
 
         public string Title { get; set; }
-        public string  Autors;
+        public string  Authors;
         public DateTime PublishingYear { get; set; }
-        public Category Category;
+        public Category Category { get; set; }
 
 
 
         public AddBookViewModel()
         {
             SaveButton = new Command(SaveButtonExecute);
-            AddAutor = new Command(AddAutorExecute);
+            AddAuthor = new Command(AddAutorExecute);
         }
 
         
@@ -61,12 +61,11 @@ namespace library.ViewModel
             Book NewBook = new Book();
 
             NewBook.Title = this.Title;
-            NewBook.Authors = this.Autors;
+            NewBook.Authors = this.Authors;
             NewBook.BarcodeNumber = this._barcodeText;
-            NewBook.Categories = Category.Si_Fi;
+            NewBook.Categories = Category.SiFi;
             NewBook.PublishingYear = this.PublishingYear;
             
-
             App.Navigation.PopAsync();
             
         }

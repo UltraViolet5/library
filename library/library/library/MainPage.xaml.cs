@@ -64,7 +64,7 @@ namespace library
         /// </summary>
         private void DisplayCategories()
         {
-            foreach (CategoryViewModel category in MainPageViewModel.Categories)
+            foreach (string category in MainPageViewModel.Categories)
             {
                 var categoriesUI = App.ComponentFactory.CreateCategoryBtn(category);
                 var tapGest = new TapGestureRecognizer();

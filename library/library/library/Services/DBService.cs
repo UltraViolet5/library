@@ -9,14 +9,12 @@ namespace library.Services
     public class DBService
     {
         private readonly IBookDao _bookDao;
-        private readonly ICategoryDao _categoryDao;
         private readonly IBorrowingDao _borrowingDao;
         private readonly IUserDao _userDao;
 
         public DBService()
         {
             _bookDao = BookDaoMemory.S;
-            _categoryDao = CategoryDaoMemory.S;
             _borrowingDao = BorrowingDaoMemory.S;
             _userDao = UserDaoMemory.S;
 
@@ -41,20 +39,7 @@ namespace library.Services
                 _bookDao.Add(book);
             }
         }
-
-        public IEnumerable<Category> GetCategories()
-        {
-            return _categoryDao.GetAll();
-        }
-
-        public void AddCategories(IEnumerable<Category> categories)
-        {
-            foreach (Category category in categories)
-            {
-                _categoryDao.Add(category);
-            }
-        }
-
+        
         public void AddBorrowings(IEnumerable<Borrowing> borrowings)
         {
             foreach (Borrowing borrowing in borrowings)

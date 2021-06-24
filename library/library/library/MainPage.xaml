@@ -74,19 +74,7 @@
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Grid.Column="0" Text="Categories" FontSize="Title" Padding="10,10"
-                           FontFamily="News701">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer
-                                Command="{Binding CategoriesCommand}" />
-                        </Label.GestureRecognizers>
-                    </Label>
-                    <Image Grid.Row="0" Grid.Column="1" Source="plus.png" WidthRequest="20" HeightRequest="20"
-                           HorizontalOptions="End" Margin="0,0,20,0">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer
-                                Command="{Binding AddCategoryCommand}" />
-                        </Image.GestureRecognizers>
-                    </Image>
+                           FontFamily="News701"></Label>
                 </Grid>
                 <ScrollView Orientation="Horizontal" HorizontalOptions="Fill">
                     <StackLayout x:Name="Categories" Orientation="Horizontal" />

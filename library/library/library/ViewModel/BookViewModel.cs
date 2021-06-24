@@ -28,12 +28,7 @@ namespace library.ViewModel
         {
             get
             {
-                List<string> authors =
-                    _book.
-                    Authors.
-                    Select(author => author.FirstName + " " + author.LastName).ToList();
-
-                return string.Join(", ", authors);
+                return _book.Authors;
             }
         }
 
@@ -80,7 +75,7 @@ namespace library.ViewModel
             }
         }
 
-        public List<Category> Categories
+        public Category Category
         {
             get => _book.Categories;
             set

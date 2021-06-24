@@ -63,7 +63,7 @@ namespace library.Infrastructure.Daos.Implementations
 
         public IEnumerable<Book> GetBy(User owner, Category category)
         {
-            return _data.Where(x => x.Owner.Id == owner.Id && x.Categories.Contains(category));
+            return _data.Where(x => x.Owner.Id == owner.Id && x.Categories == category);
         }
     }
 }

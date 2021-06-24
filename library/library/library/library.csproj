@@ -35,17 +35,11 @@
     <Compile Update="Pages\BookPage.xaml.cs">
       <DependentUpon>BookPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\BooksByCategoryPage.xaml.cs">
-      <DependentUpon>BooksByCategoryPage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Pages\BooksPage.xaml.cs">
       <DependentUpon>BooksPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\AddBookDataPage.xaml.cs">
       <DependentUpon>AddBookDataPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\CategoriesPage.xaml.cs">
-      <DependentUpon>CategoriesPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -78,12 +72,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\BooksPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Pages\BooksByCategoryPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Pages\CategoriesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\LoginPage.xaml">
