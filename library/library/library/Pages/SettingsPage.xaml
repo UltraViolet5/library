@@ -14,7 +14,7 @@
             </StackLayout>
             <Button Text="privacy policy" FontFamily="News701"></Button>
             <Button Text="Authors" FontFamily="News701"></Button>
-            <Button Text="Logout" FontFamily="News701"/>
+            <Button Text="Logout" FontFamily="News701" Command="{Binding LogoutCommand}"/>
             
         </StackLayout>
     </ContentPage.Content>
