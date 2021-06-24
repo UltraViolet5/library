@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using library.Model;
 using library.Pages;
@@ -86,6 +84,11 @@ namespace library.ViewModel
             if (verification)
             {
                 Console.WriteLine("Logged! Correct password");
+
+                // Save user logged
+                Application.Current.Properties["IsLoggedIn"] = true;
+                Application.Current.Properties["UserId"] = user.Id;
+
                 App.Navigation.PushAsync(new MainPage());
             }
             else
