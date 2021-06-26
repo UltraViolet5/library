@@ -51,6 +51,7 @@ namespace library.Pages
             ScannerView.IsScanning = false;
             ScanButton.Text = "Scan";
             App.Navigation.PopModalAsync();
+            ///wywółać z awaitem.
 
             if(IsScaned != null)
             {

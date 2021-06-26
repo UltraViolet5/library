@@ -15,25 +15,32 @@ namespace library.Pages
     public partial class AddBookDataPage : ContentPage
     {
         public static Label BarLabel;
-        public static StackLayout Autorlayout;
         private readonly ComponentFactoryBase _componentFactory;
         public readonly AddBookViewModel AddBookViewModel;
         public ScanPage ScanPage;
+        public static CheckBox CheckBox;
+
+        
 
         public AddBookDataPage()
         {
             InitializeComponent();
             Task.Run(AnimateBG);
             BarLabel = BarcodeLabel;
-            Autorlayout = AutorFrameXAML;
+            
             _componentFactory = new ComponentFactory();
             AddBookViewModel = new AddBookViewModel();
             BindingContext = AddBookViewModel;
             ScanPage = new ScanPage();
             ScanPage.IsScaned += HandleScanSucced;
+            CheckBox = mycheckbox;
+
+
 
             DisplayRadioButton();
         }
+
+
 
         private void HandleScanSucced(object sender, EventArgs e)
         {
@@ -58,14 +65,9 @@ namespace library.Pages
             }
         }
 
-        private void AddAutor_Clicked(object sender, EventArgs e)
-        {
-            Autorlayout.Children.Add(_componentFactory.CreateFrameWithEntry());
-        }
+    
 
-        private void AddCategory_Clicked(object sender, EventArgs e)
-        {
-        }
+   
 
         private void SaveBtn_Clicked(object sender, EventArgs e)
         {
@@ -74,18 +76,31 @@ namespace library.Pages
 
         private void CancelBtn_Clicked(object sender, EventArgs e)
         {
+            App.Navigation.PopAsync();
         }
 
         private void ScanBtn_Clicked(object sender, EventArgs e)
         {
             App.Navigation.PushModalAsync(ScanPage);
         }
-
+       
         private void DisplayRadioButton()
         {
             foreach (var categries in AddBookViewModel.CategoriesList)
             {
-                RadioButtonLayout.Children.Add(new RadioButton { Content = categries, Value = categries });
+                RadioButtonLayout.Children.Add(new RadioButton { Content = categries, Value = categries, BorderColor= Color.White, TextColor= Color.White });
+            }
+        }
+
+        private void mycheckbox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            if (CheckBox.IsChecked == false)
+            {
+                AddBookViewModel.SaveBtnValue = false;
+            }
+            else
+            {
+                AddBookViewModel.SaveBtnValue = true;
             }
         }
     }

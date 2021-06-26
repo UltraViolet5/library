@@ -9,7 +9,7 @@ namespace library.ViewModel
 {
     class LoginViewModel : BaseViewModel
     {
-        private string _email;
+        private string _email = "admin";
 
         public string Email
         {
@@ -23,7 +23,7 @@ namespace library.ViewModel
             }
         }
 
-        private string _password;
+        private string _password = "admin";
 
         public string Password
         {
@@ -68,6 +68,7 @@ namespace library.ViewModel
                 LoginValidation_ShowMsg = true;
 
             return canExecute;
+            
         }
 
         private void LoginExecute(object obj)

@@ -48,6 +48,8 @@ namespace library.ViewModel
             RentalsCommand = new Command(RentalsExecute);
         }
 
+
+        //wszystko co asynch powinno byc wywołane z awaitem
         private void RentalsExecute()
         {
             App.Navigation.PushAsync(new MyRentalsPage());
