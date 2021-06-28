@@ -157,7 +157,7 @@ namespace library.ViewModel
         public ICommand BackToLoginCommand => _backToLoginCommand;
 
 
-        #region Private properites fields
+        #region Private fields
 
         private bool _termsValidationShowMsg;
         private string _email;

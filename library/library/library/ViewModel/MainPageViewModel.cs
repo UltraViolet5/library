@@ -33,10 +33,14 @@ namespace library.ViewModel
         public MainPageViewModel()
         {
             // Data init
-            Books = App.DbService.GetBooks().Select(b => new BookViewModel(b));
+            Books = App.DbService.GetBooks()
+                .Where(b => b.Owner.Email == (string) App.Current.Properties["UserEmail"])
+                .Take(2)
+                .Select(b => new BookViewModel(b));
             Categories = Enum.GetNames(typeof(Category));
             Mates = App.DbService.GetMates().Select(m => new UserViewModel(m));
-            Borrowings = App.DbService.GetBorrowings().Select(b => new BorrowingViewModel(b));
+            Borrowings = App.DbService.GetBorrowings()
+                .Select(b => new BorrowingViewModel(b));
 
             // Actions init
             BooksCommand = new Command(BooksExecute);

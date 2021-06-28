@@ -3,6 +3,7 @@ using System.Linq;
 using library.Infrastructure.Daos;
 using library.Infrastructure.Daos.Implementations;
 using library.Model;
+using Xamarin.Forms.Internals;
 
 namespace library.Services
 {
@@ -74,6 +75,13 @@ namespace library.Services
         public User GetUser(string email)
         {
             return _userDao.GetAll().FirstOrDefault(x => x.Email == email);
+        }
+
+        public void UpdateUser(string userEmail, User newUser)
+        {
+            var tempUser = GetUser(userEmail);
+            var userIndex = _userDao.GetAll().IndexOf(tempUser);
+            _userDao.GetAll().ToList()[userIndex] = newUser;
         }
     }
 }

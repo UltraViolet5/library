@@ -17,11 +17,12 @@ namespace library.Pages
 
             NavigationPage.SetHasNavigationBar(this, false);
 
-            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(2), () =>
             {
                 if (Application.Current.Properties.ContainsKey("IsLoggedIn") &&
                     (bool) Application.Current.Properties["IsLoggedIn"])
                 {
+                    App.CurrentUser = Utils.GetCurrentUser();
                     Navigation.PushAsync(new MainPage());
                 }
                 else

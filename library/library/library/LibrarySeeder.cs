@@ -9,10 +9,20 @@ namespace library
     public class LibrarySeeder
     {
         private readonly DBService _dbService;
+        private User _admin;
 
         public LibrarySeeder(DBService dbService)
         {
             _dbService = dbService;
+            _admin = new User()
+            {
+                Email = "admin",
+                // Password = admin
+                PasswordHash = "$2a$11$3C0BAwSbIIGYT8wiYt2xauRoyhCJMPC9SknVBW5JcAjOTN47oDfgS",
+                UserName = "Admin Admin",
+                BirthDate = new DateTime(2001, 2, 14),
+                Localization = "Cracow"
+            };
         }
 
         public void Seed()
@@ -26,12 +36,7 @@ namespace library
         {
             return new List<User>()
             {
-                new User()
-                {
-                    Email = "admin",
-                    // Password = admin
-                    PasswordHash = "$2a$11$3C0BAwSbIIGYT8wiYt2xauRoyhCJMPC9SknVBW5JcAjOTN47oDfgS"
-                },
+                _admin,
                 new User(),
                 new User(),
                 new User()
@@ -50,17 +55,6 @@ namespace library
         
         private IEnumerable<Book> GetBooks()
         {
-            var author = new Author()
-            {
-                FirstName = "Jarek",
-                LastName = "Kaa"
-            };
-            var author2 = new Author()
-            {
-                FirstName = "Krzysiek",
-                LastName = "Fi"
-            };
-
             List<Book> books = new List<Book>();
 
             books.Add(new Book()
@@ -69,7 +63,9 @@ namespace library
                 Authors = "Jarek, Krzysiek",
                 PublishingYear = new DateTime(2020,1,1),
                 Read = true,
-                Available = false
+                Available = false,
+                Owner = _admin,
+                Categories = Category.Crime
             });
             books.Add(new Book()
             {
@@ -77,7 +73,9 @@ namespace library
                 Authors = "Jarek",
                 PublishingYear = new DateTime(2020, 1, 1),
                 Available = true,
-                Read = true
+                Read = true,
+                Owner = _admin,
+                Categories = Category.Novel
             });
             books.Add(new Book()
             {
@@ -85,7 +83,9 @@ namespace library
                 Authors = "Krzysiek",
                 PublishingYear = new DateTime(2020, 1, 1),
                 Available = true,
-                Read = false
+                Read = false,
+                Owner = _admin,
+                Categories = Category.Documentary
             });
 
             return books;

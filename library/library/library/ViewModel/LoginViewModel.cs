@@ -85,9 +85,7 @@ namespace library.ViewModel
             {
                 Console.WriteLine("Logged! Correct password");
 
-                // Save user logged
-                Application.Current.Properties["IsLoggedIn"] = true;
-                Application.Current.Properties["UserId"] = user.Id;
+                Utils.SaveUserInSession(user);
 
                 App.Navigation.PushAsync(new MainPage());
             }

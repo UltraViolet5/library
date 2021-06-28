@@ -16,7 +16,7 @@ namespace library.ViewModel
 
         private void LogoutExecute()
         {
-            Application.Current.Properties["IsLoggedIn"] = false;
+            Utils.RemoveUserFromSession();
             App.Navigation.InsertPageBefore(new LoginPage(), App.Navigation.NavigationStack.First());
             App.Navigation.PopToRootAsync();
         }
