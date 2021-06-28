@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Linq;
 using System.Windows.Input;
 using library.Pages;
 using Xamarin.Forms;
@@ -19,7 +17,8 @@ namespace library.ViewModel
         private void LogoutExecute()
         {
             Application.Current.Properties["IsLoggedIn"] = false;
-            App.Navigation.PushAsync(new LoginPage());
+            App.Navigation.InsertPageBefore(new LoginPage(), App.Navigation.NavigationStack.First());
+            App.Navigation.PopToRootAsync();
         }
     }
 }

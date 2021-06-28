@@ -85,7 +85,7 @@ namespace library.ViewModel
         }
 
 
-        // Validations
+        #region Validations
         public bool EmailValidation_ShowMsg
         {
             get { return _emailValidation_ShowMsg; }
@@ -149,6 +149,7 @@ namespace library.ViewModel
                 RaisePropertyChanged();
             }
         }
+        #endregion
 
         // Commands
         public ICommand RegisterCommand => _registerCommand;
