@@ -13,20 +13,28 @@ namespace library.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BooksPage : ContentPage
     {
-        public static BooksViewModel BooksViewModelInst { get; set; }
-        public static AddBookDataPage AddBookDataPage;
+        public static BooksViewModel BooksViewModel { get; set; }
         
         public BooksPage()
         {
             InitializeComponent();
-            AddBookDataPage = new AddBookDataPage();
-            BooksViewModelInst = new BooksViewModel();
 
+            BooksViewModel = new BooksViewModel();
+            BindingContext = BooksViewModel;
+
+            DisplayBooks();
         }
 
-        private void btnAddBook_Clicked(object sender, EventArgs e)
+        private void DisplayBooks()
         {
-             App.Navigation.PushAsync(AddBookDataPage);
+            foreach (var book in BooksViewModel.Books)
+            {
+                var bookCard = App.ComponentFactory.CreateBookCard(book);
+                var tapGest = new TapGestureRecognizer();
+                tapGest.SetBinding(TapGestureRecognizer.CommandProperty, "ShowBookCommand");
+                bookCard.GestureRecognizers.Add(tapGest);
+                Books.Children.Add(bookCard);
+            }
         }
     }
 }

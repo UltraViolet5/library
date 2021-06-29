@@ -1,9 +1,5 @@
-﻿using System;
-using System.Linq;
-using Xamarin.Forms;
-using library.Pages;
+﻿using Xamarin.Forms;
 using library.ViewModel;
-using library.FactoryMethod;
 using Xamarin.Forms.Xaml;
 
 

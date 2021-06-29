@@ -9,7 +9,7 @@ namespace library.ViewModel
 {
     public class UserViewModel : BaseViewModel
     {
-        public ICommand SaveChangesCommand { get; private set; }
+        public ICommand SaveChangesCommand => _saveChangesCommand;
 
         #region Validations
 
@@ -74,6 +74,16 @@ namespace library.ViewModel
             }
         }
 
+        public bool DataUpdated_ShowMsg
+        {
+            get => _dataUpdatedShowMsg;
+            set
+            {
+                _dataUpdatedShowMsg = value;
+                RaisePropertyChanged(nameof(DataUpdated_ShowMsg));
+            }
+        }
+
         #endregion
 
         #region Private fields
@@ -88,6 +98,8 @@ namespace library.ViewModel
         private bool _newPasswordValidationShowMsg;
         private bool _passwordConfirmationValidationShowMsg;
         private bool _localizationValidationShowMsg;
+        private readonly ICommand _saveChangesCommand;
+        private bool _dataUpdatedShowMsg;
 
         #endregion
 
@@ -95,7 +107,7 @@ namespace library.ViewModel
         {
             _user = user;
 
-            SaveChangesCommand = new Command(SaveChangesExecute, SaveChangesCanExecute);
+            _saveChangesCommand = new Command(SaveChangesExecute, SaveChangesCanExecute);
         }
 
         public string UserName
@@ -211,10 +223,18 @@ namespace library.ViewModel
                     BCrypt.Net.BCrypt.Verify(Password, App.CurrentUser.PasswordHash))
                 {
                     App.CurrentUser.BirthDate = BirthDate;
-                    App.CurrentUser.BirthDate = BirthDate;
+                    App.CurrentUser.PasswordHash = BCrypt.Net.BCrypt.HashPassword(NewPassword);
                 }
 
-                App.DbService.UpdateUser((string) App.Current.Properties["UserEmail"], App.CurrentUser);
+                App.DbService.UpdateUser(App.CurrentUser);
+
+                DataUpdated_ShowMsg = true;
+                Device.StartTimer(TimeSpan.FromSeconds(3), () =>
+                {
+                    DataUpdated_ShowMsg = false;
+
+                    return false;
+                });
             }
         }
 
