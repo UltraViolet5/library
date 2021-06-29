@@ -29,8 +29,8 @@ namespace library.ViewModel
             } 
             set 
             {   _checkboxValue = value;
-                SaveBtnValue = value;
-                RaisePropertyChanged(nameof(checkboxValue));
+                ///SaveBtnValue = value;
+                //RaisePropertyChanged(nameof(checkboxValue));
             } 
         }
 
@@ -53,15 +53,35 @@ namespace library.ViewModel
             private set { }
         }
 
-        public ICommand SaveButton { get; set; }
-        
+        public Command SaveButton { get; set; }
 
-        public string Title { get; set; }
+        private string _title;
 
-        public string Authors { get; set; }
+        public string Title
+        {
+            get { return _title; }
+            set
+            {
+                _title = value;
+                
 
- 
-     
+            }
+        }
+
+        private string _authors;
+
+        public string Authors
+        {
+            get { return _authors; }
+            set
+            {
+                _authors = value;
+              
+            }
+        }
+
+
+
         public DateTime PublishingYear { get; set; }
         public string CategoryString { get; set; }
 
@@ -69,7 +89,24 @@ namespace library.ViewModel
 
         public AddBookViewModel()
         {
-            SaveButton = new Command(execute: SaveButtonExecute);
+            SaveButton = new Command(SaveButtonExecute ,canExecute : SaveButtonCanExecuet);
+           
+            
+
+        }
+
+    
+
+        private bool SaveButtonCanExecuet(object arg)
+        {
+            if (!string.IsNullOrEmpty(Title) && !string.IsNullOrEmpty(Authors))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
         }
 
@@ -91,6 +128,8 @@ namespace library.ViewModel
             NewBook.BarcodeNumber = this._barcodeText;
             NewBook.Categories = GetCategoryByString(CategoryString);
             NewBook.PublishingYear = this.PublishingYear;
+
+            App.DbService.AddBook(NewBook);
              
 
             App.Navigation.PopAsync();

@@ -33,7 +33,7 @@ namespace library.Pages
             BindingContext = AddBookViewModel;
             ScanPage = new ScanPage();
             ScanPage.IsScaned += HandleScanSucced;
-            CheckBox = mycheckbox;
+            //CheckBox = mycheckbox;
 
 
 
@@ -102,6 +102,18 @@ namespace library.Pages
             {
                 AddBookViewModel.SaveBtnValue = true;
             }
+        }
+
+        private void Title_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            DisplayAlert("textchanged", "ok", "ok");
+            AddBookViewModel.SaveButton.ChangeCanExecute();
+        }
+
+        private void Author_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            DisplayAlert("textchanged", "ok", "ok");
+            AddBookViewModel.SaveButton.ChangeCanExecute();
         }
     }
 }

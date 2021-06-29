@@ -9,7 +9,7 @@ namespace library.ViewModel
 {
     class LoginViewModel : BaseViewModel
     {
-        private string _email = "admin";
+        private string _email;
 
         public string Email
         {
@@ -23,7 +23,7 @@ namespace library.ViewModel
             }
         }
 
-        private string _password = "admin";
+        private string _password;
 
         public string Password
         {

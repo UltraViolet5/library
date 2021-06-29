@@ -39,7 +39,11 @@ namespace library.Services
                 _bookDao.Add(book);
             }
         }
-        
+
+        public void AddBook(Book book)
+        {
+            _bookDao.Add(book);
+        }
         public void AddBorrowings(IEnumerable<Borrowing> borrowings)
         {
             foreach (Borrowing borrowing in borrowings)
