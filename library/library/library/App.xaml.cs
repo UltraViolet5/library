@@ -1,5 +1,6 @@
 ﻿using System;
 using library.FactoryMethod;
+using library.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using library.Pages;
@@ -13,6 +14,8 @@ namespace library
         public static INavigation Navigation => MainPageInstance.Navigation;
         public static DBService DbService { get; private set; }
         public static ComponentFactory ComponentFactory { get; private set; }
+
+        public static User CurrentUser { get; set; }
 
         /// <summary>
         /// Static reference to main page

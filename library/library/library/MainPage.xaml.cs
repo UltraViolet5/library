@@ -84,17 +84,11 @@ namespace library
             foreach (var book in MainPageViewModel.Books)
             {
                 var bookCard = App.ComponentFactory.CreateBookCard(book);
-                var TappGest = new TapGestureRecognizer();
-                TappGest.SetBinding(TapGestureRecognizer.CommandProperty, "ShowBookCommand");
-                bookCard.GestureRecognizers.Add(TappGest);
+                var tapGest = new TapGestureRecognizer();
+                tapGest.SetBinding(TapGestureRecognizer.CommandProperty, "ShowBookCommand");
+                bookCard.GestureRecognizers.Add(tapGest);
                 LastBooks.Children.Add(bookCard);
             }
-        }
-
-
-        private void BtnLoginPage_OnClicked(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
     }
 

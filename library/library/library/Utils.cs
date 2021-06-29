@@ -1,36 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
-using System.Text;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using library.Model;
+using Xamarin.Forms;
 
 namespace library
 {
     public static class Utils
     {
-        public static void WriteLine(string msg, ConsoleColor bgColor)
+        public static void SaveUserInSession(User user)
         {
-            Console.BackgroundColor = bgColor;
-            Console.WriteLine(msg);
-            Console.ResetColor();
+            Application.Current.Properties["IsLoggedIn"] = true;
+            Application.Current.Properties["UserId"] = user.Id;
+            Application.Current.Properties["UserEmail"] = user.Email;
+            App.CurrentUser = user;
         }
 
-        public static string HashPassword(string password)
+        public static void RemoveUserFromSession()
         {
-            // Generate a 128-bit salt using a secure PRNG
-            byte[] salt = new byte[128 / 8];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(salt);
-            }
+            Application.Current.Properties["IsLoggedIn"] = false;
+            Application.Current.Properties["UserId"] = "";
+            Application.Current.Properties["UserEmail"] = "";
+            App.CurrentUser = null;
+        }
 
-            // derive a 256-bit subkey (use HMACSHA1 with 10,000 iterations)
-            return Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: password,
-                salt: salt,
-                prf: KeyDerivationPrf.HMACSHA1,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 8));
+        public static User GetCurrentUser()
+        {
+            var userEmail = (string) App.Current.Properties["UserEmail"];
+            return App.DbService.GetUser(userEmail);
         }
     }
 }
