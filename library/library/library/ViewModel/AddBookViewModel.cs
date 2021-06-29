@@ -6,6 +6,7 @@ using library.Pages;
 using library.Services;
 using Xamarin.Forms;
 using library.Model;
+using System.Threading.Tasks;
 using library.FactoryMethod;
 using System.Linq;
 
@@ -121,11 +122,13 @@ namespace library.ViewModel
         private void SaveButtonExecute(object obj)
         {
             
+
             Book NewBook = new Book();
 
             NewBook.Title = this.Title;
             NewBook.Authors = this.Authors;
             NewBook.BarcodeNumber = this._barcodeText;
+            NewBook.Owner = App.CurrentUser;
             NewBook.Categories = GetCategoryByString(CategoryString);
             NewBook.PublishingYear = this.PublishingYear;
 
