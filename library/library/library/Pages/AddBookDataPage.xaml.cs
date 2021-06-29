@@ -88,21 +88,11 @@ namespace library.Pages
         {
             foreach (var categries in AddBookViewModel.CategoriesList)
             {
-                RadioButtonLayout.Children.Add(new RadioButton { Content = categries, Value = categries, BorderColor= Color.White, TextColor= Color.White });
+                RadioButtonLayout.Children.Add(new RadioButton { Content = categries, Value = categries, BorderColor= Color.White, TextColor= Color.White, BackgroundColor= Color.Transparent});
             }
         }
 
-        private void mycheckbox_CheckedChanged(object sender, CheckedChangedEventArgs e)
-        {
-            if (CheckBox.IsChecked == false)
-            {
-                AddBookViewModel.SaveBtnValue = false;
-            }
-            else
-            {
-                AddBookViewModel.SaveBtnValue = true;
-            }
-        }
+  
 
         private void Title_TextChanged(object sender, TextChangedEventArgs e)
         {
