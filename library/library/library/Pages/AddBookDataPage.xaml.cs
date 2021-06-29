@@ -106,13 +106,13 @@ namespace library.Pages
 
         private void Title_TextChanged(object sender, TextChangedEventArgs e)
         {
-            DisplayAlert("textchanged", "ok", "ok");
+            
             AddBookViewModel.SaveButton.ChangeCanExecute();
         }
 
         private void Author_TextChanged(object sender, TextChangedEventArgs e)
         {
-            DisplayAlert("textchanged", "ok", "ok");
+            
             AddBookViewModel.SaveButton.ChangeCanExecute();
         }
     }
