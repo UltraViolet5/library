@@ -1,29 +1,58 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodel="clr-namespace:library.ViewModel" x:DataType="viewmodel:BooksViewModel"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodel="clr-namespace:library.ViewModel"
+             x:DataType="viewmodel:BooksViewModel"
              x:Class="library.Pages.BooksPage">
     <ContentPage.Content>
-        <StackLayout x:Name="LastBooks" Padding="20">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5*" />
-                    <ColumnDefinition Width="5*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+        <ScrollView Orientation="Vertical">
+            <StackLayout Padding="20">
+                <!-- Header -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="5*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-                <Label x:Name="BooksLabel" Grid.Row="0" Grid.Column="0" Text="Books" FontSize="Title"
-                       Padding="10,10,30,10" FontFamily="News701"></Label>
-                <Image Grid.Row="0" Grid.Column="1" Source="plus.png" WidthRequest="20" HeightRequest="20"
-                       HorizontalOptions="End" Margin="0,0,20,0">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding AddBookCommand}" />
-                    </Image.GestureRecognizers>
-                </Image>
-            </Grid>
-            <!-- Here will be added book cards -->
+                    <Label x:Name="BooksLabel" Grid.Row="0" Grid.Column="0" Text="Books" FontSize="Title"
+                           Padding="10,10,30,10" FontFamily="News701" />
+                    <Image Grid.Row="0" Grid.Column="1" Source="plus.png" WidthRequest="20" HeightRequest="20"
+                           HorizontalOptions="End" Margin="0,0,20,0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AddBookCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
 
-        </StackLayout>
+                <!-- Searching -->
+                <Frame Padding="0" CornerRadius="12" Margin="0,5">
+                    <Entry Placeholder="search" HorizontalTextAlignment="Center"
+                           WidthRequest="150" IsEnabled="True" FontFamily="News701" />
+                </Frame>
+
+                <!-- Sorting -->
+                <Frame Padding="0" CornerRadius="12" Margin="0,5">
+                    <Picker x:Name="SortMode" HorizontalOptions="FillAndExpand" Title="Sort by"
+                            FontFamily="News701" HorizontalTextAlignment="Center">
+                        <Picker.Items>
+                            <x:String>Name Asc</x:String>
+                            <x:String>Name Desc</x:String>
+                            <x:String>Categories Asc</x:String>
+                            <x:String>Categories Desc</x:String>
+                            <x:String>Date Asc</x:String>
+                            <x:String>Date Desc</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </Frame>
+
+                <StackLayout x:Name="Books" Margin="0" Padding="0">
+                    <!-- Here will be added book cards -->
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

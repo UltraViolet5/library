@@ -29,10 +29,10 @@
                 <Frame Padding="0" CornerRadius="12" Margin="0,10">
                     <Entry Placeholder="name" HorizontalTextAlignment="Center"
                            BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701"
-                           Text="{Binding UserName}"/>
+                           Text="{Binding UserName}" />
                 </Frame>
                 <Label Text="User name can't be empty." HorizontalTextAlignment="Center" TextColor="Red"
-                       IsVisible="{Binding UserNameValidation_ShowMsg}"></Label>
+                       IsVisible="{Binding UserNameValidation_ShowMsg}" />
 
                 <!-- Email -->
                 <Label Text="Email" HorizontalTextAlignment="Center" FontSize="18"
@@ -42,48 +42,15 @@
                            BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701" />
                 </Frame>
                 <Label Text="Incorrect email." HorizontalTextAlignment="Center"
-                       TextColor="Red" IsVisible="{Binding EmailValidation_ShowMsg}"></Label>
-
-                <!-- Password -->
-                <Label Text="Password" HorizontalTextAlignment="Center" FontSize="18"
-                       FontFamily="News701" Margin="0" />
-                <Frame Padding="0" CornerRadius="12" Margin="0,10">
-                    <Entry Placeholder="password" HorizontalTextAlignment="Center" IsPassword="True"
-                           BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701"
-                           Text="{Binding Password}"/>
-                </Frame>
-                <Label Text="To change password, provide correct previous password." HorizontalTextAlignment="Center" TextColor="Red"
-                       IsVisible="{Binding PasswordValidation_ShowMsg}"></Label>
-
-                <!-- New Password -->
-                <Label Text="New password" HorizontalTextAlignment="Center" FontSize="18"
-                       FontFamily="News701" Margin="0" />
-                <Frame Padding="0" CornerRadius="12" Margin="0,10">
-                    <Entry Placeholder="password" HorizontalTextAlignment="Center" IsPassword="True"
-                           BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701"
-                           Text="{Binding NewPassword}"/>
-                </Frame>
-                <Label Text="Password can't be empty." HorizontalTextAlignment="Center" TextColor="Red"
-                       IsVisible="{Binding NewPasswordValidation_ShowMsg}"></Label>
-
-                <!-- Confirm Password -->
-                <Label Text="Confirm password" HorizontalTextAlignment="Center" FontSize="18"
-                       FontFamily="News701" Margin="0" />
-                <Frame Padding="0" CornerRadius="12" Margin="0,10">
-                    <Entry Placeholder="confirm password" HorizontalTextAlignment="Center" IsPassword="True"
-                           BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701"
-                           Text="{Binding ConfirmPassword}"/>
-                </Frame>
-                <Label Text="Password no match." HorizontalTextAlignment="Center" TextColor="Red"
-                       IsVisible="{Binding PasswordConfirmValidation_ShowMsg}"></Label>
+                       TextColor="Red" IsVisible="{Binding EmailValidation_ShowMsg}" />
 
                 <!-- Birth date -->
                 <Label Text="Birth date" HorizontalTextAlignment="Center" FontSize="18"
                        FontFamily="News701" Margin="0" />
                 <Frame Padding="0" CornerRadius="12" Margin="0,10"
                        BackgroundColor="#e6e6e6">
-                    <DatePicker FontFamily="News701" HorizontalOptions="CenterAndExpand" 
-                                Date="{Binding BirthDate}"/>
+                    <DatePicker FontFamily="News701" HorizontalOptions="CenterAndExpand"
+                                Date="{Binding BirthDate}" />
                 </Frame>
 
                 <!-- Localization -->
@@ -92,14 +59,51 @@
                 <Frame Padding="0" CornerRadius="12" Margin="0,10">
                     <Entry Placeholder="localization" HorizontalTextAlignment="Center"
                            BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701"
-                           Text="{Binding Localization}"/>
+                           Text="{Binding Localization}" />
                 </Frame>
                 <Label Text="Localization can't be empty." HorizontalTextAlignment="Center" TextColor="Red"
-                       IsVisible="{Binding LocalizationValidation_ShowMsg}"></Label>
+                       IsVisible="{Binding LocalizationValidation_ShowMsg}" />
 
-                <Button CornerRadius="12" Margin="0,10" BackgroundColor="#e6e6e6" 
+                <!-- Password -->
+                <Label Text="Password" HorizontalTextAlignment="Center" FontSize="18"
+                       FontFamily="News701" Margin="0" />
+                <Frame Padding="0" CornerRadius="12" Margin="0,10">
+                    <Entry Placeholder="password" HorizontalTextAlignment="Center" IsPassword="True"
+                           BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701"
+                           Text="{Binding Password}" />
+                </Frame>
+                <Label Text="To change password, provide correct previous password." HorizontalTextAlignment="Center"
+                       TextColor="Red"
+                       IsVisible="{Binding PasswordValidation_ShowMsg}" />
+
+                <!-- New Password -->
+                <Label Text="New password" HorizontalTextAlignment="Center" FontSize="18"
+                       FontFamily="News701" Margin="0" />
+                <Frame Padding="0" CornerRadius="12" Margin="0,10">
+                    <Entry Placeholder="password" HorizontalTextAlignment="Center" IsPassword="True"
+                           BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701"
+                           Text="{Binding NewPassword}" />
+                </Frame>
+                <Label Text="Password can't be empty." HorizontalTextAlignment="Center" TextColor="Red"
+                       IsVisible="{Binding NewPasswordValidation_ShowMsg}" />
+
+                <!-- Confirm Password -->
+                <Label Text="Confirm password" HorizontalTextAlignment="Center" FontSize="18"
+                       FontFamily="News701" Margin="0" />
+                <Frame Padding="0" CornerRadius="12" Margin="0,10">
+                    <Entry Placeholder="confirm password" HorizontalTextAlignment="Center" IsPassword="True"
+                           BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701"
+                           Text="{Binding ConfirmPassword}" />
+                </Frame>
+                <Label Text="Password no match." HorizontalTextAlignment="Center" TextColor="Red"
+                       IsVisible="{Binding PasswordConfirmValidation_ShowMsg}" />
+
+                <!-- Confirm  -->
+                <Label Text="Data updated." HorizontalTextAlignment="Center" TextColor="Green"
+                       IsVisible="{Binding DataUpdated_ShowMsg}" />
+                <Button CornerRadius="12" Margin="0,10" BackgroundColor="#e6e6e6"
                         Text="Save changes" FontFamily="News701"
-                        Command="{Binding SaveChangesCommand}"></Button>
+                        Command="{Binding SaveChangesCommand}" />
 
             </StackLayout>
         </ScrollView>

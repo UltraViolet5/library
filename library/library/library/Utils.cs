@@ -29,5 +29,10 @@ namespace library
             var userEmail = (string) App.Current.Properties["UserEmail"];
             return App.DbService.GetUser(userEmail);
         }
+
+        public static string GetCurrentUserEmail()
+        {
+            return (string) App.Current.Properties["UserEmail"];
+        }
     }
 }

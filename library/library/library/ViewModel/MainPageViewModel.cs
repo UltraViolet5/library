@@ -17,7 +17,6 @@ namespace library.ViewModel
         public IEnumerable<UserViewModel> Mates { get; private set; }
         public IEnumerable<BorrowingViewModel> Borrowings { get; private set; }
 
-        public ICommand RegisterCommand { get; private set; }
         public ICommand UserCommand { get; private set; }
         public ICommand MatesCommand { get; private set; }
         public ICommand RentalsCommand { get; private set; }
@@ -27,8 +26,6 @@ namespace library.ViewModel
         public ICommand AddBookCommand { get; private set; }
         public ICommand ShowBooksByCategory { get; private set; }
         public ICommand ShowBookCommand { get; private set; }
-        public ICommand CategoriesCommand { get; private set; }
-        public ICommand AddCategoryCommand { get; private set; }
 
         public MainPageViewModel()
         {

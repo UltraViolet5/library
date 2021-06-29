@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using library.Infrastructure.Daos;
 using library.Infrastructure.Daos.Implementations;
@@ -81,11 +82,13 @@ namespace library.Services
             return _userDao.GetAll().FirstOrDefault(x => x.Email == email);
         }
 
-        public void UpdateUser(string userEmail, User newUser)
+        public void UpdateUser(User newUser)
         {
-            var tempUser = GetUser(userEmail);
-            var userIndex = _userDao.GetAll().IndexOf(tempUser);
-            _userDao.GetAll().ToList()[userIndex] = newUser;
+            Utils.SaveUserInSession(newUser);
+            if (!String.IsNullOrWhiteSpace(newUser.PasswordHash))
+            {
+                App.CurrentUser.PasswordHash = newUser.PasswordHash;
+            }
         }
     }
 }
