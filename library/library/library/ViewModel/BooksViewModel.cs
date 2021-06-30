@@ -33,7 +33,7 @@ namespace library.ViewModel
 
         private void ShowBookExecute(object obj)
         {
-            App.Navigation.PushAsync(new BookPage());
+            App.Navigation.PushAsync(new BookPage((int) obj));
         }
     }
 }

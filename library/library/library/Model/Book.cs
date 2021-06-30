@@ -6,7 +6,7 @@ namespace library.Model
 {
     public class Book
     {
-        public int Id { get; private set; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Authors { get; set; }
         public string BarcodeNumber { get; set; }

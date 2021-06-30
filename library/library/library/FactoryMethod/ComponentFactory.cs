@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using library.Model;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using library.ViewModel;
 
 namespace library.FactoryMethod
@@ -100,6 +96,7 @@ namespace library.FactoryMethod
 
             Frame result = new Frame()
             {
+                ClassId = book.Id.ToString(),
                 BackgroundColor = Style.LightGray,
                 Padding = 0,
                 Margin = new Thickness(0, 10),
@@ -113,6 +110,12 @@ namespace library.FactoryMethod
                     }
                 }
             };
+
+            var tapGesture = new TapGestureRecognizer();
+            tapGesture.SetBinding(TapGestureRecognizer.CommandProperty, "ShowBookCommand");
+            tapGesture.CommandParameter = book.Id;
+            result.GestureRecognizers.Add(tapGesture);
+
             return result;
         }
 

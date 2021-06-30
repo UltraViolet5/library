@@ -59,6 +59,7 @@ namespace library
 
             books.Add(new Book()
             {
+                Id = 0,
                 Title = "First book Title",
                 Authors = "Jarek, Krzysiek",
                 PublishingYear = new DateTime(2020,1,1),
@@ -69,6 +70,7 @@ namespace library
             });
             books.Add(new Book()
             {
+                Id = 1,
                 Title = "Second super book",
                 Authors = "Jarek",
                 PublishingYear = new DateTime(2020, 1, 1),
@@ -79,6 +81,7 @@ namespace library
             });
             books.Add(new Book()
             {
+                Id = 2,
                 Title = "Third book",
                 Authors = "Krzysiek",
                 PublishingYear = new DateTime(2020, 1, 1),

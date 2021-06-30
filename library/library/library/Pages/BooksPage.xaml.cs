@@ -30,9 +30,6 @@ namespace library.Pages
             foreach (var book in BooksViewModel.Books)
             {
                 var bookCard = App.ComponentFactory.CreateBookCard(book);
-                var tapGest = new TapGestureRecognizer();
-                tapGest.SetBinding(TapGestureRecognizer.CommandProperty, "ShowBookCommand");
-                bookCard.GestureRecognizers.Add(tapGest);
                 Books.Children.Add(bookCard);
             }
         }

@@ -10,6 +10,8 @@ namespace library.ViewModel
     {
         private readonly Book _book;
 
+        public int Id => _book.Id;
+
         public string Title
         {
             get => _book.Title;
@@ -23,7 +25,6 @@ namespace library.ViewModel
             }
         }
 
-
         public string Authors
         {
             get
@@ -31,7 +32,6 @@ namespace library.ViewModel
                 return _book.Authors;
             }
         }
-
 
         public string PublishingYear => _book.PublishingYear.Date.Year.ToString();
 

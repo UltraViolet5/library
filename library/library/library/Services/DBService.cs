@@ -90,5 +90,10 @@ namespace library.Services
                 App.CurrentUser.PasswordHash = newUser.PasswordHash;
             }
         }
+
+        public Book GetBook(int id)
+        {
+            return _bookDao.Get(id);
+        }
     }
 }
