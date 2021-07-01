@@ -59,7 +59,7 @@ namespace library.FactoryMethod
                             new CheckBox()
                             {
                                 IsChecked = book.Read,
-                                Color = Color.Black,
+                                Color = Color.Gray,
                                 IsEnabled = false
                             },
                             new Label()
@@ -78,7 +78,7 @@ namespace library.FactoryMethod
                             new CheckBox()
                             {
                                 IsChecked = book.Available,
-                                Color = Color.Black,
+                                Color = Color.Gray,
                                 IsEnabled = false
                             },
                             new Label()
@@ -206,7 +206,7 @@ namespace library.FactoryMethod
 
         public override Frame CreateFrameWithEntry()
         {
-            var NewFrame = new Frame
+            var newFrame = new Frame
             {
                 CornerRadius = 12,
                 Margin = 0.10,
@@ -218,7 +218,7 @@ namespace library.FactoryMethod
                 }
             };
 
-            return NewFrame;
+            return newFrame;
         }
     }
 }

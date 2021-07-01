@@ -6,6 +6,7 @@ namespace library.Model
 {
     public enum Category
     {
+        Other,
         It,
         Crime,
         Cookbook,
