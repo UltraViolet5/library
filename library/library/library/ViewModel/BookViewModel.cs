@@ -123,7 +123,19 @@ namespace library.ViewModel
             }
         }
 
+        public List<string> CategoriesList => new List<string>(Enum.GetNames(typeof(Category)));
+
         public ICommand SaveChangesCommand { get; set; }
+
+        public string CategoryString
+        {
+            get => Category.ToString();
+            set
+            {
+                Category = GetCategoryByString(value);
+                RaisePropertyChanged(nameof(CategoryString));
+            }
+        }
 
         public BookViewModel(Book book)
         {
@@ -134,7 +146,15 @@ namespace library.ViewModel
 
         private void SaveChangesExecute()
         {
+            var v = (int) Category;
             // TODO
+        }
+
+        private Category GetCategoryByString(string categoryName)
+        {
+            Category categoryEnum = (Category) Enum.Parse(typeof(Category), categoryName);
+
+            return categoryEnum;
         }
     }
 }

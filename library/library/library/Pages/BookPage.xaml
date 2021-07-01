@@ -27,18 +27,21 @@
 
                         <!-- Content -->
                         <Label Text="{Binding Title}"
-                               FontFamily="News701" />
+                               FontFamily="News701" FontSize="Large"/>
                         <Label Text="{Binding Authors}"
-                               FontFamily="News701" FontSize="14" />
+                               FontFamily="News701" FontSize="Medium" />
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Owner:"
                                    FontFamily="News701" FontSize="14" />
                             <Label Text="{Binding Owner.UserName}"
                                    FontFamily="News701" FontSize="14" />
                         </StackLayout>
-                        
-                        <Label Text="{Binding Bookcase.Name}"
-                               FontFamily="News701" FontSize="14" />
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Placed at:"
+                                   FontFamily="News701" FontSize="14" />
+                            <Label Text="{Binding Bookcase.Name}"
+                                   FontFamily="News701" FontSize="14" />
+                        </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <CheckBox IsChecked="{Binding Read}"
                                       Color="Black" />
@@ -64,17 +67,8 @@
                                    Grid.Column="1">
                                 <Picker x:Name="Category" HorizontalOptions="FillAndExpand" Title="Category"
                                         FontFamily="News701" HorizontalTextAlignment="Center"
-                                        SelectedIndex="0">
-                                    <Picker.Items>
-                                        <!-- TODO Connect with model-->
-                                        <x:String>Other</x:String>
-                                        <x:String>IT</x:String>
-                                        <x:String>Crime</x:String>
-                                        <x:String>Cookbook</x:String>
-                                        <x:String>Documentary</x:String>
-                                        <x:String>SiFi</x:String>
-                                        <x:String>Novel</x:String>
-                                    </Picker.Items>
+                                        ItemsSource="{Binding CategoriesList}"
+                                        SelectedItem="{Binding CategoryString}">
                                 </Picker>
                             </Frame>
                         </Grid>

@@ -32,14 +32,8 @@ namespace library.ViewModel
             }
         }
 
-        public List<string> CategoriesList
-        {
+        public List<string> CategoriesList => new List<string>(Enum.GetNames(typeof(Category)));
 
-            get { return new List<string>(Enum.GetNames(typeof(Category))); }
-            private set { }
-        }
-
-        
 
         private string _title;
 
