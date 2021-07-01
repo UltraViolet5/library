@@ -1,14 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Windows.Input;
-using library.Pages;
-using library.Services;
 using Xamarin.Forms;
 using library.Model;
-using System.Threading.Tasks;
-using library.FactoryMethod;
-using System.Linq;
 
 
 namespace library.ViewModel
@@ -17,22 +10,14 @@ namespace library.ViewModel
     {
         private bool _saveBtnValue;
 
-        public bool SaveBtnValue { get { return  _saveBtnValue ; } set { _saveBtnValue = value;
-                RaisePropertyChanged(nameof(SaveBtnValue));
-            } }
-
-        private bool _checkboxValue;
-        public bool checkboxValue 
-        { 
-            get 
+        public bool SaveBtnValue
+        {
+            get { return _saveBtnValue; }
+            set
             {
-                return _checkboxValue; 
-            } 
-            set 
-            {   _checkboxValue = value;
-                ///SaveBtnValue = value;
-                //RaisePropertyChanged(nameof(checkboxValue));
-            } 
+                _saveBtnValue = value;
+                RaisePropertyChanged(nameof(SaveBtnValue));
+            }
         }
 
         private string _barcodeText = "Scan your barcode!";
@@ -54,7 +39,7 @@ namespace library.ViewModel
             private set { }
         }
 
-        public Command SaveButton { get; set; }
+        
 
         private string _title;
 
@@ -88,14 +73,13 @@ namespace library.ViewModel
         public bool Read { get; set; }
         public bool Available { get; set; }
 
+        public Command SaveButton { get; set; }
+
 
 
         public AddBookViewModel()
         {
             SaveButton = new Command(SaveButtonExecute ,canExecute : SaveButtonCanExecuet);
-           
-            
-
         }
 
     
@@ -133,6 +117,8 @@ namespace library.ViewModel
             NewBook.Owner = App.CurrentUser;
             NewBook.Categories = GetCategoryByString(CategoryString);
             NewBook.PublishingYear = this.PublishingYear;
+            NewBook.Available = this.Available;
+            NewBook.Read = this.Read;
 
             App.DbService.AddBook(NewBook);
              

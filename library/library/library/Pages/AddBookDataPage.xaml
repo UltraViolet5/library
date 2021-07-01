@@ -65,8 +65,8 @@
                     <CheckBox  IsChecked="{Binding Available}" Color="White" HorizontalOptions="Center"/>
                     
                 </StackLayout>
-                <Line X1="0" X2="400" Y1="1" Y2="1" Stroke="white" StrokeThickness="8"/>
-                <Line X1="0" X2="400" Y1="1" Y2="1" Stroke="white" StrokeThickness="8"/>
+                <Line X1="0" X2="400" Y1="1" Y2="1" Stroke="white" StrokeThickness="1" StrokeLineCap="Round"/>
+                <Line X1="0" X2="400" Y1="1" Y2="1" Stroke="white" StrokeThickness="4" StrokeLineCap="Round" HeightRequest="10"/>
                 <Button x:Name="SaveBtn"  CornerRadius="12" FontFamily="News701" Text="Save" BackgroundColor="White"  Command="{Binding SaveButton}" IsEnabled="{Binding SaveBtnValue}"/>
                 
             </StackLayout>
