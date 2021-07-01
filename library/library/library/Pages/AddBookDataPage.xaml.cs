@@ -33,11 +33,11 @@ namespace library.Pages
             BindingContext = AddBookViewModel;
             ScanPage = new ScanPage();
             ScanPage.IsScaned += HandleScanSucced;
-            //CheckBox = mycheckbox;
+            
 
 
 
-            DisplayRadioButton();
+            
         }
 
 
@@ -83,14 +83,7 @@ namespace library.Pages
         {
             App.Navigation.PushModalAsync(ScanPage);
         }
-       
-        private void DisplayRadioButton()
-        {
-            foreach (var categries in AddBookViewModel.CategoriesList)
-            {
-                RadioButtonLayout.Children.Add(new RadioButton { Content = categries, Value = categries, BorderColor= Color.White, TextColor= Color.White, BackgroundColor= Color.Transparent});
-            }
-        }
+      
 
   
 

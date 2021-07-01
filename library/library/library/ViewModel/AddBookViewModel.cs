@@ -85,6 +85,8 @@ namespace library.ViewModel
 
         public DateTime PublishingYear { get; set; }
         public string CategoryString { get; set; }
+        public bool Read { get; set; }
+        public bool Available { get; set; }
 
 
 
