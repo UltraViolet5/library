@@ -1,8 +1,6 @@
 ﻿using library.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,10 +13,8 @@ namespace library.Pages
     public partial class AddBookDataPage : ContentPage
     {
         public static Label BarLabel;
-        private readonly ComponentFactoryBase _componentFactory;
         public readonly AddBookViewModel AddBookViewModel;
         public ScanPage ScanPage;
-        public static CheckBox CheckBox;
 
         
 
@@ -28,19 +24,12 @@ namespace library.Pages
             Task.Run(AnimateBG);
             BarLabel = BarcodeLabel;
             
-            _componentFactory = new ComponentFactory();
+            
             AddBookViewModel = new AddBookViewModel();
             BindingContext = AddBookViewModel;
             ScanPage = new ScanPage();
             ScanPage.IsScaned += HandleScanSucced;
-            //CheckBox = mycheckbox;
-
-
-
-            DisplayRadioButton();
         }
-
-
 
         private void HandleScanSucced(object sender, EventArgs e)
         {
@@ -65,15 +54,6 @@ namespace library.Pages
             }
         }
 
-    
-
-   
-
-        private void SaveBtn_Clicked(object sender, EventArgs e)
-        {
-           
-        }
-
         private void CancelBtn_Clicked(object sender, EventArgs e)
         {
             App.Navigation.PopAsync();
@@ -83,17 +63,7 @@ namespace library.Pages
         {
             App.Navigation.PushModalAsync(ScanPage);
         }
-       
-        private void DisplayRadioButton()
-        {
-            foreach (var categries in AddBookViewModel.CategoriesList)
-            {
-                RadioButtonLayout.Children.Add(new RadioButton { Content = categries, Value = categries, BorderColor= Color.White, TextColor= Color.White, BackgroundColor= Color.Transparent});
-            }
-        }
-
-  
-
+   
         private void Title_TextChanged(object sender, TextChangedEventArgs e)
         {
             

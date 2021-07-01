@@ -12,6 +12,7 @@ namespace library.Model
         Cookbook,
         Documentary,
         SiFi,
-        Novel
+        Novel,
+        Other
     }
 }
