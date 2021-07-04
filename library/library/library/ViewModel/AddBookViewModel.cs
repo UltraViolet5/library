@@ -79,12 +79,12 @@ namespace library.ViewModel
 
         public AddBookViewModel()
         {
-            SaveButton = new Command(SaveButtonExecute ,canExecute : SaveButtonCanExecuet);
+            SaveButton = new Command(SaveButtonExecute, canExecute: SaveButtonCanExecute);
         }
 
     
 
-        private bool SaveButtonCanExecuet(object arg)
+        private bool SaveButtonCanExecute(object arg)
         {
             if (!string.IsNullOrEmpty(Title) && !string.IsNullOrEmpty(Authors))
             {
