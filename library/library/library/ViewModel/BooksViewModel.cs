@@ -28,7 +28,7 @@ namespace library.ViewModel
 
         private void AddBookExecute()
         {
-            App.Navigation.PushAsync(new AddBookPage());
+            App.Navigation.PushAsync(new AddBookDataPage());
         }
 
         private void ShowBookExecute(object obj)

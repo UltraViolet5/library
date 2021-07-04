@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using library.Model;
 using System.Linq;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace library.ViewModel
 {
@@ -27,10 +29,7 @@ namespace library.ViewModel
 
         public string Authors
         {
-            get
-            {
-                return _book.Authors;
-            }
+            get { return _book.Authors; }
         }
 
         public string PublishingYear => _book.PublishingYear.Date.Year.ToString();
@@ -124,9 +123,38 @@ namespace library.ViewModel
             }
         }
 
+        public List<string> CategoriesList => new List<string>(Enum.GetNames(typeof(Category)));
+
+        public ICommand SaveChangesCommand { get; set; }
+
+        public string CategoryString
+        {
+            get => Category.ToString();
+            set
+            {
+                Category = GetCategoryByString(value);
+                RaisePropertyChanged(nameof(CategoryString));
+            }
+        }
+
         public BookViewModel(Book book)
         {
             _book = book;
+
+            SaveChangesCommand = new Command(SaveChangesExecute);
+        }
+
+        private void SaveChangesExecute()
+        {
+            var v = (int) Category;
+            // TODO
+        }
+
+        private Category GetCategoryByString(string categoryName)
+        {
+            Category categoryEnum = (Category) Enum.Parse(typeof(Category), categoryName);
+
+            return categoryEnum;
         }
     }
 }

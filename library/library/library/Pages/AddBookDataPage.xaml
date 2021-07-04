@@ -53,8 +53,12 @@
                 </Frame>
                 <Label Text="Category" HorizontalTextAlignment="Center" FontSize="18"
                            FontFamily="News701" Margin="0" TextColor="White"  />
-                <Frame CornerRadius="12">
-                <Picker x:Name="categoryPicker"  BackgroundColor="White" HorizontalTextAlignment="Center" Title="Select Category" FontSize="18" FontFamily="News701" TitleColor="Black" ItemsSource="{Binding CategoriesList}" SelectedItem="{Binding CategoryString}"/>
+                <Frame CornerRadius="12" Padding="0">
+                <Picker x:Name="categoryPicker"  BackgroundColor="White" 
+                        HorizontalTextAlignment="Center" Title="Select Category" 
+                        FontSize="18" FontFamily="News701" TitleColor="Black" 
+                        ItemsSource="{Binding CategoriesList}" 
+                        SelectedItem="{Binding CategoryString}"/>
                 </Frame>
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Read"  FontSize="18" TextColor="White" VerticalTextAlignment="Center"/>
