@@ -1,13 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace library
 {
     public static class Style
     {
-        public static string MainFont { get; set; } = "News701";
-        public static Color LightGray { get; set; } = Xamarin.Forms.Color.FromHex("#e6e6e6");
+        public static bool DarkMode { get; set; } = false;
+
+        public static string MainFont => "News701";
+        public static Color LightGray => Xamarin.Forms.Color.FromHex("#e6e6e6");
+        public static int SmallCornerRadius => 8;
+        public static int MediumCornerRadius => 12;
+        public static int BigCornerRadius => 15;
+        public static int MateIconSize => 50;
+        public static int SmallFont => 12;
+        public static int MediumFont => 16;
+        public static int BigFont => 24;
+        public static int PagePadding => 20;
     }
 }

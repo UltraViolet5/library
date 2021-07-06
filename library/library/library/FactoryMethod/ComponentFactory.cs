@@ -1,11 +1,53 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 using library.ViewModel;
 
 namespace library.FactoryMethod
 {
-    public class ComponentFactory : ComponentFactoryBase
+    public class ComponentFactory : IComponentFactory
     {
-        public override Frame CreateBookCard(BookViewModel book)
+        public Label CreateLabel(string text, int fontSize = 12, TextAlignment hAlignment = TextAlignment.Start)
+        {
+            return new Label()
+            {
+                Padding = new Thickness(10, 10),
+                Text = text,
+                FontFamily = Style.MainFont,
+                VerticalTextAlignment = TextAlignment.Center,
+                HorizontalTextAlignment = hAlignment,
+                FontSize = fontSize
+            };
+        }
+
+        public Button CreateButton(string text, string command = null)
+        {
+            var result = new Button()
+            {
+                Text = text,
+                FontFamily = Style.MainFont,
+                CornerRadius = Style.MediumCornerRadius,
+                BackgroundColor = Style.LightGray,
+            };
+            if (!String.IsNullOrWhiteSpace(command))
+                result.SetBinding(Button.CommandProperty, command);
+            
+            return result;
+        }
+
+        public StackLayout CreateSwitch(string text)
+        {
+            return new StackLayout()
+            {
+                Orientation = StackOrientation.Horizontal,
+                Children =
+                {
+                    CreateLabel(text, Style.MediumFont),
+                    new Switch()
+                }
+            };
+        }
+
+        public Frame CreateBookCard(BookViewModel book)
         {
             Grid grid = new Grid()
             {
@@ -100,7 +142,7 @@ namespace library.FactoryMethod
                 BackgroundColor = Style.LightGray,
                 Padding = 0,
                 Margin = new Thickness(0, 10),
-                CornerRadius = 15,
+                CornerRadius = Style.BigCornerRadius,
                 HasShadow = true,
                 Content = new StackLayout()
                 {
@@ -119,13 +161,13 @@ namespace library.FactoryMethod
             return result;
         }
 
-        public override Frame CreateCategoryBtn(string category)
+        public Frame CreateCategoryBtn(string category)
         {
             return new Frame()
             {
                 Padding = new Thickness(15, 5, 15, 5),
                 BackgroundColor = Color.LightGray,
-                CornerRadius = 7,
+                CornerRadius = Style.SmallCornerRadius,
                 HorizontalOptions = LayoutOptions.StartAndExpand,
                 Content = new Label
                 {
@@ -136,27 +178,27 @@ namespace library.FactoryMethod
             };
         }
 
-        public override Frame CreateMateIcon(UserViewModel user)
+        public Frame CreateMateIcon(UserViewModel user)
         {
             return new Frame()
             {
-                CornerRadius = 10,
-                WidthRequest = 50,
-                HeightRequest = 50,
+                CornerRadius = Style.MediumCornerRadius,
+                WidthRequest = Style.MateIconSize,
+                HeightRequest = Style.MateIconSize,
                 Padding = 0,
                 HasShadow = false,
                 Content = new Image()
                 {
                     Source = "user.png",
                     Margin = 0,
-                    HeightRequest = 50,
-                    WidthRequest = 50,
+                    HeightRequest = Style.MateIconSize,
+                    WidthRequest = Style.MateIconSize,
                     HorizontalOptions = LayoutOptions.StartAndExpand
                 }
             };
         }
 
-        public override Frame CreateRentalBtn(BorrowingViewModel borrowing)
+        public Frame CreateRentalBtn(BorrowingViewModel borrowing)
         {
             var grid = new Grid()
             {
@@ -197,24 +239,24 @@ namespace library.FactoryMethod
             var frame = new Frame()
             {
                 Padding = new Thickness(15,5),
-                CornerRadius = 7,
+                CornerRadius = Style.SmallCornerRadius,
                 Content = grid
             };
 
             return frame;
         }
 
-        public override Frame CreateFrameWithEntry()
+        public Frame CreateFrameWithEntry()
         {
             var newFrame = new Frame
             {
-                CornerRadius = 12,
+                CornerRadius = Style.MediumCornerRadius,
                 Margin = 0.10,
                 Content = new Entry
                 {
                     BackgroundColor = Color.White,
                     WidthRequest = 150,
-                    FontFamily = "News701"
+                    FontFamily = Style.MainFont
                 }
             };
 

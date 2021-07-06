@@ -15,7 +15,7 @@
                                HorizontalOptions="Center">
                             <AbsoluteLayout>
                                 <Frame WidthRequest="150" HeightRequest="150" BorderColor="Aqua" Padding="0">
-                                    <Image Source="picture.png" Scale="1" Aspect="Fill"></Image>
+                                    <Image Source="picture.png" Scale="1" Aspect="Fill" />
                                 </Frame>
                                 <Image Source="plusfilled.png" WidthRequest="40" HeightRequest="40"
                                        AbsoluteLayout.LayoutBounds="0.9,0.9"
@@ -24,12 +24,21 @@
                         </Frame>
 
                         <!-- Content -->
-                        <Label Text="{Binding Title}"
-                               FontFamily="News701" FontSize="Large" HorizontalTextAlignment="Center"/>
-                        <Label Text="{Binding Authors}"
-                               FontFamily="News701" FontSize="Medium"  HorizontalTextAlignment="Center"/>
+                        <Label Text="Title" VerticalTextAlignment="Center"
+                               FontFamily="News701" FontSize="Large" HorizontalTextAlignment="Center" />
+                        <Frame Padding="0" CornerRadius="12" BackgroundColor="#e6e6e6" Margin="0,0,0,20">
+                            <Entry Text="{Binding Title}" HorizontalTextAlignment="Center"
+                                   FontFamily="News701" />
+                        </Frame>
+
+                        <Label Text="Authors" FontFamily="News701" FontSize="Medium" HorizontalTextAlignment="Center" />
+                        <Frame Padding="0" CornerRadius="12" BackgroundColor="#e6e6e6" Margin="0, 0,0,20">
+                            <Entry Text="{Binding Authors}" HorizontalTextAlignment="Center"
+                                   FontFamily="News701" />
+                        </Frame>
+
                         <Line X1="0" X2="50" Y1="1" Y2="1" Stroke="black" StrokeThickness="1" StrokeLineCap="Round"
-                              HorizontalOptions="CenterAndExpand"/>
+                              HorizontalOptions="CenterAndExpand" />
                         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                             <Label Text="Owner:"
                                    FontFamily="News701" FontSize="14" />
@@ -44,7 +53,7 @@
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                             <CheckBox IsChecked="{Binding Read}"
-                                      Color="Black"/>
+                                      Color="Black" />
                             <Label Text="read" VerticalOptions="Center"
                                    FontFamily="News701" />
                         </StackLayout>
@@ -57,16 +66,15 @@
 
                         <!-- Category -->
                         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                            <Label Text="Category: " FontFamily="News701"  FontSize="18"
-                                   Grid.Column="0" VerticalTextAlignment="Center" HorizontalOptions="End"/>
+                            <Label Text="Category: " FontFamily="News701" FontSize="18"
+                                   Grid.Column="0" VerticalTextAlignment="Center" HorizontalOptions="End" />
                             <Frame Padding="0" CornerRadius="12" Margin="0,5"
                                    Grid.Column="1">
                                 <Picker x:Name="Category" HorizontalOptions="FillAndExpand" Title="Category"
                                         FontFamily="News701" HorizontalTextAlignment="Center"
                                         ItemsSource="{Binding CategoriesList}"
                                         SelectedItem="{Binding CategoryString}"
-                                        BackgroundColor="#e6e6e6" FontSize="Small" WidthRequest="150">
-                                </Picker>
+                                        BackgroundColor="#e6e6e6" FontSize="Small" WidthRequest="150" />
                             </Frame>
                         </StackLayout>
                         <Button CornerRadius="12" Margin="0,10" BackgroundColor="#e6e6e6"
