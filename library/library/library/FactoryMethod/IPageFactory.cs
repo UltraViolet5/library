@@ -8,5 +8,7 @@ namespace library.FactoryMethod
     public interface IPageFactory
     {
         ScrollView GetSettingsPage(bool darkMode = false);
+        ScrollView GetBookPage(bool darkMode = false);
+        ScrollView GetLoginPage(bool darkMode = false);
     }
 }

@@ -1,12 +1,17 @@
 ﻿using System;
 using Xamarin.Forms;
 using library.ViewModel;
+using Xamarin.Forms.Shapes;
+using Rectangle = Xamarin.Forms.Rectangle;
 
 namespace library.FactoryMethod
 {
     public class ComponentFactory : IComponentFactory
     {
-        public Label CreateLabel(string text, int fontSize = 12, TextAlignment hAlignment = TextAlignment.Start)
+
+        public Label GetLabel(string text,
+            int fontSize = 16,
+            TextAlignment hAlignment = TextAlignment.Start)
         {
             return new Label()
             {
@@ -18,8 +23,41 @@ namespace library.FactoryMethod
                 FontSize = fontSize
             };
         }
+        public Label GetLabel(string text,
+            string binding,
+            int fontSize = 16,
+            TextAlignment hAlignment = TextAlignment.Start)
+        {
+            var result = new Label()
+            {
+                Padding = new Thickness(10, 10),
+                Text = text,
+                FontFamily = Style.MainFont,
+                VerticalTextAlignment = TextAlignment.Center,
+                HorizontalTextAlignment = hAlignment,
+                FontSize = fontSize
+            };
 
-        public Button CreateButton(string text, string command = null)
+            result.SetBinding(Label.TextProperty, binding);
+
+            return result;
+        }
+
+        public Label GetValidationLabel(string msg, string visibleBinding, Color color)
+        {
+            var result = new Label()
+            {
+                Text = msg,
+                HorizontalTextAlignment = TextAlignment.Center,
+                TextColor = color,
+                FontFamily = Style.MainFont
+            };
+            result.SetBinding(Label.IsVisibleProperty, visibleBinding);
+            
+            return result;
+        }
+
+        public Button GetButton(string text, string command = null)
         {
             var result = new Button()
             {
@@ -34,20 +72,65 @@ namespace library.FactoryMethod
             return result;
         }
 
-        public StackLayout CreateSwitch(string text)
+        public StackLayout GetSwitch(string text)
         {
             return new StackLayout()
             {
                 Orientation = StackOrientation.Horizontal,
                 Children =
                 {
-                    CreateLabel(text, Style.MediumFont),
+                    GetLabel(text, Style.MediumFont),
                     new Switch()
                 }
             };
         }
 
-        public Frame CreateBookCard(BookViewModel book)
+        public Frame GetPhotoBox()
+        {
+            var absoluteLayout = new AbsoluteLayout();
+
+            var image = new Frame()
+            {
+                WidthRequest = Style.PhotoBoxSize,
+                HeightRequest = Style.PhotoBoxSize,
+                Padding = new Thickness(0),
+                Content = new Image()
+                {
+                    Source = "picture.png",
+                    Scale = 1,
+                    Aspect = Aspect.Fill
+                }
+            };
+
+            var addBtn = new Image()
+            {
+                Source = "plusfilled.png",
+                WidthRequest = Style.ImageButtonSize,
+                HeightRequest = Style.ImageButtonSize,
+            };
+
+            absoluteLayout.Children.Add(image);
+            absoluteLayout.Children.Add(addBtn,
+                new Rectangle(0,0,0.9,0.9),
+                AbsoluteLayoutFlags.PositionProportional);
+
+            var result = new Frame()
+            {
+                WidthRequest = Style.PhotoBoxSize,
+                HeightRequest = Style.PhotoBoxSize,
+                CornerRadius = Style.BigCornerRadius,
+                Padding = new Thickness(0),
+                Margin = new Thickness(40,20),
+                HasShadow = true,
+                BorderColor = Style.LightGray,
+                HorizontalOptions = LayoutOptions.Center,
+                Content = absoluteLayout
+            };
+
+            return result;
+        }
+
+        public Frame GetBookCard(BookViewModel book)
         {
             Grid grid = new Grid()
             {
@@ -161,7 +244,7 @@ namespace library.FactoryMethod
             return result;
         }
 
-        public Frame CreateCategoryBtn(string category)
+        public Frame GetCategoryBtn(string category)
         {
             return new Frame()
             {
@@ -178,7 +261,7 @@ namespace library.FactoryMethod
             };
         }
 
-        public Frame CreateMateIcon(UserViewModel user)
+        public Frame GetMateIcon(UserViewModel user)
         {
             return new Frame()
             {
@@ -198,7 +281,7 @@ namespace library.FactoryMethod
             };
         }
 
-        public Frame CreateRentalBtn(BorrowingViewModel borrowing)
+        public Frame GetRentalBtn(BorrowingViewModel borrowing)
         {
             var grid = new Grid()
             {
@@ -246,21 +329,135 @@ namespace library.FactoryMethod
             return frame;
         }
 
-        public Frame CreateFrameWithEntry()
+        public Frame GetEntry(string binding, 
+            string placeholder = "", 
+            bool isPassword = false)
         {
             var newFrame = new Frame
             {
                 CornerRadius = Style.MediumCornerRadius,
-                Margin = 0.10,
-                Content = new Entry
+                Padding = 0,
+            };
+            
+            var entry = new Entry
+            {
+                BackgroundColor = Color.White,
+                FontFamily = Style.MainFont,
+                HorizontalTextAlignment = TextAlignment.Center,
+                Placeholder = placeholder,
+                IsPassword = isPassword
+            };
+            entry.SetBinding(Entry.TextProperty, binding);
+
+            newFrame.Content = entry;
+            return newFrame;
+        }
+
+        public Line GetLine()
+        {
+            return new Line()
+            {
+                Stroke = new SolidColorBrush(new Color(0,0,0)),
+                StrokeThickness = 1,
+                StrokeLineCap = PenLineCap.Round,
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                X1 = 0, X2 = 0,
+                Y1 = 1, Y2 = 1,
+                Margin = new Thickness(20)
+            };
+        }
+
+        public StackLayout GetLabelWithBinding(string label, string binding)
+        {
+            var result = new StackLayout()
+            {
+                Orientation = StackOrientation.Horizontal,
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                Children =
                 {
-                    BackgroundColor = Color.White,
-                    WidthRequest = 150,
-                    FontFamily = Style.MainFont
+                    GetLabel(label),
                 }
             };
 
-            return newFrame;
+            var boundLabel = GetLabel("");
+            boundLabel.SetBinding(Label.TextProperty, binding);
+            result.Children.Add(boundLabel);
+
+            return result;
+        }
+
+        public StackLayout GetCheckBox(string label, string binding)
+        {
+            var result = new StackLayout()
+            {
+                Orientation = StackOrientation.Horizontal,
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+            };
+
+            var checkBox = new CheckBox()
+            {
+                Color = new Color(0, 0, 0)
+            };
+            checkBox.SetBinding(CheckBox.IsCheckedProperty, binding);
+
+            result.Children.Add(checkBox);
+            result.Children.Add(GetLabel(label));
+
+            return result;
+        }
+
+        public StackLayout GetDropDown(string labelText, string bindingSource, string bindingSelected)
+        {
+            var result = new StackLayout()
+            {
+                Orientation = StackOrientation.Horizontal,
+                HorizontalOptions = LayoutOptions.CenterAndExpand
+            };
+
+            var label = GetLabel(labelText, fontSize: Style.BigFont, hAlignment: TextAlignment.Center);
+            label.HorizontalOptions = LayoutOptions.End;
+            result.Children.Add(label);
+
+            var frame = new Frame()
+            {
+                Padding = new Thickness(0),
+                CornerRadius = Style.MediumCornerRadius,
+                Margin = new Thickness(0, 5)
+            };
+
+            var picker = new Picker()
+            {
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                Title = labelText,
+                FontFamily = Style.MainFont,
+                HorizontalTextAlignment = TextAlignment.Center,
+                BackgroundColor = Style.LightGray,
+                FontSize = Style.SmallFont,
+                WidthRequest = 150
+            };
+            picker.SetBinding(Picker.ItemsSourceProperty, bindingSource);
+            picker.SetBinding(Picker.SelectedItemProperty, bindingSelected);
+            frame.Content = picker;
+
+            result.Children.Add(frame);
+
+            return result;
+        }
+
+        public Image GetNextButton(string tapBinding)
+        {
+            var result = new Image()
+            {
+                Source = "arrowfilled.png",
+                HorizontalOptions = LayoutOptions.End,
+                Margin = new Thickness(0),
+                WidthRequest = Style.ImageButtonSize
+            };
+            var tapGesture = new TapGestureRecognizer();
+            tapGesture.SetBinding(TapGestureRecognizer.CommandProperty, tapBinding);
+            result.GestureRecognizers.Add(tapGesture);
+
+            return result;
         }
     }
 }

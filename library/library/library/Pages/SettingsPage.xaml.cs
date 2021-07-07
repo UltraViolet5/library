@@ -15,7 +15,7 @@ namespace library.Pages
     public partial class SettingsPage : ContentPage
     {
         private readonly SettingsViewModel _settingsViewModel;
-        private readonly PageFactory _pageFactory;
+        private readonly IPageFactory _pageFactory;
 
         public SettingsPage()
         {

@@ -16,5 +16,7 @@ namespace library
         public static int MediumFont => 16;
         public static int BigFont => 24;
         public static int PagePadding => 20;
+        public static int PhotoBoxSize => 150;
+        public static int ImageButtonSize => 40;
     }
 }

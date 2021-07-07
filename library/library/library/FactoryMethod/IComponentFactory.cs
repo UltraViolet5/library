@@ -9,14 +9,17 @@ namespace library.FactoryMethod
 {
     public interface IComponentFactory
     {
-        Label CreateLabel(string text, int fontSize = 12,
+        Label GetLabel(string text, int fontSize,
             TextAlignment hAlignment = TextAlignment.Start);
-        Button CreateButton(string text, string command);
-        StackLayout CreateSwitch(string text);
-        Frame CreateBookCard(BookViewModel book);
-        Frame CreateCategoryBtn(string category);
-        Frame CreateMateIcon(UserViewModel user);
-        Frame CreateRentalBtn(BorrowingViewModel borrowing);
-        Frame CreateFrameWithEntry();
+        Button GetButton(string text, string command);
+        Label GetValidationLabel(string msg, string visibleBinding, Color color);
+        StackLayout GetSwitch(string text);
+        Frame GetPhotoBox();
+        Frame GetBookCard(BookViewModel book);
+        Frame GetCategoryBtn(string category);
+        Frame GetMateIcon(UserViewModel user);
+        Frame GetRentalBtn(BorrowingViewModel borrowing);
+        Frame GetEntry(string binding, string placeholder = "",
+            bool isPassword = false);
     }
 }

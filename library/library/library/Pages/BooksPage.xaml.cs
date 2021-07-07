@@ -29,9 +29,16 @@ namespace library.Pages
         {
             foreach (var book in BooksViewModel.Books)
             {
-                var bookCard = App.ComponentFactory.CreateBookCard(book);
+                var bookCard = App.ComponentFactory.GetBookCard(book);
                 Books.Children.Add(bookCard);
             }
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            Books.Children.Clear();
+            DisplayBooks();
         }
     }
 }
