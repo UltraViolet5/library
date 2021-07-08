@@ -1,4 +1,6 @@
 ﻿using Xamarin.Forms;
+using System;
+using System.Collections.Generic;
 
 namespace library.FactoryMethod
 {
@@ -93,6 +95,51 @@ namespace library.FactoryMethod
             };
 
             return result;
+        }
+
+        public ScrollView GetMyRentalsPage ()
+        {
+            
+            var borrowingElements = getBorrowingElemnts();
+            var layout = new StackLayout();
+
+            foreach (var borrowing in borrowingElements)
+            {
+                layout.Children.Add(borrowing);
+            }
+
+            var result = new ScrollView()
+            {
+                Content = layout
+            };
+
+            
+
+            return result;
+        }
+
+        private List<StackLayout> getBorrowingElemnts()
+        {
+            var borrowing = App.DbService.GetBorrowings();
+
+            List<StackLayout> borrowingElemnts = new List<StackLayout>();
+
+            foreach (var item in borrowing)
+            {
+                var NewLayout = new StackLayout()
+                {
+                    Children =
+                    {
+                        _componentFactory.GetBookCard(item.Book),
+                        _componentFactory.GetRentalBtn(item)
+                    }
+                };
+
+                
+                borrowingElemnts.Add(NewLayout);
+            }
+
+            return borrowingElemnts;
         }
     }
 }

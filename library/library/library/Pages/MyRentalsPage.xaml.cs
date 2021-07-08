@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using library.Model;
 using library.ViewModel;
+using library.FactoryMethod;
 
 namespace library.Pages
 {
@@ -16,6 +17,8 @@ namespace library.Pages
     {
         MyRentalsViewModel MyRentalsViewModel { get; set; }
 
+        private readonly IPageFactory _pageFactory;
+
         public MyRentalsPage()
         {
             InitializeComponent();
@@ -23,7 +26,14 @@ namespace library.Pages
             MyRentalsViewModel = new MyRentalsViewModel();
 
             BindingContext = MyRentalsViewModel;
+
+            _pageFactory = new PageFactory();
+            Content = _pageFactory.GetMyRentalsPage();
+
+
         }
+
+    
        
     }
 }

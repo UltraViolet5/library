@@ -4,10 +4,6 @@
              xmlns:viewmodel="clr-namespace:library.ViewModel"
              x:DataType="viewmodel:MyRentalsViewModel"
              x:Class="library.Pages.MyRentalsPage">
-    <ContentPage.Content>
-        <ScrollView x:Name="borowingsScrollViewXaml">
-            
-        </ScrollView>
-    </ContentPage.Content>
+    
       
 </ContentPage>
