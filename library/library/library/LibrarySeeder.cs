@@ -70,9 +70,9 @@ namespace library
         {
             return new List<Borrowing>()
             {
-                new Borrowing() {ReturnDate = new DateTime(2021, 9, 3),},
-                new Borrowing() {ReturnDate = new DateTime(2021, 10, 21),},
-                new Borrowing() {ReturnDate = new DateTime(2021, 8, 12),},
+                new Borrowing() {Book = new Book(){Title= "book1",Authors="Author1" } ,ReturnDate = new DateTime(2021, 9, 3),},
+                new Borrowing() {Book = new Book(){Title= "book2",Authors="Author2" } ,ReturnDate = new DateTime(2021, 10, 21),},
+                new Borrowing() {Book = new Book(){Title= "book3",Authors="Author3" } ,ReturnDate = new DateTime(2021, 8, 12),},
             };
         }
 
