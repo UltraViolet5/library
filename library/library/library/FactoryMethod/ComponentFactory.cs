@@ -7,6 +7,8 @@ namespace library.FactoryMethod
     {
         public override Frame CreateBookCard(BookViewModel book)
         {
+           
+
             Grid grid = new Grid()
             {
                 ColumnDefinitions =
@@ -91,6 +93,9 @@ namespace library.FactoryMethod
                     }
                 }
             };
+
+           
+
             contentBox.SetValue(Grid.ColumnProperty, 1);
             grid.Children.Add(contentBox);
 
@@ -220,5 +225,7 @@ namespace library.FactoryMethod
 
             return newFrame;
         }
+
+        
     }
 }
