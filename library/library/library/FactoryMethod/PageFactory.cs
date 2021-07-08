@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using System.Collections.Generic;
+using library.ViewModel;
+using Xamarin.Forms;
 
 namespace library.FactoryMethod
 {
@@ -10,6 +12,7 @@ namespace library.FactoryMethod
         {
             _componentFactory = new ComponentFactory();
         }
+
         public ScrollView GetSettingsPage(bool darkMode = false)
         {
             var result = new ScrollView()
@@ -30,6 +33,7 @@ namespace library.FactoryMethod
 
             return result;
         }
+
         public ScrollView GetBookPage(bool darkMode = false)
         {
             var result = new ScrollView()
@@ -40,11 +44,11 @@ namespace library.FactoryMethod
                     Children =
                     {
                         _componentFactory.GetPhotoBox(),
-                        _componentFactory.GetLabel("Title", hAlignment:TextAlignment.Center),
+                        _componentFactory.GetLabel("Title", hAlignment: TextAlignment.Center),
                         _componentFactory.GetEntry("Title"),
                         _componentFactory.GetValidationLabel("Title must be filled.",
                             "TitleValidation_ShowMsg", Color.Red),
-                        _componentFactory.GetLabel("Authors", hAlignment:TextAlignment.Center),
+                        _componentFactory.GetLabel("Authors", hAlignment: TextAlignment.Center),
                         _componentFactory.GetEntry("Authors"),
                         _componentFactory.GetValidationLabel("Authors must be filled.",
                             "AuthorsValidation_ShowMsg", Color.Red),
@@ -61,6 +65,7 @@ namespace library.FactoryMethod
 
             return result;
         }
+
         public ScrollView GetLoginPage(bool darkMode = false)
         {
             var result = new ScrollView()
@@ -75,12 +80,12 @@ namespace library.FactoryMethod
                             Source = "logo.png",
                             WidthRequest = Style.PhotoBoxSize,
                             HorizontalOptions = LayoutOptions.Center,
-                            Margin = new Thickness(0,100,0,20)
+                            Margin = new Thickness(0, 100, 0, 20)
                         },
-                        _componentFactory.GetLabel("Login", 
-                            hAlignment:TextAlignment.Center, 
-                            fontSize:Style.MediumFont),
-                        _componentFactory.GetEntry("Email","e-mail"),
+                        _componentFactory.GetLabel("Login",
+                            hAlignment: TextAlignment.Center,
+                            fontSize: Style.MediumFont),
+                        _componentFactory.GetEntry("Email", "e-mail"),
                         _componentFactory.GetEntry("Password", "password", true),
                         _componentFactory.GetValidationLabel("Incorrect login or password.",
                             "LoginValidation_ShowMsg", Color.Red),
@@ -90,6 +95,28 @@ namespace library.FactoryMethod
                         _componentFactory.GetButton("register", "RegisterCommand")
                     }
                 }
+            };
+
+            return result;
+        }
+
+        public View GetMatesPage(MatesViewModel matesViewModel)
+        {
+            var stackLayout = new StackLayout()
+            {
+                Padding = Style.PagePadding,
+            };
+            stackLayout.Children.Add(_componentFactory.GetLabel("Mates",
+                Style.BigFont));
+
+            foreach (UserViewModel mate in matesViewModel.Mates)
+            {
+                stackLayout.Children.Add(_componentFactory.GetMateCard(mate));
+            }
+
+            var result = new ScrollView()
+            {
+                Content = stackLayout,
             };
 
             return result;

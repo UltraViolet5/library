@@ -11,11 +11,14 @@ namespace library.Model
         public DateTime BirthDate { get; set; }
         public string Localization { get; set; }
         public bool TermsAccepted { get; private set; }
+        public List<User> Friends { get; set; }
 
         public User()
         {
             Id = Guid.NewGuid().ToString();
             TermsAccepted = true;
+
+            Friends = new List<User>();
         }
     }
 }

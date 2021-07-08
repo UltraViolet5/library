@@ -355,6 +355,7 @@ namespace library.FactoryMethod
 
         public Line GetLine()
         {
+            // TODO Not work
             return new Line()
             {
                 Stroke = new SolidColorBrush(new Color(0,0,0)),
@@ -455,6 +456,72 @@ namespace library.FactoryMethod
             };
             var tapGesture = new TapGestureRecognizer();
             tapGesture.SetBinding(TapGestureRecognizer.CommandProperty, tapBinding);
+            result.GestureRecognizers.Add(tapGesture);
+
+            return result;
+        }
+
+        public Frame GetMateCard(UserViewModel mate)
+        {
+            Grid grid = new Grid()
+            {
+                ColumnDefinitions =
+                {
+                    new ColumnDefinition() {Width = new GridLength(8, GridUnitType.Star)},
+                    new ColumnDefinition() {Width = new GridLength(2, GridUnitType.Star)}
+                }
+            };
+
+            var imageFrame = GetMateIcon(mate);
+            imageFrame.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            var imageContainer = new StackLayout()
+            {
+                Padding = 10,
+                Children =
+                {
+                    imageFrame
+                }
+            };
+
+            imageContainer.SetValue(Grid.ColumnProperty, 1);
+            grid.Children.Add(imageContainer);
+
+            var contentBox = new StackLayout()
+            {
+                Padding = new Thickness(15, 10),
+                Children =
+                {
+                    GetLabel(mate.UserName),
+                    GetLabel(mate.Email, fontSize:Style.SmallFont),
+                    GetLabel("Birth date: " + mate.BirthDate, fontSize:Style.SmallFont),
+                    GetLabel($"Localization: {mate.Localization}", fontSize:Style.SmallFont),
+                    GetLabel($"Books count: {mate.BooksCount}"),
+                    
+                }
+            };
+            contentBox.SetValue(Grid.ColumnProperty, 0);
+            grid.Children.Add(contentBox);
+
+            Frame result = new Frame()
+            {
+                BackgroundColor = Color.White,
+                Padding = 0,
+                Margin = new Thickness(0, 10),
+                CornerRadius = Style.BigCornerRadius,
+                HasShadow = true,
+                Content = new StackLayout()
+                {
+                    Children =
+                    {
+                        grid,
+                        GetButton("Books")
+                    }
+                }
+            };
+
+            var tapGesture = new TapGestureRecognizer();
+            tapGesture.SetBinding(TapGestureRecognizer.CommandProperty, "ShowMateCommand");
+            tapGesture.CommandParameter = mate.Id;
             result.GestureRecognizers.Add(tapGesture);
 
             return result;
