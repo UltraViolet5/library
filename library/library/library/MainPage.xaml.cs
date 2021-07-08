@@ -36,7 +36,7 @@ namespace library
         {
             foreach (BorrowingViewModel borrowing in MainPageViewModel.Borrowings)
             {
-                var borrowingUi = App.ComponentFactory.CreateRentalBtn(borrowing);
+                var borrowingUi = App.ComponentFactory.GetRentalBtn(borrowing);
                 
                 Rentals.Children.Add(borrowingUi);
             }
@@ -49,7 +49,7 @@ namespace library
         {
             foreach (UserViewModel mate in MainPageViewModel.Mates)
             {
-                var mateUI = App.ComponentFactory.CreateMateIcon(mate);
+                var mateUI = App.ComponentFactory.GetMateIcon(mate);
 
                 Mates.Children.Add(mateUI);
             }
@@ -62,7 +62,7 @@ namespace library
         {
             foreach (string category in MainPageViewModel.Categories)
             {
-                var categoriesUI = App.ComponentFactory.CreateCategoryBtn(category);
+                var categoriesUI = App.ComponentFactory.GetCategoryBtn(category);
                 var tapGest = new TapGestureRecognizer();
                 tapGest.SetBinding(TapGestureRecognizer.CommandProperty, "ShowBooksByCategory");
                
@@ -79,9 +79,16 @@ namespace library
         {
             foreach (var book in MainPageViewModel.Books)
             {
-                var bookCard = App.ComponentFactory.CreateBookCard(book);
+                var bookCard = App.ComponentFactory.GetBookCard(book);
                 LastBooks.Children.Add(bookCard);
             }
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            LastBooks.Children.Clear();
+            DisplayBooks();
         }
     }
 

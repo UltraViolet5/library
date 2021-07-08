@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using library.FactoryMethod;
 using library.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -20,6 +21,8 @@ namespace library.Pages
 
             _loginViewModel = new LoginViewModel();
             BindingContext = _loginViewModel;
+
+            Content = new PageFactory().GetLoginPage();
 
             NavigationPage.SetHasNavigationBar(this, false);
         }

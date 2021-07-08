@@ -11,6 +11,9 @@ namespace library.ViewModel
     public class BookViewModel : BaseViewModel
     {
         private readonly Book _book;
+        private bool _titleValidationShowMsg;
+        private bool _authorsValidationShowMsg;
+        private ICommand _saveChangesCommand;
 
         public int Id => _book.Id;
 
@@ -22,7 +25,8 @@ namespace library.ViewModel
                 if (_book.Title != value)
                 {
                     _book.Title = value;
-                    RaisePropertyChanged();
+                    TitleValidation();
+                    RaisePropertyChanged(nameof(Title));
                 }
             }
         }
@@ -30,6 +34,12 @@ namespace library.ViewModel
         public string Authors
         {
             get { return _book.Authors; }
+            set
+            {
+                _book.Authors = value;
+                AuthorsValidation();
+                RaisePropertyChanged(nameof(Authors));
+            }
         }
 
         public string PublishingYear => _book.PublishingYear.Date.Year.ToString();
@@ -43,7 +53,7 @@ namespace library.ViewModel
                 if (_book.Picture != value)
                 {
                     _book.Picture = value;
-                    RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(Picture));
                 }
             }
         }
@@ -56,7 +66,7 @@ namespace library.ViewModel
                 if (_book.Owner != value)
                 {
                     _book.Owner = value;
-                    RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(Owner));
                 }
             }
         }
@@ -69,7 +79,7 @@ namespace library.ViewModel
                 if (_book.Read != value)
                 {
                     _book.Read = value;
-                    RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(Read));
                 }
             }
         }
@@ -80,7 +90,7 @@ namespace library.ViewModel
             set
             {
                 _book.Categories = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged(nameof(Category));
             }
         }
 
@@ -92,7 +102,7 @@ namespace library.ViewModel
                 if (_book.Votes != value)
                 {
                     _book.Votes = value;
-                    RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(Votes));
                 }
             }
         }
@@ -123,18 +133,53 @@ namespace library.ViewModel
             }
         }
 
-        public List<string> CategoriesList => new List<string>(Enum.GetNames(typeof(Category)));
+        /// <summary>
+        /// Dropdown categories source
+        /// </summary>
+        public List<string> Categories => new List<string>(Enum.GetNames(typeof(Category)));
 
-        public ICommand SaveChangesCommand { get; set; }
-
-        public string CategoryString
+        /// <summary>
+        /// Dropdown selected category
+        /// </summary>
+        public string SelectedCategory
         {
             get => Category.ToString();
             set
             {
                 Category = GetCategoryByString(value);
-                RaisePropertyChanged(nameof(CategoryString));
+                RaisePropertyChanged(nameof(SelectedCategory));
+                RaisePropertyChanged(nameof(Category));
             }
+        }
+
+        #region Validation
+
+        public bool TitleValidation_ShowMsg
+        {
+            get => _titleValidationShowMsg;
+            set
+            {
+                _titleValidationShowMsg = value;
+                RaisePropertyChanged(nameof(TitleValidation_ShowMsg));
+            }
+        }
+
+        public bool AuthorsValidation_ShowMsg
+        {
+            get => _authorsValidationShowMsg;
+            set
+            {
+                _authorsValidationShowMsg = value;
+                RaisePropertyChanged(nameof(AuthorsValidation_ShowMsg));
+            }
+        }
+
+        #endregion
+
+        public ICommand SaveChangesCommand
+        {
+            get => _saveChangesCommand;
+            set => _saveChangesCommand = value;
         }
 
         public BookViewModel(Book book)
@@ -142,6 +187,15 @@ namespace library.ViewModel
             _book = book;
 
             SaveChangesCommand = new Command(SaveChangesExecute);
+        }
+
+        public void RefreshView()
+        {
+            RaisePropertyChanged(nameof(Title));
+            RaisePropertyChanged(nameof(Authors));
+            RaisePropertyChanged(nameof(Read));
+            RaisePropertyChanged(nameof(Available));
+            RaisePropertyChanged(nameof(Category));
         }
 
         private void SaveChangesExecute()
@@ -155,6 +209,20 @@ namespace library.ViewModel
             Category categoryEnum = (Category) Enum.Parse(typeof(Category), categoryName);
 
             return categoryEnum;
+        }
+
+        private bool TitleValidation()
+        {
+            bool result = !String.IsNullOrWhiteSpace(Title);
+            TitleValidation_ShowMsg = !result;
+            return result;
+        }
+
+        private bool AuthorsValidation()
+        {
+            bool result = !String.IsNullOrWhiteSpace(Authors);
+            AuthorsValidation_ShowMsg = !result;
+            return result;
         }
     }
 }
