@@ -28,6 +28,7 @@ namespace library.Pages
             BindingContext = MyRentalsViewModel;
 
             _pageFactory = new PageFactory();
+
             Content = _pageFactory.GetMyRentalsPage();
 
 

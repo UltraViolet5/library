@@ -456,6 +456,7 @@ namespace library.FactoryMethod
             {
                 ColumnDefinitions =
                 {
+                    
                     new ColumnDefinition() {Width = new GridLength(1, GridUnitType.Star)},
                     new ColumnDefinition() {Width = new GridLength(5, GridUnitType.Star)},
                     new ColumnDefinition() {Width = new GridLength(2, GridUnitType.Star)}
@@ -476,7 +477,7 @@ namespace library.FactoryMethod
                 HorizontalTextAlignment = TextAlignment.Start,
                 FontFamily = Style.MainFont
             };
-            titleLabel.SetValue(Grid.ColumnProperty, 1);
+            titleLabel.SetValue(Grid.ColumnProperty, 2);
             grid.Children.Add(titleLabel);
 
 

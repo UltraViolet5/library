@@ -26,7 +26,7 @@ namespace library.ViewModel
         public ICommand AddBookCommand { get; private set; }
         public ICommand ShowBooksByCategory { get; private set; }
         public ICommand ShowBookCommand { get; private set; }
-        public ICommand ShowBorrowingCommand { get; private set; }
+        
 
         public MainPageViewModel()
         {
@@ -49,14 +49,11 @@ namespace library.ViewModel
             SettingsCommand = new Command(SettingsExecute);
             MatesCommand = new Command(MatesExecute);
             RentalsCommand = new Command(RentalsExecute);
-            ShowBorrowingCommand = new Command(BorrowingExecute);
+            
             
         }
 
-        private void BorrowingExecute(object obj)
-        {
-            App.Navigation.PushAsync(new BorrowingPage((Borrowing)obj));
-        }
+     
 
 
         //wszystko co asynch powinno byc wywołane z awaitem

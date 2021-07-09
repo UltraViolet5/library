@@ -1,8 +1,11 @@
 ﻿using library.Model;
+using library.Pages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace library.ViewModel
 {
@@ -12,34 +15,24 @@ namespace library.ViewModel
 
         public Borrowing Borrowing { get; set; }
 
-        public List<Data> Mysource { get; set; }
+        
+
+        public ICommand ShowBorrowingCommand { get; private set; }
 
         public MyRentalsViewModel()
         {
            Borrowings = App.DbService.GetBorrowings();
-           listViewItemsAdd();
-        }
-
-        private void listViewItemsAdd()
-        {
-            Mysource = new List<Data>();
-
-            foreach (var borrowing in Borrowings)
-            {
-                Mysource.Add(new Data { Title = borrowing.Book.Title, Author = borrowing.Book.Authors, RentalEnd = borrowing.ReturnDate });
-            }
-
            
+           ShowBorrowingCommand = new Command(BorrowingExecute);
         }
- 
+        private void BorrowingExecute(object obj)
+        {
+            App.Navigation.PushAsync(new BorrowingPage((Borrowing)obj));
+        }
 
-    }
 
-    public class Data
-    {
-        public string Title { get; set; }
-        public string Author { get; set; }
-        public DateTime RentalEnd { get; set; }
+
+
     }
 
 
