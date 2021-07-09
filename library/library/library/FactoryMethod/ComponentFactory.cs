@@ -4,6 +4,7 @@ using library.ViewModel;
 using Xamarin.Forms.Shapes;
 using Rectangle = Xamarin.Forms.Rectangle;
 using library.Model;
+using System.Collections.Generic;
 
 namespace library.FactoryMethod
 {
@@ -473,6 +474,17 @@ namespace library.FactoryMethod
                 HorizontalOptions = LayoutOptions.Start
             });
 
+            var titleLabel = new Label()
+            {
+                Text = borrowing.Book.Title,
+                HorizontalOptions = LayoutOptions.StartAndExpand,
+                HorizontalTextAlignment = TextAlignment.Start,
+                FontFamily = Style.MainFont
+            };
+            titleLabel.SetValue(Grid.ColumnProperty, 1);
+            grid.Children.Add(titleLabel);
+
+
             var label = new Label()
             {
                 Text = $"Return at {borrowing.ReturnDate}",
@@ -483,21 +495,23 @@ namespace library.FactoryMethod
             label.SetValue(Grid.ColumnProperty, 1);
             grid.Children.Add(label);
 
-            var arrow = new Image()
-            {
-                Source = "arrow.png",
-                HorizontalOptions = LayoutOptions.End,
-                WidthRequest = 10
-            };
-            arrow.SetValue(Grid.ColumnProperty, 2);
-            grid.Children.Add(arrow);
+
+
 
             var frame = new Frame()
             {
                 Padding = new Thickness(15, 5),
                 CornerRadius = Style.SmallCornerRadius,
-                Content = grid
+                Content = grid,
+
+
             };
+
+            var tapgest = new TapGestureRecognizer();
+            tapgest.SetBinding(TapGestureRecognizer.CommandProperty, new Binding("ShowBorrowingCommand"));
+            tapgest.CommandParameter = borrowing;
+            frame.GestureRecognizers.Add(tapgest);
+
 
             return frame;
         }
@@ -633,6 +647,21 @@ namespace library.FactoryMethod
             return result;
         }
 
-        
+        public List<Frame> GetBorrowingElements()
+        {
+            var borrowings = App.DbService.GetBorrowings();
+
+            List<Frame> borrowingElements = new List<Frame>();
+
+            foreach (var borrowing in borrowings)
+            {
+                Frame frame = GetRentalBtn(borrowing);
+                borrowingElements.Add(frame);
+            }
+
+            return borrowingElements;
+        }
+
+
     }
 }

@@ -1,10 +1,11 @@
 ﻿using Xamarin.Forms;
 using System;
 using System.Collections.Generic;
+using library.ViewModel;
 
 namespace library.FactoryMethod
 {
-    class PageFactory : IPageFactory
+    public class PageFactory : IPageFactory
     {
         private readonly ComponentFactory _componentFactory;
 
@@ -97,11 +98,11 @@ namespace library.FactoryMethod
             return result;
         }
 
-        public ScrollView GetMyRentalsPage ()
+        public ScrollView GetMyRentalsPage()
         {
             
-            var borrowingElements = getBorrowingElemnts();
-            var layout = new StackLayout();
+            var borrowingElements = _componentFactory.GetBorrowingElements();
+            var layout = new StackLayout() { Padding = Style.PagePadding };
 
             foreach (var borrowing in borrowingElements)
             {
@@ -118,28 +119,6 @@ namespace library.FactoryMethod
             return result;
         }
 
-        private List<StackLayout> getBorrowingElemnts()
-        {
-            var borrowing = App.DbService.GetBorrowings();
-
-            List<StackLayout> borrowingElemnts = new List<StackLayout>();
-
-            foreach (var item in borrowing)
-            {
-                var NewLayout = new StackLayout()
-                {
-                    Children =
-                    {
-                        _componentFactory.GetBookCard(item.Book),
-                        _componentFactory.GetRentalBtn(item)
-                    }
-                };
-
-                
-                borrowingElemnts.Add(NewLayout);
-            }
-
-            return borrowingElemnts;
-        }
+     
     }
 }

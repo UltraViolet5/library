@@ -21,5 +21,7 @@ namespace library.FactoryMethod
         Frame GetRentalBtn(BorrowingViewModel borrowing);
         Frame GetEntry(string binding, string placeholder = "",
             bool isPassword = false);
-    }
+
+        List<Frame> GetBorrowingElements();
+    };
 }

@@ -14,6 +14,7 @@ namespace library
         public static INavigation Navigation => MainPageInstance.Navigation;
         public static DBService DbService { get; private set; }
         public static ComponentFactory ComponentFactory { get; private set; }
+        public static PageFactory PageFactory { get; private set; }
 
         public static User CurrentUser { get; set; }
 
@@ -31,6 +32,7 @@ namespace library
 
             DbService = new DBService();
             ComponentFactory = new ComponentFactory();
+            PageFactory = new PageFactory();
         }
 
         protected override void OnStart()

@@ -16,9 +16,13 @@ namespace library.ViewModel
                          $"{_borrowing.ReturnDate.Day}"; }
         }
 
+       
+
         public BorrowingViewModel(Borrowing borrowing)
         {
             _borrowing = borrowing;
+
+            
         }
     }
 }
