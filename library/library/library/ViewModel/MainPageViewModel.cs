@@ -80,7 +80,8 @@ namespace library.ViewModel
 
         private void BooksExecute(object arg)
         {
-            App.Navigation.PushAsync(new BooksPage());
+            var booksOwner = App.CurrentUser;
+            App.Navigation.PushAsync(new BooksPage(booksOwner));
         }
         
         private bool LoginBtnCanExecute(object arg)

@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using library.FactoryMethod;
+using library.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,31 +15,51 @@ namespace library.Pages
     public partial class BooksPage : ContentPage
     {
         public static BooksViewModel BooksViewModel { get; set; }
+
+        private readonly User _booksOwner;
+        private readonly PageFactory _pageFactory;
+        private readonly ScrollView _pageContent;
+        private StackLayout _booksStack;
         
-        public BooksPage()
+        public BooksPage(User booksOwner)
         {
             InitializeComponent();
-
-            BooksViewModel = new BooksViewModel();
+            
+            var books = App.DbService.GetBooks()
+                .Where(b => b.Owner.Email == booksOwner.Email)
+                .Select(b => new BookViewModel(b));
+            BooksViewModel = new BooksViewModel(books);
             BindingContext = BooksViewModel;
 
-            DisplayBooks();
-        }
+            _pageFactory = new PageFactory();
+            _booksOwner = booksOwner;
+            _pageContent = _pageFactory.GetBooksPage(booksOwner, BooksViewModel);
+            _booksStack = (StackLayout)_pageContent.Content;
 
-        private void DisplayBooks()
-        {
-            foreach (var book in BooksViewModel.Books)
-            {
-                var bookCard = App.ComponentFactory.GetBookCard(book);
-                Books.Children.Add(bookCard);
-            }
+
+            Content = _pageContent;
+            // Refreshing books
+            _pageFactory.GetListBookCards(ref _booksStack, BooksViewModel.Books);
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            Books.Children.Clear();
-            DisplayBooks();
+            ClearBooks();
+            // Refreshing books
+            _pageFactory.GetListBookCards(ref _booksStack, BooksViewModel.Books);
+        }
+
+
+        /// <summary>
+        /// Remove bookCards, and don't remove label and entries
+        /// </summary>
+        private void ClearBooks()
+        {
+            while (_booksStack.Children.Count > 3)
+            {
+                _booksStack.Children.RemoveAt(_booksStack.Children.Count - 1);
+            }
         }
     }
 }

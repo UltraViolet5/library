@@ -67,7 +67,7 @@
             <StackLayout Margin="0,20,0,0">
 
 
-                <Label Grid.Row="0" Grid.Column="0" Text="Categories" FontSize="Title" Padding="10,10"
+                <Label Grid.Row="0" Grid.Column="0" Text="Category" FontSize="Title" Padding="10,10"
                        FontFamily="News701" />
                 <ScrollView Orientation="Horizontal" HorizontalOptions="Fill">
                     <StackLayout x:Name="Categories" Orientation="Horizontal" />

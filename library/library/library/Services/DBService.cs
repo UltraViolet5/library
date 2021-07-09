@@ -95,5 +95,10 @@ namespace library.Services
         {
             return _bookDao.Get(id);
         }
+
+        public User GetUserById(string id)
+        {
+            return _userDao.GetAll().FirstOrDefault(x => x.Id == id);
+        }
     }
 }
