@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using library.Model;
@@ -192,6 +193,11 @@ namespace library.ViewModel
                 RaisePropertyChanged(nameof(Localization));
             }
         }
+
+        public int BooksCount => App.DbService.GetBooks()
+            .Count(b => b.Owner.Email == _user.Email);
+
+        public string Id => _user.Id;
 
         private bool SaveChangesCanExecute()
         {

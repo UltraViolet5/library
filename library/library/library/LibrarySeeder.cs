@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using library.Model;
 using library.Services;
@@ -29,7 +30,14 @@ namespace library
         {
             _dbService.AddBooks(GetBooks());
             _dbService.AddBorrowings(GetBorrowindg());
-            _dbService.AddUsers(GetUsers());
+
+            var users = GetUsers();
+            // Make relationship. All users are friends of admin
+            _admin.Friends.Add(users.ToList()[1]);
+            _admin.Friends.Add(users.ToList()[2]);
+            _admin.Friends.Add(users.ToList()[3]);
+
+            _dbService.AddUsers(users);
         }
 
         private IEnumerable<User> GetUsers()
@@ -37,9 +45,24 @@ namespace library
             return new List<User>()
             {
                 _admin,
-                new User(),
-                new User(),
                 new User()
+                {
+                    UserName = "Janek",
+                    Email = "Email",
+                    Localization = "Cracow"
+                },
+                new User()
+                {
+                    UserName = "Brian",
+                    Email = "Email2",
+                    Localization = "Warsaw"
+                },
+                new User()
+                {
+                    UserName = "Pep",
+                    Email = "Email3",
+                    Localization = "Cracow"
+                }
             };
         }
 
@@ -52,7 +75,7 @@ namespace library
                 new Borrowing() {Book = new Book(){Title= "book3",Authors="Author3" } ,ReturnDate = new DateTime(2021, 8, 12),},
             };
         }
-        
+
         private IEnumerable<Book> GetBooks()
         {
             List<Book> books = new List<Book>();
@@ -62,7 +85,7 @@ namespace library
                 // Id = 0,
                 Title = "First book Title",
                 Authors = "Jarek, Krzysiek",
-                PublishingYear = new DateTime(2020,1,1),
+                PublishingYear = new DateTime(2020, 1, 1),
                 Read = true,
                 Available = false,
                 Owner = _admin,
