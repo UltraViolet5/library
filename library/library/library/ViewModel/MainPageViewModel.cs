@@ -26,6 +26,7 @@ namespace library.ViewModel
         public ICommand AddBookCommand { get; private set; }
         public ICommand ShowBooksByCategory { get; private set; }
         public ICommand ShowBookCommand { get; private set; }
+        
 
         public MainPageViewModel()
         {
@@ -48,7 +49,11 @@ namespace library.ViewModel
             SettingsCommand = new Command(SettingsExecute);
             MatesCommand = new Command(MatesExecute);
             RentalsCommand = new Command(RentalsExecute);
+            
+            
         }
+
+     
 
 
         //wszystko co asynch powinno byc wywołane z awaitem

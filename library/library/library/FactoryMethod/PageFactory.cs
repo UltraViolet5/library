@@ -4,10 +4,11 @@ using Xamarin.Forms;
 using System;
 using System.Collections.Generic;
 using library.Model;
+using library.ViewModel;
 
 namespace library.FactoryMethod
 {
-    class PageFactory : IPageFactory
+    public class PageFactory : IPageFactory
     {
         private readonly ComponentFactory _componentFactory;
 
@@ -128,8 +129,8 @@ namespace library.FactoryMethod
         public ScrollView GetMyRentalsPage ()
         {
             
-            var borrowingElements = getBorrowingElemnts();
-            var layout = new StackLayout();
+            var borrowingElements = _componentFactory.GetBorrowingElements();
+            var layout = new StackLayout() { Padding = Style.PagePadding };
 
             foreach (var borrowing in borrowingElements)
             {
