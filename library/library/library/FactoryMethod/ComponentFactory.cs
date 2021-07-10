@@ -456,11 +456,19 @@ namespace library.FactoryMethod
             {
                 ColumnDefinitions =
                 {
-                    
-                    new ColumnDefinition() {Width = new GridLength(1, GridUnitType.Star)},
-                    new ColumnDefinition() {Width = new GridLength(5, GridUnitType.Star)},
-                    new ColumnDefinition() {Width = new GridLength(2, GridUnitType.Star)}
+
+                    new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) },
+                    new ColumnDefinition() { Width = new GridLength(5, GridUnitType.Star) },
+                    new ColumnDefinition() { Width = new GridLength(2, GridUnitType.Star) },
+
+                },
+                RowDefinitions =
+                {
+                    new RowDefinition(),
+                    new RowDefinition()
                 }
+                
+                
             };
             grid.Children.Add(new Image()
             {
@@ -477,7 +485,8 @@ namespace library.FactoryMethod
                 HorizontalTextAlignment = TextAlignment.Start,
                 FontFamily = Style.MainFont
             };
-            titleLabel.SetValue(Grid.ColumnProperty, 2);
+            titleLabel.SetValue(Grid.ColumnProperty, 1);
+            titleLabel.SetValue(Grid.RowProperty, 0);
             grid.Children.Add(titleLabel);
 
 
@@ -489,6 +498,7 @@ namespace library.FactoryMethod
                 FontFamily = Style.MainFont
             };
             label.SetValue(Grid.ColumnProperty, 1);
+            label.SetValue(Grid.RowProperty, 1);
             grid.Children.Add(label);
 
 
