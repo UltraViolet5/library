@@ -109,7 +109,7 @@ namespace library.ViewModel
             NewBook.Authors = this.Authors;
             NewBook.BarcodeNumber = this._barcodeText;
             NewBook.Owner = App.CurrentUser;
-            NewBook.Categories = GetCategoryByString(CategoryString);
+            NewBook.Category = GetCategoryByString(CategoryString);
             NewBook.PublishingYear = this.PublishingYear;
             NewBook.Available = this.Available;
             NewBook.Read = this.Read;

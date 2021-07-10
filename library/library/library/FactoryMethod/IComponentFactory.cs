@@ -11,7 +11,9 @@ namespace library.FactoryMethod
     {
         Label GetLabel(string text, int fontSize,
             TextAlignment hAlignment = TextAlignment.Start);
-        Button GetButton(string text, string command);
+        Button GetButton(string text,
+            string command = null,
+            object commandParameter = null);
         Label GetValidationLabel(string msg, string visibleBinding, Color color);
         StackLayout GetSwitch(string text);
         Frame GetPhotoBox();

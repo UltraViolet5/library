@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using library.Model;
+using library.Pages;
 using Xamarin.Forms;
 
 namespace library.ViewModel
@@ -11,19 +12,21 @@ namespace library.ViewModel
     {
         public IEnumerable<UserViewModel> Mates { get; set; }
 
-        public ICommand ShowMateCommand { get; private set; }
+        public ICommand ShowBooksCommand { get; private set; }
 
         public MatesViewModel()
         {
             IEnumerable<User> mates = App.CurrentUser.Friends;
             Mates = mates.Select(u => new UserViewModel(u));
 
-            ShowMateCommand = new Command(ShowMateExecute);
+            ShowBooksCommand = new Command(ShowBooksExecute);
         }
 
-        private void ShowMateExecute(object property)
+        private void ShowBooksExecute(object booksOwnerId)
         {
-            throw new NotImplementedException();
+            var booksOwner = App.DbService.GetUserById((string) booksOwnerId);
+
+            App.Navigation.PushAsync(new BooksPage(booksOwner));
         }
     }
 }

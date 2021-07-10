@@ -16,7 +16,7 @@ namespace library.Model
         public string Picture { get; set; }
         public User Owner { get; set; }
         public bool Read { get; set; }
-        public Category Categories { get; set; }
+        public Category Category { get; set; }
         public int Votes { get; set; }
         public Bookcase Bookcase { get; set; }
         public bool Available { get; set; }

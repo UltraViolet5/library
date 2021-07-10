@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using library.Model;
-using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -13,7 +11,6 @@ namespace library.ViewModel
         private readonly Book _book;
         private bool _titleValidationShowMsg;
         private bool _authorsValidationShowMsg;
-        private ICommand _saveChangesCommand;
 
         public int Id => _book.Id;
 
@@ -86,10 +83,10 @@ namespace library.ViewModel
 
         public Category Category
         {
-            get => _book.Categories;
+            get => _book.Category;
             set
             {
-                _book.Categories = value;
+                _book.Category = value;
                 RaisePropertyChanged(nameof(Category));
             }
         }
@@ -176,11 +173,7 @@ namespace library.ViewModel
 
         #endregion
 
-        public ICommand SaveChangesCommand
-        {
-            get => _saveChangesCommand;
-            set => _saveChangesCommand = value;
-        }
+        public ICommand SaveChangesCommand { get; set; }
 
         public BookViewModel(Book book)
         {
@@ -213,14 +206,14 @@ namespace library.ViewModel
 
         private bool TitleValidation()
         {
-            bool result = !String.IsNullOrWhiteSpace(Title);
+            bool result = !string.IsNullOrWhiteSpace(Title);
             TitleValidation_ShowMsg = !result;
             return result;
         }
 
         private bool AuthorsValidation()
         {
-            bool result = !String.IsNullOrWhiteSpace(Authors);
+            bool result = !string.IsNullOrWhiteSpace(Authors);
             AuthorsValidation_ShowMsg = !result;
             return result;
         }

@@ -3,6 +3,7 @@ using library.ViewModel;
 using Xamarin.Forms;
 using System;
 using System.Collections.Generic;
+using library.Model;
 using library.ViewModel;
 
 namespace library.FactoryMethod
@@ -60,7 +61,7 @@ namespace library.FactoryMethod
                         _componentFactory.GetLabelWithBinding("Placed at:", "BookCase.Name"),
                         _componentFactory.GetCheckBox("read", "Read"),
                         _componentFactory.GetCheckBox("available", "Available"),
-                        _componentFactory.GetDropDown("Category:", "Categories", "SelectedCategory"),
+                        _componentFactory.GetDropDown("Category:", "Category", "SelectedCategory"),
                         _componentFactory.GetButton("Save changes", "SaveChangesCommand"),
                     }
                 }
@@ -92,7 +93,7 @@ namespace library.FactoryMethod
                         _componentFactory.GetEntry("Password", "password", true),
                         _componentFactory.GetValidationLabel("Incorrect login or password.",
                             "LoginValidation_ShowMsg", Color.Red),
-                        _componentFactory.GetNextButton("ToMainPageCommand"),
+                        _componentFactory.GetButtonWithIcon("arrowfilled.png", "ToMainPageCommand"),
                         _componentFactory.GetLabel("or", Style.MediumFont,
                             TextAlignment.Center),
                         _componentFactory.GetButton("register", "RegisterCommand")
@@ -146,6 +147,70 @@ namespace library.FactoryMethod
             return result;
         }
 
-     
+        public ScrollView GetBooksPage(User booksOwner,
+            BooksViewModel booksViewModel)
+        {
+            var stackLayout = new StackLayout()
+            {
+                Padding = Style.PagePadding,
+                Children =
+                {
+                    _componentFactory.GetHeader(
+                        $"{booksOwner.UserName} Books",
+                        "AddBookCommand"),
+                    _componentFactory.GetEntry("Search",
+                        "search"),
+                    _componentFactory.GetDropDown("Sort: ",
+                        "SortMethods", "SelectedSortMethod")
+                    // IMPORTANT!!!
+                    // I using forth child to place bookCards, Speak with Jarek
+                    // if you want do add next child here
+                }
+            };
+
+            var result = new ScrollView()
+            {
+                Content = stackLayout,
+            };
+
+            return result;
+        }
+        /// <summary>
+        /// List book cards in stackLayout
+        /// </summary>
+        /// <param name="stackLayout"></param>
+        /// <param name="books"></param>
+        public void GetListBookCards(ref StackLayout stackLayout,
+            IEnumerable<BookViewModel> books)
+        {
+            foreach (var book in books)
+            {
+                stackLayout.Children.Add(_componentFactory.GetBookCard(book));
+            }
+        }
+
+        private List<StackLayout> getBorrowingElemnts()
+        {
+            var borrowing = App.DbService.GetBorrowings();
+
+            List<StackLayout> borrowingElemnts = new List<StackLayout>();
+
+            foreach (var item in borrowing)
+            {
+                var NewLayout = new StackLayout()
+                {
+                    Children =
+                    {
+                        _componentFactory.GetBookCard(item.Book),
+                        _componentFactory.GetRentalBtn(item)
+                    }
+                };
+
+                
+                borrowingElemnts.Add(NewLayout);
+            }
+
+            return borrowingElemnts;
+        }
     }
 }

@@ -89,7 +89,7 @@ namespace library
                 Read = true,
                 Available = false,
                 Owner = _admin,
-                Categories = Category.Crime
+                Category = Category.Crime
             });
             books.Add(new Book()
             {
@@ -100,7 +100,7 @@ namespace library
                 Available = true,
                 Read = true,
                 Owner = _admin,
-                Categories = Category.Novel
+                Category = Category.Novel
             });
             books.Add(new Book()
             {
@@ -111,7 +111,7 @@ namespace library
                 Available = true,
                 Read = false,
                 Owner = _admin,
-                Categories = Category.Documentary
+                Category = Category.Documentary
             });
 
             return books;

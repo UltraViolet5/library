@@ -10,7 +10,6 @@ namespace library.FactoryMethod
 {
     public class ComponentFactory : IComponentFactory
     {
-
         public Label GetLabel(string text,
             int fontSize = 16,
             TextAlignment hAlignment = TextAlignment.Start)
@@ -25,6 +24,7 @@ namespace library.FactoryMethod
                 FontSize = fontSize
             };
         }
+
         public Label GetLabel(string text,
             string binding,
             int fontSize = 16,
@@ -45,6 +45,35 @@ namespace library.FactoryMethod
             return result;
         }
 
+        /// <summary>
+        /// Create header with label and plus button on right.
+        /// </summary>
+        /// <param name="text">Label text</param>
+        /// <param name="plusCommand">Plus button command</param>
+        /// <returns></returns>
+        public Grid GetHeader(string text, string plusCommand)
+        {
+            var result = new Grid()
+            {
+                ColumnDefinitions =
+                {
+                    new ColumnDefinition() {Width = new GridLength(5, GridUnitType.Star)},
+                    new ColumnDefinition() {Width = new GridLength(5, GridUnitType.Star)}
+                }
+            };
+
+            var label = GetLabel(text);
+            label.SetValue(Grid.ColumnProperty, 0);
+            result.Children.Add(label);
+
+            var icon = GetButtonWithIcon("plus.png", 
+                plusCommand);
+            icon.SetValue(Grid.ColumnProperty, 1);
+            result.Children.Add(icon);
+
+            return result;
+        }
+
         public Label GetValidationLabel(string msg, string visibleBinding, Color color)
         {
             var result = new Label()
@@ -55,11 +84,13 @@ namespace library.FactoryMethod
                 FontFamily = Style.MainFont
             };
             result.SetBinding(Label.IsVisibleProperty, visibleBinding);
-            
+
             return result;
         }
 
-        public Button GetButton(string text, string command = null)
+        public Button GetButton(string text,
+            string command = null,
+            object commandParameter = null)
         {
             var result = new Button()
             {
@@ -68,9 +99,13 @@ namespace library.FactoryMethod
                 CornerRadius = Style.MediumCornerRadius,
                 BackgroundColor = Style.LightGray,
             };
+
             if (!String.IsNullOrWhiteSpace(command))
                 result.SetBinding(Button.CommandProperty, command);
-            
+
+            if (commandParameter != null)
+                result.CommandParameter = commandParameter;
+
             return result;
         }
 
@@ -113,7 +148,7 @@ namespace library.FactoryMethod
 
             absoluteLayout.Children.Add(image);
             absoluteLayout.Children.Add(addBtn,
-                new Rectangle(0,0,0.9,0.9),
+                new Rectangle(0, 0, 0.9, 0.9),
                 AbsoluteLayoutFlags.PositionProportional);
 
             var result = new Frame()
@@ -122,7 +157,7 @@ namespace library.FactoryMethod
                 HeightRequest = Style.PhotoBoxSize,
                 CornerRadius = Style.BigCornerRadius,
                 Padding = new Thickness(0),
-                Margin = new Thickness(40,20),
+                Margin = new Thickness(40, 20),
                 HasShadow = true,
                 BorderColor = Style.LightGray,
                 HorizontalOptions = LayoutOptions.Center,
@@ -159,7 +194,7 @@ namespace library.FactoryMethod
 
             var contentBox = new StackLayout()
             {
-                Padding = new Thickness(15,10),
+                Padding = new Thickness(15, 10),
                 Children =
                 {
                     new Label()
@@ -248,8 +283,6 @@ namespace library.FactoryMethod
 
         public Frame GetBookCard(Book book)
         {
-
-
             Grid grid = new Grid()
             {
                 ColumnDefinitions =
@@ -336,7 +369,6 @@ namespace library.FactoryMethod
             };
 
 
-
             contentBox.SetValue(Grid.ColumnProperty, 1);
             grid.Children.Add(contentBox);
 
@@ -406,7 +438,7 @@ namespace library.FactoryMethod
         {
             var grid = new Grid()
             {
-                ColumnDefinitions = 
+                ColumnDefinitions =
                 {
                     new ColumnDefinition() {Width = new GridLength(1, GridUnitType.Star)},
                     new ColumnDefinition() {Width = new GridLength(5, GridUnitType.Star)},
@@ -442,7 +474,7 @@ namespace library.FactoryMethod
 
             var frame = new Frame()
             {
-                Padding = new Thickness(15,5),
+                Padding = new Thickness(15, 5),
                 CornerRadius = Style.SmallCornerRadius,
                 Content = grid
             };
@@ -522,8 +554,8 @@ namespace library.FactoryMethod
             return frame;
         }
 
-        public Frame GetEntry(string binding, 
-            string placeholder = "", 
+        public Frame GetEntry(string binding,
+            string placeholder = "",
             bool isPassword = false)
         {
             var newFrame = new Frame
@@ -531,7 +563,7 @@ namespace library.FactoryMethod
                 CornerRadius = Style.MediumCornerRadius,
                 Padding = 0,
             };
-            
+
             var entry = new Entry
             {
                 BackgroundColor = Color.White,
@@ -551,7 +583,7 @@ namespace library.FactoryMethod
             // TODO Not work
             return new Line()
             {
-                Stroke = new SolidColorBrush(new Color(0,0,0)),
+                Stroke = new SolidColorBrush(new Color(0, 0, 0)),
                 StrokeThickness = 1,
                 StrokeLineCap = PenLineCap.Round,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
@@ -638,17 +670,19 @@ namespace library.FactoryMethod
             return result;
         }
 
-        public Image GetNextButton(string tapBinding)
+        public Image GetButtonWithIcon(string pictureName, string tapBinding,
+            object commandParameter = null)
         {
             var result = new Image()
             {
-                Source = "arrowfilled.png",
+                Source = pictureName,
                 HorizontalOptions = LayoutOptions.End,
                 Margin = new Thickness(0),
                 WidthRequest = Style.ImageButtonSize
             };
             var tapGesture = new TapGestureRecognizer();
             tapGesture.SetBinding(TapGestureRecognizer.CommandProperty, tapBinding);
+            tapGesture.CommandParameter = commandParameter;
             result.GestureRecognizers.Add(tapGesture);
 
             return result;
@@ -701,11 +735,10 @@ namespace library.FactoryMethod
                 Children =
                 {
                     GetLabel(mate.UserName),
-                    GetLabel(mate.Email, fontSize:Style.SmallFont),
-                    GetLabel("Birth date: " + mate.BirthDate, fontSize:Style.SmallFont),
-                    GetLabel($"Localization: {mate.Localization}", fontSize:Style.SmallFont),
+                    GetLabel(mate.Email, fontSize: Style.SmallFont),
+                    GetLabel("Birth date: " + mate.BirthDate, fontSize: Style.SmallFont),
+                    GetLabel($"Localization: {mate.Localization}", fontSize: Style.SmallFont),
                     GetLabel($"Books count: {mate.BooksCount}"),
-                    
                 }
             };
             contentBox.SetValue(Grid.ColumnProperty, 0);
@@ -723,15 +756,12 @@ namespace library.FactoryMethod
                     Children =
                     {
                         grid,
-                        GetButton("Books")
+                        GetButton("Books",
+                            "ShowBooksCommand",
+                            mate.Id)
                     }
                 }
             };
-
-            var tapGesture = new TapGestureRecognizer();
-            tapGesture.SetBinding(TapGestureRecognizer.CommandProperty, "ShowMateCommand");
-            tapGesture.CommandParameter = mate.Id;
-            result.GestureRecognizers.Add(tapGesture);
 
             return result;
         }
