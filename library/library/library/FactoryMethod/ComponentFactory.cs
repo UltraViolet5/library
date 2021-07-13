@@ -5,6 +5,7 @@ using Xamarin.Forms.Shapes;
 using Rectangle = Xamarin.Forms.Rectangle;
 using library.Model;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace library.FactoryMethod
 {
@@ -281,7 +282,7 @@ namespace library.FactoryMethod
             return result;
         }
 
-        public Frame GetBookCard(Book book)
+        public Frame GetBookCard(Borrowing borrowing)
         {
             Grid grid = new Grid()
             {
@@ -313,18 +314,18 @@ namespace library.FactoryMethod
                 {
                     new Label()
                     {
-                        Text = book.Title,
+                        Text = borrowing.Book.Title,
                         FontSize = 18,
                         FontFamily = Style.MainFont
                     },
                     new Label()
                     {
-                        Text = $"{book.Authors}; {book.PublishingYear}",
+                        Text = $"{borrowing.Book.Authors}; {borrowing.Book.PublishingYear}",
                         FontFamily = Style.MainFont
                     },
                     new Label()
                     {
-                        Text = $"Placed in: {book.Bookcase}",
+                        Text = $"Placed in: {borrowing.Book.Bookcase}",
                         FontFamily = Style.MainFont
                     },
                     new StackLayout()
@@ -334,7 +335,7 @@ namespace library.FactoryMethod
                         {
                             new CheckBox()
                             {
-                                IsChecked = book.Read,
+                                IsChecked = borrowing.Book.Read,
                                 Color = Color.Gray,
                                 IsEnabled = false
                             },
@@ -353,7 +354,7 @@ namespace library.FactoryMethod
                         {
                             new CheckBox()
                             {
-                                IsChecked = book.Available,
+                                IsChecked = borrowing.Book.Available,
                                 Color = Color.Gray,
                                 IsEnabled = false
                             },
@@ -372,9 +373,11 @@ namespace library.FactoryMethod
             contentBox.SetValue(Grid.ColumnProperty, 1);
             grid.Children.Add(contentBox);
 
+            grid.Children.Add(GetRentalBtn(borrowing));
+
             Frame result = new Frame()
             {
-                ClassId = book.Id.ToString(),
+                ClassId = borrowing.Id.ToString(),
                 BackgroundColor = Style.LightGray,
                 Padding = 0,
                 Margin = new Thickness(0, 10),
@@ -391,8 +394,10 @@ namespace library.FactoryMethod
 
             var tapGesture = new TapGestureRecognizer();
             tapGesture.SetBinding(TapGestureRecognizer.CommandProperty, "ShowBookCommand");
-            tapGesture.CommandParameter = book.Id;
+            tapGesture.CommandParameter = borrowing.Id;
             result.GestureRecognizers.Add(tapGesture);
+
+            GetRentalBtn(borrowing);
 
             return result;
         }
@@ -765,5 +770,7 @@ namespace library.FactoryMethod
 
             return result;
         }
+
+
     }
 }

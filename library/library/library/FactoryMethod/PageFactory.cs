@@ -191,17 +191,17 @@ namespace library.FactoryMethod
 
         private List<StackLayout> getBorrowingElemnts()
         {
-            var borrowing = App.DbService.GetBorrowings();
+            var borrowings = App.DbService.GetBorrowings();
 
             List<StackLayout> borrowingElemnts = new List<StackLayout>();
 
-            foreach (var item in borrowing)
+            foreach (var item in borrowings)
             {
                 var NewLayout = new StackLayout()
                 {
                     Children =
                     {
-                        _componentFactory.GetBookCard(item.Book),
+                        _componentFactory.GetBookCard(item),
                         _componentFactory.GetRentalBtn(item)
                     }
                 };
