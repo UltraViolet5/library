@@ -23,8 +23,7 @@ namespace library.Pages
             BookViewModel = new BookViewModel(App.DbService.GetBook(id));
             BindingContext = BookViewModel;
 
-            _pageFactory = new PageFactory();
-            Content = _pageFactory.GetBookPage();
+            Content = App.PageFactory.GetBookPage();
 
             NavigationPage.SetHasNavigationBar(this, false);
         }

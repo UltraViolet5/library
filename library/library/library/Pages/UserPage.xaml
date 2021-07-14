@@ -4,108 +4,108 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="library.Pages.UserPage">
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Margin="70,0" Padding="0,20">
-                <Label Text="User" HorizontalTextAlignment="Start" FontSize="18"
-                       FontFamily="News701" Margin="0,10" />
-
-                <!-- Photo -->
-                <Frame WidthRequest="150" HeightRequest="150" CornerRadius="25" Padding="0"
-                       Margin="40,10" HasShadow="False" BorderColor="LightGray"
-                       HorizontalOptions="Center">
-                    <AbsoluteLayout>
-                        <!-- TODO Add image and bind with user -->
-                        <Label Text="picture" HorizontalTextAlignment="Center" VerticalOptions="Center"
-                               FontFamily="News701" FontSize="24" TextColor="LightGray"
-                               AbsoluteLayout.LayoutBounds="0.5,0.5" AbsoluteLayout.LayoutFlags="PositionProportional" />
-                        <Image Source="plusfilled.png" WidthRequest="40" HeightRequest="40"
-                               AbsoluteLayout.LayoutBounds="0.9,0.9" AbsoluteLayout.LayoutFlags="PositionProportional" />
-                    </AbsoluteLayout>
-                </Frame>
-
-                <!-- User name -->
-                <Label Text="User name" HorizontalTextAlignment="Center" FontSize="18"
-                       FontFamily="News701" Margin="0" />
-                <Frame Padding="0" CornerRadius="12" Margin="0,10">
-                    <Entry Placeholder="name" HorizontalTextAlignment="Center"
-                           BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701"
-                           Text="{Binding UserName}" />
-                </Frame>
-                <Label Text="User name can't be empty." HorizontalTextAlignment="Center" TextColor="Red"
-                       IsVisible="{Binding UserNameValidation_ShowMsg}" />
-
-                <!-- Email -->
-                <Label Text="Email" HorizontalTextAlignment="Center" FontSize="18"
-                       FontFamily="News701" Margin="0" />
-                <Frame Padding="0" CornerRadius="12" Margin="0,10">
-                    <Entry Text="{Binding Email}" Placeholder="e-mail" HorizontalTextAlignment="Center"
-                           BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701" />
-                </Frame>
-                <Label Text="Incorrect email." HorizontalTextAlignment="Center"
-                       TextColor="Red" IsVisible="{Binding EmailValidation_ShowMsg}" />
-
-                <!-- Birth date -->
-                <Label Text="Birth date" HorizontalTextAlignment="Center" FontSize="18"
-                       FontFamily="News701" Margin="0" />
-                <Frame Padding="0" CornerRadius="12" Margin="0,10"
-                       BackgroundColor="#e6e6e6">
-                    <DatePicker FontFamily="News701" HorizontalOptions="CenterAndExpand"
-                                Date="{Binding BirthDate}" />
-                </Frame>
-
-                <!-- Localization -->
-                <Label Text="Localization" HorizontalTextAlignment="Center" FontSize="18"
-                       FontFamily="News701" Margin="0" />
-                <Frame Padding="0" CornerRadius="12" Margin="0,10">
-                    <Entry Placeholder="localization" HorizontalTextAlignment="Center"
-                           BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701"
-                           Text="{Binding Localization}" />
-                </Frame>
-                <Label Text="Localization can't be empty." HorizontalTextAlignment="Center" TextColor="Red"
-                       IsVisible="{Binding LocalizationValidation_ShowMsg}" />
-
-                <!-- Password -->
-                <Label Text="Password" HorizontalTextAlignment="Center" FontSize="18"
-                       FontFamily="News701" Margin="0" />
-                <Frame Padding="0" CornerRadius="12" Margin="0,10">
-                    <Entry Placeholder="password" HorizontalTextAlignment="Center" IsPassword="True"
-                           BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701"
-                           Text="{Binding Password}" />
-                </Frame>
-                <Label Text="To change password, provide correct previous password." HorizontalTextAlignment="Center"
-                       TextColor="Red"
-                       IsVisible="{Binding PasswordValidation_ShowMsg}" />
-
-                <!-- New Password -->
-                <Label Text="New password" HorizontalTextAlignment="Center" FontSize="18"
-                       FontFamily="News701" Margin="0" />
-                <Frame Padding="0" CornerRadius="12" Margin="0,10">
-                    <Entry Placeholder="password" HorizontalTextAlignment="Center" IsPassword="True"
-                           BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701"
-                           Text="{Binding NewPassword}" />
-                </Frame>
-                <Label Text="Password can't be empty." HorizontalTextAlignment="Center" TextColor="Red"
-                       IsVisible="{Binding NewPasswordValidation_ShowMsg}" />
-
-                <!-- Confirm Password -->
-                <Label Text="Confirm password" HorizontalTextAlignment="Center" FontSize="18"
-                       FontFamily="News701" Margin="0" />
-                <Frame Padding="0" CornerRadius="12" Margin="0,10">
-                    <Entry Placeholder="confirm password" HorizontalTextAlignment="Center" IsPassword="True"
-                           BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701"
-                           Text="{Binding ConfirmPassword}" />
-                </Frame>
-                <Label Text="Password no match." HorizontalTextAlignment="Center" TextColor="Red"
-                       IsVisible="{Binding PasswordConfirmValidation_ShowMsg}" />
-
-                <!-- Confirm  -->
-                <Label Text="Data updated." HorizontalTextAlignment="Center" TextColor="Green"
-                       IsVisible="{Binding DataUpdated_ShowMsg}" />
-                <Button CornerRadius="12" Margin="0,10" BackgroundColor="#e6e6e6"
-                        Text="Save changes" FontFamily="News701"
-                        Command="{Binding SaveChangesCommand}" />
-
-            </StackLayout>
-        </ScrollView>
+        <!-- <ScrollView> -->
+        <!--     <StackLayout Margin="70,0" Padding="0,20"> -->
+        <!--         <Label Text="User" HorizontalTextAlignment="Start" FontSize="18" -->
+        <!--                FontFamily="News701" Margin="0,10" /> -->
+        <!-- -->
+        <!--         ~1~ Photo @1@ -->
+        <!--         <Frame WidthRequest="150" HeightRequest="150" CornerRadius="25" Padding="0" -->
+        <!--                Margin="40,10" HasShadow="False" BorderColor="LightGray" -->
+        <!--                HorizontalOptions="Center"> -->
+        <!--             <AbsoluteLayout> -->
+        <!--                 ~1~ TODO Add image and bind with user @1@ -->
+        <!--                 <Label Text="picture" HorizontalTextAlignment="Center" VerticalOptions="Center" -->
+        <!--                        FontFamily="News701" FontSize="24" TextColor="LightGray" -->
+        <!--                        AbsoluteLayout.LayoutBounds="0.5,0.5" AbsoluteLayout.LayoutFlags="PositionProportional" /> -->
+        <!--                 <Image Source="plusfilled.png" WidthRequest="40" HeightRequest="40" -->
+        <!--                        AbsoluteLayout.LayoutBounds="0.9,0.9" AbsoluteLayout.LayoutFlags="PositionProportional" /> -->
+        <!--             </AbsoluteLayout> -->
+        <!--         </Frame> -->
+        <!-- -->
+        <!--         ~1~ User name @1@ -->
+        <!--         <Label Text="User name" HorizontalTextAlignment="Center" FontSize="18" -->
+        <!--                FontFamily="News701" Margin="0" /> -->
+        <!--         <Frame Padding="0" CornerRadius="12" Margin="0,10"> -->
+        <!--             <Entry Placeholder="name" HorizontalTextAlignment="Center" -->
+        <!--                    BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701" -->
+        <!--                    Text="{Binding UserName}" /> -->
+        <!--         </Frame> -->
+        <!--         <Label Text="User name can't be empty." HorizontalTextAlignment="Center" TextColor="Red" -->
+        <!--                IsVisible="{Binding UserNameValidation_ShowMsg}" /> -->
+        <!-- -->
+        <!--         ~1~ Email @1@ -->
+        <!--         <Label Text="Email" HorizontalTextAlignment="Center" FontSize="18" -->
+        <!--                FontFamily="News701" Margin="0" /> -->
+        <!--         <Frame Padding="0" CornerRadius="12" Margin="0,10"> -->
+        <!--             <Entry Text="{Binding Email}" Placeholder="e-mail" HorizontalTextAlignment="Center" -->
+        <!--                    BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701" /> -->
+        <!--         </Frame> -->
+        <!--         <Label Text="Incorrect email." HorizontalTextAlignment="Center" -->
+        <!--                TextColor="Red" IsVisible="{Binding EmailValidation_ShowMsg}" /> -->
+        <!-- -->
+        <!--         ~1~ Birth date @1@ -->
+        <!--         <Label Text="Birth date" HorizontalTextAlignment="Center" FontSize="18" -->
+        <!--                FontFamily="News701" Margin="0" /> -->
+        <!--         <Frame Padding="0" CornerRadius="12" Margin="0,10" -->
+        <!--                BackgroundColor="#e6e6e6"> -->
+        <!--             <DatePicker FontFamily="News701" HorizontalOptions="CenterAndExpand" -->
+        <!--                         Date="{Binding BirthDate}" /> -->
+        <!--         </Frame> -->
+        <!-- -->
+        <!--         ~1~ Localization @1@ -->
+        <!--         <Label Text="Localization" HorizontalTextAlignment="Center" FontSize="18" -->
+        <!--                FontFamily="News701" Margin="0" /> -->
+        <!--         <Frame Padding="0" CornerRadius="12" Margin="0,10"> -->
+        <!--             <Entry Placeholder="localization" HorizontalTextAlignment="Center" -->
+        <!--                    BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701" -->
+        <!--                    Text="{Binding Localization}" /> -->
+        <!--         </Frame> -->
+        <!--         <Label Text="Localization can't be empty." HorizontalTextAlignment="Center" TextColor="Red" -->
+        <!--                IsVisible="{Binding LocalizationValidation_ShowMsg}" /> -->
+        <!-- -->
+        <!--         ~1~ Password @1@ -->
+        <!--         <Label Text="Password" HorizontalTextAlignment="Center" FontSize="18" -->
+        <!--                FontFamily="News701" Margin="0" /> -->
+        <!--         <Frame Padding="0" CornerRadius="12" Margin="0,10"> -->
+        <!--             <Entry Placeholder="password" HorizontalTextAlignment="Center" IsPassword="True" -->
+        <!--                    BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701" -->
+        <!--                    Text="{Binding Password}" /> -->
+        <!--         </Frame> -->
+        <!--         <Label Text="To change password, provide correct previous password." HorizontalTextAlignment="Center" -->
+        <!--                TextColor="Red" -->
+        <!--                IsVisible="{Binding PasswordValidation_ShowMsg}" /> -->
+        <!-- -->
+        <!--         ~1~ New Password @1@ -->
+        <!--         <Label Text="New password" HorizontalTextAlignment="Center" FontSize="18" -->
+        <!--                FontFamily="News701" Margin="0" /> -->
+        <!--         <Frame Padding="0" CornerRadius="12" Margin="0,10"> -->
+        <!--             <Entry Placeholder="password" HorizontalTextAlignment="Center" IsPassword="True" -->
+        <!--                    BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701" -->
+        <!--                    Text="{Binding NewPassword}" /> -->
+        <!--         </Frame> -->
+        <!--         <Label Text="Password can't be empty." HorizontalTextAlignment="Center" TextColor="Red" -->
+        <!--                IsVisible="{Binding NewPasswordValidation_ShowMsg}" /> -->
+        <!-- -->
+        <!--         ~1~ Confirm Password @1@ -->
+        <!--         <Label Text="Confirm password" HorizontalTextAlignment="Center" FontSize="18" -->
+        <!--                FontFamily="News701" Margin="0" /> -->
+        <!--         <Frame Padding="0" CornerRadius="12" Margin="0,10"> -->
+        <!--             <Entry Placeholder="confirm password" HorizontalTextAlignment="Center" IsPassword="True" -->
+        <!--                    BackgroundColor="#e6e6e6" WidthRequest="150" FontFamily="News701" -->
+        <!--                    Text="{Binding ConfirmPassword}" /> -->
+        <!--         </Frame> -->
+        <!--         <Label Text="Password no match." HorizontalTextAlignment="Center" TextColor="Red" -->
+        <!--                IsVisible="{Binding PasswordConfirmValidation_ShowMsg}" /> -->
+        <!-- -->
+        <!--         ~1~ Confirm  @1@ -->
+        <!--         <Label Text="Data updated." HorizontalTextAlignment="Center" TextColor="Green" -->
+        <!--                IsVisible="{Binding DataUpdated_ShowMsg}" /> -->
+        <!--         <Button CornerRadius="12" Margin="0,10" BackgroundColor="#e6e6e6" -->
+        <!--                 Text="Save changes" FontFamily="News701" -->
+        <!--                 Command="{Binding SaveChangesCommand}" /> -->
+        <!-- -->
+        <!--     </StackLayout> -->
+        <!-- </ScrollView> -->
     </ContentPage.Content>
 </ContentPage>

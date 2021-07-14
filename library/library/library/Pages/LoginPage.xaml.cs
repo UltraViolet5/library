@@ -22,7 +22,7 @@ namespace library.Pages
             _loginViewModel = new LoginViewModel();
             BindingContext = _loginViewModel;
 
-            Content = new PageFactory().GetLoginPage();
+            Content = App.PageFactory.GetLoginPage();
 
             NavigationPage.SetHasNavigationBar(this, false);
         }
