@@ -177,7 +177,7 @@ namespace library.FactoryMethod
             return result;
         }
 
-        public Frame GetBookCard(BookViewModel book, string photoSourceBinding)
+        public Frame GetBookCard(BookViewModel book)
         {
             Grid grid = new Grid()
             {
@@ -190,9 +190,9 @@ namespace library.FactoryMethod
 
             var img = new Image()
             {
+                Source = book.PhotoSource,
                 Aspect = Aspect.AspectFill
             };
-            img.SetBinding(Image.SourceProperty, photoSourceBinding);
 
             var imageFrame = new Frame()
             {

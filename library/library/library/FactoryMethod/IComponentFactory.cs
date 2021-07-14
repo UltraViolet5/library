@@ -31,7 +31,7 @@ namespace library.FactoryMethod
         StackLayout GetSwitch(string text);
         Frame GetPhotoBox(string plusBtnCommand, string plusBtnParameter,
             string visibilityBinding, string photoSourceBinding);
-        Frame GetBookCard(BookViewModel book, string photoSourceBinding);
+        Frame GetBookCard(BookViewModel book);
         Frame GetCategoryBtn(string category);
         Frame GetMateIcon(UserViewModel user);
         Frame GetRentalBtn(BorrowingViewModel borrowing);

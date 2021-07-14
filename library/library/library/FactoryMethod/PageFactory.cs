@@ -249,8 +249,8 @@ namespace library.FactoryMethod
             int index = 0;
             foreach (var book in books)
             {
-                stackLayout.Children.Add(_componentFactory.GetBookCard(book,
-                    $"Books[{index}].PhotoSource"));
+                stackLayout.Children.Add(_componentFactory.GetBookCard(book))
+                    ;
                 index++;
             }
         }

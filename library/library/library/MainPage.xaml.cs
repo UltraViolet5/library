@@ -81,9 +81,8 @@ namespace library
             int index = 0;
             foreach (var book in MainPageViewModel.Books)
             {
-                var bookCard = App.ComponentFactory.GetBookCard(book,
-                    $"Books[{index}].PhotoSource");
-                Console.WriteLine($"Books[{index}].PhotoSource");
+                var bookCard = App.ComponentFactory.GetBookCard(book);
+                Console.WriteLine($"PhotoSource");
                 LastBooks.Children.Add(bookCard);
                 index++;
             }
