@@ -63,12 +63,12 @@ namespace library.FactoryMethod
                 }
             };
 
-            var label = GetLabel(text, fontSize:Style.BigFont);
+            var label = GetLabel(text, fontSize: Style.BigFont);
             label.SetValue(Grid.ColumnProperty, 0);
             result.Children.Add(label);
 
-            var icon = GetButtonWithIcon("plus.png", 
-                plusCommand, size:20);
+            var icon = GetButtonWithIcon("plus.png",
+                plusCommand, size: 20);
             icon.SetValue(Grid.ColumnProperty, 1);
             result.Children.Add(icon);
 
@@ -123,22 +123,26 @@ namespace library.FactoryMethod
             };
         }
 
-        public Frame GetPhotoBox()
+        public Frame GetPhotoBox(string plusBtnCommand, string plusBtnParameter,
+            string visibilityBinding, string photoSourceBinding)
         {
             var absoluteLayout = new AbsoluteLayout();
 
-            var image = new Frame()
+            var img = new Image()
+            {
+                Scale = 1,
+                Aspect = Aspect.AspectFill
+            };
+            img.SetBinding(Image.SourceProperty, photoSourceBinding);
+
+            var frame = new Frame()
             {
                 WidthRequest = Style.PhotoBoxSize,
                 HeightRequest = Style.PhotoBoxSize,
                 Padding = new Thickness(0),
-                Content = new Image()
-                {
-                    Source = "picture.png",
-                    Scale = 1,
-                    Aspect = Aspect.Fill
-                }
+                Content = img,
             };
+            ;
 
             var addBtn = new Image()
             {
@@ -146,8 +150,13 @@ namespace library.FactoryMethod
                 WidthRequest = Style.ImageButtonSize,
                 HeightRequest = Style.ImageButtonSize,
             };
+            var tapGesture = new TapGestureRecognizer();
+            tapGesture.SetBinding(TapGestureRecognizer.CommandProperty, plusBtnCommand);
+            tapGesture.SetBinding(TapGestureRecognizer.CommandParameterProperty, plusBtnParameter);
+            addBtn.GestureRecognizers.Add(tapGesture);
+            addBtn.SetBinding(Image.IsEnabledProperty, visibilityBinding);
 
-            absoluteLayout.Children.Add(image);
+            absoluteLayout.Children.Add(frame);
             absoluteLayout.Children.Add(addBtn,
                 new Rectangle(0.9, 0.9, addBtn.Width, addBtn.Height),
                 AbsoluteLayoutFlags.PositionProportional);
@@ -168,7 +177,7 @@ namespace library.FactoryMethod
             return result;
         }
 
-        public Frame GetBookCard(BookViewModel book)
+        public Frame GetBookCard(BookViewModel book, string photoSourceBinding)
         {
             Grid grid = new Grid()
             {
@@ -179,16 +188,18 @@ namespace library.FactoryMethod
                 }
             };
 
+            var img = new Image()
+            {
+                Aspect = Aspect.AspectFill
+            };
+            img.SetBinding(Image.SourceProperty, photoSourceBinding);
+
             var imageFrame = new Frame()
             {
                 Padding = 0,
                 HeightRequest = 100,
                 HasShadow = false,
-                Content = new Image()
-                {
-                    Source = "picture.png",
-                    Aspect = Aspect.AspectFill
-                }
+                Content = img,
             };
             imageFrame.SetValue(Grid.ColumnProperty, 0);
             grid.Children.Add(imageFrame);
@@ -493,19 +504,15 @@ namespace library.FactoryMethod
             {
                 ColumnDefinitions =
                 {
-
-                    new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) },
-                    new ColumnDefinition() { Width = new GridLength(5, GridUnitType.Star) },
-                    new ColumnDefinition() { Width = new GridLength(2, GridUnitType.Star) },
-
+                    new ColumnDefinition() {Width = new GridLength(1, GridUnitType.Star)},
+                    new ColumnDefinition() {Width = new GridLength(5, GridUnitType.Star)},
+                    new ColumnDefinition() {Width = new GridLength(2, GridUnitType.Star)},
                 },
                 RowDefinitions =
                 {
                     new RowDefinition(),
                     new RowDefinition()
                 }
-                
-                
             };
             grid.Children.Add(new Image()
             {
@@ -539,15 +546,11 @@ namespace library.FactoryMethod
             grid.Children.Add(label);
 
 
-
-
             var frame = new Frame()
             {
                 Padding = new Thickness(15, 5),
                 CornerRadius = Style.SmallCornerRadius,
                 Content = grid,
-
-
             };
 
             var tapgest = new TapGestureRecognizer();
@@ -684,7 +687,7 @@ namespace library.FactoryMethod
                 HorizontalOptions = LayoutOptions.End,
                 Margin = new Thickness(0),
                 WidthRequest = Style.ImageButtonSize
-        };
+            };
             if (size > 0)
                 result.WidthRequest = size;
 
@@ -710,7 +713,6 @@ namespace library.FactoryMethod
 
             return borrowingElements;
         }
-
 
         public Frame GetMateCard(UserViewModel mate)
         {
@@ -774,7 +776,6 @@ namespace library.FactoryMethod
             return result;
         }
 
-
         public Frame GetDatePicker(string binding)
         {
             var datePicker = new DatePicker()
@@ -788,7 +789,7 @@ namespace library.FactoryMethod
             {
                 Padding = new Thickness(0),
                 CornerRadius = Style.MediumCornerRadius,
-                Margin = new Thickness(0,10),
+                Margin = new Thickness(0, 10),
                 BackgroundColor = Style.LightGray,
                 Content = datePicker
             };

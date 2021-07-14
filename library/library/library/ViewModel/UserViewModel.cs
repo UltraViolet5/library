@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
@@ -10,7 +11,17 @@ namespace library.ViewModel
 {
     public class UserViewModel : BaseViewModel
     {
-        public ICommand SaveChangesCommand => _saveChangesCommand;
+        public ICommand SaveChangesCommand
+        {
+            get => _saveChangesCommand;
+            set => _saveChangesCommand = value;
+        }
+
+        public ICommand AddPhotoCommand
+        {
+            get => _addPhotoCommand;
+            set => _addPhotoCommand = value;
+        }
 
         #region Validations
 
@@ -99,8 +110,12 @@ namespace library.ViewModel
         private bool _newPasswordValidationShowMsg;
         private bool _passwordConfirmationValidationShowMsg;
         private bool _localizationValidationShowMsg;
-        private readonly ICommand _saveChangesCommand;
         private bool _dataUpdatedShowMsg;
+        private ICommand _saveChangesCommand;
+        private ICommand _addPhotoCommand;
+        private object _photo;
+        private bool _addPhotoIsEnabled = true;
+        private ImageSource _photoSource;
 
         #endregion
 
@@ -108,7 +123,13 @@ namespace library.ViewModel
         {
             _user = user;
 
-            _saveChangesCommand = new Command(SaveChangesExecute, SaveChangesCanExecute);
+            SaveChangesCommand = new Command(SaveChangesExecute, SaveChangesCanExecute);
+            AddPhotoCommand = new Command(AddPhotoExecute);
+        }
+
+        private void AddPhotoExecute(object obj)
+        {
+            throw new NotImplementedException();
         }
 
         public string UserName
@@ -198,6 +219,32 @@ namespace library.ViewModel
             .Count(b => b.Owner.Email == _user.Email);
 
         public string Id => _user.Id;
+
+        public object Photo
+        {
+            get => _photo;
+            set => _photo = value;
+        }
+
+        public ImageSource PhotoSource
+        {
+            get => _photoSource;
+            set
+            {
+                _photoSource = value;
+                RaisePropertyChanged(nameof(PhotoSource));
+            }
+        }
+
+        public bool AddPhotoIsEnabled
+        {
+            get => _addPhotoIsEnabled;
+            set
+            {
+                _addPhotoIsEnabled = value;
+                RaisePropertyChanged(nameof(AddPhotoIsEnabled));
+            }
+        }
 
         private bool SaveChangesCanExecute()
         {

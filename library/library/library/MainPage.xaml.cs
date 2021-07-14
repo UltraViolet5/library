@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 using library.ViewModel;
 using Xamarin.Forms.Xaml;
 
@@ -77,10 +78,14 @@ namespace library
         /// </summary>
         private void DisplayBooks()
         {
+            int index = 0;
             foreach (var book in MainPageViewModel.Books)
             {
-                var bookCard = App.ComponentFactory.GetBookCard(book);
+                var bookCard = App.ComponentFactory.GetBookCard(book,
+                    $"Books[{index}].PhotoSource");
+                Console.WriteLine($"Books[{index}].PhotoSource");
                 LastBooks.Children.Add(bookCard);
+                index++;
             }
         }
 

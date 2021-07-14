@@ -12,8 +12,6 @@ namespace library.Model
         public string BarcodeNumber { get; set; }
 
         public DateTime PublishingYear { get; set; }
-        // TODO implement pictures
-        public string Picture { get; set; }
         public User Owner { get; set; }
         public bool Read { get; set; }
         public Category Category { get; set; }
@@ -36,5 +34,7 @@ namespace library.Model
                 return toReturn;
             }
         }
+
+        public byte[] Photo { get; set; }
     }
 }

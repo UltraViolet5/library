@@ -10,7 +10,7 @@ namespace library.FactoryMethod
 {
     public class PageFactory : IPageFactory
     {
-        private readonly ComponentFactory _componentFactory;
+        private readonly IComponentFactory _componentFactory;
 
         public PageFactory()
         {
@@ -47,12 +47,14 @@ namespace library.FactoryMethod
                     Padding = Style.PagePadding,
                     Children =
                     {
-                        _componentFactory.GetPhotoBox(),
-                        _componentFactory.GetLabel("Title", hAlignment: TextAlignment.Center),
+                        _componentFactory.GetPhotoBox("AddPhotoCommand", 
+                            "Photo", "AddPhotoIsEnabled", 
+                            "PhotoSource"),
+                        _componentFactory.GetLabel("Title", Style.BigFont, hAlignment: TextAlignment.Center),
                         _componentFactory.GetEntry("Title"),
                         _componentFactory.GetValidationLabel("Title must be filled.",
                             "TitleValidation_ShowMsg", Color.Red),
-                        _componentFactory.GetLabel("Authors", hAlignment: TextAlignment.Center),
+                        _componentFactory.GetLabel("Authors", Style.BigFont, hAlignment: TextAlignment.Center),
                         _componentFactory.GetEntry("Authors"),
                         _componentFactory.GetValidationLabel("Authors must be filled.",
                             "AuthorsValidation_ShowMsg", Color.Red),
@@ -155,7 +157,8 @@ namespace library.FactoryMethod
                     $"{booksOwner.UserName} Books",
                     "AddBookCommand");
             else
-                label = _componentFactory.GetLabel($"{booksOwner.UserName} Books");
+                label = _componentFactory.GetLabel($"{booksOwner.UserName} Books", 
+                    Style.BigFont);
 
             var stackLayout = new StackLayout()
             {
@@ -192,7 +195,9 @@ namespace library.FactoryMethod
                     {
                         _componentFactory.GetLabel("User",
                             fontSize: Style.BigFont),
-                        _componentFactory.GetPhotoBox(),
+                        _componentFactory.GetPhotoBox("AddPhotoCommand",
+                            "Photo", "AddPhotoIsEnabled",
+                            "PhotoSource"),
                         _componentFactory.GetLabel("User name",
                             fontSize: Style.MediumFont, TextAlignment.Center),
                         _componentFactory.GetEntry("UserName", "name"),
@@ -241,9 +246,12 @@ namespace library.FactoryMethod
         public void ListBookCards(ref StackLayout stackLayout,
             IEnumerable<BookViewModel> books)
         {
+            int index = 0;
             foreach (var book in books)
             {
-                stackLayout.Children.Add(_componentFactory.GetBookCard(book));
+                stackLayout.Children.Add(_componentFactory.GetBookCard(book,
+                    $"Books[{index}].PhotoSource"));
+                index++;
             }
         }
     }

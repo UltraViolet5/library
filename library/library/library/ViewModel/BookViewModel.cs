@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using library.Model;
 using System.Windows.Input;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using Xamarin.Forms;
 
 namespace library.ViewModel
@@ -11,6 +14,10 @@ namespace library.ViewModel
         private readonly Book _book;
         private bool _titleValidationShowMsg;
         private bool _authorsValidationShowMsg;
+        private bool _addPhotoIsEnabled = true;
+        private ICommand _addPhotoCommand;
+        private ICommand _saveChangesCommand;
+        private ImageSource _photoSource;
 
         public int Id => _book.Id;
 
@@ -40,20 +47,6 @@ namespace library.ViewModel
         }
 
         public string PublishingYear => _book.PublishingYear.Date.Year.ToString();
-
-
-        public string Picture
-        {
-            get => _book.Picture;
-            set
-            {
-                if (_book.Picture != value)
-                {
-                    _book.Picture = value;
-                    RaisePropertyChanged(nameof(Picture));
-                }
-            }
-        }
 
         public User Owner
         {
@@ -101,6 +94,40 @@ namespace library.ViewModel
                     _book.Votes = value;
                     RaisePropertyChanged(nameof(Votes));
                 }
+            }
+        }
+
+        public bool AddPhotoIsEnabled
+        {
+            get => _addPhotoIsEnabled;
+            set
+            {
+                _addPhotoIsEnabled = value;
+                RaisePropertyChanged(nameof(AddPhotoIsEnabled));
+            }
+        }
+
+        public byte[] Photo
+        {
+            get => _book.Photo;
+            set
+            {
+                _book.Photo = value;
+                RaisePropertyChanged(nameof(PhotoSource));
+            }
+        }
+
+        public ImageSource PhotoSource
+        {
+            get
+            {
+                var photoSource = Utils.BytesToImageSource(Photo);
+                if (photoSource == null)
+                {
+                    return null;
+                }
+
+                return photoSource;
             }
         }
 
@@ -173,22 +200,33 @@ namespace library.ViewModel
 
         #endregion
 
-        public ICommand SaveChangesCommand { get; set; }
+        public ICommand AddPhotoCommand
+        {
+            get => _addPhotoCommand;
+            set => _addPhotoCommand = value;
+        }
+
+        public ICommand SaveChangesCommand
+        {
+            get => _saveChangesCommand;
+            set => _saveChangesCommand = value;
+        }
 
         public BookViewModel(Book book)
         {
             _book = book;
 
             SaveChangesCommand = new Command(SaveChangesExecute);
+            AddPhotoCommand = new Command(AddPhotoExecute);
         }
 
-        public void RefreshView()
+        private async void AddPhotoExecute(object obj)
         {
-            RaisePropertyChanged(nameof(Title));
-            RaisePropertyChanged(nameof(Authors));
-            RaisePropertyChanged(nameof(Read));
-            RaisePropertyChanged(nameof(Available));
-            RaisePropertyChanged(nameof(Category));
+            AddPhotoIsEnabled = false;
+
+            Photo = await Utils.TakePhoto();
+
+            AddPhotoIsEnabled = true;
         }
 
         private void SaveChangesExecute()

@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 using library.Model;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using Xamarin.Forms;
 
 namespace library
@@ -33,6 +37,32 @@ namespace library
         public static string GetCurrentUserEmail()
         {
             return (string) App.Current.Properties["UserEmail"];
+        }
+
+        public static ImageSource BytesToImageSource(byte[] bytes)
+        {
+            if (bytes == null || bytes.Length == 0)
+                return null;
+
+            return ImageSource.FromStream(() => new MemoryStream(bytes));
+        }
+
+        public static async Task<byte[]> TakePhoto()
+        {
+            var photo = await CrossMedia.Current.TakePhotoAsync(
+                new Plugin.Media.Abstractions.StoreCameraMediaOptions()
+                {
+                    CompressionQuality = 80,
+                    PhotoSize = PhotoSize.Medium
+                });
+
+            // ImageSource from stream: ImageSource.FromStream((() => photo.GetStream()));
+
+            if (photo == null)
+            {
+                return null;
+            }
+            return File.ReadAllBytes(photo.Path);
         }
     }
 }

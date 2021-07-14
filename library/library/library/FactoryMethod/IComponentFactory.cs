@@ -4,6 +4,7 @@ using System.Text;
 using library.Model;
 using Xamarin.Forms;
 using library.ViewModel;
+using Xamarin.Forms.Shapes;
 
 namespace library.FactoryMethod
 {
@@ -11,19 +12,34 @@ namespace library.FactoryMethod
     {
         Label GetLabel(string text, int fontSize,
             TextAlignment hAlignment = TextAlignment.Start);
+
+        Grid GetHeader(string text, string plusCommand);
+        Label GetLabel(string text,
+            string binding,
+            int fontSize = 16,
+            TextAlignment hAlignment = TextAlignment.Start);
+        Line GetLine();
+        StackLayout GetLabelWithBinding(string label, string binding);
+        StackLayout GetCheckBox(string label, string binding);
+        StackLayout GetDropDown(string labelText, string bindingSource, string bindingSelected);
         Button GetButton(string text,
             string command = null,
             object commandParameter = null);
+        Image GetButtonWithIcon(string pictureName, string tapBinding,
+            object commandParameter = null, int size = -1);
         Label GetValidationLabel(string msg, string visibleBinding, Color color);
         StackLayout GetSwitch(string text);
-        Frame GetPhotoBox();
-        Frame GetBookCard(BookViewModel book);
+        Frame GetPhotoBox(string plusBtnCommand, string plusBtnParameter,
+            string visibilityBinding, string photoSourceBinding);
+        Frame GetBookCard(BookViewModel book, string photoSourceBinding);
         Frame GetCategoryBtn(string category);
         Frame GetMateIcon(UserViewModel user);
         Frame GetRentalBtn(BorrowingViewModel borrowing);
         Frame GetEntry(string binding, string placeholder = "",
             bool isPassword = false);
 
+        Frame GetMateCard(UserViewModel mate);
+        Frame GetDatePicker(string binding);
         List<Frame> GetBorrowingElements();
     };
 }
