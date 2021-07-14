@@ -126,11 +126,10 @@ namespace library.FactoryMethod
             return result;
         }
 
-        public ScrollView GetMyRentalsPage ()
+        public ScrollView GetMyRentalsPage()
         {
-            
             var borrowingElements = _componentFactory.GetBorrowingElements();
-            var layout = new StackLayout() { Padding = Style.PagePadding };
+            var layout = new StackLayout() {Padding = Style.PagePadding};
 
             foreach (var borrowing in borrowingElements)
             {
@@ -142,28 +141,34 @@ namespace library.FactoryMethod
                 Content = layout
             };
 
-            
 
             return result;
         }
 
         public ScrollView GetBooksPage(User booksOwner,
-            BooksViewModel booksViewModel)
+            BooksViewModel booksViewModel, bool addBookButton = false)
         {
+            View label;
+
+            if (addBookButton)
+                label = _componentFactory.GetHeader(
+                    $"{booksOwner.UserName} Books",
+                    "AddBookCommand");
+            else
+                label = _componentFactory.GetLabel($"{booksOwner.UserName} Books");
+
             var stackLayout = new StackLayout()
             {
                 Padding = Style.PagePadding,
                 Children =
                 {
-                    _componentFactory.GetHeader(
-                        $"{booksOwner.UserName} Books",
-                        "AddBookCommand"),
+                    label,
                     _componentFactory.GetEntry("Search",
                         "search"),
                     _componentFactory.GetDropDown("Sort: ",
                         "SortMethods", "SelectedSortMethod")
                     // IMPORTANT!!!
-                    // I using forth child to place bookCards, Speak with Jarek
+                    // I used forth child to place bookCards, Speak with Jarek
                     // if you want do add next child here
                 }
             };
@@ -175,42 +180,71 @@ namespace library.FactoryMethod
 
             return result;
         }
+
+        public ScrollView GetUserPage(bool darkMode = false)
+        {
+            var result = new ScrollView()
+            {
+                Content = new StackLayout()
+                {
+                    Padding = Style.PagePadding,
+                    Children =
+                    {
+                        _componentFactory.GetLabel("User",
+                            fontSize: Style.BigFont),
+                        _componentFactory.GetPhotoBox(),
+                        _componentFactory.GetLabel("User name",
+                            fontSize: Style.MediumFont, TextAlignment.Center),
+                        _componentFactory.GetEntry("UserName", "name"),
+                        _componentFactory.GetValidationLabel("User name cant't be empty.",
+                            "UserNameValidation_ShowMsg", Style.ValidationErrorColor),
+                        _componentFactory.GetLabel("Email", Style.MediumFont, TextAlignment.Center),
+                        _componentFactory.GetEntry("Email", "e-mail"),
+                        _componentFactory.GetValidationLabel("Incorrect email.",
+                            "EmailValidation_ShowMsg", Style.ValidationErrorColor),
+                        _componentFactory.GetLabel("Birth date", Style.MediumFont, TextAlignment.Center),
+                        _componentFactory.GetDatePicker("BirthDate"),
+                        _componentFactory.GetLabel("Localization", fontSize: Style.MediumFont, TextAlignment.Center),
+                        _componentFactory.GetEntry("Localization", "localization"),
+                        _componentFactory.GetValidationLabel("Localization can't be empty.",
+                            "LocalizationValidation_ShowMsg", Style.ValidationErrorColor),
+                        _componentFactory.GetLabel("Password",
+                            Style.MediumFont, TextAlignment.Center),
+                        _componentFactory.GetEntry("Password", "password", true),
+                        _componentFactory.GetValidationLabel("To change password, provide correct previous password.",
+                            "PasswordValidation_ShowMsg", Style.ValidationErrorColor),
+                        _componentFactory.GetLabel("New Password",
+                            Style.MediumFont, TextAlignment.Center),
+                        _componentFactory.GetEntry("NewPassword", "new password", true),
+                        _componentFactory.GetValidationLabel("Password can't be empty.",
+                            "NewPasswordValidation_ShowMsg", Style.ValidationErrorColor),
+                        _componentFactory.GetLabel("Confirm Password",
+                            Style.MediumFont, TextAlignment.Center),
+                        _componentFactory.GetEntry("ConfirmPassword", "confirm password", true),
+                        _componentFactory.GetValidationLabel("Password no match.",
+                            "PasswordConfirmValidation_ShowMsg", Style.ValidationErrorColor),
+                        _componentFactory.GetValidationLabel("Data updated.", "DataUpdated_ShowMsg",
+                            Style.ValidationSuccessColor),
+                        _componentFactory.GetButton("Save changes", "SaveChangesCommand"),
+                    }
+                }
+            };
+
+            return result;
+        }
+
         /// <summary>
-        /// List book cards in stackLayout
+        /// List book cards in stackLayout. Partial render of books page and main page.
         /// </summary>
         /// <param name="stackLayout"></param>
         /// <param name="books"></param>
-        public void GetListBookCards(ref StackLayout stackLayout,
+        public void ListBookCards(ref StackLayout stackLayout,
             IEnumerable<BookViewModel> books)
         {
             foreach (var book in books)
             {
                 stackLayout.Children.Add(_componentFactory.GetBookCard(book));
             }
-        }
-
-        private List<StackLayout> getBorrowingElemnts()
-        {
-            var borrowings = App.DbService.GetBorrowings();
-
-            List<StackLayout> borrowingElemnts = new List<StackLayout>();
-
-            foreach (var item in borrowings)
-            {
-                var NewLayout = new StackLayout()
-                {
-                    Children =
-                    {
-                        _componentFactory.GetBookCard(item),
-                        _componentFactory.GetRentalBtn(item)
-                    }
-                };
-
-                
-                borrowingElemnts.Add(NewLayout);
-            }
-
-            return borrowingElemnts;
         }
     }
 }

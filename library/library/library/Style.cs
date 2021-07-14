@@ -18,5 +18,7 @@ namespace library
         public static int PagePadding => 20;
         public static int PhotoBoxSize => 150;
         public static int ImageButtonSize => 40;
+        public static Color ValidationErrorColor => Color.Red;
+        public static Color ValidationSuccessColor => Color.Green;
     }
 }

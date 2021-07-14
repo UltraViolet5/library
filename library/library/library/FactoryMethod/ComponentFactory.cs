@@ -58,17 +58,17 @@ namespace library.FactoryMethod
             {
                 ColumnDefinitions =
                 {
-                    new ColumnDefinition() {Width = new GridLength(5, GridUnitType.Star)},
-                    new ColumnDefinition() {Width = new GridLength(5, GridUnitType.Star)}
+                    new ColumnDefinition() {Width = new GridLength(8, GridUnitType.Star)},
+                    new ColumnDefinition() {Width = new GridLength(2, GridUnitType.Star)}
                 }
             };
 
-            var label = GetLabel(text);
+            var label = GetLabel(text, fontSize:Style.BigFont);
             label.SetValue(Grid.ColumnProperty, 0);
             result.Children.Add(label);
 
             var icon = GetButtonWithIcon("plus.png", 
-                plusCommand);
+                plusCommand, size:20);
             icon.SetValue(Grid.ColumnProperty, 1);
             result.Children.Add(icon);
 
@@ -149,7 +149,7 @@ namespace library.FactoryMethod
 
             absoluteLayout.Children.Add(image);
             absoluteLayout.Children.Add(addBtn,
-                new Rectangle(0, 0, 0.9, 0.9),
+                new Rectangle(0.9, 0.9, addBtn.Width, addBtn.Height),
                 AbsoluteLayoutFlags.PositionProportional);
 
             var result = new Frame()
@@ -676,7 +676,7 @@ namespace library.FactoryMethod
         }
 
         public Image GetButtonWithIcon(string pictureName, string tapBinding,
-            object commandParameter = null)
+            object commandParameter = null, int size = -1)
         {
             var result = new Image()
             {
@@ -684,7 +684,10 @@ namespace library.FactoryMethod
                 HorizontalOptions = LayoutOptions.End,
                 Margin = new Thickness(0),
                 WidthRequest = Style.ImageButtonSize
-            };
+        };
+            if (size > 0)
+                result.WidthRequest = size;
+
             var tapGesture = new TapGestureRecognizer();
             tapGesture.SetBinding(TapGestureRecognizer.CommandProperty, tapBinding);
             tapGesture.CommandParameter = commandParameter;
@@ -772,5 +775,25 @@ namespace library.FactoryMethod
         }
 
 
+        public Frame GetDatePicker(string binding)
+        {
+            var datePicker = new DatePicker()
+            {
+                FontFamily = Style.MainFont,
+                HorizontalOptions = LayoutOptions.CenterAndExpand
+            };
+            datePicker.SetBinding(DatePicker.DateProperty, binding);
+
+            var result = new Frame()
+            {
+                Padding = new Thickness(0),
+                CornerRadius = Style.MediumCornerRadius,
+                Margin = new Thickness(0,10),
+                BackgroundColor = Style.LightGray,
+                Content = datePicker
+            };
+
+            return result;
+        }
     }
 }

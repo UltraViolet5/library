@@ -21,7 +21,7 @@ namespace library.Pages
         private readonly ScrollView _pageContent;
         private StackLayout _booksStack;
         
-        public BooksPage(User booksOwner)
+        public BooksPage(User booksOwner, bool addBookButton = false)
         {
             InitializeComponent();
             
@@ -33,13 +33,13 @@ namespace library.Pages
 
             _pageFactory = new PageFactory();
             _booksOwner = booksOwner;
-            _pageContent = _pageFactory.GetBooksPage(booksOwner, BooksViewModel);
+            _pageContent = _pageFactory.GetBooksPage(booksOwner, BooksViewModel, addBookButton);
             _booksStack = (StackLayout)_pageContent.Content;
 
 
             Content = _pageContent;
             // Refreshing books
-            _pageFactory.GetListBookCards(ref _booksStack, BooksViewModel.Books);
+            _pageFactory.ListBookCards(ref _booksStack, BooksViewModel.Books);
         }
 
         protected override void OnAppearing()
@@ -47,7 +47,7 @@ namespace library.Pages
             base.OnAppearing();
             ClearBooks();
             // Refreshing books
-            _pageFactory.GetListBookCards(ref _booksStack, BooksViewModel.Books);
+            _pageFactory.ListBookCards(ref _booksStack, BooksViewModel.Books);
         }
 
 
