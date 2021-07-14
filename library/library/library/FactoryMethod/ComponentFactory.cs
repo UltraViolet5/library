@@ -301,6 +301,13 @@ namespace library.FactoryMethod
                 {
                     new ColumnDefinition() {Width = new GridLength(3, GridUnitType.Star)},
                     new ColumnDefinition() {Width = new GridLength(7, GridUnitType.Star)}
+                },
+
+                RowDefinitions =
+                {
+                    new RowDefinition() {Height = new GridLength(2, GridUnitType.Star)},
+                    new RowDefinition() {Height = new GridLength(2, GridUnitType.Star)},
+
                 }
             };
 
@@ -384,7 +391,11 @@ namespace library.FactoryMethod
             contentBox.SetValue(Grid.ColumnProperty, 1);
             grid.Children.Add(contentBox);
 
-            grid.Children.Add(GetRentalBtn(borrowing));
+            var rentalBtn = GetRentalBtn(borrowing);
+            rentalBtn.SetValue(Grid.RowProperty, 1);
+            rentalBtn.SetValue(Grid.ColumnProperty, 1);
+
+            grid.Children.Add(rentalBtn);
 
             Frame result = new Frame()
             {
@@ -408,7 +419,7 @@ namespace library.FactoryMethod
             tapGesture.CommandParameter = borrowing.Id;
             result.GestureRecognizers.Add(tapGesture);
 
-            GetRentalBtn(borrowing);
+            
 
             return result;
         }
@@ -504,14 +515,19 @@ namespace library.FactoryMethod
             {
                 ColumnDefinitions =
                 {
-                    new ColumnDefinition() {Width = new GridLength(1, GridUnitType.Star)},
-                    new ColumnDefinition() {Width = new GridLength(5, GridUnitType.Star)},
-                    new ColumnDefinition() {Width = new GridLength(2, GridUnitType.Star)},
+
+                    new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) },
+                    new ColumnDefinition() { Width = new GridLength(5, GridUnitType.Star) },
+                    new ColumnDefinition() { Width = new GridLength(2, GridUnitType.Star) },
+                    new ColumnDefinition() { Width = new GridLength(2, GridUnitType.Star) },
+
+
                 },
                 RowDefinitions =
                 {
                     new RowDefinition(),
-                    new RowDefinition()
+                    new RowDefinition(),
+                    
                 }
             };
             grid.Children.Add(new Image()
@@ -553,10 +569,10 @@ namespace library.FactoryMethod
                 Content = grid,
             };
 
-            var tapgest = new TapGestureRecognizer();
-            tapgest.SetBinding(TapGestureRecognizer.CommandProperty, new Binding("ShowBorrowingCommand"));
-            tapgest.CommandParameter = borrowing;
-            frame.GestureRecognizers.Add(tapgest);
+            var tapGest = new TapGestureRecognizer();
+            tapGest.SetBinding(TapGestureRecognizer.CommandProperty, new Binding("ShowBorrowingCommand"));
+            tapGest.CommandParameter = borrowing;
+            frame.GestureRecognizers.Add(tapGest);
 
 
             return frame;
