@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
+using System.Reflection;
 using System.Windows.Input;
 using library.Model;
 using Xamarin.Forms;
@@ -11,6 +9,8 @@ namespace library.ViewModel
 {
     public class UserViewModel : BaseViewModel
     {
+        public event EventHandler IsPhotoUpdated;
+
         public ICommand SaveChangesCommand
         {
             get => _saveChangesCommand;
@@ -101,6 +101,7 @@ namespace library.ViewModel
         #region Private fields
 
         private readonly User _user;
+        private readonly ContentPage _parentReference;
         private string _password;
         private string _newPassword;
         private string _confirmPassword;
@@ -125,11 +126,6 @@ namespace library.ViewModel
 
             SaveChangesCommand = new Command(SaveChangesExecute, SaveChangesCanExecute);
             AddPhotoCommand = new Command(AddPhotoExecute);
-        }
-
-        private void AddPhotoExecute(object obj)
-        {
-            throw new NotImplementedException();
         }
 
         public string UserName
@@ -220,19 +216,33 @@ namespace library.ViewModel
 
         public string Id => _user.Id;
 
-        public object Photo
+        public byte[] Photo
         {
-            get => _photo;
-            set => _photo = value;
+            get => _user.Photo;
+            set
+            {
+                _user.Photo = value;
+                RaisePropertyChanged(nameof(PhotoSource));
+                if (IsPhotoUpdated != null)
+                {
+                    IsPhotoUpdated(this, EventArgs.Empty);
+                }
+            }
         }
 
         public ImageSource PhotoSource
         {
-            get => _photoSource;
-            set
+            get
             {
-                _photoSource = value;
-                RaisePropertyChanged(nameof(PhotoSource));
+                var photoSource = Utils.BytesToImageSource(Photo);
+                if (photoSource == null)
+                {
+                    // If user don't have photo load photo from global resources
+                    var assembly = this.GetType().GetTypeInfo().Assembly;
+                    var data = Utils.ImageDataFromResource("library.Resources.user.png", assembly);
+                    return Utils.BytesToImageSource(data);
+                }
+                return photoSource;
             }
         }
 
@@ -244,6 +254,15 @@ namespace library.ViewModel
                 _addPhotoIsEnabled = value;
                 RaisePropertyChanged(nameof(AddPhotoIsEnabled));
             }
+        }
+
+        private async void AddPhotoExecute(object obj)
+        {
+            AddPhotoIsEnabled = false;
+
+            Photo = await Utils.TakePhoto();
+
+            AddPhotoIsEnabled = true;
         }
 
         private bool SaveChangesCanExecute()

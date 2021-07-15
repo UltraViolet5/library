@@ -12,6 +12,7 @@ namespace library.Model
         public string Localization { get; set; }
         public bool TermsAccepted { get; private set; }
         public List<User> Friends { get; set; }
+        public byte[] Photo { get; set; }
 
         public User()
         {

@@ -10,7 +10,6 @@ namespace library.Model
         public string Title { get; set; }
         public string Authors { get; set; }
         public string BarcodeNumber { get; set; }
-
         public DateTime PublishingYear { get; set; }
         public User Owner { get; set; }
         public bool Read { get; set; }
@@ -18,7 +17,7 @@ namespace library.Model
         public int Votes { get; set; }
         public Bookcase Bookcase { get; set; }
         public bool Available { get; set; }
-
+        public byte[] Photo { get; set; }
         public Book()
         {
             Id = NextId;
@@ -35,6 +34,5 @@ namespace library.Model
             }
         }
 
-        public byte[] Photo { get; set; }
     }
 }

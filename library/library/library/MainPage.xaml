@@ -19,7 +19,8 @@
 
                 <Frame Grid.Column="0" Grid.Row="0" CornerRadius="15" WidthRequest="50" HeightRequest="50"
                        Padding="0" HasShadow="False">
-                    <Image Source="user.png" Margin="0"
+                    <Image Source="{Binding PhotoSource}" 
+                           Margin="0" Aspect="AspectFill"
                            HeightRequest="50" WidthRequest="50" HorizontalOptions="StartAndExpand">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding UserCommand}" />

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,22 +12,17 @@ namespace library.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ScanPage : ContentPage
     {
-
         public static Button ScanButton { get; set; }
         public static ZXing.Net.Mobile.Forms.ZXingScannerView ScannerView { get; private set; }
 
         public event EventHandler IsScaned;
-        
 
 
         public ScanPage()
         {
-           
-
             InitializeComponent();
             ScanButton = scanbuttonXAML;
             ScannerView = scanerXAML;
-
         }
 
 
@@ -38,13 +32,9 @@ namespace library.Pages
         /// <param name="result"></param>
         private void ZXingScannerView_OnScanResult(ZXing.Result result)
         {
-           
-
-
             Device.BeginInvokeOnMainThread(() =>
             {
                 scanResultText.Text = result.Text + "(type: " + result.BarcodeFormat.ToString() + ")";
-
             });
 
             ///Navigation.NavigationStack[Navigation.NavigationStack.Count-2]
@@ -53,16 +43,11 @@ namespace library.Pages
             App.Navigation.PopModalAsync();
             ///wywółać z awaitem.
 
-            if(IsScaned != null)
+            if (IsScaned != null)
             {
                 IsScaned(result.Text, EventArgs.Empty);
-
             }
-            
-
         }
-
-   
 
 
         /// <summary>

@@ -1,10 +1,8 @@
 ﻿using library.ViewModel;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using library.FactoryMethod;
 
 
 namespace library.Pages
@@ -16,24 +14,23 @@ namespace library.Pages
         public readonly AddBookViewModel AddBookViewModel;
         public ScanPage ScanPage;
 
-        
 
         public AddBookDataPage()
         {
             InitializeComponent();
             Task.Run(AnimateBG);
             BarLabel = BarcodeLabel;
-            
-            
+
+
             AddBookViewModel = new AddBookViewModel();
             BindingContext = AddBookViewModel;
             ScanPage = new ScanPage();
-            ScanPage.IsScaned += HandleScanSucced;
+            ScanPage.IsScaned += HandleScanSucceed;
         }
 
-        private void HandleScanSucced(object sender, EventArgs e)
+        private void HandleScanSucceed(object sender, EventArgs e)
         {
-            string Scantext = (string)sender;
+            string Scantext = (string) sender;
             AddBookViewModel.BarcodeText = Scantext;
         }
 
@@ -63,16 +60,14 @@ namespace library.Pages
         {
             App.Navigation.PushModalAsync(ScanPage);
         }
-   
+
         private void Title_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
             AddBookViewModel.SaveButton.ChangeCanExecute();
         }
 
         private void Author_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
             AddBookViewModel.SaveButton.ChangeCanExecute();
         }
     }

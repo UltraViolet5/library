@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Reflection;
 using library.Model;
 using System.Windows.Input;
-using Plugin.Media;
-using Plugin.Media.Abstractions;
 using Xamarin.Forms;
 
 namespace library.ViewModel
@@ -17,7 +15,6 @@ namespace library.ViewModel
         private bool _addPhotoIsEnabled = true;
         private ICommand _addPhotoCommand;
         private ICommand _saveChangesCommand;
-        private ImageSource _photoSource;
 
         public int Id => _book.Id;
 
@@ -136,7 +133,13 @@ namespace library.ViewModel
             get
             {
                 var photoSource = Utils.BytesToImageSource(Photo);
-                
+                if (photoSource == null)
+                {
+                    // If book don't have photo load photo from global resources
+                    var assembly = this.GetType().GetTypeInfo().Assembly;
+                    var data = Utils.ImageDataFromResource("library.Resources.picture.png", assembly);
+                    return Utils.BytesToImageSource(data);
+                }
                 return photoSource;
             }
         }

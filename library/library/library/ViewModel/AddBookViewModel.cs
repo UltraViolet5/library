@@ -40,12 +40,7 @@ namespace library.ViewModel
         public string Title
         {
             get { return _title; }
-            set
-            {
-                _title = value;
-                
-
-            }
+            set { _title = value; }
         }
 
         private string _authors;
@@ -53,13 +48,8 @@ namespace library.ViewModel
         public string Authors
         {
             get { return _authors; }
-            set
-            {
-                _authors = value;
-              
-            }
+            set { _authors = value; }
         }
-
 
 
         public DateTime PublishingYear { get; set; }
@@ -70,13 +60,11 @@ namespace library.ViewModel
         public Command SaveButton { get; set; }
 
 
-
         public AddBookViewModel()
         {
             SaveButton = new Command(SaveButtonExecute, canExecute: SaveButtonCanExecute);
         }
 
-    
 
         private bool SaveButtonCanExecute(object arg)
         {
@@ -88,12 +76,11 @@ namespace library.ViewModel
             {
                 return false;
             }
-
         }
 
         private Category GetCategoryByString(string categoryName)
         {
-            Category categoryEnum = (Category)Enum.Parse(typeof(Category), categoryName);
+            Category categoryEnum = (Category) Enum.Parse(typeof(Category), categoryName);
 
             return categoryEnum;
         }
@@ -101,8 +88,6 @@ namespace library.ViewModel
 
         private void SaveButtonExecute(object obj)
         {
-            
-
             Book NewBook = new Book();
 
             NewBook.Title = this.Title;
@@ -115,10 +100,9 @@ namespace library.ViewModel
             NewBook.Read = this.Read;
 
             App.DbService.AddBook(NewBook);
-             
+
 
             App.Navigation.PopAsync();
-            
         }
     }
 }

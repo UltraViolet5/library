@@ -1,17 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Reflection;
 using System.Windows.Input;
 using library.Model;
 using library.Pages;
-using library.Services;
 using Xamarin.Forms;
 
 namespace library.ViewModel
 {
     public class MainPageViewModel : BaseViewModel
     {
+        public ImageSource PhotoSource
+        {
+            get
+            {
+                var photoSource = Utils.BytesToImageSource(App.CurrentUser.Photo);
+
+                if (photoSource == null)
+                {
+                    // If user don't have photo load photo from global resources
+                    var assembly = this.GetType().GetTypeInfo().Assembly;
+                    var data = Utils.ImageDataFromResource("library.Resources.user.png", assembly);
+                    return Utils.BytesToImageSource(data);
+                }
+
+                return photoSource;
+            }
+        }
+
+        public UserPage _userPage { get; private set; }
         public IEnumerable<BookViewModel> Books { get; private set; }
         public IEnumerable<string> Categories { get; private set; }
         public IEnumerable<UserViewModel> Mates { get; private set; }
@@ -26,7 +44,7 @@ namespace library.ViewModel
         public ICommand AddBookCommand { get; private set; }
         public ICommand ShowBooksByCategory { get; private set; }
         public ICommand ShowBookCommand { get; private set; }
-        
+
 
         public MainPageViewModel()
         {
@@ -49,12 +67,15 @@ namespace library.ViewModel
             SettingsCommand = new Command(SettingsExecute);
             MatesCommand = new Command(MatesExecute);
             RentalsCommand = new Command(RentalsExecute);
-            
-            
+
+            _userPage = new UserPage();
+            _userPage.UserViewModel.IsPhotoUpdated += HandlePhotoUpdated;
         }
 
-     
-
+        private void HandlePhotoUpdated(object sender, EventArgs e)
+        {
+            RaisePropertyChanged(nameof(PhotoSource));
+        }
 
         //wszystko co asynch powinno byc wywołane z awaitem
         private void RentalsExecute()
@@ -66,7 +87,7 @@ namespace library.ViewModel
         {
             App.Navigation.PushAsync(new MatesPage());
         }
-        
+
 
         private void SettingsExecute()
         {
@@ -77,10 +98,10 @@ namespace library.ViewModel
         {
             App.Navigation.PushAsync(new BookPage((int) obj));
         }
-        
+
         private void UserViewImageTappedExecute(object obj)
         {
-            App.Navigation.PushAsync(new UserPage());
+            App.Navigation.PushAsync(_userPage);
         }
 
         private void BooksExecute(object arg)
@@ -88,7 +109,7 @@ namespace library.ViewModel
             var booksOwner = App.CurrentUser;
             App.Navigation.PushAsync(new BooksPage(booksOwner, true));
         }
-        
+
         private bool LoginBtnCanExecute(object arg)
         {
             return true;

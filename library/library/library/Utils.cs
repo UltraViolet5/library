@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using library.Model;
@@ -62,7 +63,28 @@ namespace library
             {
                 return null;
             }
+
             return File.ReadAllBytes(photo.Path);
+        }
+
+
+        public static byte[] ImageDataFromResource(string r, Assembly assembly)
+        {
+            // Ensure "this" is an object that is part of your implementation within your Xamarin forms project
+            // get assembly by: var assembly = this.GetType().GetTypeInfo().Assembly;
+            byte[] buffer = null;
+
+            using (Stream s = assembly.GetManifestResourceStream(r))
+            {
+                if (s != null)
+                {
+                    long length = s.Length;
+                    buffer = new byte[length];
+                    s.Read(buffer, 0, (int)length);
+                }
+            }
+
+            return buffer;
         }
     }
 }

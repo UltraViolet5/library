@@ -11,11 +11,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\picture.png" />
     <None Remove="TT0320M_.TTF" />
+    <None Remove="user.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\picture.png" />
     <EmbeddedResource Include="Resources\TT0320M_.TTF" />
+    <EmbeddedResource Include="Resources\user.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,9 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Pages\AddBookPage.xaml.cs">
-      <DependentUpon>AddBookPage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Pages\BookPage.xaml.cs">
       <DependentUpon>BookPage.xaml</DependentUpon>
     </Compile>
@@ -66,9 +67,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Pages\AddBookPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Pages\BookPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

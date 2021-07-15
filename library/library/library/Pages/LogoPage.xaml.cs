@@ -32,7 +32,10 @@ namespace library.Pages
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            Navigation.RemovePage(this);
+            if (Navigation.NavigationStack.Count > 1)
+            {
+                Navigation.RemovePage(this);
+            }
         }
     }
 }

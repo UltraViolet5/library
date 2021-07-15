@@ -13,15 +13,14 @@ namespace library.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UserPage : ContentPage
     {
-        private readonly UserViewModel _userViewModel;
-
+        public readonly UserViewModel UserViewModel;
         public UserPage()
         {
             InitializeComponent();
 
             var currentUser = App.DbService.GetUser((string)Application.Current.Properties["UserEmail"]);
-            _userViewModel = new UserViewModel(currentUser);
-            BindingContext = _userViewModel;
+            UserViewModel = new UserViewModel(currentUser);
+            BindingContext = UserViewModel;
 
             Content = App.PageFactory.GetUserPage();
 
