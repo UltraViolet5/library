@@ -83,7 +83,16 @@ namespace library.ViewModel
                 RaisePropertyChanged(nameof(Category));
             }
         }
-
+        public string SelectedCategory
+        {
+            get => Category.ToString();
+            set
+            {
+                Category = GetCategoryByString(value);
+                RaisePropertyChanged(nameof(SelectedCategory));
+                RaisePropertyChanged(nameof(Category));
+            }
+        }
         public int Votes
         {
             get => _book.Votes;
@@ -97,6 +106,11 @@ namespace library.ViewModel
             }
         }
 
+        /// <summary>
+        /// Dropdown categories source
+        /// </summary>
+        public List<string> Categories => new List<string>(Enum.GetNames(typeof(Category)));
+        
         public bool AddPhotoIsEnabled
         {
             get => _addPhotoIsEnabled;
@@ -122,11 +136,7 @@ namespace library.ViewModel
             get
             {
                 var photoSource = Utils.BytesToImageSource(Photo);
-                if (photoSource == null)
-                {
-                    return null;
-                }
-
+                
                 return photoSource;
             }
         }
@@ -158,24 +168,9 @@ namespace library.ViewModel
         }
 
         /// <summary>
-        /// Dropdown categories source
-        /// </summary>
-        public List<string> Categories => new List<string>(Enum.GetNames(typeof(Category)));
-
-        /// <summary>
         /// Dropdown selected category
         /// </summary>
-        public string SelectedCategory
-        {
-            get => Category.ToString();
-            set
-            {
-                Category = GetCategoryByString(value);
-                RaisePropertyChanged(nameof(SelectedCategory));
-                RaisePropertyChanged(nameof(Category));
-            }
-        }
-
+        
         #region Validation
 
         public bool TitleValidation_ShowMsg

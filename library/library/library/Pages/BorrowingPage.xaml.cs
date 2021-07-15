@@ -25,10 +25,6 @@ namespace library.Pages
             BindingContext = BorrowingViewModel;
 
             Content = App.ComponentFactory.GetBookCard(borrowing);
-
-
-
-
         }
     }
 }

@@ -63,7 +63,7 @@ namespace library.FactoryMethod
                         _componentFactory.GetLabelWithBinding("Placed at:", "BookCase.Name"),
                         _componentFactory.GetCheckBox("read", "Read"),
                         _componentFactory.GetCheckBox("available", "Available"),
-                        _componentFactory.GetDropDown("Category:", "Category", "SelectedCategory"),
+                        _componentFactory.GetDropDown("Category:", "Categories", "SelectedCategory"),
                         _componentFactory.GetButton("Save changes", "SaveChangesCommand"),
                     }
                 }
