@@ -30,7 +30,7 @@ namespace library.FactoryMethod
         Label GetValidationLabel(string msg, string visibleBinding, Color color);
         StackLayout GetSwitch(string text);
         Frame GetPhotoBox(string plusBtnCommand, string plusBtnParameter,
-            string visibilityBinding, string photoSourceBinding);
+            string plusBtnIsEnabledBinding, string photoSourceBinding);
         Frame GetBookCard(BookViewModel book);
         Frame GetCategoryBtn(string category);
         Frame GetMateIcon(UserViewModel user);

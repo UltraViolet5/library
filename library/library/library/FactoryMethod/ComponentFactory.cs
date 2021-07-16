@@ -124,7 +124,7 @@ namespace library.FactoryMethod
         }
 
         public Frame GetPhotoBox(string plusBtnCommand, string plusBtnParameter,
-            string visibilityBinding, string photoSourceBinding)
+            string plusBtnIsEnabledBinding, string photoSourceBinding)
         {
             var absoluteLayout = new AbsoluteLayout();
 
@@ -154,7 +154,7 @@ namespace library.FactoryMethod
             tapGesture.SetBinding(TapGestureRecognizer.CommandProperty, plusBtnCommand);
             tapGesture.SetBinding(TapGestureRecognizer.CommandParameterProperty, plusBtnParameter);
             addBtn.GestureRecognizers.Add(tapGesture);
-            addBtn.SetBinding(Image.IsEnabledProperty, visibilityBinding);
+            addBtn.SetBinding(Image.IsEnabledProperty, plusBtnIsEnabledBinding);
 
             absoluteLayout.Children.Add(frame);
             absoluteLayout.Children.Add(addBtn,

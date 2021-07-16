@@ -1,6 +1,7 @@
 ﻿using library.ViewModel;
 using System;
 using System.Threading.Tasks;
+using library.FactoryMethod;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -26,6 +27,12 @@ namespace library.Pages
             BindingContext = AddBookViewModel;
             ScanPage = new ScanPage();
             ScanPage.IsScaned += HandleScanSucceed;
+
+            // Add Photo box to layout
+            PhotoContainer.Children.Add(
+                new ComponentFactory()
+                    .GetPhotoBox("AddPhotoCommand", "Photo",
+                        "AddPhotoIsEnabled", "PhotoSource"));
         }
 
         private void HandleScanSucceed(object sender, EventArgs e)

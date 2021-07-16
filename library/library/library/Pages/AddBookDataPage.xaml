@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodel="clr-namespace:library.ViewModel"
              x:DataType="viewmodel:AddBookViewModel"
@@ -7,75 +8,88 @@
     <ContentPage.Title>Add Data</ContentPage.Title>
 
     <Grid>
-            <BoxView x:Name="slGradient" Scale="20" AnchorX="1" AnchorY="0" >
+        <BoxView x:Name="slGradient" Scale="20" AnchorX="1" AnchorY="0">
             <BoxView.Background>
                 <LinearGradientBrush>
 
-                    <GradientStop Color="DarkBlue"  Offset="0.2"/>
-                    <GradientStop Color="LightBlue"  Offset="0.3"/>
-                    <GradientStop Color="Indigo"  Offset="0.4"/>
-                    <GradientStop Color="Aqua" Offset="0.5"/>
-                    <GradientStop Color="CornflowerBlue" Offset="0.6"/>
-                    <GradientStop Color="DarkBlue"  Offset="0.7"/>
-                    <GradientStop Color="LightBlue"  Offset="0.8"/>
-                    <GradientStop Color="Indigo"  Offset="0.9"/>
-                    <GradientStop Color="Aqua" Offset="1.0"/>
+                    <GradientStop Color="DarkBlue" Offset="0.2" />
+                    <GradientStop Color="LightBlue" Offset="0.3" />
+                    <GradientStop Color="Indigo" Offset="0.4" />
+                    <GradientStop Color="Aqua" Offset="0.5" />
+                    <GradientStop Color="CornflowerBlue" Offset="0.6" />
+                    <GradientStop Color="DarkBlue" Offset="0.7" />
+                    <GradientStop Color="LightBlue" Offset="0.8" />
+                    <GradientStop Color="Indigo" Offset="0.9" />
+                    <GradientStop Color="Aqua" Offset="1.0" />
 
                 </LinearGradientBrush>
             </BoxView.Background>
-                
+
         </BoxView>
         <ScrollView>
             <StackLayout Padding="40">
-                <Frame HeightRequest="20" HorizontalOptions="Center" VerticalOptions="Start" BackgroundColor="Transparent" BorderColor="White">
-                    <Label x:Name="BarcodeLabel"  FontSize="15" HorizontalTextAlignment="Center"  TextColor="White"  Text="{Binding BarcodeText}"/>
+                <StackLayout x:Name="PhotoContainer">
+
+                </StackLayout>
+                <Frame HeightRequest="20" HorizontalOptions="Center" VerticalOptions="Start"
+                       BackgroundColor="Transparent" BorderColor="White">
+                    <Label x:Name="BarcodeLabel" FontSize="15" HorizontalTextAlignment="Center" TextColor="White"
+                           Text="{Binding BarcodeText}" />
                 </Frame>
 
-                <Button x:Name="ScanBtn" Text="Scan"  CornerRadius="12" HorizontalOptions="FillAndExpand" Clicked="ScanBtn_Clicked" FontFamily="News701" HeightRequest="40" WidthRequest="30" BackgroundColor="White" />
+                <Button x:Name="ScanBtn" Text="Scan" CornerRadius="12" HorizontalOptions="FillAndExpand"
+                        Clicked="ScanBtn_Clicked" FontFamily="News701" HeightRequest="40" WidthRequest="30"
+                        BackgroundColor="White" />
                 <Label Text="Title" HorizontalTextAlignment="Center" FontSize="18"
-                           FontFamily="News701" Margin="0" TextColor="White" />
+                       FontFamily="News701" Margin="0" TextColor="White" />
                 <Frame Padding="0" CornerRadius="12" Margin="0,10">
-                    <Entry Placeholder="Titlte" HorizontalTextAlignment="Center" TextChanged="Title_TextChanged"    
-                               BackgroundColor="White" WidthRequest="150" FontFamily="News701"  Text="{Binding Title , Mode=OneWayToSource}" />
+                    <Entry Placeholder="Titlte" HorizontalTextAlignment="Center" TextChanged="Title_TextChanged"
+                           BackgroundColor="White" WidthRequest="150" FontFamily="News701"
+                           Text="{Binding Title , Mode=OneWayToSource}" />
                 </Frame>
-                <Label   Text="Author" HorizontalTextAlignment="Center" FontSize="18"
-                           FontFamily="News701" Margin="0" TextColor="White"/>
-                <Frame  Padding="0" CornerRadius="12" Margin="0,10">
+                <Label Text="Author" HorizontalTextAlignment="Center" FontSize="18"
+                       FontFamily="News701" Margin="0" TextColor="White" />
+                <Frame Padding="0" CornerRadius="12" Margin="0,10">
                     <Entry Placeholder="Author" HorizontalTextAlignment="Center" TextChanged="Author_TextChanged"
-                                BackgroundColor="White" WidthRequest="150" FontFamily="News701" Text="{Binding Authors , Mode=OneWayToSource}"/>
-                   
+                           BackgroundColor="White" WidthRequest="150" FontFamily="News701"
+                           Text="{Binding Authors , Mode=OneWayToSource}" />
+
                 </Frame>
-                
+
                 <Label Text="Publishing Year" HorizontalTextAlignment="Center" FontSize="18"
-                           FontFamily="News701" Margin="0" TextColor="White" />
+                       FontFamily="News701" Margin="0" TextColor="White" />
                 <Frame Padding="0" CornerRadius="12" Margin="0,10">
-                    <DatePicker Date="{Binding PublishingYear, Mode=OneWayToSource}" HorizontalOptions="CenterAndExpand" BackgroundColor="White" WidthRequest="150" FontFamily="News701"/>
+                    <DatePicker Date="{Binding PublishingYear, Mode=OneWayToSource}"
+                                HorizontalOptions="CenterAndExpand" BackgroundColor="White"
+                                FontFamily="News701" />
                 </Frame>
                 <Label Text="Category" HorizontalTextAlignment="Center" FontSize="18"
-                           FontFamily="News701" Margin="0" TextColor="White"  />
+                       FontFamily="News701" Margin="0" TextColor="White" />
                 <Frame CornerRadius="12" Padding="0">
-                <Picker x:Name="categoryPicker"  BackgroundColor="White" 
-                        HorizontalTextAlignment="Center" Title="Select Category" 
-                        FontSize="18" FontFamily="News701" TitleColor="Black" 
-                        ItemsSource="{Binding CategoriesList}" 
-                        SelectedItem="{Binding CategoryString}"/>
+                    <Picker x:Name="categoryPicker" BackgroundColor="White"
+                            HorizontalTextAlignment="Center" Title="Select Category"
+                            FontSize="18" FontFamily="News701" TitleColor="Black"
+                            ItemsSource="{Binding CategoriesList}"
+                            SelectedItem="{Binding CategoryString}" />
                 </Frame>
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Read"  FontSize="18" TextColor="White" VerticalTextAlignment="Center"/>
-                    <CheckBox  IsChecked="{Binding Read}" Color="White" HorizontalOptions="Center" />
+                    <Label Text="Read" FontSize="18" TextColor="White" VerticalTextAlignment="Center" />
+                    <CheckBox IsChecked="{Binding Read}" Color="White" HorizontalOptions="Center" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Available" FontSize="18" TextColor="White" VerticalTextAlignment="Center"/>
-                    <CheckBox  IsChecked="{Binding Available}" Color="White" HorizontalOptions="Center"/>
-                    
+                    <Label Text="Available" FontSize="18" TextColor="White" VerticalTextAlignment="Center" />
+                    <CheckBox IsChecked="{Binding Available}" Color="White" HorizontalOptions="Center" />
+
                 </StackLayout>
-                <Line X1="0" X2="400" Y1="1" Y2="1" Stroke="white" StrokeThickness="1" StrokeLineCap="Round"/>
-                <Line X1="0" X2="400" Y1="1" Y2="1" Stroke="white" StrokeThickness="4" StrokeLineCap="Round" HeightRequest="10"/>
-                <Button x:Name="SaveBtn"  CornerRadius="12" FontFamily="News701" Text="Save" BackgroundColor="White"  Command="{Binding SaveButton}" IsEnabled="{Binding SaveBtnValue}"/>
-                
+                <Line X1="0" X2="400" Y1="1" Y2="1" Stroke="white" StrokeThickness="1" StrokeLineCap="Round" />
+                <Line X1="0" X2="400" Y1="1" Y2="1" Stroke="white" StrokeThickness="4" StrokeLineCap="Round"
+                      HeightRequest="10" />
+                <Button x:Name="SaveBtn" CornerRadius="12" FontFamily="News701" Text="Save" BackgroundColor="White"
+                        Command="{Binding SaveButton}" IsEnabled="{Binding SaveBtnValue}" />
+
             </StackLayout>
         </ScrollView>
-          
+
     </Grid>
 
 
