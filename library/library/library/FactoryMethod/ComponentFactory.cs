@@ -813,9 +813,6 @@ namespace library.FactoryMethod
             return result;
         }
 
-        //public Frame GetBorowingFrame(Borrowing borrowing)
-        //{
-        //    var grid = new Grid();
-        //}
+  
     }
 }

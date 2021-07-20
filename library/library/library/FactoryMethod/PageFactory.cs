@@ -255,38 +255,82 @@ namespace library.FactoryMethod
             }
         }
 
-        //public ScrollView GetBorrowingPage(Borrowing borrowing)
-        //{
-        //    var result = new ScrollView()
-        //    {
-        //        Content = new StackLayout()
-        //        {
-        //            Padding = Style.PagePadding,
-        //            Children =
-        //            {
-        //                new Image()
-        //                {
-        //                        Source = Utils.BytesToImageSource(borrowing.Book.Photo),
-        //                        Aspect = Aspect.AspectFill
-        //                },
-        //                 new Frame()
-        //                 {
-        //                     Content=
-        //                     {
-        //                        new Label()
-        //                        {
+        public ScrollView GetBorrowingPage(Borrowing borrowing)
+        {
+            var grid = new Grid()
+            {
+                ColumnDefinitions =
+                {
+                    new ColumnDefinition() {Width = new GridLength(1, GridUnitType.Star)},
+                    new ColumnDefinition() {Width = new GridLength(5, GridUnitType.Star)},
+                    new ColumnDefinition() {Width = new GridLength(2, GridUnitType.Star)}
+                }
+            };
+            grid.Children.Add(new Image()
+            {
+                Source = "calender.png",
+                WidthRequest = 15,
+                HeightRequest = 15,
+                HorizontalOptions = LayoutOptions.Start
+            });
 
-        //                        }
-        //                     }
-        //                 }
-                      
-                      
+            var label = new Label()
+            {
+                Text = $"Return at {borrowing.ReturnDate}",
+                HorizontalOptions = LayoutOptions.StartAndExpand,
+                HorizontalTextAlignment = TextAlignment.Start,
+                FontFamily = Style.MainFont
+            };
+            label.SetValue(Grid.ColumnProperty, 1);
+            grid.Children.Add(label);
+
+            var arrow = new Image()
+            {
+                Source = "arrow.png",
+                HorizontalOptions = LayoutOptions.End,
+                WidthRequest = 10
+            };
+            arrow.SetValue(Grid.ColumnProperty, 2);
+            grid.Children.Add(arrow);
+
+            var frame = new Frame()
+            {
+                Padding = new Thickness(15, 5),
+                CornerRadius = Style.SmallCornerRadius,
+                Content = grid
+            };
 
 
-        //            }
-                    
-        //        }
-        //    };
-        //}
+            var result = new ScrollView()
+            {
+                Content = new StackLayout()
+                {
+                    Padding = Style.PagePadding,
+                    Children =
+                    {
+                       
+                        
+                         new Frame()
+                         {
+                             Content = new StackLayout()
+                             {
+                                 Children=
+                                 {
+                                     frame,
+                                     _componentFactory.GetBookCard(new BookViewModel(borrowing.Book))
+                                 }
+                             }
+                         }
+
+
+
+
+                    }
+
+                }
+            };
+
+            return result;
+        }
     }
 }

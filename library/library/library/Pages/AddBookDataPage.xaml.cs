@@ -28,6 +28,7 @@ namespace library.Pages
             ScanPage = new ScanPage();
             ScanPage.IsScaned += HandleScanSucceed;
 
+
             // Add Photo box to layout
             PhotoContainer.Children.Add(
                 new ComponentFactory()

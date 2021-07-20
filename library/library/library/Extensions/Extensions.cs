@@ -8,6 +8,9 @@ namespace library.Extensions
 {
     public static class Extensions
     {
-
+         public static BookViewModel ToBookViewModel (this Book book)
+        {
+            return new BookViewModel(book);
+        }
     }
 }

@@ -17,12 +17,12 @@ namespace library.Pages
 
         public event EventHandler IsScaned;
 
-
         public ScanPage()
         {
             InitializeComponent();
             //ScanButton = scanbuttonXAML;
             ScannerView = scanerXAML;
+
         }
 
 
@@ -39,41 +39,14 @@ namespace library.Pages
                 {
                     IsScaned(result.Text, EventArgs.Empty);
                 }
-                scanResultText.Text = result.Text + "(type: " + result.BarcodeFormat.ToString() + ")";
-                App.Navigation.PopModalAsync();
-
             });
 
-            ///Navigation.NavigationStack[Navigation.NavigationStack.Count-2]
-           
-            
-            
-            ///wywółać z awaitem.
-
-          
         }
 
-
-        /// <summary>
-        /// Turn on or off scaning.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void scanbuttonXAML_Clicked(object sender, EventArgs e)
-        //{
-        //    if (ScannerView.IsScanning)
-        //    {
-        //        ScannerView.IsScanning = false;
-        //        ScanButton.Text = "Scan";
-        //        scanResultText.Text = "";
-        //    }
-        //    else
-        //    {
-        //        ScannerView.IsScanning = true;
-        //        ScanButton.Text = "Off Scan";
-        //        scanResultText.Text = "Skanowanie";
-
-        //    }
-        //}
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ScannerView.IsScanning = true;
+        }
     }
 }
