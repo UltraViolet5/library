@@ -39,6 +39,8 @@ namespace library.Pages
                 {
                     IsScaned(result.Text, EventArgs.Empty);
                 }
+
+                App.Navigation.PopModalAsync();
             });
 
         }

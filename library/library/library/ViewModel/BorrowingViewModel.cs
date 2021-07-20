@@ -9,6 +9,7 @@ namespace library.ViewModel
     {
         private readonly Borrowing _borrowing;
 
+        public Borrowing Borrowing => _borrowing;
         public string ReturnDate
         {
             get { return $"{_borrowing.ReturnDate.Year}/" +
@@ -16,7 +17,15 @@ namespace library.ViewModel
                          $"{_borrowing.ReturnDate.Day}"; }
         }
 
-       
+        public string BookTitle
+        {
+            get
+            {
+                var book = App.DbService.GetBook(Borrowing.BookId);
+                return book.Title;
+            }
+        }
+
 
         public BorrowingViewModel(Borrowing borrowing)
         {

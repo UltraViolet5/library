@@ -2,8 +2,6 @@
 using library.Pages;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -13,27 +11,18 @@ namespace library.ViewModel
     {
         public IEnumerable<Borrowing> Borrowings { get; set; }
 
-        public Borrowing Borrowing { get; set; }
-
-        
-
         public ICommand ShowBorrowingCommand { get; private set; }
 
         public MyRentalsViewModel()
         {
-           Borrowings = App.DbService.GetBorrowings();
-           
-           ShowBorrowingCommand = new Command(BorrowingExecute);
+            Borrowings = App.DbService.GetBorrowings();
+
+            ShowBorrowingCommand = new Command(BorrowingExecute);
         }
+
         private void BorrowingExecute(object obj)
         {
-            App.Navigation.PushAsync(new BorrowingPage((Borrowing)obj));
+            App.Navigation.PushAsync(new BorrowingPage((Borrowing) obj));
         }
-
-
-
-
     }
-
-
 }

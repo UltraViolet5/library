@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
 using library.ViewModel;
 using Xamarin.Forms;
-using System;
-using System.Collections.Generic;
 using library.Model;
-using library.ViewModel;
 
 namespace library.FactoryMethod
 {
@@ -47,8 +44,8 @@ namespace library.FactoryMethod
                     Padding = Style.PagePadding,
                     Children =
                     {
-                        _componentFactory.GetPhotoBox("AddPhotoCommand", 
-                            "Photo", "AddPhotoIsEnabled", 
+                        _componentFactory.GetPhotoBox("AddPhotoCommand",
+                            "Photo", "AddPhotoIsEnabled",
                             "PhotoSource"),
                         _componentFactory.GetLabel("Title", Style.BigFont, hAlignment: TextAlignment.Center),
                         _componentFactory.GetEntry("Title"),
@@ -128,21 +125,30 @@ namespace library.FactoryMethod
             return result;
         }
 
-        public ScrollView GetMyRentalsPage()
+        public ScrollView GetMyRentalsPage(IEnumerable<Borrowing> borrowings)
         {
-            var borrowingElements = _componentFactory.GetBorrowingElements();
-            var layout = new StackLayout() {Padding = Style.PagePadding};
-
-            foreach (var borrowing in borrowingElements)
+            var layout = new StackLayout()
             {
-                layout.Children.Add(borrowing);
+                Padding = Style.PagePadding,
+                Children =
+                {
+                    _componentFactory.GetLabel("My rentals", Style.BigFont)
+                }
+            };
+
+            foreach (var borrowing in borrowings)
+            {
+                layout.Children.Add(
+                    _componentFactory.GetRentalBtn(
+                        new BorrowingViewModel(borrowing)
+                    )
+                );
             }
 
             var result = new ScrollView()
             {
                 Content = layout
             };
-
 
             return result;
         }
@@ -157,7 +163,7 @@ namespace library.FactoryMethod
                     $"{booksOwner.UserName} Books",
                     "AddBookCommand");
             else
-                label = _componentFactory.GetLabel($"{booksOwner.UserName} Books", 
+                label = _componentFactory.GetLabel($"{booksOwner.UserName} Books",
                     Style.BigFont);
 
             var stackLayout = new StackLayout()
@@ -262,45 +268,80 @@ namespace library.FactoryMethod
                 ColumnDefinitions =
                 {
                     new ColumnDefinition() {Width = new GridLength(1, GridUnitType.Star)},
-                    new ColumnDefinition() {Width = new GridLength(5, GridUnitType.Star)},
-                    new ColumnDefinition() {Width = new GridLength(2, GridUnitType.Star)}
+                    new ColumnDefinition() {Width = new GridLength(9, GridUnitType.Star)},
                 }
             };
-            grid.Children.Add(new Image()
+            grid.Children.Add(new StackLayout()
             {
-                Source = "calender.png",
-                WidthRequest = 15,
-                HeightRequest = 15,
-                HorizontalOptions = LayoutOptions.Start
+                Children =
+                {
+                    new Image()
+                    {
+                        Source = "calender.png",
+                        WidthRequest = 15,
+                        HeightRequest = 15,
+                        HorizontalOptions = LayoutOptions.Start
+                    }
+                }
             });
 
-            var label = new Label()
+            var gridStackContent = new StackLayout()
             {
-                Text = $"Return at {borrowing.ReturnDate}",
-                HorizontalOptions = LayoutOptions.StartAndExpand,
-                HorizontalTextAlignment = TextAlignment.Start,
-                FontFamily = Style.MainFont
+                Children =
+                {
+                    new Label()
+                    {
+                        Text = $"Date {borrowing.Date.Day}/ {borrowing.Date.Month}/ {borrowing.Date.Year}",
+                        HorizontalOptions = LayoutOptions.StartAndExpand,
+                        HorizontalTextAlignment = TextAlignment.Start,
+                        FontFamily = Style.MainFont
+                    },
+                    new Label()
+                    {
+                        Text =
+                            $"Return at {borrowing.ReturnDate.Day}/{borrowing.ReturnDate.Month}/{borrowing.ReturnDate.Year}",
+                        HorizontalOptions = LayoutOptions.StartAndExpand,
+                        HorizontalTextAlignment = TextAlignment.Start,
+                        FontFamily = Style.MainFont
+                    },
+                    new Label()
+                    {
+                        Text = $"Borrower: {borrowing.Borower.UserName}",
+                        HorizontalOptions = LayoutOptions.StartAndExpand,
+                        HorizontalTextAlignment = TextAlignment.Start,
+                        FontFamily = Style.MainFont
+                    },
+                    new Label()
+                    {
+                        Text = $"Client: {borrowing.Client.UserName}",
+                        HorizontalOptions = LayoutOptions.StartAndExpand,
+                        HorizontalTextAlignment = TextAlignment.Start,
+                        FontFamily = Style.MainFont
+                    }
+                }
             };
-            label.SetValue(Grid.ColumnProperty, 1);
-            grid.Children.Add(label);
+            gridStackContent.SetValue(Grid.ColumnProperty, 1);
+            grid.Children.Add(gridStackContent);
 
-            var arrow = new Image()
-            {
-                Source = "arrow.png",
-                HorizontalOptions = LayoutOptions.End,
-                WidthRequest = 10
-            };
-            arrow.SetValue(Grid.ColumnProperty, 2);
-            grid.Children.Add(arrow);
+
+            Book book = App.DbService.GetBook(borrowing.BookId);
+            var bookCard = _componentFactory.GetBookCard(new BookViewModel(book));
 
             var frame = new Frame()
             {
                 Padding = new Thickness(15, 5),
                 CornerRadius = Style.SmallCornerRadius,
-                Content = grid
+                Content = new StackLayout()
+                {
+                    Children =
+                    {
+                        grid,
+                        bookCard
+                    }
+                },
             };
 
-            Book book = App.DbService.GetBook(borrowing.BookId);
+
             var result = new ScrollView()
             {
                 Content = new StackLayout()
@@ -308,25 +349,8 @@ namespace library.FactoryMethod
                     Padding = Style.PagePadding,
                     Children =
                     {
-                       
-                        
-                         new Frame()
-                         {
-                             Content = new StackLayout()
-                             {
-                                 Children=
-                                 {
-                                     frame,
-                                     _componentFactory.GetBookCard(new BookViewModel(book))
-                                 }
-                             }
-                         }
-
-
-
-
+                        frame
                     }
-
                 }
             };
 

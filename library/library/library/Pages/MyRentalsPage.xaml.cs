@@ -29,9 +29,7 @@ namespace library.Pages
 
             _pageFactory = new PageFactory();
 
-            Content = _pageFactory.GetMyRentalsPage();
-
-
+            Content = _pageFactory.GetMyRentalsPage(MyRentalsViewModel.Borrowings);
         }
 
     

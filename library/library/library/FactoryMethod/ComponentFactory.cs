@@ -293,7 +293,6 @@ namespace library.FactoryMethod
             return result;
         }
 
-        
 
         public Frame GetCategoryBtn(string category)
         {
@@ -343,23 +342,40 @@ namespace library.FactoryMethod
                     new ColumnDefinition() {Width = new GridLength(2, GridUnitType.Star)}
                 }
             };
-            grid.Children.Add(new Image()
-            {
-                Source = "calender.png",
-                WidthRequest = 15,
-                HeightRequest = 15,
-                HorizontalOptions = LayoutOptions.Start
-            });
+            grid.Children.Add(
+                new Image()
+                {
+                    Source = "calender.png",
+                    WidthRequest = 15,
+                    HeightRequest = 15,
+                    HorizontalOptions = LayoutOptions.Start
+                }
+            );
 
-            var label = new Label()
+            var stack = new StackLayout()
             {
-                Text = $"Return at {borrowing.ReturnDate}",
-                HorizontalOptions = LayoutOptions.StartAndExpand,
-                HorizontalTextAlignment = TextAlignment.Start,
-                FontFamily = Style.MainFont
+                Children =
+                {
+                    new Label()
+                    {
+                        Text = $"{borrowing.BookTitle}",
+                        HorizontalOptions = LayoutOptions.StartAndExpand,
+                        HorizontalTextAlignment = TextAlignment.Start,
+                        FontFamily = Style.MainFont,
+                        FontSize = Style.MediumFont
+                    },
+                    new Label()
+                    {
+                        Text = $"Return at {borrowing.ReturnDate}",
+                        HorizontalOptions = LayoutOptions.StartAndExpand,
+                        HorizontalTextAlignment = TextAlignment.Start,
+                        FontFamily = Style.MainFont,
+                        FontSize = Style.SmallFont
+                    },
+                }
             };
-            label.SetValue(Grid.ColumnProperty, 1);
-            grid.Children.Add(label);
+            stack.SetValue(Grid.ColumnProperty, 1);
+            grid.Children.Add(stack);
 
             var arrow = new Image()
             {
@@ -377,77 +393,10 @@ namespace library.FactoryMethod
                 Content = grid
             };
 
-            return frame;
-        }
-
-        public Frame GetRentalBtn(Borrowing borrowing)
-        {
-            var grid = new Grid()
-            {
-                ColumnDefinitions =
-                {
-
-                    new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) },
-                    new ColumnDefinition() { Width = new GridLength(5, GridUnitType.Star) },
-                    new ColumnDefinition() { Width = new GridLength(2, GridUnitType.Star) },
-                    new ColumnDefinition() { Width = new GridLength(2, GridUnitType.Star) },
-
-
-                },
-                RowDefinitions =
-                {
-                    new RowDefinition(),
-                    new RowDefinition(),
-                    
-                }
-            };
-            grid.Children.Add(new Image()
-            {
-                Source = "calender.png",
-                WidthRequest = 15,
-                HeightRequest = 15,
-                HorizontalOptions = LayoutOptions.Start
-            });
-
-            Book book = App.DbService.GetBook(borrowing.BookId);
-
-            var titleLabel = new Label()
-            {
-                
-                Text = book.Title,
-                HorizontalOptions = LayoutOptions.StartAndExpand,
-                HorizontalTextAlignment = TextAlignment.Start,
-                FontFamily = Style.MainFont
-            };
-            titleLabel.SetValue(Grid.ColumnProperty, 1);
-            titleLabel.SetValue(Grid.RowProperty, 0);
-            grid.Children.Add(titleLabel);
-
-
-            var label = new Label()
-            {
-                Text = $"Return at {borrowing.ReturnDate}",
-                HorizontalOptions = LayoutOptions.StartAndExpand,
-                HorizontalTextAlignment = TextAlignment.Start,
-                FontFamily = Style.MainFont
-            };
-            label.SetValue(Grid.ColumnProperty, 1);
-            label.SetValue(Grid.RowProperty, 1);
-            grid.Children.Add(label);
-
-
-            var frame = new Frame()
-            {
-                Padding = new Thickness(15, 5),
-                CornerRadius = Style.SmallCornerRadius,
-                Content = grid,
-            };
-
             var tapGest = new TapGestureRecognizer();
             tapGest.SetBinding(TapGestureRecognizer.CommandProperty, new Binding("ShowBorrowingCommand"));
-            tapGest.CommandParameter = borrowing;
+            tapGest.CommandParameter = borrowing.Borrowing;
             frame.GestureRecognizers.Add(tapGest);
-
 
             return frame;
         }
@@ -589,21 +538,6 @@ namespace library.FactoryMethod
             return result;
         }
 
-        public List<Frame> GetBorrowingElements()
-        {
-            var borrowings = App.DbService.GetBorrowings();
-
-            List<Frame> borrowingElements = new List<Frame>();
-
-            foreach (var borrowing in borrowings)
-            {
-                Frame frame = GetRentalBtn(borrowing);
-                borrowingElements.Add(frame);
-            }
-
-            return borrowingElements;
-        }
-
         public Frame GetMateCard(UserViewModel mate)
         {
             Grid grid = new Grid()
@@ -686,7 +620,5 @@ namespace library.FactoryMethod
 
             return result;
         }
-
-  
     }
 }

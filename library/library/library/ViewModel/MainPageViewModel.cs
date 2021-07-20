@@ -38,7 +38,7 @@ namespace library.ViewModel
         public ICommand UserCommand { get; private set; }
         public ICommand MatesCommand { get; private set; }
         public ICommand RentalsCommand { get; private set; }
-        public ICommand RentedCommand { get; private set; }
+        public ICommand ShowBorrowingCommand { get; private set; }
         public ICommand SettingsCommand { get; private set; }
         public ICommand BooksCommand { get; private set; }
         public ICommand AddBookCommand { get; private set; }
@@ -57,7 +57,8 @@ namespace library.ViewModel
             Mates = App.CurrentUser.Friends
                 .Select(m => new UserViewModel(m));
             Borrowings = App.DbService.GetBorrowings()
-                .Select(b => new BorrowingViewModel(b));
+                .Select(b => new BorrowingViewModel(b))
+                .Take(2);
 
             // Actions init
             BooksCommand = new Command(BooksExecute);
@@ -67,9 +68,15 @@ namespace library.ViewModel
             SettingsCommand = new Command(SettingsExecute);
             MatesCommand = new Command(MatesExecute);
             RentalsCommand = new Command(RentalsExecute);
+            ShowBorrowingCommand = new Command(ShowBorrowingExecute);
 
             _userPage = new UserPage();
             _userPage.UserViewModel.IsPhotoUpdated += HandlePhotoUpdated;
+        }
+
+        private void ShowBorrowingExecute(object obj)
+        {
+            App.Navigation.PushAsync(new BorrowingPage((Borrowing)obj));
         }
 
         private void HandlePhotoUpdated(object sender, EventArgs e)
@@ -77,7 +84,6 @@ namespace library.ViewModel
             RaisePropertyChanged(nameof(PhotoSource));
         }
 
-        //wszystko co asynch powinno byc wywołane z awaitem
         private void RentalsExecute()
         {
             App.Navigation.PushAsync(new MyRentalsPage());
@@ -87,7 +93,6 @@ namespace library.ViewModel
         {
             App.Navigation.PushAsync(new MatesPage());
         }
-
 
         private void SettingsExecute()
         {
@@ -108,11 +113,6 @@ namespace library.ViewModel
         {
             var booksOwner = App.CurrentUser;
             App.Navigation.PushAsync(new BooksPage(booksOwner, true));
-        }
-
-        private bool LoginBtnCanExecute(object arg)
-        {
-            return true;
         }
 
         private void AddBookExecute(object arg)

@@ -40,6 +40,5 @@ namespace library.FactoryMethod
 
         Frame GetMateCard(UserViewModel mate);
         Frame GetDatePicker(string binding);
-        List<Frame> GetBorrowingElements();
     };
 }

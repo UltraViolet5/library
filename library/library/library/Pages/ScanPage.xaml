@@ -4,7 +4,7 @@
              xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms" xmlns:viewmodel="clr-namespace:library.ViewModel"
              x:DataType="viewmodel:AddBookViewModel"
              x:Class="library.Pages.ScanPage">
-  <ContentPage.Title>Scann</ContentPage.Title>
+  <ContentPage.Title>Scan</ContentPage.Title>
     <StackLayout>
         <zxing:ZXingScannerView x:Name="scanerXAML" IsScanning="False" OnScanResult="ZXingScannerView_OnScanResult"/>
     </StackLayout>
