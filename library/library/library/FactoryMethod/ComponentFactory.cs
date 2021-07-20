@@ -293,136 +293,7 @@ namespace library.FactoryMethod
             return result;
         }
 
-        public Frame GetBookCard(Borrowing borrowing)
-        {
-            Grid grid = new Grid()
-            {
-                ColumnDefinitions =
-                {
-                    new ColumnDefinition() {Width = new GridLength(3, GridUnitType.Star)},
-                    new ColumnDefinition() {Width = new GridLength(7, GridUnitType.Star)}
-                },
-
-                RowDefinitions =
-                {
-                    new RowDefinition() {Height = new GridLength(2, GridUnitType.Star)},
-                    new RowDefinition() {Height = new GridLength(2, GridUnitType.Star)},
-
-                }
-            };
-
-            var imageFrame = new Frame()
-            {
-                Padding = 0,
-                HeightRequest = 100,
-                HasShadow = false,
-                Content = new Image()
-                {
-                    Source = "picture.png",
-                    Aspect = Aspect.AspectFill
-                }
-            };
-            imageFrame.SetValue(Grid.ColumnProperty, 0);
-            grid.Children.Add(imageFrame);
-
-            var contentBox = new StackLayout()
-            {
-                Padding = new Thickness(15, 10),
-                Children =
-                {
-                    new Label()
-                    {
-                        Text = borrowing.Book.Title,
-                        FontSize = 18,
-                        FontFamily = Style.MainFont
-                    },
-                    new Label()
-                    {
-                        Text = $"{borrowing.Book.Authors}; {borrowing.Book.PublishingYear}",
-                        FontFamily = Style.MainFont
-                    },
-                    new Label()
-                    {
-                        Text = $"Placed in: {borrowing.Book.Bookcase}",
-                        FontFamily = Style.MainFont
-                    },
-                    new StackLayout()
-                    {
-                        Orientation = StackOrientation.Horizontal,
-                        Children =
-                        {
-                            new CheckBox()
-                            {
-                                IsChecked = borrowing.Book.Read,
-                                Color = Color.Gray,
-                                IsEnabled = false
-                            },
-                            new Label()
-                            {
-                                Text = "read",
-                                VerticalOptions = LayoutOptions.Center,
-                                FontFamily = Style.MainFont
-                            }
-                        }
-                    },
-                    new StackLayout()
-                    {
-                        Orientation = StackOrientation.Horizontal,
-                        Children =
-                        {
-                            new CheckBox()
-                            {
-                                IsChecked = borrowing.Book.Available,
-                                Color = Color.Gray,
-                                IsEnabled = false
-                            },
-                            new Label()
-                            {
-                                Text = "available",
-                                VerticalOptions = LayoutOptions.Center,
-                                FontFamily = Style.MainFont
-                            }
-                        }
-                    }
-                }
-            };
-
-
-            contentBox.SetValue(Grid.ColumnProperty, 1);
-            grid.Children.Add(contentBox);
-
-            var rentalBtn = GetRentalBtn(borrowing);
-            rentalBtn.SetValue(Grid.RowProperty, 1);
-            rentalBtn.SetValue(Grid.ColumnProperty, 1);
-
-            grid.Children.Add(rentalBtn);
-
-            Frame result = new Frame()
-            {
-                ClassId = borrowing.Id.ToString(),
-                BackgroundColor = Style.LightGray,
-                Padding = 0,
-                Margin = new Thickness(0, 10),
-                CornerRadius = Style.BigCornerRadius,
-                HasShadow = true,
-                Content = new StackLayout()
-                {
-                    Children =
-                    {
-                        grid
-                    }
-                }
-            };
-
-            var tapGesture = new TapGestureRecognizer();
-            tapGesture.SetBinding(TapGestureRecognizer.CommandProperty, "ShowBookCommand");
-            tapGesture.CommandParameter = borrowing.Id;
-            result.GestureRecognizers.Add(tapGesture);
-
-            
-
-            return result;
-        }
+        
 
         public Frame GetCategoryBtn(string category)
         {
@@ -538,9 +409,12 @@ namespace library.FactoryMethod
                 HorizontalOptions = LayoutOptions.Start
             });
 
+            Book book = App.DbService.GetBook(borrowing.BookId);
+
             var titleLabel = new Label()
             {
-                Text = borrowing.Book.Title,
+                
+                Text = book.Title,
                 HorizontalOptions = LayoutOptions.StartAndExpand,
                 HorizontalTextAlignment = TextAlignment.Start,
                 FontFamily = Style.MainFont

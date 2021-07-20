@@ -7,8 +7,10 @@ namespace library.Model
     public class Borrowing
     {
         public int Id { get; private set; }
-        public User Borrowed { get; set; }
-        public Book Book { get; set; }
+        public User Client { get; set; }
+        //public Book Book { get; set; }
+        public User Borower { get; set; }
+        public int BookId { get; set; }
         public DateTime Date { get; set; }
         public DateTime ReturnDate { get; set; }
 

@@ -11,6 +11,7 @@ namespace library
     {
         private readonly DBService _dbService;
         private User _admin;
+        private IEnumerable<User> _usersList { get; set; }
 
         public LibrarySeeder(DBService dbService)
         {
@@ -24,20 +25,23 @@ namespace library
                 BirthDate = new DateTime(2001, 2, 14),
                 Localization = "Cracow"
             };
+            _usersList = GetUsers();
         }
 
         public void Seed()
         {
             _dbService.AddBooks(GetBooks());
-            _dbService.AddBorrowings(GetBorrowindg());
+            _dbService.AddBorrowings(GetBorrowings());
 
-            var users = GetUsers();
+
+
             // Make relationship. All users are friends of admin
-            _admin.Friends.Add(users.ToList()[1]);
-            _admin.Friends.Add(users.ToList()[2]);
-            _admin.Friends.Add(users.ToList()[3]);
+            _admin.Friends.Add(_usersList.ToList()[1]);
+            _admin.Friends.Add(_usersList.ToList()[2]);
+            _admin.Friends.Add(_usersList.ToList()[3]);
 
-            _dbService.AddUsers(users);
+
+            _dbService.AddUsers(_usersList);
         }
 
         private IEnumerable<User> GetUsers()
@@ -66,13 +70,30 @@ namespace library
             };
         }
 
-        private IEnumerable<Borrowing> GetBorrowindg()
+        private IEnumerable<Borrowing> GetBorrowings()
         {
             return new List<Borrowing>()
             {
-                new Borrowing() {Book = new Book(){Title= "book1",Authors="Author1" } ,ReturnDate = new DateTime(2021, 9, 3),},
-                new Borrowing() {Book = new Book(){Title= "book2",Authors="Author2" } ,ReturnDate = new DateTime(2021, 10, 21),},
-                new Borrowing() {Book = new Book(){Title= "book3",Authors="Author3" } ,ReturnDate = new DateTime(2021, 8, 12),},
+                new Borrowing() {
+                    BookId =5,
+                    Borower= _admin,
+                    Client= _usersList.ToList()[0],
+                    Date = new DateTime(2021,5,4),
+                    ReturnDate = new DateTime(2021, 9, 3),
+                },
+                new Borrowing() {
+                    BookId= 4,
+                    Borower= _admin ,
+                    Client= _usersList.ToList()[1],
+                    Date = new DateTime(2021,5,2),
+                    ReturnDate = new DateTime(2021, 10, 21),
+                },
+                new Borrowing() {BookId = 3,
+                    Borower=_admin,
+                    Client= _usersList.ToList()[2] ,
+                    Date = new DateTime(2021,5,1),
+                    ReturnDate = new DateTime(2021, 8, 12),
+                }
             };
         }
 
@@ -113,6 +134,40 @@ namespace library
                 Owner = _admin,
                 Category = Category.Documentary
             });
+            books.Add(new Book()
+            {
+                // Id = 3,
+                Title = "Book1",
+                Authors = "Jarek, Krzysiek",
+                PublishingYear = new DateTime(2020, 1, 1),
+                Read = true,
+                Available = false,
+                Owner = _admin,
+                Category = Category.Crime
+            });
+            books.Add(new Book()
+            {
+                // Id = 4,
+                Title = "Book2",
+                Authors = "Jarek",
+                PublishingYear = new DateTime(2020, 1, 1),
+                Available = true,
+                Read = true,
+                Owner = _admin,
+                Category = Category.Novel
+            });
+            books.Add(new Book()
+            {
+                // Id = 5,
+                Title = "Book3",
+                Authors = "Krzysiek",
+                PublishingYear = new DateTime(2020, 1, 1),
+                Available = true,
+                Read = false,
+                Owner = _admin,
+                Category = Category.Documentary
+            });
+
 
             return books;
         }

@@ -300,7 +300,7 @@ namespace library.FactoryMethod
                 Content = grid
             };
 
-
+            Book book = App.DbService.GetBook(borrowing.BookId);
             var result = new ScrollView()
             {
                 Content = new StackLayout()
@@ -317,7 +317,7 @@ namespace library.FactoryMethod
                                  Children=
                                  {
                                      frame,
-                                     _componentFactory.GetBookCard(new BookViewModel(borrowing.Book))
+                                     _componentFactory.GetBookCard(new BookViewModel(book))
                                  }
                              }
                          }
