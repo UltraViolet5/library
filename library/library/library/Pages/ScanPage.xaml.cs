@@ -21,7 +21,7 @@ namespace library.Pages
         public ScanPage()
         {
             InitializeComponent();
-            ScanButton = scanbuttonXAML;
+            //ScanButton = scanbuttonXAML;
             ScannerView = scanerXAML;
         }
 
@@ -34,19 +34,23 @@ namespace library.Pages
         {
             Device.BeginInvokeOnMainThread(() =>
             {
+                ScannerView.IsScanning = false;
+                if (IsScaned != null)
+                {
+                    IsScaned(result.Text, EventArgs.Empty);
+                }
                 scanResultText.Text = result.Text + "(type: " + result.BarcodeFormat.ToString() + ")";
+                App.Navigation.PopModalAsync();
+
             });
 
             ///Navigation.NavigationStack[Navigation.NavigationStack.Count-2]
-            ScannerView.IsScanning = false;
-            ScanButton.Text = "Scan";
-            App.Navigation.PopModalAsync();
+           
+            
+            
             ///wywółać z awaitem.
 
-            if (IsScaned != null)
-            {
-                IsScaned(result.Text, EventArgs.Empty);
-            }
+          
         }
 
 
@@ -55,19 +59,21 @@ namespace library.Pages
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void scanbuttonXAML_Clicked(object sender, EventArgs e)
-        {
-            if (ScannerView.IsScanning)
-            {
-                ScannerView.IsScanning = false;
-                ScanButton.Text = "Scan";
-            }
-            else
-            {
-                ScannerView.IsScanning = true;
-                ScanButton.Text = "Off Scan";
-                scanResultText.Text += "Skanowanie";
-            }
-        }
+        //private void scanbuttonXAML_Clicked(object sender, EventArgs e)
+        //{
+        //    if (ScannerView.IsScanning)
+        //    {
+        //        ScannerView.IsScanning = false;
+        //        ScanButton.Text = "Scan";
+        //        scanResultText.Text = "";
+        //    }
+        //    else
+        //    {
+        //        ScannerView.IsScanning = true;
+        //        ScanButton.Text = "Off Scan";
+        //        scanResultText.Text = "Skanowanie";
+
+        //    }
+        //}
     }
 }

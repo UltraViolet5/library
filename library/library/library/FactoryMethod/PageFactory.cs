@@ -254,5 +254,39 @@ namespace library.FactoryMethod
                 index++;
             }
         }
+
+        //public ScrollView GetBorrowingPage(Borrowing borrowing)
+        //{
+        //    var result = new ScrollView()
+        //    {
+        //        Content = new StackLayout()
+        //        {
+        //            Padding = Style.PagePadding,
+        //            Children =
+        //            {
+        //                new Image()
+        //                {
+        //                        Source = Utils.BytesToImageSource(borrowing.Book.Photo),
+        //                        Aspect = Aspect.AspectFill
+        //                },
+        //                 new Frame()
+        //                 {
+        //                     Content=
+        //                     {
+        //                        new Label()
+        //                        {
+
+        //                        }
+        //                     }
+        //                 }
+                      
+                      
+
+
+        //            }
+                    
+        //        }
+        //    };
+        //}
     }
 }

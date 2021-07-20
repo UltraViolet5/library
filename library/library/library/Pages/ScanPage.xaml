@@ -6,8 +6,8 @@
              x:Class="library.Pages.ScanPage">
   <ContentPage.Title>Scann</ContentPage.Title>
     <StackLayout>
-        <Label x:Name="scanResultText" Text="{Binding BarcodeText, Mode=TwoWay}"/>
-        <zxing:ZXingScannerView x:Name="scanerXAML" IsScanning="False" OnScanResult="ZXingScannerView_OnScanResult"/>
-        <Button x:Name="scanbuttonXAML" Text="Scan" Clicked="scanbuttonXAML_Clicked"/>
+        <Label x:Name="scanResultText" Text="{Binding BarcodeText, Mode=TwoWay}" HorizontalTextAlignment="Center"/>
+        <zxing:ZXingScannerView x:Name="scanerXAML" IsScanning="True" OnScanResult="ZXingScannerView_OnScanResult"/>
+        <!--<Button x:Name="scanbuttonXAML" Text="Scan" Clicked="scanbuttonXAML_Clicked"/>-->
     </StackLayout>
 </ContentPage>
