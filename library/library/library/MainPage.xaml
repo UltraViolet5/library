@@ -95,7 +95,11 @@
                         </Label.GestureRecognizers>
                     </Label>
                     <Image Grid.Row="0" Grid.Column="1" Source="plus.png" WidthRequest="20" HeightRequest="20"
-                           HorizontalOptions="End" Margin="0,0,20,0" />
+                           HorizontalOptions="End" Margin="0,0,20,0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AddMateCommand}"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
                 </Grid>
                 <ScrollView Orientation="Horizontal" HorizontalOptions="Fill">
                     <StackLayout x:Name="Mates" Orientation="Horizontal">

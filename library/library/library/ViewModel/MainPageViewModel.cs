@@ -44,6 +44,7 @@ namespace library.ViewModel
         public ICommand AddBookCommand { get; private set; }
         public ICommand ShowBooksByCategory { get; private set; }
         public ICommand ShowBookCommand { get; private set; }
+        public ICommand AddMateCommand { get; set; }
 
 
         public MainPageViewModel()
@@ -69,9 +70,15 @@ namespace library.ViewModel
             MatesCommand = new Command(MatesExecute);
             RentalsCommand = new Command(RentalsExecute);
             ShowBorrowingCommand = new Command(ShowBorrowingExecute);
+            AddMateCommand = new Command(AddMateExecute);
 
             _userPage = new UserPage();
             _userPage.UserViewModel.IsPhotoUpdated += HandlePhotoUpdated;
+        }
+
+        private void AddMateExecute()
+        {
+            App.Navigation.PushAsync(new AddMatePage());
         }
 
         private void ShowBorrowingExecute(object obj)

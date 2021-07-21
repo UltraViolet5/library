@@ -13,14 +13,11 @@ namespace library.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
-        private readonly LoginViewModel _loginViewModel;
-
         public LoginPage()
         {
             InitializeComponent();
 
-            _loginViewModel = new LoginViewModel();
-            BindingContext = _loginViewModel;
+            BindingContext = new LoginViewModel();
 
             Content = App.PageFactory.GetLoginPage();
 
