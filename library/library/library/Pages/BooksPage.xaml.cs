@@ -1,9 +1,6 @@
-﻿using library.ViewModel;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using library.ViewModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using library.FactoryMethod;
 using library.Model;
 using Xamarin.Forms;
@@ -16,41 +13,40 @@ namespace library.Pages
     {
         public static BooksViewModel BooksViewModel { get; set; }
 
-        private readonly User _booksOwner;
-        private readonly PageFactory _pageFactory;
-        private readonly ScrollView _pageContent;
         private StackLayout _booksStack;
-        
+
         public BooksPage(User booksOwner, bool addBookButton = false)
         {
             InitializeComponent();
-            
+
             var books = App.DbService.GetBooks()
                 .Where(b => b.Owner.Email == booksOwner.Email)
                 .Select(b => new BookViewModel(b));
-            BooksViewModel = new BooksViewModel(books);
+            BooksViewModel = new BooksViewModel(books, this);
             BindingContext = BooksViewModel;
 
-            _pageFactory = new PageFactory();
-            _booksOwner = booksOwner;
-            _pageContent = _pageFactory.GetBooksPage(booksOwner, BooksViewModel, addBookButton);
-            _booksStack = (StackLayout)_pageContent.Content;
+            Content = App.PageFactory
+                .GetBooksPage(booksOwner, BooksViewModel, addBookButton);
+            _booksStack = ((StackLayout) ((ScrollView) Content).Content);
 
+            RefreshBooksList();
+            NavigationPage.SetHasNavigationBar(this, false);
 
-            Content = _pageContent;
-            // Refreshing books
-            _pageFactory.ListBookCards(ref _booksStack, BooksViewModel.Books);
+            BooksViewModel.OnSortingMethodChange += HandleSortingMethodChange;
+        }
+
+        public void RefreshBooksList()
+        {
+            ClearBooks();
+            App.PageFactory.ListBookCards(ref _booksStack, BooksViewModel.Books);
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            ClearBooks();
-            // Refreshing books
-            _pageFactory.ListBookCards(ref _booksStack, BooksViewModel.Books);
+            RefreshBooksList();
         }
-
-
+        
         /// <summary>
         /// Remove bookCards, and don't remove label and entries
         /// </summary>
@@ -60,6 +56,10 @@ namespace library.Pages
             {
                 _booksStack.Children.RemoveAt(_booksStack.Children.Count - 1);
             }
+        }
+        private void HandleSortingMethodChange(object sender, EventArgs e)
+        {
+            RefreshBooksList();
         }
     }
 }

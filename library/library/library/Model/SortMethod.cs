@@ -6,8 +6,8 @@ namespace library.Model
 {
     public enum SortMethod
     {
-        NameAsc,
-        NameDesc,
+        TitleAsc,
+        TitleDesc,
         AuthorAsc,
         AuthorDesc,
         DateAsc,

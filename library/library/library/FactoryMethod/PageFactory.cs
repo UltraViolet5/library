@@ -176,9 +176,9 @@ namespace library.FactoryMethod
                         "search"),
                     _componentFactory.GetDropDown("Sort: ",
                         "SortMethods", "SelectedSortMethod")
+
                     // IMPORTANT!!!
-                    // I used forth child to place bookCards, Speak with Jarek
-                    // if you want do add next child here
+                    // I used this area to place books
                 }
             };
 
@@ -249,14 +249,14 @@ namespace library.FactoryMethod
         /// </summary>
         /// <param name="stackLayout"></param>
         /// <param name="books"></param>
-        public void ListBookCards(ref StackLayout stackLayout,
+        public void ListBookCards(
+            ref StackLayout stackLayout,
             IEnumerable<BookViewModel> books)
         {
             int index = 0;
             foreach (var book in books)
             {
-                stackLayout.Children.Add(_componentFactory.GetBookCard(book))
-                    ;
+                stackLayout.Children.Add(_componentFactory.GetBookCard(book));
                 index++;
             }
         }
@@ -350,6 +350,24 @@ namespace library.FactoryMethod
                     Children =
                     {
                         frame
+                    }
+                }
+            };
+
+            return result;
+        }
+
+        public ScrollView GetAddMatePage()
+        {
+            var result = new ScrollView()
+            {
+                Content = new StackLayout()
+                {
+                    Padding = Style.PagePadding,
+                    Children =
+                    {
+                        _componentFactory.GetLabel("AddMatePage", Style.BigFont),
+                        _componentFactory.GetEntry("SearchPhrase", "search"),
                     }
                 }
             };

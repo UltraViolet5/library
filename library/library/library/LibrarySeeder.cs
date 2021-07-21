@@ -34,7 +34,6 @@ namespace library
             _dbService.AddBorrowings(GetBorrowings());
 
 
-
             // Make relationship. All users are friends of admin
             _admin.Friends.Add(_usersList.ToList()[1]);
             _admin.Friends.Add(_usersList.ToList()[2]);
@@ -74,24 +73,28 @@ namespace library
         {
             return new List<Borrowing>()
             {
-                new Borrowing() {
-                    BookId =5,
-                    Borower= _admin,
-                    Client= _usersList.ToList()[0],
-                    Date = new DateTime(2021,5,4),
+                new Borrowing()
+                {
+                    BookId = 5,
+                    Borower = _admin,
+                    Client = _usersList.ToList()[0],
+                    Date = new DateTime(2021, 5, 4),
                     ReturnDate = new DateTime(2021, 9, 3),
                 },
-                new Borrowing() {
-                    BookId= 4,
-                    Borower= _admin ,
-                    Client= _usersList.ToList()[1],
-                    Date = new DateTime(2021,5,2),
+                new Borrowing()
+                {
+                    BookId = 4,
+                    Borower = _admin,
+                    Client = _usersList.ToList()[1],
+                    Date = new DateTime(2021, 5, 2),
                     ReturnDate = new DateTime(2021, 10, 21),
                 },
-                new Borrowing() {BookId = 3,
-                    Borower=_admin,
-                    Client= _usersList.ToList()[2] ,
-                    Date = new DateTime(2021,5,1),
+                new Borrowing()
+                {
+                    BookId = 3,
+                    Borower = _admin,
+                    Client = _usersList.ToList()[2],
+                    Date = new DateTime(2021, 5, 1),
                     ReturnDate = new DateTime(2021, 8, 12),
                 }
             };

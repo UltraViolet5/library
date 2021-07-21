@@ -17,6 +17,10 @@ namespace library.Pages
             InitializeComponent();
 
             BindingContext = new AddMateViewModel();
+
+            Content = App.PageFactory.GetAddMatePage();
+
+            NavigationPage.SetHasNavigationBar(this, false);
         }
     }
 }

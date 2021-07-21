@@ -12,17 +12,15 @@ namespace library.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ScanPage : ContentPage
     {
+        public event EventHandler OnScanResultReturned;
+
         public static Button ScanButton { get; set; }
         public static ZXing.Net.Mobile.Forms.ZXingScannerView ScannerView { get; private set; }
-
-        public event EventHandler IsScaned;
-
+        
         public ScanPage()
         {
             InitializeComponent();
-            //ScanButton = scanbuttonXAML;
             ScannerView = scanerXAML;
-
         }
 
 
@@ -35,14 +33,13 @@ namespace library.Pages
             Device.BeginInvokeOnMainThread(() =>
             {
                 ScannerView.IsScanning = false;
-                if (IsScaned != null)
+                if (OnScanResultReturned != null)
                 {
-                    IsScaned(result.Text, EventArgs.Empty);
+                    OnScanResultReturned(result.Text, EventArgs.Empty);
                 }
 
                 App.Navigation.PopModalAsync();
             });
-
         }
 
         protected override void OnAppearing()

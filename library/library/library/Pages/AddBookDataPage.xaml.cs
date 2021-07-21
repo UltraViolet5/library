@@ -26,7 +26,7 @@ namespace library.Pages
             AddBookViewModel = new AddBookViewModel();
             BindingContext = AddBookViewModel;
             ScanPage = new ScanPage();
-            ScanPage.IsScaned += HandleScanSucceed;
+            ScanPage.OnScanResultReturned += HandleScanSucceed;
 
 
             // Add Photo box to layout
