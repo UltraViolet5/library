@@ -50,7 +50,7 @@ namespace library
         {
             foreach (UserViewModel mate in MainPageViewModel.Mates)
             {
-                var mateUI = App.ComponentFactory.GetMateIcon(mate);
+                var mateUI = App.ComponentFactory.GetMateIcon(mate, "MatesCommand");
 
                 Mates.Children.Add(mateUI);
             }

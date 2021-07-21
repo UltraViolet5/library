@@ -311,9 +311,9 @@ namespace library.FactoryMethod
             };
         }
 
-        public Frame GetMateIcon(UserViewModel user)
+        public Frame GetMateIcon(UserViewModel user, string boundCommand = null)
         {
-            return new Frame()
+            var result = new Frame()
             {
                 CornerRadius = Style.MediumCornerRadius,
                 WidthRequest = Style.MateIconSize,
@@ -329,6 +329,15 @@ namespace library.FactoryMethod
                     HorizontalOptions = LayoutOptions.StartAndExpand
                 }
             };
+
+            if (!String.IsNullOrWhiteSpace(boundCommand))
+            {
+                var tapGesture = new TapGestureRecognizer();
+                tapGesture.SetBinding(TapGestureRecognizer.CommandProperty, boundCommand);
+                result.GestureRecognizers.Add(tapGesture);
+            }
+
+            return result;
         }
 
         public Frame GetRentalBtn(BorrowingViewModel borrowing)
