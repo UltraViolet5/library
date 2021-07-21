@@ -410,6 +410,8 @@ namespace library.FactoryMethod
             return frame;
         }
 
+
+
         public Frame GetEntry(string binding,
             string placeholder = "",
             bool isPassword = false)

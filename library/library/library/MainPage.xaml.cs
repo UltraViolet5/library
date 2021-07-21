@@ -2,6 +2,9 @@
 using Xamarin.Forms;
 using library.ViewModel;
 using Xamarin.Forms.Xaml;
+using library.Model;
+using System.Collections.Generic;
+
 
 
 namespace library
@@ -9,14 +12,14 @@ namespace library
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
-    
+
         public readonly MainPageViewModel MainPageViewModel;
 
         public MainPage()
         {
-            
+
             InitializeComponent();
-  
+
             MainPageViewModel = new MainPageViewModel();
 
             BindingContext = MainPageViewModel;
@@ -35,12 +38,36 @@ namespace library
         /// </summary>
         private void DisplayBorrowings()
         {
-            foreach (BorrowingViewModel borrowing in MainPageViewModel.Borrowings)
+
+            var Borrowings = App.DbService.GetBorrowings();
+
+            var FutureReturnsList = new List<Borrowing>();
+
+            var NextMonth = DateTime.UtcNow.AddMonths(5);
+
+
+            foreach (var borrowing in Borrowings)
             {
-                var borrowingUi = App.ComponentFactory.GetRentalBtn(borrowing);
-                
+                if (borrowing.ReturnDate< NextMonth)
+                {
+                    FutureReturnsList.Add(borrowing);
+                }
+            }
+
+            foreach (var borrowing in FutureReturnsList)
+            {
+                var book = App.DbService.GetBook(borrowing.BookId);
+
+                var borrowingUi = App.ComponentFactory.GetRentalBtn(new BorrowingViewModel(borrowing));
                 Rentals.Children.Add(borrowingUi);
             }
+
+            //foreach (BorrowingViewModel borrowing in MainPageViewModel.Borrowings)
+            //{
+            //    var borrowingUi = App.ComponentFactory.GetRentalBtn(borrowing);
+
+            //    Rentals.Children.Add(borrowingUi);
+            //}
         }
 
         /// <summary>
@@ -66,7 +93,7 @@ namespace library
                 var categoriesUI = App.ComponentFactory.GetCategoryBtn(category);
                 var tapGest = new TapGestureRecognizer();
                 tapGest.SetBinding(TapGestureRecognizer.CommandProperty, "ShowBooksByCategory");
-               
+
                 categoriesUI.GestureRecognizers.Add(tapGest);
                 Categories.Children.Add(categoriesUI);
             }
