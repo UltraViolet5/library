@@ -33,7 +33,7 @@ namespace library.FactoryMethod
             string plusBtnIsEnabledBinding, string photoSourceBinding);
         Frame GetBookCard(BookViewModel book);
         Frame GetCategoryBtn(string category);
-        Frame GetMateIcon(UserViewModel user);
+        Frame GetMateIcon(UserViewModel user, string boundCommand = null);
         Frame GetRentalBtn(BorrowingViewModel borrowing);
         Frame GetEntry(string binding, string placeholder = "",
             bool isPassword = false);
