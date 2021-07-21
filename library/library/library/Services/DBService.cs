@@ -72,6 +72,18 @@ namespace library.Services
             return _borrowingDao.GetAll();
         }
 
+        /// <summary>
+        /// Get borrowings for current user.
+        /// </summary>
+        /// <param name="userEmail"></param>
+        /// <returns></returns>
+        public IEnumerable<Borrowing> GetBorrowings(string userEmail)
+        {
+            return _borrowingDao.GetAll()
+                .Where(b => b.Borower.Email == userEmail
+                || b.Client.Email == userEmail);
+        }
+
         public void AddUser(User user)
         {
             _userDao.Add(user);

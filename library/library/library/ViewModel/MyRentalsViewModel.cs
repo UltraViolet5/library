@@ -15,7 +15,7 @@ namespace library.ViewModel
 
         public MyRentalsViewModel()
         {
-            Borrowings = App.DbService.GetBorrowings();
+            Borrowings = App.DbService.GetBorrowings(App.CurrentUser.Email);
 
             ShowBorrowingCommand = new Command(BorrowingExecute);
         }
