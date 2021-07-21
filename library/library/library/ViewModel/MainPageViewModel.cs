@@ -58,8 +58,11 @@ namespace library.ViewModel
             Mates = App.CurrentUser.Friends
                 .Select(m => new UserViewModel(m));
             Borrowings = App.DbService.GetBorrowings()
-                .Select(b => new BorrowingViewModel(b))
-                .Take(2);
+                .Where(x => x.Borower.Email == App.CurrentUser.Email ||
+                            x.Client.Email == App.CurrentUser.Email)
+                .OrderBy(x => x.ReturnDate)
+                .Take(2)
+                .Select(b => new BorrowingViewModel(b));
 
             // Actions init
             BooksCommand = new Command(BooksExecute);

@@ -29,9 +29,8 @@ namespace library.ViewModel
                 Books = SortBooksBySortMethod();
 
                 RaisePropertyChanged(nameof(SelectedSortMethod));
-                
-                if (OnSortingMethodChange != null)
-                    OnSortingMethodChange(this, EventArgs.Empty);
+
+                OnSortingMethodChange?.Invoke(this, EventArgs.Empty);
             }
 
         }

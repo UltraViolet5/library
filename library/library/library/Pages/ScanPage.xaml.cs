@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using library.ViewModel;
 
 namespace library.Pages
 {
@@ -14,7 +9,6 @@ namespace library.Pages
     {
         public event EventHandler OnScanResultReturned;
 
-        public static Button ScanButton { get; set; }
         public static ZXing.Net.Mobile.Forms.ZXingScannerView ScannerView { get; private set; }
         
         public ScanPage()
@@ -33,10 +27,8 @@ namespace library.Pages
             Device.BeginInvokeOnMainThread(() =>
             {
                 ScannerView.IsScanning = false;
-                if (OnScanResultReturned != null)
-                {
-                    OnScanResultReturned(result.Text, EventArgs.Empty);
-                }
+
+                OnScanResultReturned?.Invoke(result.Text, EventArgs.Empty);
 
                 App.Navigation.PopModalAsync();
             });

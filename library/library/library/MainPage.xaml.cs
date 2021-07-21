@@ -38,36 +38,12 @@ namespace library
         /// </summary>
         private void DisplayBorrowings()
         {
-
-            var Borrowings = App.DbService.GetBorrowings();
-
-            var FutureReturnsList = new List<Borrowing>();
-
-            var NextMonth = DateTime.UtcNow.AddMonths(5);
-
-
-            foreach (var borrowing in Borrowings)
+            foreach (BorrowingViewModel borrowing in MainPageViewModel.Borrowings)
             {
-                if (borrowing.ReturnDate< NextMonth)
-                {
-                    FutureReturnsList.Add(borrowing);
-                }
-            }
+                var borrowingUi = App.ComponentFactory.GetRentalBtn(borrowing);
 
-            foreach (var borrowing in FutureReturnsList)
-            {
-                var book = App.DbService.GetBook(borrowing.BookId);
-
-                var borrowingUi = App.ComponentFactory.GetRentalBtn(new BorrowingViewModel(borrowing));
                 Rentals.Children.Add(borrowingUi);
             }
-
-            //foreach (BorrowingViewModel borrowing in MainPageViewModel.Borrowings)
-            //{
-            //    var borrowingUi = App.ComponentFactory.GetRentalBtn(borrowing);
-
-            //    Rentals.Children.Add(borrowingUi);
-            //}
         }
 
         /// <summary>
