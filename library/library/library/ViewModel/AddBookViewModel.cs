@@ -93,7 +93,7 @@ namespace library.ViewModel
         private bool _addPhotoIsEnabled = true;
         private ImageSource _photoSource;
         private DateTime _publishingYear;
-        private string _categoryString;
+        private string _categoryString = "Other";
         private bool _read;
         private bool _available;
         private Command _saveButton;
