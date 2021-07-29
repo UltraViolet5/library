@@ -80,7 +80,7 @@ namespace library.Services
         public IEnumerable<Borrowing> GetBorrowings(string userEmail)
         {
             return _borrowingDao.GetAll()
-                .Where(b => b.Borower.Email == userEmail
+                .Where(b => b.Borrower.Email == userEmail
                 || b.Client.Email == userEmail);
         }
 

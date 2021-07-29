@@ -306,7 +306,7 @@ namespace library.FactoryMethod
                     },
                     new Label()
                     {
-                        Text = $"Borrower: {borrowing.Borower.UserName}",
+                        Text = $"Borrower: {borrowing.Borrower.UserName}",
                         HorizontalOptions = LayoutOptions.StartAndExpand,
                         HorizontalTextAlignment = TextAlignment.Start,
                         FontFamily = Style.MainFont

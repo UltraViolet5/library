@@ -76,7 +76,7 @@ namespace library
                 new Borrowing()
                 {
                     BookId = 5,
-                    Borower = _admin,
+                    Borrower = _admin,
                     Client = _usersList.ToList()[0],
                     Date = new DateTime(2021, 5, 4),
                     ReturnDate = new DateTime(2021, 9, 3),
@@ -84,7 +84,7 @@ namespace library
                 new Borrowing()
                 {
                     BookId = 4,
-                    Borower = _admin,
+                    Borrower = _admin,
                     Client = _usersList.ToList()[1],
                     Date = new DateTime(2021, 5, 2),
                     ReturnDate = new DateTime(2021, 10, 21),
@@ -92,7 +92,7 @@ namespace library
                 new Borrowing()
                 {
                     BookId = 3,
-                    Borower = _admin,
+                    Borrower = _admin,
                     Client = _usersList.ToList()[2],
                     Date = new DateTime(2021, 5, 1),
                     ReturnDate = new DateTime(2021, 8, 12),

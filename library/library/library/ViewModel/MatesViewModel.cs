@@ -24,9 +24,7 @@ namespace library.ViewModel
 
         private void ShowBooksExecute(object booksOwnerId)
         {
-            var booksOwner = App.DbService.GetUserById((string) booksOwnerId);
-
-            App.Navigation.PushAsync(new BooksPage(booksOwner));
+            App.Navigation.PushAsync(new BooksPage());
         }
     }
 }

@@ -15,18 +15,18 @@ namespace library.Pages
 
         private StackLayout _booksStack;
 
-        public BooksPage(User booksOwner, bool addBookButton = false)
+        public BooksPage(bool addBookButton = false)
         {
             InitializeComponent();
 
             var books = App.DbService.GetBooks()
-                .Where(b => b.Owner.Email == booksOwner.Email)
+                .Where(b => b.Owner.Email == App.CurrentUser.Email)
                 .Select(b => new BookViewModel(b));
             BooksViewModel = new BooksViewModel(books, this);
             BindingContext = BooksViewModel;
 
             Content = App.PageFactory
-                .GetBooksPage(booksOwner, BooksViewModel, addBookButton);
+                .GetBooksPage(App.CurrentUser, BooksViewModel, addBookButton);
             _booksStack = ((StackLayout) ((ScrollView) Content).Content);
 
             RefreshBooksList();
