@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Windows.Input;
 using library.Model;
 using library.Pages;
+using library.Services;
 using Xamarin.Forms;
 
 namespace library.ViewModel
@@ -58,7 +59,7 @@ namespace library.ViewModel
             Mates = App.CurrentUser.Friends
                 .Select(m => new UserViewModel(m));
             Borrowings = App.DbService.GetBorrowings()
-                .Where(x => x.Borower.Email == App.CurrentUser.Email ||
+                .Where(x => x.Borrower.Email == App.CurrentUser.Email ||
                             x.Client.Email == App.CurrentUser.Email)
                 .OrderBy(x => x.ReturnDate)
                 .Take(2)
@@ -121,8 +122,7 @@ namespace library.ViewModel
 
         private void BooksExecute(object arg)
         {
-            var booksOwner = App.CurrentUser;
-            App.Navigation.PushAsync(new BooksPage(booksOwner, true));
+            App.Navigation.PushAsync(new BooksPage(true));
         }
 
         private void AddBookExecute(object arg)
