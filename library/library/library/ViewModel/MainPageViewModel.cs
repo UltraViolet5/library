@@ -122,6 +122,8 @@ namespace library.ViewModel
 
         private void BooksExecute(object arg)
         {
+            var requestResult = new ApiService().GetBooks();
+
             App.Navigation.PushAsync(new BooksPage(true));
         }
 
