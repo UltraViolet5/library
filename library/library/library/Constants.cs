@@ -9,8 +9,8 @@ namespace library
     {
         public static string BaseAddress = 
             DeviceInfo.Platform == DevicePlatform.Android 
-            ? "https://10.0.2.2:8080"
-            : "https://localhost:8080";
+            ? "http://10.0.2.2:8080"
+            : "http://localhost:8080";
 
         public static string BooksUrl = $"{BaseAddress}/api/Books/";
     }

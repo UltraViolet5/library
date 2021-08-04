@@ -62,7 +62,7 @@ namespace library.Services
             }
         }
 
-        public IEnumerable<User> GetMates()
+        public IEnumerable<User> GetUsers()
         {
             return _userDao.GetAll();
         }

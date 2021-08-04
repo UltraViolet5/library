@@ -28,21 +28,19 @@ namespace library.Services
         {
             List<Book> result = new List<Book>();
             Uri uri = new Uri(String.Format(Constants.BooksUrl, String.Empty));
-            // try
-            // {
-            HttpResponseMessage response = await _client.GetAsync(Constants.BooksUrl);
-            Console.WriteLine(response.RequestMessage.RequestUri);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                string content = await response.Content.ReadAsStringAsync();
-                result = JsonConvert.DeserializeObject<List<Book>>(content);
-                Console.WriteLine(result);
+                HttpResponseMessage response = await _client.GetAsync(Constants.BooksUrl);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    result = JsonConvert.DeserializeObject<List<Book>>(content);
+                }
             }
-            // }
-            // catch (Exception ex)
-            // {
-            // Debug.WriteLine($"\tERROR {ex.Message}");
-            // }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"\tERROR {ex.Message}");
+            }
 
             return result;
         }

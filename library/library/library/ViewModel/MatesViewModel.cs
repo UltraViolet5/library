@@ -24,7 +24,10 @@ namespace library.ViewModel
 
         private void ShowBooksExecute(object booksOwnerId)
         {
-            App.Navigation.PushAsync(new BooksPage());
+            var user = App.DbService.GetUsers()
+                .FirstOrDefault(u => u.Id == booksOwnerId);
+
+            App.Navigation.PushAsync(new BooksPage(user));
         }
     }
 }

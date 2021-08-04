@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Windows.Input;
 using library.Model;
 using library.Pages;
-using library.Services;
 using Xamarin.Forms;
 
 namespace library.ViewModel
@@ -59,11 +58,8 @@ namespace library.ViewModel
             Mates = App.CurrentUser.Friends
                 .Select(m => new UserViewModel(m));
             Borrowings = App.DbService.GetBorrowings()
-                .Where(x => x.Borrower.Email == App.CurrentUser.Email ||
-                            x.Client.Email == App.CurrentUser.Email)
-                .OrderBy(x => x.ReturnDate)
-                .Take(2)
-                .Select(b => new BorrowingViewModel(b));
+                .Select(b => new BorrowingViewModel(b))
+                .Take(2);
 
             // Actions init
             BooksCommand = new Command(BooksExecute);
@@ -122,9 +118,7 @@ namespace library.ViewModel
 
         private void BooksExecute(object arg)
         {
-            var requestResult = new ApiService().GetBooks();
-
-            App.Navigation.PushAsync(new BooksPage(true));
+            App.Navigation.PushAsync(new BooksPage(App.CurrentUser, true));
         }
 
         private void AddBookExecute(object arg)
