@@ -18,7 +18,9 @@ namespace library.Pages
         {
             InitializeComponent();
 
-            var currentUser = App.DbService.GetUser((string)Application.Current.Properties["UserEmail"]);
+            var currentUser = App.DbService
+                .GetUser((string)Application.Current.Properties["UserId"])
+                .Result;
             UserViewModel = new UserViewModel(currentUser);
             BindingContext = UserViewModel;
 

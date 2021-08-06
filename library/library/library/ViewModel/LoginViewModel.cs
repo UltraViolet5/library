@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Input;
 using library.Model;
 using library.Pages;
+using library.Services;
 using Xamarin.Forms;
 using BCrypt = BCrypt.Net.BCrypt;
 
@@ -68,15 +70,16 @@ namespace library.ViewModel
                 LoginValidation_ShowMsg = true;
 
             return canExecute;
-            
         }
 
-        private void LoginExecute(object obj)
+        private async void LoginExecute(object obj)
         {
-            User user = App.DbService.GetUser(Email);
+            var users = await new ApiService().GetUsers();
+            
+            var user = users.FirstOrDefault(u => u.Email == Email);
+
             if (user == null)
             {
-                Console.WriteLine("Incorrect login or password.");
                 LoginValidation_ShowMsg = true;
                 return;
             }
@@ -84,9 +87,9 @@ namespace library.ViewModel
             bool verification = global::BCrypt.Net.BCrypt.Verify(Password, user.PasswordHash);
             if (verification)
             {
-                Console.WriteLine("Logged! Correct password");
-
                 Utils.SaveUserInSession(user);
+                var mates = await App.DbService.GetUserFriends(App.CurrentUser.Id);
+                App.CurrentUser.Friends = mates;
 
                 App.Navigation.PushAsync(new MainPage());
             }

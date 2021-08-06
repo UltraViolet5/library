@@ -26,6 +26,7 @@ namespace library.Pages
             InitializeComponent();
             
             var books = App.DbService.GetBooks()
+                .Result
                 .Where(b => b.Owner.Email == booksOwner.Email)
                 .Select(b => new BookViewModel(b));
             BooksViewModel = new BooksViewModel(books, this);

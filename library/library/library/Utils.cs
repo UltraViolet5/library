@@ -31,8 +31,8 @@ namespace library
 
         public static User GetCurrentUser()
         {
-            var userEmail = (string) App.Current.Properties["UserEmail"];
-            return App.DbService.GetUser(userEmail);
+            var userId = (string) App.Current.Properties["UserId"];
+            return App.DbService.GetUser(userId).Result;
         }
 
         public static string GetCurrentUserEmail()
@@ -85,6 +85,15 @@ namespace library
             }
 
             return buffer;
+        }
+
+        public static void UpdateLoggedUser(User newUser)
+        {
+            Utils.SaveUserInSession(newUser);
+            if (!String.IsNullOrWhiteSpace(newUser.PasswordHash))
+            {
+                App.CurrentUser.PasswordHash = newUser.PasswordHash;
+            }
         }
     }
 }

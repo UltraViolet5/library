@@ -25,6 +25,7 @@ namespace library.ViewModel
         private void ShowBooksExecute(object booksOwnerId)
         {
             var user = App.DbService.GetUsers()
+                .Result
                 .FirstOrDefault(u => u.Id == (string) booksOwnerId);
 
             App.Navigation.PushAsync(new BooksPage(user));

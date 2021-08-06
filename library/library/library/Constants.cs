@@ -13,5 +13,8 @@ namespace library
             : "http://localhost:8080";
 
         public static string BooksUrl = $"{BaseAddress}/api/Books/";
+        public static string BorrowingsUrl = $"{BaseAddress}/api/Borrowings/";
+        public static string UsersUrl = $"{BaseAddress}/api/Users/";
+        public static string FriendsUrl = $"{BaseAddress}/api/Friends/";
     }
 }

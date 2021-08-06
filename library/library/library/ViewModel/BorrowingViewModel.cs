@@ -21,7 +21,7 @@ namespace library.ViewModel
         {
             get
             {
-                var book = App.DbService.GetBook(Borrowing.BookId);
+                var book = App.DbService.GetBook(Borrowing.BookId).Result;
                 return book.Title;
             }
         }

@@ -20,7 +20,7 @@ namespace library.Pages
         {
             InitializeComponent();
 
-            BookViewModel = new BookViewModel(App.DbService.GetBook(id));
+            BookViewModel = new BookViewModel(App.DbService.GetBook(id).Result);
             BindingContext = BookViewModel;
 
             Content = App.PageFactory.GetBookPage();

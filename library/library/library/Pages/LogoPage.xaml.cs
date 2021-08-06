@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using library.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,8 +11,6 @@ namespace library.Pages
     {
         public LogoPage()
         {
-            var requestResult = new ApiService().GetBooks();
-
             InitializeComponent();
 
             NavigationPage.SetHasNavigationBar(this, false);

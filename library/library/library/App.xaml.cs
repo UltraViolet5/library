@@ -12,7 +12,7 @@ namespace library
     {
         
         public static INavigation Navigation => MainPageInstance.Navigation;
-        public static DBService DbService { get; private set; }
+        public static ApiService DbService { get; private set; }
         public static ComponentFactory ComponentFactory { get; private set; }
         public static PageFactory PageFactory { get; private set; }
 
@@ -30,7 +30,7 @@ namespace library
             MainPage = new NavigationPage(new LogoPage());
             MainPageInstance = MainPage;
 
-            DbService = new DBService();
+            DbService = new ApiService();
             ComponentFactory = new ComponentFactory();
             PageFactory = new PageFactory();
         }

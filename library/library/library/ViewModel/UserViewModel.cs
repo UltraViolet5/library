@@ -212,6 +212,7 @@ namespace library.ViewModel
         }
 
         public int BooksCount => App.DbService.GetBooks()
+            .Result
             .Count(b => b.Owner.Email == _user.Email);
 
         public string Id => _user.Id;
@@ -298,7 +299,7 @@ namespace library.ViewModel
                     App.CurrentUser.PasswordHash = BCrypt.Net.BCrypt.HashPassword(NewPassword);
                 }
 
-                App.DbService.UpdateUser(App.CurrentUser);
+                Utils.UpdateLoggedUser(App.CurrentUser);
 
                 DataUpdated_ShowMsg = true;
                 Device.StartTimer(TimeSpan.FromSeconds(3), () =>

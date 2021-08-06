@@ -324,7 +324,7 @@ namespace library.FactoryMethod
             grid.Children.Add(gridStackContent);
 
 
-            Book book = App.DbService.GetBook(borrowing.BookId);
+            Book book = App.DbService.GetBook(borrowing.BookId).Result;
             var bookCard = _componentFactory.GetBookCard(new BookViewModel(book));
 
             var frame = new Frame()
