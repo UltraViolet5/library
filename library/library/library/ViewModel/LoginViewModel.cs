@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Input;
 using library.Model;
 using library.Pages;
@@ -71,9 +72,11 @@ namespace library.ViewModel
             
         }
 
-        private void LoginExecute(object obj)
+        private async void LoginExecute(object obj)
         {
-            User user = App.DbService.GetUser(Email);
+
+            var users = await App.ApiService.GetUsers();
+            User user = users.FirstOrDefault(u => u.Email == Email);
             if (user == null)
             {
                 Console.WriteLine("Incorrect login or password.");
@@ -87,7 +90,7 @@ namespace library.ViewModel
                 Console.WriteLine("Logged! Correct password");
 
                 Utils.SaveUserInSession(user);
-
+                App.CurrentUser.Friends = await App.ApiService.GetUserFriends(App.CurrentUser.Id);
                 App.Navigation.PushAsync(new MainPage());
             }
             else
