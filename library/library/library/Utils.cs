@@ -31,8 +31,8 @@ namespace library
 
         public static User GetCurrentUser()
         {
-            var userEmail = (string) App.Current.Properties["UserEmail"];
-            return App.DbService.GetUser(userEmail);
+            var userId = (string) App.Current.Properties["UserId"];
+            return App.ApiService.GetUser(userId).Result;
         }
 
         public static string GetCurrentUserEmail()

@@ -79,7 +79,6 @@ namespace library.ViewModel
             User user = users.FirstOrDefault(u => u.Email == Email);
             if (user == null)
             {
-                Console.WriteLine("Incorrect login or password.");
                 LoginValidation_ShowMsg = true;
                 return;
             }
@@ -87,8 +86,6 @@ namespace library.ViewModel
             bool verification = global::BCrypt.Net.BCrypt.Verify(Password, user.PasswordHash);
             if (verification)
             {
-                Console.WriteLine("Logged! Correct password");
-
                 Utils.SaveUserInSession(user);
                 App.CurrentUser.Friends = await App.ApiService.GetUserFriends(App.CurrentUser.Id);
                 App.Navigation.PushAsync(new MainPage());

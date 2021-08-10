@@ -4,7 +4,7 @@ using library.ViewModel;
 using Xamarin.Forms.Xaml;
 using library.Model;
 using System.Collections.Generic;
-
+using System.Linq;
 
 
 namespace library
@@ -17,19 +17,21 @@ namespace library
 
         public MainPage()
         {
-
             InitializeComponent();
-
             MainPageViewModel = new MainPageViewModel();
+            try
+            {
+                DataInitAsync();
 
-            BindingContext = MainPageViewModel;
+                BindingContext = MainPageViewModel;
 
-            NavigationPage.SetHasNavigationBar(this, false);
-
-            DisplayBooks();
-            DisplayCategories();
-            DisplayMates();
-            DisplayBorrowings();
+                NavigationPage.SetHasNavigationBar(this, false);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
 
@@ -96,6 +98,25 @@ namespace library
             base.OnAppearing();
             LastBooks.Children.Clear();
             DisplayBooks();
+        }
+
+        private async void DataInitAsync()
+        {
+            var books = await App.ApiService.GetBooks();
+            MainPageViewModel.Books = books
+                .Where(b => b.Owner.Email == (string)App.Current.Properties["UserEmail"])
+                .Take(2)
+                .Select(b => new BookViewModel(b));
+            DisplayBooks();
+            MainPageViewModel.Categories = Enum.GetNames(typeof(Category));
+            DisplayCategories();
+            MainPageViewModel.Mates = App.CurrentUser.Friends
+                .Select(m => new UserViewModel(m));
+            DisplayMates();
+            MainPageViewModel.Borrowings = App.DbService.GetBorrowings()
+                .Select(b => new BorrowingViewModel(b))
+                .Take(2);
+            DisplayBorrowings();
         }
     }
 

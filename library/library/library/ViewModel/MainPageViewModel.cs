@@ -30,10 +30,10 @@ namespace library.ViewModel
         }
 
         public UserPage _userPage { get; private set; }
-        public IEnumerable<BookViewModel> Books { get; private set; }
-        public IEnumerable<string> Categories { get; private set; }
-        public IEnumerable<UserViewModel> Mates { get; private set; }
-        public IEnumerable<BorrowingViewModel> Borrowings { get; private set; }
+        public IEnumerable<BookViewModel> Books { get; set; }
+        public IEnumerable<string> Categories { get; set; }
+        public IEnumerable<UserViewModel> Mates { get; set; }
+        public IEnumerable<BorrowingViewModel> Borrowings { get; set; }
 
         public ICommand UserCommand { get; private set; }
         public ICommand MatesCommand { get; private set; }
@@ -50,16 +50,7 @@ namespace library.ViewModel
         public MainPageViewModel()
         {
             // Data init
-            Books = App.DbService.GetBooks()
-                .Where(b => b.Owner.Email == (string) App.Current.Properties["UserEmail"])
-                .Take(2)
-                .Select(b => new BookViewModel(b));
-            Categories = Enum.GetNames(typeof(Category));
-            Mates = App.CurrentUser.Friends
-                .Select(m => new UserViewModel(m));
-            Borrowings = App.DbService.GetBorrowings()
-                .Select(b => new BorrowingViewModel(b))
-                .Take(2);
+            // DataInitAsync();
 
             // Actions init
             BooksCommand = new Command(BooksExecute);
@@ -75,7 +66,7 @@ namespace library.ViewModel
             _userPage = new UserPage();
             _userPage.UserViewModel.IsPhotoUpdated += HandlePhotoUpdated;
         }
-
+        
         private void AddMateExecute()
         {
             App.Navigation.PushAsync(new AddMatePage());

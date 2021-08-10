@@ -10,7 +10,6 @@ namespace library
 {
     public partial class App : Application
     {
-        
         public static INavigation Navigation => MainPageInstance.Navigation;
         public static DBService DbService { get; private set; }
         public static ApiService ApiService { get; private set; }
@@ -28,13 +27,13 @@ namespace library
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new LogoPage());
-            MainPageInstance = MainPage;
-
             DbService = new DBService();
             ApiService = new ApiService();
             ComponentFactory = new ComponentFactory();
             PageFactory = new PageFactory();
+
+            MainPage = new NavigationPage(new LogoPage());
+            MainPageInstance = MainPage;
         }
 
         protected override void OnStart()

@@ -20,7 +20,7 @@ namespace library.Services
             {
                 using (var client = GetHttpClient())
                 {
-                    HttpResponseMessage response = await client.GetAsync(Constants.BooksUrl);
+                    HttpResponseMessage response = await client.GetAsync(uri);
                     if (response.IsSuccessStatusCode)
                     {
                         string content = await response.Content.ReadAsStringAsync();
@@ -113,7 +113,7 @@ namespace library.Services
                     {
                         if (friend.UserId == userId)
                         {
-                            response = await client.GetAsync(Constants.UsersUrl + friend.FriendId);
+                            response = await client.GetAsync(Constants.UsersUrl + "/" + friend.FriendId);
                             if (response.IsSuccessStatusCode)
                             {
                                 string content = await response.Content.ReadAsStringAsync();
@@ -123,7 +123,7 @@ namespace library.Services
                         }
                         else if (friend.FriendId == userId)
                         {
-                            response = await client.GetAsync(Constants.UsersUrl + friend.UserId);
+                            response = await client.GetAsync(Constants.UsersUrl + "/" + friend.UserId);
                             if (response.IsSuccessStatusCode)
                             {
                                 string content = await response.Content.ReadAsStringAsync();
@@ -152,6 +152,7 @@ namespace library.Services
 #else
             client = new HttpClient();
 #endif
+            client.DefaultRequestHeaders.Add("User-Agent", "request");
             return client;
         }
     }

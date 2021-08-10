@@ -10,16 +10,15 @@ namespace library.Pages
     {
         public LogoPage()
         {
-            var requestResult = new ApiService().GetBooks();
-
             InitializeComponent();
+
+            Utils.RemoveUserFromSession();
 
             NavigationPage.SetHasNavigationBar(this, false);
 
             Device.StartTimer(TimeSpan.FromSeconds(2), () =>
             {
                 if (Application.Current.Properties.ContainsKey("IsLoggedIn") &&
-                    Application.Current.Properties.ContainsKey("UserEmail") &&
                     (bool) Application.Current.Properties["IsLoggedIn"])
                 {
                     App.CurrentUser = Utils.GetCurrentUser();

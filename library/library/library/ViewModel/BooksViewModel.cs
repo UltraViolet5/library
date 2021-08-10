@@ -55,8 +55,6 @@ namespace library.ViewModel
 
             AddBookCommand = new Command(AddBookExecute);
             ShowBookCommand = new Command(ShowBookExecute);
-
-            // _page = page;
         }
 
         private IEnumerable<BookViewModel> SortBooksBySortMethod()

@@ -29,6 +29,7 @@ namespace library.Pages
                 .Where(b => b.Owner.Email == booksOwner.Email)
                 .Select(b => new BookViewModel(b));
             BooksViewModel = new BooksViewModel(books, this);
+            BooksViewModel.OnSortingMethodChange += HandleOnSortingMethodChange;
             BindingContext = BooksViewModel;
 
             _pageFactory = new PageFactory();
@@ -47,7 +48,7 @@ namespace library.Pages
             base.OnAppearing();
             ClearBooks();
             // Refreshing books
-            _pageFactory.ListBookCards(ref _booksStack, BooksViewModel.Books);
+            RefreshBooks();
         }
 
 
@@ -60,6 +61,17 @@ namespace library.Pages
             {
                 _booksStack.Children.RemoveAt(_booksStack.Children.Count - 1);
             }
+        }
+
+        private void RefreshBooks()
+        {
+            ClearBooks();
+            _pageFactory.ListBookCards(ref _booksStack, BooksViewModel.Books);
+        }
+
+        private void HandleOnSortingMethodChange(object sender, EventArgs e)
+        {
+            RefreshBooks();
         }
     }
 }
