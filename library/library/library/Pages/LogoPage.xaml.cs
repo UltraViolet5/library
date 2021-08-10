@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using library.Model;
 using library.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,7 +14,7 @@ namespace library.Pages
         {
             InitializeComponent();
 
-            Utils.RemoveUserFromSession();
+            // Utils.RemoveUserFromSession();
 
             NavigationPage.SetHasNavigationBar(this, false);
 
@@ -21,14 +23,22 @@ namespace library.Pages
                 if (Application.Current.Properties.ContainsKey("IsLoggedIn") &&
                     (bool) Application.Current.Properties["IsLoggedIn"])
                 {
-                    App.CurrentUser = Utils.GetCurrentUser();
-                    Navigation.PushAsync(new MainPage());
+                   InitMainPageAsync();
                 }
                 else
                     Navigation.PushAsync(new LoginPage());
 
                 return false;
             });
+        }
+
+        private async void InitMainPageAsync()
+        {
+            var userId = (string)App.Current.Properties["UserId"];
+            var result = await App.ApiService.GetUser(userId);
+            App.CurrentUser = result;
+            App.CurrentUser.Friends = await App.ApiService.GetUserFriends(App.CurrentUser.Id);
+            Navigation.PushAsync(new MainPage());
         }
 
         protected override void OnDisappearing()

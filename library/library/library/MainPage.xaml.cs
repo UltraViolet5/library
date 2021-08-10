@@ -21,7 +21,7 @@ namespace library
             MainPageViewModel = new MainPageViewModel();
             try
             {
-                DataInitAsync();
+                DisplayComponents();
 
                 BindingContext = MainPageViewModel;
 
@@ -40,6 +40,8 @@ namespace library
         /// </summary>
         private void DisplayBorrowings()
         {
+            if (MainPageViewModel.Borrowings == null) return;
+
             foreach (BorrowingViewModel borrowing in MainPageViewModel.Borrowings)
             {
                 var borrowingUi = App.ComponentFactory.GetRentalBtn(borrowing);
@@ -53,6 +55,9 @@ namespace library
         /// </summary>
         private void DisplayMates()
         {
+            if (MainPageViewModel.Mates == null)
+                return;
+
             foreach (UserViewModel mate in MainPageViewModel.Mates)
             {
                 var mateUI = App.ComponentFactory.GetMateIcon(mate, "MatesCommand");
@@ -66,6 +71,9 @@ namespace library
         /// </summary>
         private void DisplayCategories()
         {
+            if (MainPageViewModel.Categories == null)
+                return;
+            
             foreach (string category in MainPageViewModel.Categories)
             {
                 var categoriesUI = App.ComponentFactory.GetCategoryBtn(category);
@@ -83,6 +91,9 @@ namespace library
         /// </summary>
         private void DisplayBooks()
         {
+            if (MainPageViewModel.Books == null)
+                return;
+            
             int index = 0;
             foreach (var book in MainPageViewModel.Books)
             {
@@ -100,7 +111,7 @@ namespace library
             DisplayBooks();
         }
 
-        private async void DataInitAsync()
+        private async void DisplayComponents()
         {
             var books = await App.ApiService.GetBooks();
             MainPageViewModel.Books = books

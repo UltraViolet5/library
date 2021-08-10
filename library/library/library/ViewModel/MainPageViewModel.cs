@@ -49,9 +49,6 @@ namespace library.ViewModel
 
         public MainPageViewModel()
         {
-            // Data init
-            // DataInitAsync();
-
             // Actions init
             BooksCommand = new Command(BooksExecute);
             UserCommand = new Command(UserViewImageTappedExecute);

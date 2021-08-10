@@ -29,10 +29,12 @@ namespace library
             App.CurrentUser = null;
         }
 
-        public static User GetCurrentUser()
+        public async static Task<User> GetCurrentUser()
         {
             var userId = (string) App.Current.Properties["UserId"];
-            return App.ApiService.GetUser(userId).Result;
+            var result = await App.ApiService.GetUser(userId);
+
+            return result;
         }
 
         public static string GetCurrentUserEmail()

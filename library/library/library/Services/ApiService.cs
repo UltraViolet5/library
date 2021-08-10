@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using library.Model;
 using Newtonsoft.Json;
-using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
 namespace library.Services
 {
@@ -41,9 +39,10 @@ namespace library.Services
             User result = new User();
             try
             {
+                Uri uri = new Uri(String.Format(Constants.UsersUrl + "/" + id, String.Empty));
                 using (HttpClient client = GetHttpClient())
                 {
-                    HttpResponseMessage response = await client.GetAsync(Constants.UsersUrl + id);
+                    HttpResponseMessage response = await client.GetAsync(uri);
                     if (response.IsSuccessStatusCode)
                     {
                         string content = await response.Content.ReadAsStringAsync();
