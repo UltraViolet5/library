@@ -13,18 +13,22 @@ namespace library.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UserPage : ContentPage
     {
-        public readonly UserViewModel UserViewModel;
+        public UserViewModel UserViewModel { get; private set; }
         public UserPage()
         {
             InitializeComponent();
 
-            var currentUser = App.DbService.GetUser((string)Application.Current.Properties["UserEmail"]);
-            UserViewModel = new UserViewModel(currentUser);
+            InitData();
+
+            NavigationPage.SetHasNavigationBar(this, false);
+        }
+
+        private void InitData()
+        {
+            UserViewModel = new UserViewModel(App.CurrentUser);
             BindingContext = UserViewModel;
 
             Content = App.PageFactory.GetUserPage();
-
-            NavigationPage.SetHasNavigationBar(this, false);
         }
     }
 }

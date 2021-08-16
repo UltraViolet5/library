@@ -15,5 +15,6 @@ namespace library
         public static string BooksUrl = $"{BaseAddress}/api/Books";
         public static string UsersUrl = $"{BaseAddress}/api/Users";
         public static string FriendsUrl = $"{BaseAddress}/api/Friends";
+        public static string BorrowingsUrl = $"{BaseAddress}/api/Borrowings";
     }
 }

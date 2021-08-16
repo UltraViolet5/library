@@ -8,23 +8,8 @@ namespace library.Model
         public User Client { get; set; }
         public User Borrower { get; set; }
         public int BookId { get; set; }
+        public string BookTitle { get; set; }
         public DateTime Date { get; set; }
         public DateTime ReturnDate { get; set; }
-
-        public Borrowing()
-        {
-            Id = NextId;
-        }
-
-        private static int _nextId = 0;
-        public static int NextId
-        {
-            get
-            {
-                int toReturn = _nextId;
-                _nextId++;
-                return toReturn;
-            }
-        }
     }
 }

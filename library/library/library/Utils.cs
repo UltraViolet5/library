@@ -88,5 +88,14 @@ namespace library
 
             return buffer;
         }
+
+        public static void UpdateUser(User newUser)
+        {
+            Utils.SaveUserInSession(newUser);
+            if (!String.IsNullOrWhiteSpace(newUser.PasswordHash))
+            {
+                App.CurrentUser.PasswordHash = newUser.PasswordHash;
+            }
+        }
     }
 }

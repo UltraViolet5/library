@@ -62,6 +62,7 @@ namespace library.FactoryMethod
                         _componentFactory.GetCheckBox("available", "Available"),
                         _componentFactory.GetDropDown("Category:", "Categories", "SelectedCategory"),
                         _componentFactory.GetButton("Save changes", "SaveChangesCommand"),
+                        _componentFactory.GetButton("Remove", "RemoveBookCommand"),
                     }
                 }
             };
@@ -261,7 +262,7 @@ namespace library.FactoryMethod
             }
         }
 
-        public ScrollView GetBorrowingPage(Borrowing borrowing)
+        public ScrollView GetBorrowingPage(Borrowing borrowing, Book book)
         {
             var grid = new Grid()
             {
@@ -323,8 +324,6 @@ namespace library.FactoryMethod
             gridStackContent.SetValue(Grid.ColumnProperty, 1);
             grid.Children.Add(gridStackContent);
 
-
-            Book book = App.DbService.GetBook(borrowing.BookId);
             var bookCard = _componentFactory.GetBookCard(new BookViewModel(book));
 
             var frame = new Frame()

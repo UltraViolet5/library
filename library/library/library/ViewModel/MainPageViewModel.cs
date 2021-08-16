@@ -61,7 +61,7 @@ namespace library.ViewModel
             AddMateCommand = new Command(AddMateExecute);
 
             _userPage = new UserPage();
-            _userPage.UserViewModel.IsPhotoUpdated += HandlePhotoUpdated;
+            _userPage.UserViewModel.OnPhotoUpdated += HandlePhotoUpdated;
         }
         
         private void AddMateExecute()
@@ -96,7 +96,7 @@ namespace library.ViewModel
 
         private void ShowBookExecute(object obj)
         {
-            App.Navigation.PushAsync(new BookPage((int) obj));
+            App.Navigation.PushAsync(new BookPage((BookViewModel) obj));
         }
 
         private void UserViewImageTappedExecute(object obj)

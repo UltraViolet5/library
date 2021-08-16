@@ -9,12 +9,15 @@ namespace library.ViewModel
 {
     public class BookViewModel : BaseViewModel
     {
+        public event EventHandler OnBookRemoved;
+
         private readonly Book _book;
         private bool _titleValidationShowMsg;
         private bool _authorsValidationShowMsg;
         private bool _addPhotoIsEnabled = true;
         private ICommand _addPhotoCommand;
         private ICommand _saveChangesCommand;
+        private ICommand _removeBookCommand;
 
         public int Id => _book.Id;
 
@@ -201,6 +204,12 @@ namespace library.ViewModel
 
         #endregion
 
+        public ICommand RemoveBookCommand
+        {
+            get => _removeBookCommand;
+            set => _removeBookCommand = value;
+        }
+
         public ICommand AddPhotoCommand
         {
             get => _addPhotoCommand;
@@ -217,8 +226,16 @@ namespace library.ViewModel
         {
             _book = book;
 
+            RemoveBookCommand = new Command(RemoveBookExecute);
             SaveChangesCommand = new Command(SaveChangesExecute);
             AddPhotoCommand = new Command(AddPhotoExecute);
+        }
+
+        private void RemoveBookExecute()
+        {
+            App.ApiService.RemoveBook(Id);
+            OnBookRemoved?.Invoke(Id, EventArgs.Empty);
+            App.Navigation.PopAsync();
         }
 
         private async void AddPhotoExecute(object obj)

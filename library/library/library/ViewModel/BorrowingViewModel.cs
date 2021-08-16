@@ -17,21 +17,13 @@ namespace library.ViewModel
                          $"{_borrowing.ReturnDate.Day}"; }
         }
 
-        public string BookTitle
-        {
-            get
-            {
-                var book = App.DbService.GetBook(Borrowing.BookId);
-                return book.Title;
-            }
-        }
-
+        private string _bookTitle;
+        public string BookTitle => _bookTitle;
 
         public BorrowingViewModel(Borrowing borrowing)
         {
             _borrowing = borrowing;
-
-            
+            _bookTitle = borrowing.BookTitle;
         }
     }
 }

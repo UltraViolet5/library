@@ -22,10 +22,9 @@ namespace library.ViewModel
             ShowBooksCommand = new Command(ShowBooksExecute);
         }
 
-        private void ShowBooksExecute(object booksOwnerId)
+        private async void ShowBooksExecute(object booksOwnerId)
         {
-            var user = App.DbService.GetUsers()
-                .FirstOrDefault(u => u.Id == (string) booksOwnerId);
+            var user = await App.ApiService.GetUser((string)booksOwnerId);
 
             App.Navigation.PushAsync(new BooksPage(user));
         }

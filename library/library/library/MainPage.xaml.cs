@@ -5,6 +5,7 @@ using Xamarin.Forms.Xaml;
 using library.Model;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 
 namespace library
@@ -21,7 +22,7 @@ namespace library
             MainPageViewModel = new MainPageViewModel();
             try
             {
-                DisplayComponents();
+                DisplayComponentsAsync();
 
                 BindingContext = MainPageViewModel;
 
@@ -111,12 +112,10 @@ namespace library
             DisplayBooks();
         }
 
-        private async void DisplayComponents()
+        private async void DisplayComponentsAsync()
         {
-            var books = await App.ApiService.GetBooks();
+            var books = await App.ApiService.GetBooks(App.CurrentUser.Id, 2);
             MainPageViewModel.Books = books
-                .Where(b => b.Owner.Email == (string)App.Current.Properties["UserEmail"])
-                .Take(2)
                 .Select(b => new BookViewModel(b));
             DisplayBooks();
             MainPageViewModel.Categories = Enum.GetNames(typeof(Category));
@@ -124,9 +123,9 @@ namespace library
             MainPageViewModel.Mates = App.CurrentUser.Friends
                 .Select(m => new UserViewModel(m));
             DisplayMates();
-            MainPageViewModel.Borrowings = App.DbService.GetBorrowings()
-                .Select(b => new BorrowingViewModel(b))
-                .Take(2);
+            var borrowings = await App.ApiService.GetBorrowings(App.CurrentUser.Id, 2);
+            MainPageViewModel.Borrowings = borrowings
+                .Select(b => new BorrowingViewModel(b));
             DisplayBorrowings();
         }
     }

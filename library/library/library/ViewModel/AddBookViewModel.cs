@@ -182,16 +182,21 @@ namespace library.ViewModel
             NewBook.Authors = this.Authors;
             NewBook.BarcodeNumber = this._barcodeText;
             NewBook.Owner = App.CurrentUser;
+            NewBook.OwnerId = App.CurrentUser.Id;
             NewBook.Category = GetCategoryByString(CategoryString);
             NewBook.PublishingYear = this.PublishingYear;
             NewBook.Available = this.Available;
             NewBook.Read = this.Read;
             NewBook.Photo = Photo;
 
-            App.DbService.AddBook(NewBook);
 
+            App.ApiService.AddBook(NewBook);
+
+            OnBookAdded?.Invoke(NewBook, EventArgs.Empty);
 
             App.Navigation.PopAsync();
         }
+
+        public EventHandler OnBookAdded;
     }
 }

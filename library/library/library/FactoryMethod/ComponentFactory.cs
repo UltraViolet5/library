@@ -3,9 +3,6 @@ using Xamarin.Forms;
 using library.ViewModel;
 using Xamarin.Forms.Shapes;
 using Rectangle = Xamarin.Forms.Rectangle;
-using library.Model;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace library.FactoryMethod
 {
@@ -99,6 +96,28 @@ namespace library.FactoryMethod
                 FontFamily = Style.MainFont,
                 CornerRadius = Style.MediumCornerRadius,
                 BackgroundColor = Style.LightGray,
+            };
+
+            if (!String.IsNullOrWhiteSpace(command))
+                result.SetBinding(Button.CommandProperty, command);
+
+            if (commandParameter != null)
+                result.CommandParameter = commandParameter;
+
+            return result;
+        }
+
+        public Button GetButton(string text,
+            Color color,
+            string command = null,
+            object commandParameter = null)
+        {
+            var result = new Button()
+            {
+                Text = text,
+                FontFamily = Style.MainFont,
+                CornerRadius = Style.MediumCornerRadius,
+                BackgroundColor = color,
             };
 
             if (!String.IsNullOrWhiteSpace(command))
@@ -287,7 +306,7 @@ namespace library.FactoryMethod
 
             var tapGesture = new TapGestureRecognizer();
             tapGesture.SetBinding(TapGestureRecognizer.CommandProperty, "ShowBookCommand");
-            tapGesture.CommandParameter = book.Id;
+            tapGesture.CommandParameter = book;
             result.GestureRecognizers.Add(tapGesture);
 
             return result;
@@ -602,8 +621,8 @@ namespace library.FactoryMethod
                     {
                         grid,
                         GetButton("Books",
-                            "ShowBooksCommand",
-                            mate.Id)
+                            command:"ShowBooksCommand",
+                            commandParameter:mate.Id)
                     }
                 }
             };

@@ -14,8 +14,6 @@ namespace library.Pages
         {
             InitializeComponent();
 
-            // Utils.RemoveUserFromSession();
-
             NavigationPage.SetHasNavigationBar(this, false);
 
             Device.StartTimer(TimeSpan.FromSeconds(2), () =>

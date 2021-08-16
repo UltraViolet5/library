@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using library.Model;
@@ -17,22 +16,19 @@ namespace library.Pages
     {
         MyRentalsViewModel MyRentalsViewModel { get; set; }
 
-        private readonly IPageFactory _pageFactory;
-
         public MyRentalsPage()
         {
             InitializeComponent();
-
-            MyRentalsViewModel = new MyRentalsViewModel();
-
-            BindingContext = MyRentalsViewModel;
-
-            _pageFactory = new PageFactory();
-
-            Content = _pageFactory.GetMyRentalsPage(MyRentalsViewModel.Borrowings);
+            
+            InitData();
         }
 
-    
-       
+        private async void InitData()
+        {
+            MyRentalsViewModel = new MyRentalsViewModel();
+            MyRentalsViewModel.Borrowings = await App.ApiService.GetBorrowings(App.CurrentUser.Email);
+            BindingContext = MyRentalsViewModel;
+            Content = App.PageFactory.GetMyRentalsPage(MyRentalsViewModel.Borrowings);
+        }
     }
 }

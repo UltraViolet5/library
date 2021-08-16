@@ -16,7 +16,7 @@ namespace library.ViewModel
         /// Parent Instance
         /// </summary>
         // private readonly BooksPage _page;
-        public IEnumerable<BookViewModel> Books { get; private set; }
+        public List<BookViewModel> Books { get; private set; }
         public String Search { get; set; }
 
         private SortMethod _sortMethod = SortMethod.TitleAsc;
@@ -47,17 +47,21 @@ namespace library.ViewModel
         }
         public ICommand AddBookCommand { get; private set; }
         public ICommand ShowBookCommand { get; private set; }
-        
+
+        private readonly BooksPage parent;
+
         public BooksViewModel(IEnumerable<BookViewModel> books, BooksPage page)
         {
-            Books = books;
+            Books = books.ToList();
             Books = SortBooksBySortMethod();
 
             AddBookCommand = new Command(AddBookExecute);
             ShowBookCommand = new Command(ShowBookExecute);
+
+            parent = page;
         }
 
-        private IEnumerable<BookViewModel> SortBooksBySortMethod()
+        private List<BookViewModel> SortBooksBySortMethod()
         {
             IEnumerable<BookViewModel> result;
 
@@ -85,23 +89,31 @@ namespace library.ViewModel
                     throw new ArgumentOutOfRangeException();
             }
 
-            return result;
+            return result.ToList();
         }
 
         private void AddBookExecute()
         {
-            App.Navigation.PushAsync(new AddBookDataPage());
+            var addBookPage = new AddBookDataPage();
+            addBookPage.AddBookViewModel.OnBookAdded += OnBookAdded;
+            App.Navigation.PushAsync(addBookPage);
         }
 
         private void ShowBookExecute(object obj)
         {
-            App.Navigation.PushAsync(new BookPage((int) obj));
+            App.Navigation.PushAsync(new BookPage((BookViewModel) obj));
         }
         private SortMethod SortMethodFromString(string value)
         {
             SortMethod sortMethod = (SortMethod)Enum.Parse(typeof(SortMethod), value);
 
             return sortMethod;
+        }
+
+        private void OnBookAdded(object sender, EventArgs e)
+        {
+            parent.BooksViewModel.Books.Add(new BookViewModel((Book) sender));
+            parent.RefreshBooks();
         }
     }
 }

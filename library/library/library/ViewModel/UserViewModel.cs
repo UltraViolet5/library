@@ -9,7 +9,7 @@ namespace library.ViewModel
 {
     public class UserViewModel : BaseViewModel
     {
-        public event EventHandler IsPhotoUpdated;
+        public event EventHandler OnPhotoUpdated;
 
         public ICommand SaveChangesCommand
         {
@@ -126,6 +126,8 @@ namespace library.ViewModel
 
             SaveChangesCommand = new Command(SaveChangesExecute, SaveChangesCanExecute);
             AddPhotoCommand = new Command(AddPhotoExecute);
+
+            InitBooksCount();
         }
 
         public string UserName
@@ -211,8 +213,13 @@ namespace library.ViewModel
             }
         }
 
-        public int BooksCount => App.DbService.GetBooks()
-            .Count(b => b.Owner.Email == _user.Email);
+        public int BooksCount { get; private set; }
+
+        private async void InitBooksCount()
+        {
+            var booksCount = await App.ApiService.GetBooksCount(Email);
+            BooksCount = booksCount;
+        }
 
         public string Id => _user.Id;
 
@@ -223,9 +230,9 @@ namespace library.ViewModel
             {
                 _user.Photo = value;
                 RaisePropertyChanged(nameof(PhotoSource));
-                if (IsPhotoUpdated != null)
+                if (OnPhotoUpdated != null)
                 {
-                    IsPhotoUpdated(this, EventArgs.Empty);
+                    OnPhotoUpdated(this, EventArgs.Empty);
                 }
             }
         }
@@ -298,7 +305,7 @@ namespace library.ViewModel
                     App.CurrentUser.PasswordHash = BCrypt.Net.BCrypt.HashPassword(NewPassword);
                 }
 
-                App.DbService.UpdateUser(App.CurrentUser);
+                Utils.UpdateUser(App.CurrentUser);
 
                 DataUpdated_ShowMsg = true;
                 Device.StartTimer(TimeSpan.FromSeconds(3), () =>

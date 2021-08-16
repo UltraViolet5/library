@@ -215,7 +215,7 @@ namespace library.ViewModel
                 BirthDate = this.BirthDate,
                 PasswordHash = global::BCrypt.Net.BCrypt.HashPassword(this.Password),
             };
-            App.DbService.AddUser(user);
+            App.ApiService.AddUser(user);
             Console.WriteLine(user.PasswordHash);
             App.Navigation.PushAsync(new LoginPage());
         }

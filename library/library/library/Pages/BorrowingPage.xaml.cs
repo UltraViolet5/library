@@ -14,11 +14,18 @@ namespace library.Pages
         {
             InitializeComponent();
 
+            InitPageAsync(borrowing);
+        }
+
+        private async void InitPageAsync(Borrowing borrowing)
+        {
             BorrowingViewModel = new BorrowingViewModel(borrowing);
 
             BindingContext = BorrowingViewModel;
 
-            Content = App.PageFactory.GetBorrowingPage(borrowing);
+            var book = await App.ApiService.GetBook(borrowing.BookId);
+
+            Content = App.PageFactory.GetBorrowingPage(borrowing, book);
         }
     }
 }

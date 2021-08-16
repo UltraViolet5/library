@@ -11,6 +11,7 @@ namespace library.Model
         public string Authors { get; set; }
         public string BarcodeNumber { get; set; }
         public DateTime PublishingYear { get; set; }
+        public string OwnerId { get; set; }
         public User Owner { get; set; }
         public bool Read { get; set; }
         public Category Category { get; set; }
@@ -18,21 +19,5 @@ namespace library.Model
         public Bookcase Bookcase { get; set; }
         public bool Available { get; set; }
         public byte[] Photo { get; set; }
-        public Book()
-        {
-            Id = NextId;
-        }
-
-        private static int _nextId = 0;
-        public static int NextId
-        {
-            get
-            {
-                int toReturn = _nextId;
-                _nextId++;
-                return toReturn;
-            }
-        }
-
     }
 }

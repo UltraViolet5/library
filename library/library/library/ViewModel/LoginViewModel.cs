@@ -74,9 +74,7 @@ namespace library.ViewModel
 
         private async void LoginExecute(object obj)
         {
-
-            var users = await App.ApiService.GetUsers();
-            User user = users.FirstOrDefault(u => u.Email == Email);
+            var user = await App.ApiService.GetUserByEmail(Email);
             if (user == null)
             {
                 LoginValidation_ShowMsg = true;
@@ -87,8 +85,7 @@ namespace library.ViewModel
             if (verification)
             {
                 Utils.SaveUserInSession(user);
-                App.CurrentUser.Friends = await App.ApiService.GetUserFriends(App.CurrentUser.Id);
-                App.Navigation.PushAsync(new MainPage());
+                await App.Navigation.PushAsync(new MainPage());
             }
             else
             {

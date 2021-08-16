@@ -25,6 +25,11 @@ namespace library.FactoryMethod
         Button GetButton(string text,
             string command = null,
             object commandParameter = null);
+
+        Button GetButton(string text,
+            Color color,
+            string command = null,
+            object commandParameter = null);
         Image GetButtonWithIcon(string pictureName, string tapBinding,
             object commandParameter = null, int size = -1);
         Label GetValidationLabel(string msg, string visibleBinding, Color color);

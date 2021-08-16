@@ -1,9 +1,6 @@
 ﻿using library.ViewModel;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using library.FactoryMethod;
 using library.Model;
 using Xamarin.Forms;
@@ -14,40 +11,48 @@ namespace library.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BooksPage : ContentPage
     {
-        public static BooksViewModel BooksViewModel { get; set; }
+        public BooksViewModel BooksViewModel { get; set; }
+        public bool PageLoaded { get; private set; }
 
-        private readonly User _booksOwner;
-        private readonly PageFactory _pageFactory;
-        private readonly ScrollView _pageContent;
+        private PageFactory _pageFactory;
+        private ScrollView _pageContent;
         private StackLayout _booksStack;
-        
+
         public BooksPage(User booksOwner, bool addBookButton = false)
         {
             InitializeComponent();
-            
-            var books = App.DbService.GetBooks()
-                .Where(b => b.Owner.Email == booksOwner.Email)
+
+            InitPage(booksOwner, addBookButton);
+        }
+
+        private async void InitPage(User booksOwner, bool addBookButton = false)
+        {
+            var books = await App.ApiService.GetBooks(booksOwner.Id);
+            var bookViewModels = books
                 .Select(b => new BookViewModel(b));
-            BooksViewModel = new BooksViewModel(books, this);
+            BooksViewModel = new BooksViewModel(bookViewModels, this);
+            foreach (BookViewModel model in BooksViewModel.Books)
+            {
+                model.OnBookRemoved += HandleBookRemoved;
+            }
             BooksViewModel.OnSortingMethodChange += HandleOnSortingMethodChange;
             BindingContext = BooksViewModel;
 
             _pageFactory = new PageFactory();
-            _booksOwner = booksOwner;
             _pageContent = _pageFactory.GetBooksPage(booksOwner, BooksViewModel, addBookButton);
             _booksStack = (StackLayout)_pageContent.Content;
 
-
             Content = _pageContent;
-            // Refreshing books
-            _pageFactory.ListBookCards(ref _booksStack, BooksViewModel.Books);
+            RefreshBooks();
+            PageLoaded = true;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            if (!PageLoaded) return;
+
             ClearBooks();
-            // Refreshing books
             RefreshBooks();
         }
 
@@ -63,7 +68,7 @@ namespace library.Pages
             }
         }
 
-        private void RefreshBooks()
+        public void RefreshBooks()
         {
             ClearBooks();
             _pageFactory.ListBookCards(ref _booksStack, BooksViewModel.Books);
@@ -71,6 +76,20 @@ namespace library.Pages
 
         private void HandleOnSortingMethodChange(object sender, EventArgs e)
         {
+            RefreshBooks();
+        }
+        private void HandleBookRemoved(object sender, EventArgs e)
+        {
+            var toRemoveId = 0;
+            foreach (BookViewModel model in BooksViewModel.Books)
+            {
+                if (model.Id == (int) sender)
+                {
+                    break;
+                }
+                toRemoveId++;
+            }
+            BooksViewModel.Books.RemoveAt(toRemoveId);
             RefreshBooks();
         }
     }

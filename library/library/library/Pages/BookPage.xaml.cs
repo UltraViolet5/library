@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using library.FactoryMethod;
-using library.ViewModel;
+﻿using library.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,19 +7,24 @@ namespace library.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BookPage : ContentPage
     {
-        private readonly IPageFactory _pageFactory;
         public BookViewModel BookViewModel { get; set; }
 
-        public BookPage(int id)
+        public BookPage(BookViewModel model)
         {
             InitializeComponent();
 
-            BookViewModel = new BookViewModel(App.DbService.GetBook(id));
+            InitPageAsync(model);
+
+            NavigationPage.SetHasNavigationBar(this, false);
+        }
+
+        private async void InitPageAsync(BookViewModel model)
+        {
+            // var book = await App.ApiService.GetBook(id);
+            BookViewModel = model;
             BindingContext = BookViewModel;
 
             Content = App.PageFactory.GetBookPage();
-
-            NavigationPage.SetHasNavigationBar(this, false);
         }
     }
 }
