@@ -11,6 +11,7 @@ namespace library.Model
         public string Authors { get; set; }
         public string BarcodeNumber { get; set; }
         public DateTime PublishingYear { get; set; }
+        public DateTime AddingDate { get; set; }
         public string OwnerId { get; set; }
         public User Owner { get; set; }
         public bool Read { get; set; }

@@ -188,7 +188,7 @@ namespace library.ViewModel
             NewBook.Available = this.Available;
             NewBook.Read = this.Read;
             NewBook.Photo = Photo;
-
+            NewBook.AddingDate = DateTime.Now;
 
             App.ApiService.AddBook(NewBook);
 

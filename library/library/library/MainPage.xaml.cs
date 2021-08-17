@@ -3,9 +3,7 @@ using Xamarin.Forms;
 using library.ViewModel;
 using Xamarin.Forms.Xaml;
 using library.Model;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 
 namespace library
@@ -19,7 +17,7 @@ namespace library
         public MainPage()
         {
             InitializeComponent();
-            MainPageViewModel = new MainPageViewModel();
+            MainPageViewModel = new MainPageViewModel(this);
             try
             {
                 DisplayComponentsAsync();
@@ -61,7 +59,7 @@ namespace library
 
             foreach (UserViewModel mate in MainPageViewModel.Mates)
             {
-                var mateUI = App.ComponentFactory.GetMateIcon(mate, "MatesCommand");
+                var mateUI = App.ComponentFactory.GetMateIcon(mate, boundCommand:"MatesCommand");
 
                 Mates.Children.Add(mateUI);
             }
@@ -98,6 +96,7 @@ namespace library
             int index = 0;
             foreach (var book in MainPageViewModel.Books)
             {
+                // book.OnBookRemoved += HandleBookRemoved;
                 var bookCard = App.ComponentFactory.GetBookCard(book);
                 Console.WriteLine($"PhotoSource");
                 LastBooks.Children.Add(bookCard);
@@ -105,18 +104,32 @@ namespace library
             }
         }
 
+        private void HandleBookRemoved(object sender, EventArgs e)
+        {
+            var toRemoveId = 0;
+            foreach (BookViewModel model in MainPageViewModel.Books)
+            {
+                if (model.Id == (int)sender)
+                {
+                    break;
+                }
+                toRemoveId++;
+            }
+            MainPageViewModel.Books.RemoveAt(toRemoveId);
+            RefreshBooks();
+        }
+        
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            LastBooks.Children.Clear();
-            DisplayBooks();
+            RefreshBooks();
         }
 
         private async void DisplayComponentsAsync()
         {
             var books = await App.ApiService.GetBooks(App.CurrentUser.Id, 2);
             MainPageViewModel.Books = books
-                .Select(b => new BookViewModel(b));
+                .Select(b => new BookViewModel(b)).ToList();
             DisplayBooks();
             MainPageViewModel.Categories = Enum.GetNames(typeof(Category));
             DisplayCategories();
@@ -127,6 +140,15 @@ namespace library
             MainPageViewModel.Borrowings = borrowings
                 .Select(b => new BorrowingViewModel(b));
             DisplayBorrowings();
+        }
+
+        private async void RefreshBooks()
+        {
+            var books = await App.ApiService.GetBooks(App.CurrentUser.Id, 2);
+            MainPageViewModel.Books = books
+                .Select(b => new BookViewModel(b)).ToList();
+            LastBooks.Children.Clear();
+            DisplayBooks();
         }
     }
 

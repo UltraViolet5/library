@@ -175,6 +175,8 @@ namespace library.ViewModel
                 }
             }
         }
+        
+        public DateTime AddingDate => _book.AddingDate;
 
         /// <summary>
         /// Dropdown selected category
@@ -249,8 +251,7 @@ namespace library.ViewModel
 
         private void SaveChangesExecute()
         {
-            var v = (int) Category;
-            // TODO
+            App.ApiService.UpdateBook(_book);
         }
 
         private Category GetCategoryByString(string categoryName)

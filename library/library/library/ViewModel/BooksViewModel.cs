@@ -48,7 +48,7 @@ namespace library.ViewModel
         public ICommand AddBookCommand { get; private set; }
         public ICommand ShowBookCommand { get; private set; }
 
-        private readonly BooksPage parent;
+        private readonly BooksPage _page;
 
         public BooksViewModel(IEnumerable<BookViewModel> books, BooksPage page)
         {
@@ -58,7 +58,7 @@ namespace library.ViewModel
             AddBookCommand = new Command(AddBookExecute);
             ShowBookCommand = new Command(ShowBookExecute);
 
-            parent = page;
+            this._page = page;
         }
 
         private List<BookViewModel> SortBooksBySortMethod()
@@ -95,7 +95,7 @@ namespace library.ViewModel
         private void AddBookExecute()
         {
             var addBookPage = new AddBookDataPage();
-            addBookPage.AddBookViewModel.OnBookAdded += OnBookAdded;
+            addBookPage.AddBookViewModel.OnBookAdded += HandleBookAdded;
             App.Navigation.PushAsync(addBookPage);
         }
 
@@ -110,10 +110,10 @@ namespace library.ViewModel
             return sortMethod;
         }
 
-        private void OnBookAdded(object sender, EventArgs e)
+        private void HandleBookAdded(object sender, EventArgs e)
         {
-            parent.BooksViewModel.Books.Add(new BookViewModel((Book) sender));
-            parent.RefreshBooks();
+            Books.Add(new BookViewModel((Book) sender));
+            _page.RefreshBooks();
         }
     }
 }

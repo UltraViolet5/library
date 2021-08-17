@@ -26,7 +26,7 @@ namespace library.Pages
         private async void InitData()
         {
             MyRentalsViewModel = new MyRentalsViewModel();
-            MyRentalsViewModel.Borrowings = await App.ApiService.GetBorrowings(App.CurrentUser.Email);
+            MyRentalsViewModel.Borrowings = await App.ApiService.GetBorrowings(App.CurrentUser.Id);
             BindingContext = MyRentalsViewModel;
             Content = App.PageFactory.GetMyRentalsPage(MyRentalsViewModel.Borrowings);
         }
