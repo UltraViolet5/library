@@ -6,16 +6,21 @@ using System.Text;
 using System.Threading.Tasks;
 using library.Model;
 using Newtonsoft.Json;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace library.Services
 {
     public class ApiService
     {
+
+        ResourceDictionary APIResource = (ResourceDictionary)Application.Current.Resources;
         public async Task<Book> GetBook(int bookId)
         {
             Book result = new Book();
-            Uri uri = new Uri(string.Format(Constants.BooksUrl + $"/{bookId}", String.Empty));
+
+            
+            Uri uri = new Uri(string.Format(APIResource["Books"] + $"/{bookId}", String.Empty));
             try
             {
                 using (var client = GetHttpClient())
@@ -39,7 +44,7 @@ namespace library.Services
         public async Task<List<Book>> GetBooks(string userId)
         {
             List<Book> result = new List<Book>();
-            Uri uri = new Uri(string.Format(Constants.BooksUrl + $"/ByUserId/{userId}", String.Empty));
+            Uri uri = new Uri(string.Format(APIResource["Books"] + $"/ByUserId/{userId}", String.Empty));
             try
             {
                 using (var client = GetHttpClient())
@@ -63,7 +68,7 @@ namespace library.Services
         public async Task<List<Book>> GetBooks(string userId, int amount)
         {
             List<Book> result = new List<Book>();
-            Uri uri = new Uri(string.Format(Constants.BooksUrl + $"/ByUserId/{userId}/{amount}", String.Empty));
+            Uri uri = new Uri(string.Format(APIResource["Books"] + $"/ByUserId/{userId}/{amount}", String.Empty));
             try
             {
                 using (var client = GetHttpClient())
@@ -87,7 +92,7 @@ namespace library.Services
         public async Task<int> GetBooksCount(string userId)
         {
             List<Book> result = new List<Book>();
-            Uri uri = new Uri(string.Format(Constants.BooksUrl +
+            Uri uri = new Uri(string.Format(APIResource["Books"] +
                                             $"/ByUserId/{userId}/Count",
                                             String.Empty));
             try
@@ -115,7 +120,7 @@ namespace library.Services
             User result = new User();
             try
             {
-                Uri uri = new Uri(String.Format(Constants.UsersUrl + "/" + id, String.Empty));
+                Uri uri = new Uri(String.Format(APIResource["Users"] + "/" + id, String.Empty));
                 using (HttpClient client = GetHttpClient())
                 {
                     HttpResponseMessage response = await client.GetAsync(uri);
@@ -157,18 +162,21 @@ namespace library.Services
             {
                 using (var client = GetHttpClient())
                 {
-                    HttpResponseMessage response = await client.GetAsync(Constants.FriendsUrl);
+                    string urlFrineds =(string) APIResource["Friends"];
+                    HttpResponseMessage response = await client.GetAsync(urlFrineds);
                     if (response.IsSuccessStatusCode)
                     {
                         string content = await response.Content.ReadAsStringAsync();
                         friends = JsonConvert.DeserializeObject<List<Friends>>(content);
                     }
 
+                    string urlUsers = (string)APIResource["Users"];
+
                     foreach (Friends friend in friends)
                     {
                         if (friend.UserId == userId)
                         {
-                            response = await client.GetAsync(Constants.UsersUrl + "/" + friend.FriendId);
+                            response = await client.GetAsync(urlUsers + "/" + friend.FriendId);
                             if (response.IsSuccessStatusCode)
                             {
                                 string content = await response.Content.ReadAsStringAsync();
@@ -178,7 +186,7 @@ namespace library.Services
                         }
                         else if (friend.FriendId == userId)
                         {
-                            response = await client.GetAsync(Constants.UsersUrl + "/" + friend.UserId);
+                            response = await client.GetAsync(urlUsers + "/" + friend.UserId);
                             if (response.IsSuccessStatusCode)
                             {
                                 string content = await response.Content.ReadAsStringAsync();
@@ -204,7 +212,8 @@ namespace library.Services
             {
                 using (var client = GetHttpClient())
                 {
-                    HttpResponseMessage response = await client.GetAsync(Constants.BorrowingsUrl + $"/ByOwnerId/{ownerId}/{amount}");
+                    string urlBorrowing = (string)APIResource["Borrowings"];
+                    HttpResponseMessage response = await client.GetAsync(urlBorrowing + $"/ByOwnerId/{ownerId}/{amount}");
                     if (response.IsSuccessStatusCode)
                     {
                         string content = await response.Content.ReadAsStringAsync();
@@ -227,7 +236,8 @@ namespace library.Services
             {
                 using (var client = GetHttpClient())
                 {
-                    HttpResponseMessage response = await client.GetAsync(Constants.BorrowingsUrl + $"/ByOwnerId/{ownerId}");
+                    string urlBorrowing = (string)APIResource["Borrowings"];
+                    HttpResponseMessage response = await client.GetAsync(urlBorrowing + $"/ByOwnerId/{ownerId}");
                     if (response.IsSuccessStatusCode)
                     {
                         string content = await response.Content.ReadAsStringAsync();
@@ -248,7 +258,8 @@ namespace library.Services
             User result = new User();
             try
             {
-                Uri uri = new Uri(String.Format(Constants.UsersUrl + $"/byemail/{email}", String.Empty));
+                string urlUsers = (string)APIResource["Users"];
+                Uri uri = new Uri(String.Format(urlUsers + $"/byemail/{email}", String.Empty));
                 using (HttpClient client = GetHttpClient())
                 {
                     HttpResponseMessage response = await client.GetAsync(uri);
@@ -277,7 +288,8 @@ namespace library.Services
 
             using (var client = GetHttpClient())
             {
-                var response = await client.PostAsync(Constants.BooksUrl, data);
+                string urlBooks = (string)APIResource["Books"];
+                var response = await client.PostAsync(urlBooks, data);
                 string result = await response.Content.ReadAsStringAsync();
             }
         }
@@ -305,7 +317,8 @@ namespace library.Services
         {
             using (var client = GetHttpClient())
             {
-                var response = await client.DeleteAsync(Constants.BooksUrl + $"/{id}");
+                string urlBooks = (string)APIResource["Books"];
+                var response = await client.DeleteAsync(urlBooks + $"/{id}");
                 if (response.IsSuccessStatusCode)
                 {
                     Console.WriteLine($"Success. Deleted book with id {id}!");

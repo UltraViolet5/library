@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <x:String x:Key ="AndroidLocalHostURL">"http://10.0.2.2:8080"</x:String>
+    <!--Get Post without arguments & Get, Put, Del With {Id}-->
+    <x:String x:Key ="Bookcases">http://10.0.2.2:8080/api/Bookcases</x:String>
+    <!--Get Post without arguments & Get, Put, Del With {Id}-->
+    <x:String x:Key ="Books">http://10.0.2.2:8080/api/Books</x:String>
+    <!--Get with {userId} or {userId}/{limit} or {userId}/Count-->
+    <x:String x:Key ="BooksByUserId">http://10.0.2.2:8080/api/Books/ByUserId</x:String>
+    <!--Get Post without arguments & Get, Put, Del With {Id} -->
+    <x:String x:Key ="Borrowings">http://10.0.2.2:8080/api/Borrowings</x:String>
+    <!--Get with {OwnerId} or {OwnerId}/{Amount}-->
+    <x:String x:Key ="BorrowingsByOwnerId">http://10.0.2.2:8080/api/Borrowings/ByOwnerId</x:String>
+    <!--Get Post Del without arguments & Get With {userId}-->
+    <x:String x:Key ="Friends">http://10.0.2.2:8080/api/Friends</x:String>
+    <!--Get Post without arguments & Get, Put, Del With {Id}-->
+    <x:String x:Key ="Users">http://10.0.2.2:8080/api/Users</x:String>
+    <!--Get with {email}-->
+    <x:String x:Key ="UsersByEmail">http://10.0.2.2:8080/api/Users/ByEmail</x:String>
+</ResourceDictionary>
