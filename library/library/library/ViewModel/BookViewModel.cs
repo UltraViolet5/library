@@ -18,6 +18,7 @@ namespace library.ViewModel
         private ICommand _addPhotoCommand;
         private ICommand _saveChangesCommand;
         private ICommand _removeBookCommand;
+        private bool _dataUpdatedShowMsg;
 
         public int Id => _book.Id;
 
@@ -252,6 +253,7 @@ namespace library.ViewModel
         private void SaveChangesExecute()
         {
             App.ApiService.UpdateBook(_book);
+            ShowDataUpdatedMsg();
         }
 
         private Category GetCategoryByString(string categoryName)
@@ -273,6 +275,27 @@ namespace library.ViewModel
             bool result = !string.IsNullOrWhiteSpace(Authors);
             AuthorsValidation_ShowMsg = !result;
             return result;
+        }
+
+        public bool DataUpdated_ShowMsg
+        {
+            get => _dataUpdatedShowMsg;
+            set
+            {
+                _dataUpdatedShowMsg = value;
+                RaisePropertyChanged(nameof(DataUpdated_ShowMsg));
+            }
+        }
+
+        private void ShowDataUpdatedMsg()
+        {
+            DataUpdated_ShowMsg = true;
+            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
+            {
+                DataUpdated_ShowMsg = false;
+
+                return false;
+            });
         }
     }
 }

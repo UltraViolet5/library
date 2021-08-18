@@ -1,4 +1,5 @@
 ﻿using System;
+using library.Model;
 using Xamarin.Forms;
 using library.ViewModel;
 using Xamarin.Forms.Shapes;
@@ -20,6 +21,23 @@ namespace library.FactoryMethod
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalTextAlignment = hAlignment,
                 FontSize = fontSize
+            };
+        }
+
+        public Label GetLabel(string text,
+            Thickness margin,
+            int fontSize = 16,
+            TextAlignment hAlignment = TextAlignment.Start)
+        {
+            return new Label()
+            {
+                Padding = margin,
+                Text = text,
+                FontFamily = Style.MainFont,
+                VerticalTextAlignment = TextAlignment.Center,
+                HorizontalTextAlignment = hAlignment,
+                FontSize = fontSize,
+                Margin = margin
             };
         }
 
@@ -225,47 +243,45 @@ namespace library.FactoryMethod
 
             var contentBox = new StackLayout()
             {
-                Padding = new Thickness(15, 10),
+                Padding = new Thickness(10, 10),
                 Children =
                 {
-                    new Label()
-                    {
-                        Text = book.Title,
-                        FontSize = 18,
-                        FontFamily = Style.MainFont
-                    },
-                    new Label()
-                    {
-                        Text = $"{book.Authors}; {book.PublishingYear}",
-                        FontFamily = Style.MainFont
-                    },
-                    new Label()
-                    {
-                        Text = $"Placed in: {book.Bookcase}",
-                        FontFamily = Style.MainFont
-                    },
+                    GetLabel(book.Title, new Thickness( 0), fontSize: 18),
+                    GetLabel($"{book.Authors}; {book.PublishingYear}", new Thickness(0),
+                        fontSize: Style.SmallFont),
+                    GetLabel($"Placed in: {book.Bookcase}", new Thickness(0), fontSize: Style.SmallFont),
+                    GetLabel($"Category: {Enum.GetName(typeof(Category), book.Category)}",
+                        new Thickness( 0),
+                        fontSize: Style.SmallFont),
                     new StackLayout()
                     {
                         Orientation = StackOrientation.Horizontal,
+                        Margin = new Thickness( 0),
+                        Padding = new Thickness(0),
                         Children =
                         {
                             new CheckBox()
                             {
                                 IsChecked = book.Read,
                                 Color = Color.Gray,
-                                IsEnabled = false
+                                IsEnabled = false,
+                                Margin = new Thickness(0)
                             },
                             new Label()
                             {
                                 Text = "read",
                                 VerticalOptions = LayoutOptions.Center,
-                                FontFamily = Style.MainFont
+                                FontFamily = Style.MainFont,
+                                FontSize = Style.SmallFont,
+                                Margin = new Thickness(0)
                             }
                         }
                     },
                     new StackLayout()
                     {
                         Orientation = StackOrientation.Horizontal,
+                        Margin = new Thickness(0),
+                        Padding = new Thickness(0),
                         Children =
                         {
                             new CheckBox()
@@ -278,7 +294,8 @@ namespace library.FactoryMethod
                             {
                                 Text = "available",
                                 VerticalOptions = LayoutOptions.Center,
-                                FontFamily = Style.MainFont
+                                FontFamily = Style.MainFont,
+                                FontSize = Style.SmallFont
                             }
                         }
                     }
@@ -431,7 +448,6 @@ namespace library.FactoryMethod
 
             return frame;
         }
-
 
 
         public Frame GetEntry(string binding,
@@ -624,8 +640,8 @@ namespace library.FactoryMethod
                     {
                         grid,
                         GetButton("Books",
-                            command:"ShowBooksCommand",
-                            commandParameter:mate.Id)
+                            command: "ShowBooksCommand",
+                            commandParameter: mate.Id)
                     }
                 }
             };

@@ -300,14 +300,19 @@ namespace library.ViewModel
                 Utils.UpdateUser(App.CurrentUser);
                 App.ApiService.UpdateUser(App.CurrentUser);
 
-                DataUpdated_ShowMsg = true;
-                Device.StartTimer(TimeSpan.FromSeconds(3), () =>
-                {
-                    DataUpdated_ShowMsg = false;
-
-                    return false;
-                });
+                ShowDataUpdatedMsg();
             }
+        }
+
+        private void ShowDataUpdatedMsg()
+        {
+            DataUpdated_ShowMsg = true;
+            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
+            {
+                DataUpdated_ShowMsg = false;
+
+                return false;
+            });
         }
 
         private bool UserNameValidation()

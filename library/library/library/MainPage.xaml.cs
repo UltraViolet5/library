@@ -80,7 +80,7 @@ namespace library
                 tapGest.SetBinding(TapGestureRecognizer.CommandProperty, "ShowBooksByCategory");
 
                 categoriesUI.GestureRecognizers.Add(tapGest);
-                Categories.Children.Add(categoriesUI);
+                // Categories.Children.Add(categoriesUI);
             }
         }
 
@@ -116,13 +116,13 @@ namespace library
                 toRemoveId++;
             }
             MainPageViewModel.Books.RemoveAt(toRemoveId);
-            RefreshBooks();
+            RefreshBooksAsync();
         }
         
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            RefreshBooks();
+            RefreshBooksAsync();
         }
 
         private async void DisplayComponentsAsync()
@@ -132,7 +132,7 @@ namespace library
                 .Select(b => new BookViewModel(b)).ToList();
             DisplayBooks();
             MainPageViewModel.Categories = Enum.GetNames(typeof(Category));
-            DisplayCategories();
+            // DisplayCategories();
             MainPageViewModel.Mates = App.CurrentUser.Friends
                 .Select(m => new UserViewModel(m));
             DisplayMates();
@@ -142,7 +142,7 @@ namespace library
             DisplayBorrowings();
         }
 
-        private async void RefreshBooks()
+        public async void RefreshBooksAsync()
         {
             var books = await App.ApiService.GetBooks(App.CurrentUser.Id, 2);
             MainPageViewModel.Books = books

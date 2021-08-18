@@ -22,25 +22,28 @@ namespace library.Pages
         {
             InitializeComponent();
 
-            InitPage(booksOwner, addBookButton);
+            InitPageAsync(booksOwner, addBookButton);
+
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
-        private async void InitPage(User booksOwner, bool addBookButton = false)
+        private async void InitPageAsync(User booksOwner, bool addBookButton = false)
         {
             var books = await App.ApiService.GetBooks(booksOwner.Id);
             var bookViewModels = books
                 .Select(b => new BookViewModel(b));
             BooksViewModel = new BooksViewModel(bookViewModels, this);
+            
             foreach (BookViewModel model in BooksViewModel.Books)
-            {
                 model.OnBookRemoved += HandleBookRemoved;
-            }
+
             BooksViewModel.OnSortingMethodChange += HandleOnSortingMethodChange;
+            BooksViewModel.OnCategoryFilterChange += HandleOnCategoryFilterChange;
             BindingContext = BooksViewModel;
 
             _pageFactory = new PageFactory();
             _pageContent = _pageFactory.GetBooksPage(booksOwner, BooksViewModel, addBookButton);
-            _booksStack = (StackLayout)_pageContent.Content;
+            _booksStack = (StackLayout) _pageContent.Content;
 
             Content = _pageContent;
             RefreshBooks();
@@ -62,7 +65,8 @@ namespace library.Pages
         /// </summary>
         private void ClearBooks()
         {
-            while (_booksStack.Children.Count > 3)
+            int childrenContInStack = 4;
+            while (_booksStack.Children.Count > childrenContInStack)
             {
                 _booksStack.Children.RemoveAt(_booksStack.Children.Count - 1);
             }
@@ -78,17 +82,22 @@ namespace library.Pages
         {
             RefreshBooks();
         }
+
+        private void HandleOnCategoryFilterChange(object sender, EventArgs e)
+        {
+            RefreshBooks();
+        }
+
         private void HandleBookRemoved(object sender, EventArgs e)
         {
             var toRemoveId = 0;
             foreach (BookViewModel model in BooksViewModel.Books)
             {
                 if (model.Id == (int) sender)
-                {
                     break;
-                }
                 toRemoveId++;
             }
+
             BooksViewModel.Books.RemoveAt(toRemoveId);
             RefreshBooks();
         }

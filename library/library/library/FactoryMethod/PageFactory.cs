@@ -61,8 +61,10 @@ namespace library.FactoryMethod
                         _componentFactory.GetCheckBox("read", "Read"),
                         _componentFactory.GetCheckBox("available", "Available"),
                         _componentFactory.GetDropDown("Category:", "Categories", "SelectedCategory"),
+                        _componentFactory.GetValidationLabel("Data updated.", "DataUpdated_ShowMsg",
+                            Style.ValidationSuccessColor),
                         _componentFactory.GetButton("Save changes", "SaveChangesCommand"),
-                        _componentFactory.GetButton("Remove", "RemoveBookCommand"),
+                        _componentFactory.GetButton("Remove", Style.ValidationErrorColor, "RemoveBookCommand"),
                     }
                 }
             };
@@ -176,10 +178,13 @@ namespace library.FactoryMethod
                     _componentFactory.GetEntry("Search",
                         "search"),
                     _componentFactory.GetDropDown("Sort: ",
-                        "SortMethods", "SelectedSortMethod")
+                        "SortMethods", "SelectedSortMethod"),
+                    _componentFactory.GetDropDown("Category: ", "Categories",
+                        "SelectedCategory")
 
                     // IMPORTANT!!!
                     // I used this area to place books
+                    // Placing books depends on numbers of children
                 }
             };
 

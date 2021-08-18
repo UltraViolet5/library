@@ -12,6 +12,18 @@ namespace library.Model
         Documentary,
         SiFi,
         Novel,
-        Other
+        Other,
+    }
+
+    public enum CategoryForFiltering
+    {
+        It,
+        Crime,
+        Cookbook,
+        Documentary,
+        SiFi,
+        Novel,
+        Other,
+        NoFilter,
     }
 }

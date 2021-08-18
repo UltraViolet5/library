@@ -85,7 +85,7 @@ namespace library.ViewModel
         {
             App.Navigation.PushAsync(new MyRentalsPage());
         }
-
+        
         private void MatesExecute()
         {
             App.Navigation.PushAsync(new MatesPage());
@@ -123,6 +123,7 @@ namespace library.ViewModel
             Books.Add(new BookViewModel((Book) sender));
             Books = Books.OrderByDescending(b => b.AddingDate).ToList();
             Books.RemoveAt(Books.Count - 1);
+            _mainPage.RefreshBooksAsync();
         }
     }
 }
