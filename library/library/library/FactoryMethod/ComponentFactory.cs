@@ -332,6 +332,16 @@ namespace library.FactoryMethod
 
         public Frame GetMateIcon(UserViewModel user, string boundCommand = null)
         {
+            var image = new Image()
+            {
+                Source = user.PhotoSource,
+                Margin = 0,
+                HeightRequest = Style.MateIconSize,
+                WidthRequest = Style.MateIconSize,
+                HorizontalOptions = LayoutOptions.StartAndExpand,
+                Aspect = Aspect.AspectFill
+            };
+
             var result = new Frame()
             {
                 CornerRadius = Style.MediumCornerRadius,
@@ -339,14 +349,7 @@ namespace library.FactoryMethod
                 HeightRequest = Style.MateIconSize,
                 Padding = 0,
                 HasShadow = false,
-                Content = new Image()
-                {
-                    Source = "user.png",
-                    Margin = 0,
-                    HeightRequest = Style.MateIconSize,
-                    WidthRequest = Style.MateIconSize,
-                    HorizontalOptions = LayoutOptions.StartAndExpand
-                }
+                Content = image
             };
 
             if (!String.IsNullOrWhiteSpace(boundCommand))

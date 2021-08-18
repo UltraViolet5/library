@@ -30,7 +30,8 @@ namespace library.ViewModel
         }
 
         public UserPage _userPage { get; private set; }
-        public IEnumerable<BookViewModel> Books { get; set; }
+        private MainPage _mainPage { get; set; }
+        public List<BookViewModel> Books { get; set; }
         public IEnumerable<string> Categories { get; set; }
         public IEnumerable<UserViewModel> Mates { get; set; }
         public IEnumerable<BorrowingViewModel> Borrowings { get; set; }
@@ -47,7 +48,7 @@ namespace library.ViewModel
         public ICommand AddMateCommand { get; set; }
 
 
-        public MainPageViewModel()
+        public MainPageViewModel(MainPage page)
         {
             // Actions init
             BooksCommand = new Command(BooksExecute);
@@ -62,8 +63,9 @@ namespace library.ViewModel
 
             _userPage = new UserPage();
             _userPage.UserViewModel.OnPhotoUpdated += HandlePhotoUpdated;
+            _mainPage = page;
         }
-        
+
         private void AddMateExecute()
         {
             App.Navigation.PushAsync(new AddMatePage());
@@ -111,7 +113,16 @@ namespace library.ViewModel
 
         private void AddBookExecute(object arg)
         {
-            App.Navigation.PushAsync(new AddBookDataPage());
+            var addBookPage = new AddBookDataPage();
+            addBookPage.AddBookViewModel.OnBookAdded += HandleBookAdded;
+            App.Navigation.PushAsync(addBookPage);
+        }
+
+        private void HandleBookAdded(object sender, EventArgs e)
+        {
+            Books.Add(new BookViewModel((Book) sender));
+            Books = Books.OrderByDescending(b => b.AddingDate).ToList();
+            Books.RemoveAt(Books.Count - 1);
         }
     }
 }

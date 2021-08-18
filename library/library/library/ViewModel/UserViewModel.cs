@@ -126,8 +126,6 @@ namespace library.ViewModel
 
             SaveChangesCommand = new Command(SaveChangesExecute, SaveChangesCanExecute);
             AddPhotoCommand = new Command(AddPhotoExecute);
-
-            InitBooksCount();
         }
 
         public string UserName
@@ -213,13 +211,7 @@ namespace library.ViewModel
             }
         }
 
-        public int BooksCount { get; private set; }
-
-        private async void InitBooksCount()
-        {
-            var booksCount = await App.ApiService.GetBooksCount(Email);
-            BooksCount = booksCount;
-        }
+        public int BooksCount => _user.BooksCount;
 
         public string Id => _user.Id;
 
@@ -292,11 +284,11 @@ namespace library.ViewModel
         {
             if (SaveChangesCanExecute())
             {
-                Console.WriteLine("Save Changes Execute!");
                 App.CurrentUser.BirthDate = BirthDate;
                 App.CurrentUser.UserName = UserName;
                 App.CurrentUser.Email = Email;
                 App.CurrentUser.Localization = Localization;
+                App.CurrentUser.Photo = Photo;
 
                 if (!String.IsNullOrWhiteSpace(NewPassword) &&
                     BCrypt.Net.BCrypt.Verify(Password, App.CurrentUser.PasswordHash))
@@ -306,6 +298,7 @@ namespace library.ViewModel
                 }
 
                 Utils.UpdateUser(App.CurrentUser);
+                App.ApiService.UpdateUser(App.CurrentUser);
 
                 DataUpdated_ShowMsg = true;
                 Device.StartTimer(TimeSpan.FromSeconds(3), () =>

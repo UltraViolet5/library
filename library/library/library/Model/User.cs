@@ -13,6 +13,7 @@ namespace library.Model
         public bool TermsAccepted { get; private set; }
         public List<User> Friends { get; set; }
         public byte[] Photo { get; set; }
+        public int BooksCount { get; set; }
 
         public User()
         {

@@ -308,9 +308,16 @@ namespace library.Services
             return client;
         }
 
-        public void AddUser(User user)
+        public async void AddUser(User user)
         {
-            throw new NotImplementedException();
+            var json = JsonConvert.SerializeObject(user, Formatting.Indented);
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            using (var client = GetHttpClient())
+            {
+                var response = await client.PostAsync(Constants.BooksUrl, data);
+                string result = await response.Content.ReadAsStringAsync();
+            }
         }
 
         public async void RemoveBook(int id)
@@ -322,6 +329,44 @@ namespace library.Services
                 if (response.IsSuccessStatusCode)
                 {
                     Console.WriteLine($"Success. Deleted book with id {id}!");
+                }
+            }
+        }
+
+        public async void UpdateUser(User currentUser)
+        {
+            var json = JsonConvert.SerializeObject(currentUser, Formatting.Indented);
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            using (var client = GetHttpClient())
+            {
+                var response = await client.PutAsync(Constants.UsersUrl + $"/{currentUser.Id}", data);
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("User updated.");
+                }
+                else
+                {
+                    throw new Exception("Can't update user.");
+                }
+            }
+        }
+
+        public async void UpdateBook(Book book)
+        {
+            var json = JsonConvert.SerializeObject(book, Formatting.Indented);
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            using (var client = GetHttpClient())
+            {
+                var response = await client.PutAsync(Constants.BooksUrl + $"/{book.Id}", data);
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Book updated.");
+                }
+                else
+                {
+                    throw new Exception("Can't update book.");
                 }
             }
         }
