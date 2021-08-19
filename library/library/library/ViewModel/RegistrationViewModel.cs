@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using library.Model;
 using library.Pages;
 using Xamarin.Forms;
-using BCrypt;
 
 namespace library.ViewModel
 {
@@ -216,7 +213,6 @@ namespace library.ViewModel
                 PasswordHash = global::BCrypt.Net.BCrypt.HashPassword(this.Password),
             };
             App.ApiService.AddUser(user);
-            Console.WriteLine(user.PasswordHash);
             App.Navigation.PushAsync(new LoginPage());
         }
 

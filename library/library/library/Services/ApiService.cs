@@ -120,7 +120,7 @@ namespace library.Services
             User result = new User();
             try
             {
-                Uri uri = new Uri(String.Format(APIResource["Users"] + "/" + id, String.Empty));
+                Uri uri = new Uri(String.Format(APIResource["Users"] + $"/{id}", String.Empty));
                 using (HttpClient client = GetHttpClient())
                 {
                     HttpResponseMessage response = await client.GetAsync(uri);
@@ -315,7 +315,8 @@ namespace library.Services
 
             using (var client = GetHttpClient())
             {
-                var response = await client.PostAsync(Constants.BooksUrl, data);
+                string requestAddress = (string) APIResource["Users"];
+                var response = await client.PostAsync(requestAddress, data);
                 string result = await response.Content.ReadAsStringAsync();
             }
         }
@@ -340,7 +341,7 @@ namespace library.Services
 
             using (var client = GetHttpClient())
             {
-                var response = await client.PutAsync(Constants.UsersUrl + $"/{currentUser.Id}", data);
+                var response = await client.PutAsync((string)APIResource["Users"] + $"/{currentUser.Id}", data);
                 if (response.IsSuccessStatusCode)
                 {
                     Console.WriteLine("User updated.");
@@ -359,7 +360,7 @@ namespace library.Services
 
             using (var client = GetHttpClient())
             {
-                var response = await client.PutAsync(Constants.BooksUrl + $"/{book.Id}", data);
+                var response = await client.PutAsync((string)APIResource["Books"] + $"/{book.Id}", data);
                 if (response.IsSuccessStatusCode)
                 {
                     Console.WriteLine("Book updated.");
