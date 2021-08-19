@@ -20,10 +20,12 @@ namespace library.Pages
         {
             InitializeComponent();
             
-            InitData();
+            InitDataAsync();
+
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
-        private async void InitData()
+        private async void InitDataAsync()
         {
             MyRentalsViewModel = new MyRentalsViewModel();
             MyRentalsViewModel.Borrowings = await App.ApiService.GetBorrowings(App.CurrentUser.Id);

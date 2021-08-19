@@ -15,6 +15,8 @@ namespace library.Pages
             InitializeComponent();
 
             InitPageAsync(borrowing);
+
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
         private async void InitPageAsync(Borrowing borrowing)
